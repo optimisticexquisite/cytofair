@@ -1,0 +1,20 @@
+.DS_Store
+.venv/
+__pycache__/
+.pytest_cache/
+*.egg-info/
+
+# Raw datasets and generated artifacts are intentionally never versioned.
+data/
+artifacts/
+results/
+reports/generated/
+provenance/*.parquet
+splits/generated/
+
+# Run-local logs/checkpoints.
+*.log
+*.pt
+*.pth
+*.ckpt
+
