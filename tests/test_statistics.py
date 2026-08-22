@@ -8,6 +8,7 @@ from cytofair.statistics import (
     shuffled_probe_check,
     verify_protocol_order,
 )
+from cytofair.verification import acceptance_contract_report
 
 
 def run_table():
@@ -86,3 +87,16 @@ def test_shuffled_probe_handles_constant_scores():
     check = shuffled_probe_check([0.1] * 5, chance=0.1)
     assert check["passed"]
     assert check["ci_low"] == check["ci_high"] == 0.1
+
+
+def test_acceptance_report_never_silently_passes_missing_evidence(tmp_path):
+    import subprocess
+
+    subprocess.run(["git", "init", "-q", tmp_path], check=True)
+    subprocess.run(["git", "config", "user.email", "test@example.com"], cwd=tmp_path, check=True)
+    subprocess.run(["git", "config", "user.name", "Test"], cwd=tmp_path, check=True)
+    (tmp_path / "PREREGISTRATION.md").write_text("registered\n")
+    subprocess.run(["git", "add", "PREREGISTRATION.md"], cwd=tmp_path, check=True)
+    subprocess.run(["git", "commit", "-qm", "preregister"], cwd=tmp_path, check=True)
+    report = acceptance_contract_report(repository=tmp_path)
+    assert set(report.status) == {"PENDING"}
