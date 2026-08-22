@@ -61,6 +61,7 @@ def structural_table(
                 "crops": len(frame),
                 "parents": frame.parent_id.nunique(),
                 "crops_per_parent_mean_sd": _format_mean_sd(parent_sizes),
+                "analytic_p1_non_straddle_pct": (1.0 - analytic) * 100,
                 "analytic_p1_straddle_pct": analytic * 100,
                 "monte_carlo_95_low_pct": mc_low * 100,
                 "monte_carlo_95_high_pct": mc_high * 100,
@@ -74,4 +75,3 @@ def structural_table(
             }
         )
     return pd.DataFrame(summaries), pd.DataFrame(seed_rows)
-
