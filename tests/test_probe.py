@@ -1,6 +1,8 @@
+import numpy as np
 import pandas as pd
+from PIL import Image
 
-from cytofair.probe import balanced_parent_split
+from cytofair.probe import _ImageMode, balanced_parent_split
 
 
 def test_probe_split_is_balanced_and_has_exact_chance():
@@ -20,3 +22,11 @@ def test_probe_split_is_balanced_and_has_exact_chance():
     counts = split.groupby(["partition", "label"]).size()
     assert (counts == 2).all()
 
+
+def test_all_preregistered_probe_modes_return_rgb_images():
+    rng = np.random.default_rng(3)
+    image = Image.fromarray(rng.integers(0, 255, (48, 64, 3), dtype=np.uint8))
+    for mode in ("rgb", "grayscale", "stain_normalized", "background_only", "highpass"):
+        transformed = _ImageMode(mode)(image)
+        assert transformed.mode == "RGB"
+        assert transformed.size == image.size

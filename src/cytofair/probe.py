@@ -63,7 +63,13 @@ def balanced_parent_split(
 
 class _ImageMode:
     def __init__(self, mode: str):
-        if mode not in {"rgb", "grayscale", "highpass"}:
+        if mode not in {
+            "rgb",
+            "grayscale",
+            "stain_normalized",
+            "background_only",
+            "highpass",
+        }:
             raise ValueError(f"Unsupported image mode: {mode}")
         self.mode = mode
 
@@ -75,7 +81,31 @@ class _ImageMode:
         if self.mode == "grayscale":
             gray = cv2.cvtColor(values, cv2.COLOR_RGB2GRAY)
             values = np.repeat(gray[..., None], 3, axis=2)
-        else:
+        elif self.mode == "stain_normalized":
+            lab = cv2.cvtColor(values, cv2.COLOR_RGB2LAB).astype(np.float32)
+            target_mean = np.asarray((190.0, 140.0, 135.0), dtype=np.float32)
+            target_sd = np.asarray((35.0, 14.0, 14.0), dtype=np.float32)
+            source_mean = lab.reshape(-1, 3).mean(axis=0)
+            source_sd = lab.reshape(-1, 3).std(axis=0)
+            lab = (lab - source_mean) * (target_sd / np.maximum(source_sd, 1.0)) + target_mean
+            values = cv2.cvtColor(np.clip(lab, 0, 255).astype(np.uint8), cv2.COLOR_LAB2RGB)
+        elif self.mode == "background_only":
+            hsv = cv2.cvtColor(values, cv2.COLOR_RGB2HSV)
+            gray = cv2.cvtColor(values, cv2.COLOR_RGB2GRAY)
+            saturation_threshold, _ = cv2.threshold(
+                hsv[..., 1], 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU
+            )
+            luminance_threshold, _ = cv2.threshold(
+                gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU
+            )
+            foreground = (
+                (hsv[..., 1] > saturation_threshold) | (gray < luminance_threshold)
+            ).astype(np.uint8)
+            foreground = cv2.morphologyEx(
+                foreground, cv2.MORPH_CLOSE, np.ones((5, 5), dtype=np.uint8)
+            )
+            values = cv2.inpaint(values, foreground, 5, cv2.INPAINT_TELEA)
+        elif self.mode == "highpass":
             blurred = cv2.GaussianBlur(values, (0, 0), sigmaX=3)
             values = np.clip(values.astype(np.int16) - blurred.astype(np.int16) + 128, 0, 255)
             values = values.astype(np.uint8)
@@ -267,4 +297,3 @@ def summarize_probe(paths: list[str | Path]) -> tuple[pd.DataFrame, dict[str, ob
         shuffled.test_accuracy.to_numpy(), float(shuffled.chance_accuracy.iloc[0])
     )
     return summary, control
-

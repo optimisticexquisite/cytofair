@@ -39,7 +39,10 @@ def main() -> None:
     parser.add_argument("--workers", type=int, default=2)
     parser.add_argument("--max-gpus", type=int, default=3, choices=(1, 2, 3))
     parser.add_argument(
-        "--modes", nargs="+", choices=("rgb", "grayscale", "highpass"), default=("rgb",)
+        "--modes",
+        nargs="+",
+        choices=("rgb", "grayscale", "stain_normalized", "background_only", "highpass"),
+        default=("rgb",),
     )
     parser.add_argument("--without-shuffled", action="store_true")
     args = parser.parse_args()
@@ -115,4 +118,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

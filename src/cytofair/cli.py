@@ -299,7 +299,11 @@ def build_parser() -> argparse.ArgumentParser:
     command.add_argument("map")
     command.add_argument("--seed", type=int, required=True)
     command.add_argument("--output", required=True)
-    command.add_argument("--image-mode", choices=("rgb", "grayscale", "highpass"), default="rgb")
+    command.add_argument(
+        "--image-mode",
+        choices=("rgb", "grayscale", "stain_normalized", "background_only", "highpass"),
+        default="rgb",
+    )
     command.add_argument("--shuffled-labels", action="store_true")
     command.add_argument("--epochs", type=int, default=15)
     command.add_argument("--batch-size", type=int, default=64)
