@@ -34,3 +34,20 @@ def test_sipakmed_filename_and_template_branches(tmp_path: Path):
     overlaps = bbox_iou_pairs(branch_b)
     assert len(overlaps) == 1
     assert overlaps.iloc[0].intersection_pixels > 0
+
+
+def test_template_branch_can_resume_from_checkpoint(tmp_path: Path):
+    class_root = tmp_path / "im_Parabasal"
+    crop_root = class_root / "CROPPED"
+    crop_root.mkdir(parents=True)
+    rng = np.random.default_rng(8)
+    parent = rng.integers(0, 255, (60, 70, 3), dtype=np.uint8)
+    cv2.imwrite(str(class_root / "001.bmp"), parent)
+    cv2.imwrite(str(crop_root / "001_01.bmp"), parent[5:35, 8:38])
+    branch_a = recover_branch_a(tmp_path)
+    checkpoint = tmp_path / "partial.parquet"
+    first = recover_branch_b(branch_a, checkpoint_path=checkpoint, checkpoint_every=1)
+    resumed = recover_branch_b(branch_a, checkpoint_path=checkpoint, checkpoint_every=1)
+    assert first[["crop_id", "parent_id", "x", "y"]].equals(
+        resumed[["crop_id", "parent_id", "x", "y"]]
+    )

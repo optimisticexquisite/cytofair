@@ -41,7 +41,10 @@ def _extract(args: argparse.Namespace) -> None:
 
 def _sipak(args: argparse.Namespace) -> None:
     branch_a = recover_branch_a(args.root)
-    branch_b = recover_branch_b(branch_a, workers=args.workers)
+    checkpoint = Path(args.branch_b).with_suffix(".partial.parquet")
+    branch_b = recover_branch_b(
+        branch_a, workers=args.workers, checkpoint_path=checkpoint
+    )
     validation = validate_provenance(
         branch_b,
         expected_total=SIPAKMED_TOTAL_CROPS,
@@ -59,6 +62,7 @@ def _sipak(args: argparse.Namespace) -> None:
     Path(args.overlap).parent.mkdir(parents=True, exist_ok=True)
     overlaps.to_parquet(args.overlap, index=False)
     validation.raise_for_failure()
+    checkpoint.unlink(missing_ok=True)
 
 
 def _sipak_a(args: argparse.Namespace) -> None:
@@ -77,7 +81,10 @@ def _sipak_a(args: argparse.Namespace) -> None:
 
 def _sipak_b(args: argparse.Namespace) -> None:
     branch_a = read_map(args.branch_a)
-    branch_b = recover_branch_b(branch_a, workers=args.workers)
+    checkpoint = Path(args.output).with_suffix(".partial.parquet")
+    branch_b = recover_branch_b(
+        branch_a, workers=args.workers, checkpoint_path=checkpoint
+    )
     validation = validate_provenance(
         branch_b,
         expected_total=SIPAKMED_TOTAL_CROPS,
@@ -94,6 +101,7 @@ def _sipak_b(args: argparse.Namespace) -> None:
     Path(args.overlap).parent.mkdir(parents=True, exist_ok=True)
     overlaps.to_parquet(args.overlap, index=False)
     validation.raise_for_failure()
+    checkpoint.unlink(missing_ok=True)
 
 
 def _cx22(args: argparse.Namespace) -> None:

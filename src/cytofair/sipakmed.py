@@ -123,6 +123,8 @@ def recover_branch_b(
     minimum_margin: float = 0.02,
     coarse_scale: float = 0.25,
     top_k: int = 5,
+    checkpoint_path: str | Path | None = None,
+    checkpoint_every: int = 100,
 ) -> pd.DataFrame:
     """Independently identify and locate each crop among every same-class parent.
 
@@ -136,6 +138,8 @@ def recover_branch_b(
         raise ValueError(f"Branch A table misses: {missing}")
     if not 0 < coarse_scale <= 1:
         raise ValueError("coarse_scale must be in (0, 1]")
+    if checkpoint_every < 1:
+        raise ValueError("checkpoint_every must be positive")
     parents = branch_a[["parent_id", "class_name", "parent_path"]].drop_duplicates()
     if parents.parent_id.duplicated().any():
         raise ValueError("A parent_id maps to multiple candidate images")
@@ -204,15 +208,37 @@ def recover_branch_b(
         }
 
     crop_records = branch_a[["crop_id", "class_name", "crop_path"]].to_dict("records")
+    matched = []
+    checkpoint_path = Path(checkpoint_path) if checkpoint_path is not None else None
+    if checkpoint_path is not None and checkpoint_path.exists():
+        partial = pd.read_parquet(checkpoint_path)
+        if not set(partial.crop_id).issubset(set(branch_a.crop_id)) or partial.crop_id.duplicated().any():
+            raise ValueError(f"Invalid Branch-B checkpoint: {checkpoint_path}")
+        matched = partial.to_dict("records")
+        completed = set(partial.crop_id)
+        crop_records = [record for record in crop_records if record["crop_id"] not in completed]
+        print(f"resuming image matching at {len(matched)}/{len(branch_a)} crops", flush=True)
+
+    def collect(iterator):
+        for result in iterator:
+            matched.append(result)
+            if len(matched) % checkpoint_every == 0 or len(matched) == len(branch_a):
+                print(f"matched {len(matched)}/{len(branch_a)} crops", flush=True)
+                if checkpoint_path is not None:
+                    checkpoint_path.parent.mkdir(parents=True, exist_ok=True)
+                    pd.DataFrame(matched).to_parquet(checkpoint_path, index=False)
+
     if workers == 1:
-        matched = [match_one(record) for record in crop_records]
+        collect(map(match_one, crop_records))
     else:
         with ThreadPoolExecutor(max_workers=workers) as pool:
-            matched = list(pool.map(match_one, crop_records))
+            collect(pool.map(match_one, crop_records))
     out = pd.DataFrame(matched).sort_values("crop_id").reset_index(drop=True)
     out["accepted"] = (out.match_confidence >= minimum_confidence) & (
         out.match_margin >= minimum_margin
     )
+    if checkpoint_path is not None:
+        out.to_parquet(checkpoint_path, index=False)
     return out
 
 
