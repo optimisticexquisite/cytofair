@@ -6,6 +6,7 @@ import argparse
 import json
 from pathlib import Path
 
+from .classification import train_classifier
 from .constants import SIPAKMED_PARENT_COUNTS, SIPAKMED_TOTAL_CROPS
 from .cric import recover_classifications
 from .cx22 import recover_all as recover_cx22
@@ -150,6 +151,24 @@ def _summarize_probe(args: argparse.Namespace) -> None:
     print(json.dumps(control, indent=2))
 
 
+def _train_classifier(args: argparse.Namespace) -> None:
+    result = train_classifier(
+        read_map(args.map),
+        dataset=args.dataset,
+        protocol=args.protocol,
+        architecture=args.architecture,
+        seed=args.seed,
+        output=args.output,
+        epochs=args.epochs,
+        batch_size=args.batch_size,
+        workers=args.workers,
+        learning_rate=args.learning_rate,
+        pretrained=not args.no_pretrained,
+        repository=args.repository,
+    )
+    print(json.dumps({key: value for key, value in result.items() if key != "history"}, indent=2))
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="cytofair")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -237,6 +256,32 @@ def build_parser() -> argparse.ArgumentParser:
     command.add_argument("--output", default="results/parent_probe_summary.csv")
     command.add_argument("--control-output", default="results/parent_probe_shuffled_control.json")
     command.set_defaults(function=_summarize_probe)
+
+    command = commands.add_parser("train-classifier", help="Train one matched protocol run")
+    command.add_argument("map")
+    command.add_argument("--dataset", required=True)
+    command.add_argument("--protocol", choices=("P1", "P1-prime", "P2", "P3"), required=True)
+    command.add_argument(
+        "--architecture",
+        choices=(
+            "resnet18",
+            "resnet50",
+            "densenet121",
+            "efficientnet_b0",
+            "mobilenet_v2",
+            "vit_b_16",
+        ),
+        required=True,
+    )
+    command.add_argument("--seed", type=int, required=True)
+    command.add_argument("--output", required=True)
+    command.add_argument("--epochs", type=int, default=20)
+    command.add_argument("--batch-size", type=int, default=64)
+    command.add_argument("--workers", type=int, default=2)
+    command.add_argument("--learning-rate", type=float, default=1e-4)
+    command.add_argument("--no-pretrained", action="store_true")
+    command.add_argument("--repository", default=".")
+    command.set_defaults(function=_train_classifier)
     return parser
 
 

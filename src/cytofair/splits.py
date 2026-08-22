@@ -87,15 +87,18 @@ def make_p1_prime(p1: pd.DataFrame, p2: pd.DataFrame, seed: int) -> pd.DataFrame
     if target > len(train):
         raise ValueError("P2 training size exceeds P1 training size")
     if target < len(train):
-        # A seeded stratified sample. The exact target is guaranteed by train_test_split.
-        keep, _ = train_test_split(
-            np.arange(len(train)),
-            train_size=target,
-            random_state=seed,
-            shuffle=True,
-            stratify=train.class_name,
-        )
-        retained = set(train.iloc[keep].crop_id)
+        counts = train.class_name.value_counts().sort_index()
+        quotas = counts * (target / len(train))
+        take = np.floor(quotas).astype(int)
+        remainder = target - int(take.sum())
+        priority = (quotas - take).sort_values(ascending=False, kind="stable").index
+        for class_name in priority[:remainder]:
+            take.loc[class_name] += 1
+        rng = np.random.default_rng(seed)
+        retained = set()
+        for class_name, count in take.items():
+            candidates = train.loc[train.class_name == class_name, "crop_id"].to_numpy()
+            retained.update(rng.choice(candidates, size=count, replace=False))
     else:
         retained = set(train.crop_id)
     out = p1.loc[(p1.partition == "test") | p1.crop_id.isin(retained)].copy()
@@ -153,4 +156,3 @@ def monte_carlo_straddle_interval(
         values[index] = np.mean((train_counts > 0) & (train_counts < sizes))
     low, high = np.quantile(values, [0.025, 0.975])
     return float(low), float(high)
-

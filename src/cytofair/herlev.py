@@ -27,6 +27,7 @@ def recover_one_cell_per_image(root: str | Path) -> pd.DataFrame:
                 "crop_id": relative,
                 "parent_id": relative,
                 "class_name": path.parent.name,
+                "crop_path": str(path.resolve()),
                 "method": "one_released_image_per_parent",
                 "match_confidence": 1.0,
             }
