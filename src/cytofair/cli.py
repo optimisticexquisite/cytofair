@@ -12,6 +12,7 @@ from .cric import recover_classifications
 from .cx22 import recover_all as recover_cx22
 from .cx22 import subset_parent_overlap
 from .download import download_manifest
+from .duplicates import attach_p3_groups, duplicate_pairs, hash_manifest
 from .extract import extract_manifest
 from .herlev import recover_one_cell_per_image
 from .probe import summarize_probe, train_parent_probe
@@ -169,6 +170,28 @@ def _train_classifier(args: argparse.Namespace) -> None:
     print(json.dumps({key: value for key, value in result.items() if key != "history"}, indent=2))
 
 
+def _duplicates(args: argparse.Namespace) -> None:
+    provenance = read_map(args.map)
+    hashes = hash_manifest(provenance)
+    pairs = duplicate_pairs(
+        hashes, phash_threshold=args.phash_threshold, dhash_threshold=args.dhash_threshold
+    )
+    Path(args.hashes).parent.mkdir(parents=True, exist_ok=True)
+    hashes.to_parquet(args.hashes, index=False)
+    pairs.to_csv(args.pairs, index=False)
+    write_map(attach_p3_groups(provenance, pairs), args.output)
+    print(
+        json.dumps(
+            {
+                "crops": len(hashes),
+                "consensus_pairs": len(pairs),
+                "cross_parent_pairs": int(pairs.cross_parent.sum()) if not pairs.empty else 0,
+            },
+            indent=2,
+        )
+    )
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="cytofair")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -282,6 +305,15 @@ def build_parser() -> argparse.ArgumentParser:
     command.add_argument("--no-pretrained", action="store_true")
     command.add_argument("--repository", default=".")
     command.set_defaults(function=_train_classifier)
+
+    command = commands.add_parser("audit-duplicates", help="Hash crops and create P3 groups")
+    command.add_argument("map")
+    command.add_argument("--hashes", default="duplicates/hash_manifest.parquet")
+    command.add_argument("--pairs", default="duplicates/near_duplicate_manifest.csv")
+    command.add_argument("--output", default="provenance/parent_map_p3.parquet")
+    command.add_argument("--phash-threshold", type=int, default=6)
+    command.add_argument("--dhash-threshold", type=int, default=6)
+    command.set_defaults(function=_duplicates)
     return parser
 
 
