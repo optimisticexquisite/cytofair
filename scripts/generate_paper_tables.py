@@ -164,17 +164,90 @@ def classification_tables(
     return scores, inference
 
 
+def secondary_contrast_table(secondary: pd.DataFrame) -> str:
+    required = {
+        "dataset",
+        "architecture",
+        "left_protocol",
+        "right_protocol",
+        "n",
+        "mean_difference",
+        "sd_difference",
+        "test",
+        "p_value",
+        "effect_name",
+        "effect_size",
+        "effect_ci_low",
+        "effect_ci_high",
+    }
+    missing = sorted(required - set(secondary.columns))
+    if missing:
+        raise ValueError(f"Secondary contrast table misses columns: {missing}")
+    rows = []
+    for row in secondary.itertuples(index=False):
+        if int(row.n) < 5:
+            raise ValueError("Secondary contrasts require at least five paired seeds")
+        if pd.isna(row.p_value):
+            inference = f"{row.test}; no p-value"
+        else:
+            if (
+                not row.effect_name
+                or pd.isna(row.effect_size)
+                or pd.isna(row.effect_ci_low)
+                or pd.isna(row.effect_ci_high)
+            ):
+                raise ValueError("Every secondary p-value requires an effect and 95% CI")
+            inference = (
+                f"unadjusted p={_p(row.p_value)}; {row.effect_name}={row.effect_size:.3f} "
+                f"[{row.effect_ci_low:.3f}, {row.effect_ci_high:.3f}]"
+            )
+        rows.append(
+            [
+                row.dataset,
+                row.architecture,
+                f"{PROTOCOL_LABEL[row.left_protocol]}−{PROTOCOL_LABEL[row.right_protocol]}",
+                f"{row.mean_difference:.4f} ± {row.sd_difference:.4f}",
+                row.test,
+                inference,
+            ]
+        )
+    return _markdown(
+        ["Dataset", "Architecture", "Contrast", "Paired Δ, mean ± SD", "Test", "Inference"],
+        rows,
+    )
+
+
+def ordering_table(ordering: pd.DataFrame) -> str:
+    required = {"dataset", "architecture", "ordering_passed"}
+    missing = sorted(required - set(ordering.columns))
+    if missing:
+        raise ValueError(f"Ordering table misses columns: {missing}")
+    return _markdown(
+        ["Dataset", "Architecture", "Registered P3 ≤ P2 ≤ P1"],
+        [
+            [row.dataset, row.architecture, "Pass" if bool(row.ordering_passed) else "Violation"]
+            for row in ordering.itertuples(index=False)
+        ],
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--structural", default="results/table1_structural_leakage.csv")
     parser.add_argument("--classification", default="results/classification_summary.csv")
     parser.add_argument("--contrasts", default="results/classification_primary_contrasts.csv")
+    parser.add_argument(
+        "--secondary", default="results/classification_secondary_contrasts.csv"
+    )
+    parser.add_argument("--ordering", default="results/classification_protocol_ordering.csv")
     parser.add_argument("--output", default="paper/generated_tables.md")
     args = parser.parse_args()
     structural = structural_table(pd.read_csv(args.structural))
     scores, inference = classification_tables(
         pd.read_csv(args.classification), pd.read_csv(args.contrasts)
     )
+    secondary = secondary_contrast_table(pd.read_csv(args.secondary))
+    ordering = ordering_table(pd.read_csv(args.ordering))
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(
@@ -185,7 +258,13 @@ def main() -> None:
         "## Table 2a. Matched classification accuracy\n\n"
         f"{scores}\n\n"
         "## Table 2b. Preregistered paired inference\n\n"
-        f"{inference}\n"
+        f"{inference}\n\n"
+        "## Table 2c. Secondary P2−P3 sensitivity contrast\n\n"
+        "These p-values are unadjusted because P2−P3 is outside the stated confirmatory "
+        "BH family. Every p-value retains its paired effect and 95% CI.\n\n"
+        f"{secondary}\n\n"
+        "## Table 2d. Registered protocol-ordering check\n\n"
+        f"{ordering}\n"
     )
     print(output)
 

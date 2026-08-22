@@ -59,3 +59,34 @@ def test_classification_table_rejects_bare_p_value():
         assert "Every p-value" in str(error)
     else:
         raise AssertionError("A bare p-value was accepted")
+
+
+def test_secondary_and_ordering_tables_make_violations_explicit():
+    module = _module()
+    secondary = pd.DataFrame(
+        [
+            {
+                "dataset": "d",
+                "architecture": "resnet18",
+                "left_protocol": "P2",
+                "right_protocol": "P3",
+                "n": 5,
+                "mean_difference": -0.01,
+                "sd_difference": 0.02,
+                "test": "paired_t",
+                "p_value": 0.4,
+                "effect_name": "cohens_dz",
+                "effect_size": -0.5,
+                "effect_ci_low": -1.2,
+                "effect_ci_high": 0.2,
+            }
+        ]
+    )
+    rendered = module.secondary_contrast_table(secondary)
+    assert "unadjusted p=0.4000; cohens_dz=-0.500 [-1.200, 0.200]" in rendered
+    ordering = module.ordering_table(
+        pd.DataFrame(
+            [{"dataset": "d", "architecture": "resnet18", "ordering_passed": False}]
+        )
+    )
+    assert "Violation" in ordering
