@@ -17,7 +17,6 @@ from .extract import extract_manifest
 from .herlev import recover_one_cell_per_image
 from .probe import summarize_probe, train_parent_probe
 from .provenance import read_map, validate_provenance, write_map
-from .results import summarize_classification
 from .sipakmed import bbox_iou_pairs, recover_branch_a, recover_branch_b
 from .splits import export_protocol_splits
 from .table1 import structural_table
@@ -205,6 +204,8 @@ def _train_classifier(args: argparse.Namespace) -> None:
 
 
 def _summarize_classification(args: argparse.Namespace) -> None:
+    from .results import summarize_classification
+
     summary, primary, secondary, ordering = summarize_classification(args.results)
     outputs = {
         args.output: summary,
