@@ -9,7 +9,7 @@ import json
 import platform
 import socket
 import subprocess
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 
@@ -28,7 +28,7 @@ def main() -> None:
         "virgin_host_attested": bool(args.virgin_host_attested),
         "host": socket.gethostname(),
         "platform": platform.platform(),
-        "completed_at_utc": datetime.now(timezone.utc).isoformat(),
+        "completed_at_utc": datetime.now(UTC).isoformat(),
         "git_sha": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
         "table1_sha256": hashlib.sha256(table.read_bytes()).hexdigest(),
         "entry_point": "./scripts/reproduce_table1.sh",

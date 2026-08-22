@@ -17,6 +17,10 @@ uv run pytest
 uv run cytofair --help
 ```
 
+Python 3.11 or newer is required. The lock pins scikit-learn 1.9.0 because grouped
+split assignment changed in an older compatible release; accepting an arbitrary
+scikit-learn version would make the released P2/P3 hashes machine-dependent.
+
 The clean-clone reproduction entry point is:
 
 ```bash

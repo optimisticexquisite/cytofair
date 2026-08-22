@@ -10,7 +10,7 @@ import socket
 import subprocess
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from hashlib import sha256
 from pathlib import Path
 
@@ -259,7 +259,7 @@ def train_parent_probe(
     optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate, weight_decay=1e-4)
 
     started = time.time()
-    started_at = datetime.now(timezone.utc).isoformat()
+    started_at = datetime.now(UTC).isoformat()
     history = []
     for epoch in range(epochs):
         model.train()
@@ -316,7 +316,7 @@ def train_parent_probe(
         "gpu_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES", ""),
         "git_sha": _git_sha(repository),
         "started_at_utc": started_at,
-        "completed_at_utc": datetime.now(timezone.utc).isoformat(),
+        "completed_at_utc": datetime.now(UTC).isoformat(),
         "elapsed_seconds": time.time() - started,
         "runtime": _runtime_metadata(torch, torchvision, provenance),
         "history": history,

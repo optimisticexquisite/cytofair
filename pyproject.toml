@@ -7,7 +7,7 @@ name = "cytofair"
 version = "0.1.0"
 description = "Leakage-aware provenance recovery and evaluation for cervical cytology benchmarks"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
   "h5py>=3.11,<4",
   "numpy>=2.0,<3",
@@ -16,7 +16,7 @@ dependencies = [
   "pillow>=10.4,<13",
   "py7zr>=0.22,<2",
   "pyarrow==25.0.1",
-  "scikit-learn>=1.5,<2",
+  "scikit-learn==1.9.0",
   "scipy>=1.14,<2",
   "statsmodels>=0.14,<1",
 ]
@@ -41,4 +41,4 @@ addopts = "-ra"
 
 [tool.ruff]
 line-length = 100
-target-version = "py310"
+target-version = "py311"

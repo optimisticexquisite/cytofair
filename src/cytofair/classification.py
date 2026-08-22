@@ -7,7 +7,7 @@ import json
 import os
 import random
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import numpy as np
@@ -152,7 +152,7 @@ def train_classifier(
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate, weight_decay=1e-4)
     started = time.time()
-    started_at = datetime.now(timezone.utc).isoformat()
+    started_at = datetime.now(UTC).isoformat()
     history = []
     final_predictions, final_targets = [], []
     for epoch in range(epochs):
@@ -207,7 +207,7 @@ def train_classifier(
         "git_sha": _git_sha(repository),
         "gpu_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES", ""),
         "started_at_utc": started_at,
-        "completed_at_utc": datetime.now(timezone.utc).isoformat(),
+        "completed_at_utc": datetime.now(UTC).isoformat(),
         "elapsed_seconds": time.time() - started,
         "runtime": _runtime_metadata(torch, torchvision, provenance),
         "history": history,
