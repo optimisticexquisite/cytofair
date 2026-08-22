@@ -2,7 +2,12 @@ import numpy as np
 import pandas as pd
 from PIL import Image
 
-from cytofair.probe import _ImageMode, _provenance_sha256, balanced_parent_split
+from cytofair.probe import (
+    _ImageMode,
+    _provenance_sha256,
+    _runtime_metadata,
+    balanced_parent_split,
+)
 
 
 def test_probe_split_is_balanced_and_has_exact_chance():
@@ -37,3 +42,34 @@ def test_provenance_hash_is_order_invariant():
         {"crop_id": ["b", "a"], "parent_id": ["p", "q"], "class_name": ["x", "y"]}
     )
     assert _provenance_sha256(frame) == _provenance_sha256(frame.iloc[::-1])
+
+
+def test_runtime_metadata_records_split_and_image_dependencies(monkeypatch):
+    import types
+
+    torch = types.SimpleNamespace(
+        __version__="test-torch",
+        version=types.SimpleNamespace(cuda="test-cuda"),
+        backends=types.SimpleNamespace(cudnn=types.SimpleNamespace(version=lambda: 1)),
+        cuda=types.SimpleNamespace(
+            is_available=lambda: False,
+            get_device_name=lambda _index: "unused",
+        ),
+    )
+    torchvision = types.SimpleNamespace(__version__="test-torchvision")
+    monkeypatch.setattr("cytofair.probe.socket.gethostname", lambda: "test-host")
+    provenance = pd.DataFrame(
+        {"crop_id": ["c"], "parent_id": ["p"], "class_name": ["x"]}
+    )
+    metadata = _runtime_metadata(torch, torchvision, provenance)
+    for key in (
+        "numpy_version",
+        "pandas_version",
+        "scipy_version",
+        "scikit_learn_version",
+        "pillow_version",
+        "opencv_version",
+        "torch_version",
+        "torchvision_version",
+    ):
+        assert metadata[key]

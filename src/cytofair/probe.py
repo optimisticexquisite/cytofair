@@ -137,11 +137,21 @@ def _provenance_sha256(provenance: pd.DataFrame) -> str:
 
 
 def _runtime_metadata(torch, torchvision, provenance: pd.DataFrame) -> dict[str, object]:
+    import PIL
+    import scipy
+    import sklearn
+
     return {
         "host": socket.gethostname(),
         "command": sys.argv,
         "python_version": platform.python_version(),
         "platform": platform.platform(),
+        "numpy_version": np.__version__,
+        "pandas_version": pd.__version__,
+        "scipy_version": scipy.__version__,
+        "scikit_learn_version": sklearn.__version__,
+        "pillow_version": PIL.__version__,
+        "opencv_version": cv2.__version__,
         "torch_version": torch.__version__,
         "torchvision_version": torchvision.__version__,
         "cuda_version": torch.version.cuda,
