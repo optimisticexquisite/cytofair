@@ -81,6 +81,7 @@ def acceptance_contract_report(
     classification_summary: pd.DataFrame | None = None,
     primary_contrasts: pd.DataFrame | None = None,
     classification_ordering: pd.DataFrame | None = None,
+    classification_validation: dict[str, object] | None = None,
     clean_clone_evidence: dict[str, object] | None = None,
     paper_checklist: dict[str, object] | None = None,
 ) -> pd.DataFrame:
@@ -195,6 +196,18 @@ def acceptance_contract_report(
                 f"{len(classification_ordering)} cells",
             )
         )
+    items.append(
+        _item(
+            "statistics",
+            "classification matrix keys, runtime, and split hashes",
+            None
+            if classification_validation is None
+            else bool(classification_validation.get("passed")),
+            "classification matrix validation absent"
+            if classification_validation is None
+            else str(classification_validation),
+        )
+    )
 
     git_evidence = git_preregistration_evidence(repository)
     items.append(

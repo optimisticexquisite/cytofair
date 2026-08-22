@@ -100,3 +100,21 @@ def test_acceptance_report_never_silently_passes_missing_evidence(tmp_path):
     subprocess.run(["git", "commit", "-qm", "preregister"], cwd=tmp_path, check=True)
     report = acceptance_contract_report(repository=tmp_path)
     assert set(report.status) == {"PENDING"}
+
+
+def test_acceptance_report_uses_matrix_integrity_evidence(tmp_path):
+    import subprocess
+
+    subprocess.run(["git", "init", "-q", tmp_path], check=True)
+    subprocess.run(["git", "config", "user.email", "test@example.com"], cwd=tmp_path, check=True)
+    subprocess.run(["git", "config", "user.name", "Test"], cwd=tmp_path, check=True)
+    (tmp_path / "PREREGISTRATION.md").write_text("registered\n")
+    subprocess.run(["git", "add", "PREREGISTRATION.md"], cwd=tmp_path, check=True)
+    subprocess.run(["git", "commit", "-qm", "preregister"], cwd=tmp_path, check=True)
+    report = acceptance_contract_report(
+        repository=tmp_path, classification_validation={"passed": False, "errors": ["bad"]}
+    )
+    item = report.loc[
+        report.criterion == "classification matrix keys, runtime, and split hashes"
+    ].iloc[0]
+    assert item.status == "FAIL"

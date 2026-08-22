@@ -50,6 +50,10 @@ def main() -> None:
         "--ordering", default="results/classification_protocol_ordering.csv"
     )
     parser.add_argument(
+        "--classification-validation",
+        default="reports/generated/classification_matrix_validation.json",
+    )
+    parser.add_argument(
         "--clean-clone-evidence", default="reports/generated/clean_clone_evidence.json"
     )
     parser.add_argument("--paper-checklist", default="reports/paper_checklist.json")
@@ -67,6 +71,7 @@ def main() -> None:
         classification_summary=_csv(args.classification_summary),
         primary_contrasts=_csv(args.primary_contrasts),
         classification_ordering=_csv(args.ordering),
+        classification_validation=_json(args.classification_validation),
         clean_clone_evidence=_json(args.clean_clone_evidence),
         paper_checklist=_json(args.paper_checklist),
     )
