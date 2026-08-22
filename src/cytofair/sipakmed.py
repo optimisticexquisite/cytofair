@@ -97,12 +97,14 @@ def _read_rgb(path: str | Path) -> np.ndarray:
     return image
 
 
-def _best_match(crop: np.ndarray, parent: np.ndarray) -> tuple[float, int, int, int, int]:
+def _best_match(
+    crop: np.ndarray, parent: np.ndarray, *, scales: tuple[float, ...] = (1.0, 0.75, 1.25)
+) -> tuple[float, int, int, int, int]:
     """Full-resolution NCC with multiscale fallback for release variants."""
     crop_h, crop_w = crop.shape[:2]
     parent_h, parent_w = parent.shape[:2]
     best = (-np.inf, 0, 0, crop_w, crop_h)
-    for scale in (1.0, 0.75, 1.25):
+    for scale in scales:
         scaled_w = max(8, round(crop_w * scale))
         scaled_h = max(8, round(crop_h * scale))
         if scaled_w > parent_w or scaled_h > parent_h:
@@ -180,11 +182,21 @@ def recover_branch_b(
                 score = float(response.max())
             ranked.append((score, candidate))
         ranked.sort(key=lambda item: item[0], reverse=True)
-        refined = []
-        for coarse_score, candidate in ranked[:top_k]:
-            parent = full_parent(candidate["parent_path"])
-            score, x, y, width, height = _best_match(crop, parent)
-            refined.append((score, coarse_score, candidate, x, y, width, height, parent.shape))
+        def refine(scales: tuple[float, ...]):
+            values = []
+            for coarse_score, candidate in ranked[:top_k]:
+                parent = full_parent(candidate["parent_path"])
+                score, x, y, width, height = _best_match(crop, parent, scales=scales)
+                values.append(
+                    (score, coarse_score, candidate, x, y, width, height, parent.shape)
+                )
+            return values
+
+        refined = refine((1.0,))
+        # The released crops are normally exact pixel windows. Multiscale matching
+        # remains a fail-safe for any post-processed/resized release variant.
+        if max(item[0] for item in refined) < minimum_confidence:
+            refined = refine((1.0, 0.75, 1.25))
         refined.sort(key=lambda item: item[0], reverse=True)
         best = refined[0]
         second_score = refined[1][0] if len(refined) > 1 else -1.0
