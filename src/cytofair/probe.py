@@ -4,9 +4,14 @@ from __future__ import annotations
 
 import json
 import os
+import platform
 import random
+import socket
 import subprocess
+import sys
 import time
+from datetime import datetime, timezone
+from hashlib import sha256
 from pathlib import Path
 
 import cv2
@@ -121,6 +126,31 @@ def _git_sha(repository: str | Path = ".") -> str:
         return "unknown"
 
 
+def _provenance_sha256(provenance: pd.DataFrame) -> str:
+    columns = [
+        column
+        for column in ("crop_id", "parent_id", "class_name", "p3_group_id")
+        if column in provenance.columns
+    ]
+    payload = provenance.sort_values("crop_id")[columns].to_csv(index=False, lineterminator="\n")
+    return sha256(payload.encode()).hexdigest()
+
+
+def _runtime_metadata(torch, torchvision, provenance: pd.DataFrame) -> dict[str, object]:
+    return {
+        "host": socket.gethostname(),
+        "command": sys.argv,
+        "python_version": platform.python_version(),
+        "platform": platform.platform(),
+        "torch_version": torch.__version__,
+        "torchvision_version": torchvision.__version__,
+        "cuda_version": torch.version.cuda,
+        "cudnn_version": torch.backends.cudnn.version(),
+        "cuda_device": torch.cuda.get_device_name(0) if torch.cuda.is_available() else None,
+        "input_provenance_sha256": _provenance_sha256(provenance),
+    }
+
+
 def train_parent_probe(
     provenance: pd.DataFrame,
     *,
@@ -137,6 +167,7 @@ def train_parent_probe(
 ) -> dict[str, object]:
     """Fine-tune ResNet-18 to identify source parents."""
     import torch
+    import torchvision
     from torch import nn
     from torch.utils.data import DataLoader, Dataset
     from torchvision import models, transforms
@@ -218,6 +249,7 @@ def train_parent_probe(
     optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate, weight_decay=1e-4)
 
     started = time.time()
+    started_at = datetime.now(timezone.utc).isoformat()
     history = []
     for epoch in range(epochs):
         model.train()
@@ -273,7 +305,10 @@ def train_parent_probe(
         "pretrained": pretrained,
         "gpu_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES", ""),
         "git_sha": _git_sha(repository),
+        "started_at_utc": started_at,
+        "completed_at_utc": datetime.now(timezone.utc).isoformat(),
         "elapsed_seconds": time.time() - started,
+        "runtime": _runtime_metadata(torch, torchvision, provenance),
         "history": history,
     }
     output = Path(output)

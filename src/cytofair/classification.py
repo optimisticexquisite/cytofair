@@ -7,6 +7,7 @@ import json
 import os
 import random
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 import numpy as np
@@ -14,7 +15,7 @@ import pandas as pd
 from PIL import Image
 from sklearn.metrics import balanced_accuracy_score, f1_score
 
-from .probe import _git_sha
+from .probe import _git_sha, _runtime_metadata
 from .splits import make_grouped, make_p1, make_p1_prime
 
 
@@ -75,6 +76,7 @@ def train_classifier(
     repository: str | Path = ".",
 ) -> dict[str, object]:
     import torch
+    import torchvision
     from torch import nn
     from torch.utils.data import DataLoader, Dataset
     from torchvision import transforms
@@ -150,6 +152,7 @@ def train_classifier(
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate, weight_decay=1e-4)
     started = time.time()
+    started_at = datetime.now(timezone.utc).isoformat()
     history = []
     final_predictions, final_targets = [], []
     for epoch in range(epochs):
@@ -203,11 +206,13 @@ def train_classifier(
         "split_sha256": split_hash,
         "git_sha": _git_sha(repository),
         "gpu_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES", ""),
+        "started_at_utc": started_at,
+        "completed_at_utc": datetime.now(timezone.utc).isoformat(),
         "elapsed_seconds": time.time() - started,
+        "runtime": _runtime_metadata(torch, torchvision, provenance),
         "history": history,
     }
     output = Path(output)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, indent=2))
     return result
-
