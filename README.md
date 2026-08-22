@@ -17,7 +17,7 @@ uv run pytest
 uv run cytofair --help
 ```
 
-The eventual clean-clone reproduction entry point is:
+The clean-clone reproduction entry point is:
 
 ```bash
 ./scripts/reproduce_table1.sh
@@ -85,7 +85,9 @@ python scripts/launch_probe_matrix.py provenance/sipakmed_parent_map_p3.parquet 
 
 python scripts/launch_classification_matrix.py \
   --dataset-map SIPaKMeD=provenance/sipakmed_parent_map_p3.parquet \
-  --output results/classification --max-gpus 3
+  --output results/classification --max-gpus 3 \
+  --architectures resnet18 resnet50 densenet121 efficientnet_b0 mobilenet_v2 vit_b_16 \
+  --protocols P1 P1-prime P2 P3
 ```
 
 Every model JSON records the seed, input-provenance hash, Git SHA, command,
@@ -99,3 +101,7 @@ P1-prime-vs-P2 classification family.
 Cx22/CCEDD and other source datasets may restrict use to non-commercial research and
 may forbid redistribution. This project publishes derived IDs, coordinates, checksums,
 and split assignments—not source images.
+
+The concrete reuse boundary for the ISBI unit, journal extension, F2/F3/F8, and the
+fish-domain V2 is recorded in `reports/downstream_reuse.md` without claiming future
+experiments as completed work.
