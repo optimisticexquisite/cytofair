@@ -69,7 +69,8 @@ def figure_svg(summary: pd.DataFrame, control: dict[str, object]) -> str:
 <line x1="80" y1="145" x2="80" y2="535" stroke="#667788" stroke-width="2"/>
 <text x="27" y="345" transform="rotate(-90 27 345)" class="axis">Parent-ID test accuracy</text>
 <line x1="80" y1="{chance_y:.1f}" x2="1130" y2="{chance_y:.1f}" stroke="#8C6D1F" stroke-width="3" stroke-dasharray="9 7"/>
-<text x="1130" y="{chance_y - 9:.1f}" text-anchor="end" class="number">chance = {100 * chance:.4f}%</text>
+<line x1="970" y1="165" x2="1020" y2="165" stroke="#8C6D1F" stroke-width="3" stroke-dasharray="9 7"/>
+<text x="1032" y="171" text-anchor="start" class="number">chance = {100 * chance:.4f}%</text>
 {''.join(elements)}
 <rect x="72" y="620" width="1056" height="42" rx="9" fill="#EAF1F5"/>
 <text x="600" y="647" text-anchor="middle" class="number">RGB is {multiplier:.1f}× chance; shuffled-label 95% CI covers chance: {bool(control['passed'])}.</text>

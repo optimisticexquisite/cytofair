@@ -31,3 +31,4 @@ def test_figure2_requires_and_states_five_seed_control():
     assert "424-way" in svg
     assert "shuffled-label 95% CI covers chance: True" in svg
     assert "25.00 ± 1.00%" in svg
+    assert 'y="171"' in svg
