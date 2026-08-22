@@ -8,6 +8,8 @@ from pathlib import Path
 
 import pandas as pd
 
+from .constants import SIPAKMED_PARENT_COUNTS
+
 
 @dataclass(frozen=True)
 class AcceptanceItem:
@@ -87,13 +89,25 @@ def acceptance_contract_report(
     if provenance_validation is None:
         items.append(_item("provenance", "all recovery checks", None, "validation absent"))
     else:
-        passed = provenance_validation["passed"].astype(bool)
+        required = {
+            "branch_parent_agreement",
+            "bbox_within_parent",
+            "dataset_total",
+            "per_parent_count_sum",
+            *(f"parent_count:{name}" for name in SIPAKMED_PARENT_COUNTS),
+        }
+        available = set(provenance_validation["name"])
+        missing = sorted(required - available)
+        selected = provenance_validation.loc[provenance_validation.name.isin(required)]
+        passed = selected["passed"].astype(bool)
         items.append(
             _item(
                 "provenance",
                 "A/B agreement, bbox containment, totals, and class counts",
-                bool(passed.all()),
-                f"{int(passed.sum())}/{len(passed)} checks pass",
+                None if missing else bool(passed.all()),
+                f"missing checks: {missing}"
+                if missing
+                else f"{int(passed.sum())}/{len(passed)} required checks pass",
             )
         )
 
