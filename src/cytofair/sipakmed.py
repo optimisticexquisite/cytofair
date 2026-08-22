@@ -269,3 +269,38 @@ def bbox_iou_pairs(provenance: pd.DataFrame) -> pd.DataFrame:
                     }
                 )
     return pd.DataFrame(records)
+
+
+def cross_split_pixel_overlap(
+    provenance: pd.DataFrame, split: pd.DataFrame
+) -> dict[str, int | float]:
+    """Measure literal bbox overlap specifically across train and test."""
+    pairs = bbox_iou_pairs(provenance)
+    partitions = split.set_index("crop_id").partition
+    if set(provenance.crop_id) != set(split.crop_id):
+        raise ValueError("Pixel-overlap split must cover exactly the provenance crops")
+    if pairs.empty:
+        return {
+            "cross_split_pairs": 0,
+            "overlapping_cross_split_pairs": 0,
+            "overlapping_cross_split_pair_fraction": 0.0,
+            "test_crops_with_train_pixel_overlap": 0,
+            "test_crop_pixel_overlap_fraction": 0.0,
+        }
+    pairs["partition_a"] = pairs.crop_id_a.map(partitions)
+    pairs["partition_b"] = pairs.crop_id_b.map(partitions)
+    cross = pairs.loc[pairs.partition_a != pairs.partition_b]
+    overlapping = cross.loc[cross.intersection_pixels > 0]
+    test_with_overlap = set(
+        overlapping.crop_id_a.loc[overlapping.partition_a == "test"]
+    ) | set(overlapping.crop_id_b.loc[overlapping.partition_b == "test"])
+    n_test = int((split.partition == "test").sum())
+    return {
+        "cross_split_pairs": len(cross),
+        "overlapping_cross_split_pairs": len(overlapping),
+        "overlapping_cross_split_pair_fraction": len(overlapping) / len(cross)
+        if len(cross)
+        else 0.0,
+        "test_crops_with_train_pixel_overlap": len(test_with_overlap),
+        "test_crop_pixel_overlap_fraction": len(test_with_overlap) / n_test if n_test else 0.0,
+    }

@@ -4,7 +4,12 @@ import cv2
 import numpy as np
 
 from cytofair.provenance import validate_provenance
-from cytofair.sipakmed import bbox_iou_pairs, recover_branch_a, recover_branch_b
+from cytofair.sipakmed import (
+    bbox_iou_pairs,
+    cross_split_pixel_overlap,
+    recover_branch_a,
+    recover_branch_b,
+)
 
 
 def test_sipakmed_filename_and_template_branches(tmp_path: Path):
@@ -34,6 +39,11 @@ def test_sipakmed_filename_and_template_branches(tmp_path: Path):
     overlaps = bbox_iou_pairs(branch_b)
     assert len(overlaps) == 1
     assert overlaps.iloc[0].intersection_pixels > 0
+    split = branch_b[["crop_id"]].copy()
+    split["partition"] = ["train", "test"]
+    pixel_leakage = cross_split_pixel_overlap(branch_b, split)
+    assert pixel_leakage["overlapping_cross_split_pairs"] == 1
+    assert pixel_leakage["test_crop_pixel_overlap_fraction"] == 1.0
 
 
 def test_template_branch_can_resume_from_checkpoint(tmp_path: Path):
