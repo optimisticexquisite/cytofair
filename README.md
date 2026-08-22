@@ -53,6 +53,11 @@ confidence/margin gate, the dataset total is 4,049, and the five parent counts a
 126/108/238/271/223 in release order. Ambiguous rows remain in the map with
 `accepted=false`; they are never silently discarded.
 
+`sipakmed_parent_map.parquet` is the canonical filename-derived map used for splits.
+`sipakmed_branch_b.parquet` is the independent all-parent image-match audit with
+bboxes, confidence, margin, and an `accepted` flag. Keeping them separate ensures
+that an ambiguous content match can never overwrite an exact released filename ID.
+
 Cx22 source identities and requested ROIs come directly from the authors' MATLAB
 generator metadata. The clean reproduction additionally downloads the declared
 CCEDD archive, verifies its checksum, checks that each source image exists, and
