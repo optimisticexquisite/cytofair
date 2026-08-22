@@ -30,14 +30,15 @@
       "filename": "im_Metaplastic.7z",
       "url": "https://www.cs.uoi.gr/~marina/SIPAKMED/im_Metaplastic.7z",
       "size": 1396480123,
-      "sha256": null,
+      "sha256": "97f1badc5f606f127d2af0d18a008ebd41a2b60f44785cb332a6eaa33004d2af",
       "terms": "Public for experimental use; cite Plissiti et al., ICIP 2018"
     },
     {
       "dataset": "sipakmed",
       "filename": "im_Dyskeratotic.7z",
       "url": "https://www.cs.uoi.gr/~marina/SIPAKMED/im_Dyskeratotic.7z",
-      "sha256": null,
+      "size": 1182980549,
+      "sha256": "a8768bc03c9e814063ff946b7ef7548067e16b760168267d2b12e95a66955cce",
       "terms": "Public for experimental use; cite Plissiti et al., ICIP 2018"
     },
     {

@@ -13,6 +13,7 @@ from .cx22 import subset_parent_overlap
 from .download import download_manifest
 from .extract import extract_manifest
 from .herlev import recover_one_cell_per_image
+from .probe import summarize_probe, train_parent_probe
 from .provenance import read_map, validate_provenance, write_map
 from .sipakmed import recover_branch_a, recover_branch_b
 from .table1 import structural_table
@@ -92,6 +93,32 @@ def _git_evidence(args: argparse.Namespace) -> None:
     print(json.dumps(git_preregistration_evidence(args.repository), indent=2))
 
 
+def _train_probe(args: argparse.Namespace) -> None:
+    result = train_parent_probe(
+        read_map(args.map),
+        seed=args.seed,
+        output=args.output,
+        image_mode=args.image_mode,
+        shuffled_labels=args.shuffled_labels,
+        epochs=args.epochs,
+        batch_size=args.batch_size,
+        workers=args.workers,
+        learning_rate=args.learning_rate,
+        pretrained=not args.no_pretrained,
+        repository=args.repository,
+    )
+    print(json.dumps({key: value for key, value in result.items() if key != "history"}, indent=2))
+
+
+def _summarize_probe(args: argparse.Namespace) -> None:
+    summary, control = summarize_probe(args.results)
+    Path(args.output).parent.mkdir(parents=True, exist_ok=True)
+    summary.to_csv(args.output, index=False)
+    Path(args.control_output).write_text(json.dumps(control, indent=2))
+    print(summary.to_string(index=False))
+    print(json.dumps(control, indent=2))
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="cytofair")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -146,6 +173,26 @@ def build_parser() -> argparse.ArgumentParser:
     command = commands.add_parser("git-evidence", help="Verify preregistration chronology")
     command.add_argument("repository", nargs="?", default=".")
     command.set_defaults(function=_git_evidence)
+
+    command = commands.add_parser("train-probe", help="Train one parent-identity probe run")
+    command.add_argument("map")
+    command.add_argument("--seed", type=int, required=True)
+    command.add_argument("--output", required=True)
+    command.add_argument("--image-mode", choices=("rgb", "grayscale", "highpass"), default="rgb")
+    command.add_argument("--shuffled-labels", action="store_true")
+    command.add_argument("--epochs", type=int, default=15)
+    command.add_argument("--batch-size", type=int, default=64)
+    command.add_argument("--workers", type=int, default=2)
+    command.add_argument("--learning-rate", type=float, default=1e-4)
+    command.add_argument("--no-pretrained", action="store_true")
+    command.add_argument("--repository", default=".")
+    command.set_defaults(function=_train_probe)
+
+    command = commands.add_parser("summarize-probe", help="Summarize probe seeds and control")
+    command.add_argument("results", nargs="+")
+    command.add_argument("--output", default="results/parent_probe_summary.csv")
+    command.add_argument("--control-output", default="results/parent_probe_shuffled_control.json")
+    command.set_defaults(function=_summarize_probe)
     return parser
 
 
