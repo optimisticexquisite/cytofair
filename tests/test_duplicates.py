@@ -1,6 +1,8 @@
+import cv2
+import numpy as np
 import pandas as pd
 
-from cytofair.duplicates import attach_p3_groups, duplicate_pairs
+from cytofair.duplicates import attach_p3_groups, duplicate_pairs, synthetic_detector_check
 
 
 def test_consensus_hash_pair_and_parent_union():
@@ -31,3 +33,19 @@ def test_consensus_hash_pair_and_parent_union():
         "parent_id"
     ).p3_group_id["p1"]
 
+
+def test_synthetic_detector_reports_precision_and_recall(tmp_path):
+    base = np.zeros((128, 128, 3), dtype=np.uint8)
+    cv2.circle(base, (64, 64), 30, (220, 120, 80), -1)
+    negative = np.zeros_like(base)
+    cv2.line(negative, (0, 0), (127, 127), (255, 255, 255), 8)
+    base_path, negative_path = tmp_path / "base.png", tmp_path / "negative.png"
+    cv2.imwrite(str(base_path), base)
+    cv2.imwrite(str(negative_path), negative)
+    result = synthetic_detector_check(
+        base_path, tmp_path / "injected", negative_paths=[negative_path]
+    )
+    assert result["positive_examples"] == 3
+    assert result["negative_examples"] == 1
+    assert 0 <= result["precision"] <= 1
+    assert 0 <= result["recall"] <= 1

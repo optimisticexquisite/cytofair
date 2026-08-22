@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+from collections.abc import Sequence
 from pathlib import Path
 
 import cv2
@@ -113,8 +114,15 @@ def attach_p3_groups(provenance: pd.DataFrame, pairs: pd.DataFrame) -> pd.DataFr
     return out
 
 
-def synthetic_detector_check(base_path: str | Path, output_dir: str | Path) -> dict[str, float]:
-    """Validate known transformed copies against unrelated image negatives."""
+def synthetic_detector_check(
+    base_path: str | Path,
+    output_dir: str | Path,
+    *,
+    negative_paths: Sequence[str | Path] = (),
+    phash_threshold: int = 6,
+    dhash_threshold: int = 6,
+) -> dict[str, float | int]:
+    """Validate transformed positives and unrelated negatives at fixed thresholds."""
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     image = cv2.imread(str(base_path), cv2.IMREAD_COLOR)
@@ -132,12 +140,30 @@ def synthetic_detector_check(base_path: str | Path, output_dir: str | Path) -> d
         cv2.imwrite(str(path), values, [cv2.IMWRITE_JPEG_QUALITY, 75 if name == "jpeg" else 95])
         paths.append(path)
     base_hash = image_hashes(paths[0])
-    detected = 0
-    for path in paths[1:]:
-        candidate = image_hashes(path)
-        detected += int(
-            _hamming(int(base_hash[0]), int(candidate[0])) <= 6
-            and _hamming(int(base_hash[1]), int(candidate[1])) <= 6
-        )
-    return {"injected": len(paths) - 1, "detected": detected, "recall": detected / (len(paths) - 1)}
 
+    def detected(path: str | Path) -> bool:
+        candidate = image_hashes(path)
+        return bool(
+            _hamming(int(base_hash[0]), int(candidate[0])) <= phash_threshold
+            and _hamming(int(base_hash[1]), int(candidate[1])) <= dhash_threshold
+        )
+
+    true_positive = 0
+    for path in paths[1:]:
+        true_positive += int(detected(path))
+    false_positive = sum(int(detected(path)) for path in negative_paths)
+    false_negative = len(paths) - 1 - true_positive
+    true_negative = len(negative_paths) - false_positive
+    precision_denominator = true_positive + false_positive
+    return {
+        "positive_examples": len(paths) - 1,
+        "negative_examples": len(negative_paths),
+        "true_positive": true_positive,
+        "false_positive": false_positive,
+        "false_negative": false_negative,
+        "true_negative": true_negative,
+        "precision": true_positive / precision_denominator if precision_denominator else 0.0,
+        "recall": true_positive / (len(paths) - 1),
+        "phash_threshold": phash_threshold,
+        "dhash_threshold": dhash_threshold,
+    }

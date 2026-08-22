@@ -12,7 +12,12 @@ from .cric import recover_classifications
 from .cx22 import recover_all as recover_cx22
 from .cx22 import subset_parent_overlap
 from .download import download_manifest
-from .duplicates import attach_p3_groups, duplicate_pairs, hash_manifest
+from .duplicates import (
+    attach_p3_groups,
+    duplicate_pairs,
+    hash_manifest,
+    synthetic_detector_check,
+)
 from .extract import extract_manifest
 from .herlev import recover_one_cell_per_image
 from .probe import summarize_probe, train_parent_probe
@@ -320,6 +325,20 @@ def _duplicates(args: argparse.Namespace) -> None:
     )
 
 
+def _validate_duplicate_detector(args: argparse.Namespace) -> None:
+    result = synthetic_detector_check(
+        args.base,
+        args.output_dir,
+        negative_paths=args.negative,
+        phash_threshold=args.phash_threshold,
+        dhash_threshold=args.dhash_threshold,
+    )
+    output = Path(args.output)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(result, indent=2) + "\n")
+    print(json.dumps(result, indent=2))
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="cytofair")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -486,6 +505,19 @@ def build_parser() -> argparse.ArgumentParser:
     command.add_argument("--phash-threshold", type=int, default=6)
     command.add_argument("--dhash-threshold", type=int, default=6)
     command.set_defaults(function=_duplicates)
+
+    command = commands.add_parser(
+        "validate-duplicate-detector", help="Score hash precision/recall on injected copies"
+    )
+    command.add_argument("base")
+    command.add_argument("--negative", action="append", default=[])
+    command.add_argument("--output-dir", default="results/duplicates/synthetic_check")
+    command.add_argument(
+        "--output", default="results/duplicates/synthetic_detector_check.json"
+    )
+    command.add_argument("--phash-threshold", type=int, default=6)
+    command.add_argument("--dhash-threshold", type=int, default=6)
+    command.set_defaults(function=_validate_duplicate_detector)
     return parser
 
 
