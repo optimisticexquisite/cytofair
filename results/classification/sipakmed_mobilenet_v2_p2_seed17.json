@@ -1,0 +1,170 @@
+{
+  "dataset": "SIPaKMeD",
+  "task": "classification",
+  "architecture": "mobilenet_v2",
+  "protocol": "P2",
+  "seed": 17,
+  "accuracy": 0.9641975308641976,
+  "macro_f1": 0.9643185384690678,
+  "balanced_accuracy": 0.9645316692799041,
+  "train_crops": 3239,
+  "test_crops": 810,
+  "n_classes": 5,
+  "class_names": {
+    "Dyskeratotic": 0,
+    "Koilocytotic": 1,
+    "Metaplastic": 2,
+    "Parabasal": 3,
+    "Superficial-Intermediate": 4
+  },
+  "epochs": 20,
+  "batch_size": 64,
+  "learning_rate": 0.0001,
+  "pretrained": true,
+  "split_sha256": "0d206d372ae0601e4e5a6324a5851f80611f44290ae8b73f8ee9e929c9685b71",
+  "git_sha": "4da9f6267b30c2b9e5b1e6165942aa6010dc6e3e",
+  "gpu_visible_devices": "1",
+  "started_at_utc": "2026-08-22T06:29:26.059492+00:00",
+  "completed_at_utc": "2026-08-22T06:32:11.115120+00:00",
+  "elapsed_seconds": 165.055668592453,
+  "runtime": {
+    "host": "node1",
+    "command": [
+      "/home/rchethan1/cytofair_repo/src/cytofair/cli.py",
+      "train-classifier",
+      "provenance/sipakmed_parent_map_p3.parquet",
+      "--dataset",
+      "SIPaKMeD",
+      "--protocol",
+      "P2",
+      "--architecture",
+      "mobilenet_v2",
+      "--seed",
+      "17",
+      "--output",
+      "results/classification/sipakmed_mobilenet_v2_p2_seed17.json",
+      "--epochs",
+      "20",
+      "--batch-size",
+      "64",
+      "--workers",
+      "2"
+    ],
+    "python_version": "3.13.9",
+    "platform": "Linux-4.18.0-372.9.1.el8.x86_64-x86_64-with-glibc2.28",
+    "numpy_version": "2.5.2",
+    "pandas_version": "3.0.5",
+    "scipy_version": "1.18.1",
+    "scikit_learn_version": "1.9.0",
+    "pillow_version": "12.3.0",
+    "opencv_version": "5.0.0",
+    "torch_version": "2.9.0+cu128",
+    "torchvision_version": "0.24.0+cu128",
+    "cuda_version": "12.8",
+    "cudnn_version": 91002,
+    "cuda_device": "NVIDIA RTX A6000",
+    "input_provenance_sha256": "27ba4e670ba4de5ed582cce0e5a6428f9c4cfa843b64deb8731c5c49c97318e1"
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.9585466067266155,
+      "accuracy": 0.8790123456790123
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.3098736374180933,
+      "accuracy": 0.9407407407407408
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.20798675643464745,
+      "accuracy": 0.9382716049382716
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.15162391324825733,
+      "accuracy": 0.9567901234567902
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.12138298822451278,
+      "accuracy": 0.945679012345679
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.10470893509817109,
+      "accuracy": 0.9506172839506173
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.09442315416944803,
+      "accuracy": 0.9679012345679012
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.08716680036582267,
+      "accuracy": 0.9543209876543209
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.08443728581130706,
+      "accuracy": 0.9555555555555556
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.06212226724739187,
+      "accuracy": 0.9543209876543209
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.05059862875688146,
+      "accuracy": 0.9604938271604938
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.050535725626902436,
+      "accuracy": 0.9666666666666667
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.04685651254933644,
+      "accuracy": 0.9617283950617284
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.04769043850977872,
+      "accuracy": 0.9654320987654321
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.03291088561422481,
+      "accuracy": 0.9555555555555556
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.028742813817206708,
+      "accuracy": 0.9592592592592593
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.0323355896355295,
+      "accuracy": 0.9481481481481482
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.028645968993400564,
+      "accuracy": 0.971604938271605
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.02231671826068028,
+      "accuracy": 0.9592592592592593
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.021538034993516843,
+      "accuracy": 0.9641975308641976
+    }
+  ]
+}

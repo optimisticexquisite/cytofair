@@ -1,0 +1,61 @@
+{
+  "dataset": "SIPaKMeD",
+  "task": "parent_identity_probe",
+  "architecture": "resnet18",
+  "image_mode": "rgb",
+  "shuffled_labels": false,
+  "seed": 17,
+  "n_parents": 424,
+  "train_crops": 848,
+  "test_crops": 848,
+  "chance_accuracy": 0.0023584905660377358,
+  "test_accuracy": 0.00589622641509434,
+  "best_test_accuracy": 0.00589622641509434,
+  "epochs": 1,
+  "batch_size": 64,
+  "learning_rate": 0.0001,
+  "pretrained": true,
+  "gpu_visible_devices": "1",
+  "git_sha": "67892b715b256c5dfc2afd6de2f4fe7794b154b9",
+  "started_at_utc": "2026-08-22T01:59:10.522581+00:00",
+  "completed_at_utc": "2026-08-22T01:59:16.245740+00:00",
+  "elapsed_seconds": 5.723217487335205,
+  "runtime": {
+    "host": "node1",
+    "command": [
+      "/home/rchethan1/cytofair_repo/src/cytofair/cli.py",
+      "train-probe",
+      "provenance/sipakmed_parent_map.parquet",
+      "--seed",
+      "17",
+      "--output",
+      "results/smoke/probe_rgb_seed17.json",
+      "--image-mode",
+      "rgb",
+      "--epochs",
+      "1",
+      "--batch-size",
+      "64",
+      "--workers",
+      "2",
+      "--repository",
+      "."
+    ],
+    "python_version": "3.13.9",
+    "platform": "Linux-4.18.0-372.9.1.el8.x86_64-x86_64-with-glibc2.28",
+    "torch_version": "2.9.0+cu128",
+    "torchvision_version": "0.24.0+cu128",
+    "cuda_version": "12.8",
+    "cudnn_version": 91002,
+    "cuda_device": "NVIDIA RTX A6000",
+    "input_provenance_sha256": "809b69060ee86c69e2db8a91f7de26bf32195b24c9392db066438a166f1a670a"
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 6.272863109156771,
+      "train_accuracy": 0.003537735849056604,
+      "test_accuracy": 0.00589622641509434
+    }
+  ]
+}

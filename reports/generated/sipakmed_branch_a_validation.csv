@@ -1,0 +1,10 @@
+name,passed,observed,expected,detail
+unique_crop_id,True,4049,4049,
+parent_id_complete,True,0,0,
+dataset_total,True,4049,4049,
+per_parent_count_sum,True,4049,4049,
+parent_count:Superficial-Intermediate,True,126,126,
+parent_count:Parabasal,True,108,108,
+parent_count:Koilocytotic,True,238,238,
+parent_count:Metaplastic,True,271,271,
+parent_count:Dyskeratotic,True,223,223,

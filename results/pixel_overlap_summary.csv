@@ -1,0 +1,4 @@
+dataset,protocol,overlapping_cross_split_pair_fraction_mean,overlapping_cross_split_pair_fraction_std,overlapping_cross_split_pair_fraction_count,test_crop_pixel_overlap_fraction_mean,test_crop_pixel_overlap_fraction_std,test_crop_pixel_overlap_fraction_count
+SIPaKMeD,P1,0.1680357779657501,0.007720013385536346,5,0.5261728395061729,0.019741508952848704,5
+SIPaKMeD,P2,0.0,0.0,5,0.0,0.0,5
+SIPaKMeD,P3,0.0,0.0,5,0.0,0.0,5

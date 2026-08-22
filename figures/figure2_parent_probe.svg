@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680">
+<style>
+  .title { font: 700 31px Arial, sans-serif; fill: #17212B; }
+  .subtitle { font: 19px Arial, sans-serif; fill: #435466; }
+  .label { font: 16px Arial, sans-serif; fill: #17212B; }
+  .number { font: 700 15px Arial, sans-serif; fill: #17212B; }
+  .axis { font: 15px Arial, sans-serif; fill: #435466; }
+</style>
+<rect width="1200" height="680" fill="#FAFBFC"/>
+<text x="60" y="55" class="title">Cell crops carry a measurable parent-field fingerprint</text>
+<text x="60" y="88" class="subtitle">ResNet-18 parent identification; balanced 424-way task; mean ± sample SD over five fixed seeds.</text>
+<line x1="80" y1="535" x2="1130" y2="535" stroke="#667788" stroke-width="2"/>
+<line x1="80" y1="145" x2="80" y2="535" stroke="#667788" stroke-width="2"/>
+<text x="27" y="345" transform="rotate(-90 27 345)" class="axis">Parent-ID test accuracy</text>
+<line x1="80" y1="531.9" x2="1130" y2="531.9" stroke="#8C6D1F" stroke-width="3" stroke-dasharray="9 7"/>
+<line x1="970" y1="165" x2="1020" y2="165" stroke="#8C6D1F" stroke-width="3" stroke-dasharray="9 7"/>
+<text x="1032" y="171" text-anchor="start" class="number">chance = 0.2358%</text>
+<rect x="115" y="200.5" width="105" height="334.5" rx="7" fill="#C43C4E"/><line x1="167.5" y1="191.9" x2="167.5" y2="209.1" stroke="#17212B" stroke-width="3"/><line x1="150" y1="191.9" x2="185" y2="191.9" stroke="#17212B" stroke-width="3"/><text x="167.5" y="178.9" text-anchor="middle" class="number">25.73 ± 0.66%</text><text x="167.5" y="575" text-anchor="middle" class="label">RGB</text><rect x="285" y="355.6" width="105" height="179.4" rx="7" fill="#2A6F97"/><line x1="337.5" y1="341.1" x2="337.5" y2="370.1" stroke="#17212B" stroke-width="3"/><line x1="320" y1="341.1" x2="355" y2="341.1" stroke="#17212B" stroke-width="3"/><text x="337.5" y="328.1" text-anchor="middle" class="number">13.80 ± 1.12%</text><text x="337.5" y="575" text-anchor="middle" class="label">Grayscale</text><rect x="455" y="310.0" width="105" height="225.0" rx="7" fill="#2A6F97"/><line x1="507.5" y1="301.6" x2="507.5" y2="318.3" stroke="#17212B" stroke-width="3"/><line x1="490" y1="301.6" x2="525" y2="301.6" stroke="#17212B" stroke-width="3"/><text x="507.5" y="288.6" text-anchor="middle" class="number">17.31 ± 0.64%</text><text x="507.5" y="575" text-anchor="middle" class="label">Stain-normalized</text><rect x="625" y="292.2" width="105" height="242.8" rx="7" fill="#2A6F97"/><line x1="677.5" y1="275.9" x2="677.5" y2="308.4" stroke="#17212B" stroke-width="3"/><line x1="660" y1="275.9" x2="695" y2="275.9" stroke="#17212B" stroke-width="3"/><text x="677.5" y="262.9" text-anchor="middle" class="number">18.68 ± 1.25%</text><text x="677.5" y="575" text-anchor="middle" class="label">Background only</text><rect x="795" y="323.4" width="105" height="211.6" rx="7" fill="#2A6F97"/><line x1="847.5" y1="315.6" x2="847.5" y2="331.3" stroke="#17212B" stroke-width="3"/><line x1="830" y1="315.6" x2="865" y2="315.6" stroke="#17212B" stroke-width="3"/><text x="847.5" y="302.6" text-anchor="middle" class="number">16.27 ± 0.60%</text><text x="847.5" y="575" text-anchor="middle" class="label">High-pass</text><rect x="965" y="532.9" width="105" height="2.1" rx="7" fill="#84919D"/><line x1="1017.5" y1="529.7" x2="1017.5" y2="536.0" stroke="#17212B" stroke-width="3"/><line x1="1000" y1="529.7" x2="1035" y2="529.7" stroke="#17212B" stroke-width="3"/><text x="1017.5" y="516.7" text-anchor="middle" class="number">0.17 ± 0.24%</text><text x="1017.5" y="575" text-anchor="middle" class="label">Shuffled labels</text>
+<rect x="72" y="620" width="1056" height="42" rx="9" fill="#EAF1F5"/>
+<text x="600" y="647" text-anchor="middle" class="number">RGB is 109.1× chance; shuffled-label 95% CI covers chance: True.</text>
+</svg>

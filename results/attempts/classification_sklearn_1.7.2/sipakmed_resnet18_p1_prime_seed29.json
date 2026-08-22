@@ -1,0 +1,164 @@
+{
+  "dataset": "SIPaKMeD",
+  "task": "classification",
+  "architecture": "resnet18",
+  "protocol": "P1-prime",
+  "seed": 29,
+  "accuracy": 0.9790123456790123,
+  "macro_f1": 0.9789915481676275,
+  "balanced_accuracy": 0.9792727132419227,
+  "train_crops": 3237,
+  "test_crops": 810,
+  "n_classes": 5,
+  "class_names": {
+    "Dyskeratotic": 0,
+    "Koilocytotic": 1,
+    "Metaplastic": 2,
+    "Parabasal": 3,
+    "Superficial-Intermediate": 4
+  },
+  "epochs": 20,
+  "batch_size": 64,
+  "learning_rate": 0.0001,
+  "pretrained": true,
+  "split_sha256": "1e9b2a74aa44c1d3cd3870ce35211219102945f55b2476154c5f922581ecdbb4",
+  "git_sha": "ab40681a8d3e6d3aedf686ee13dabb2a4a331833",
+  "gpu_visible_devices": "1",
+  "started_at_utc": "2026-08-22T04:14:35.311205+00:00",
+  "completed_at_utc": "2026-08-22T04:17:04.196421+00:00",
+  "elapsed_seconds": 148.88526391983032,
+  "runtime": {
+    "host": "node1",
+    "command": [
+      "/home/rchethan1/cytofair_repo/src/cytofair/cli.py",
+      "train-classifier",
+      "provenance/sipakmed_parent_map_p3.parquet",
+      "--dataset",
+      "SIPaKMeD",
+      "--protocol",
+      "P1-prime",
+      "--architecture",
+      "resnet18",
+      "--seed",
+      "29",
+      "--output",
+      "results/classification/sipakmed_resnet18_p1_prime_seed29.json",
+      "--epochs",
+      "20",
+      "--batch-size",
+      "64",
+      "--workers",
+      "2"
+    ],
+    "python_version": "3.13.9",
+    "platform": "Linux-4.18.0-372.9.1.el8.x86_64-x86_64-with-glibc2.28",
+    "torch_version": "2.9.0+cu128",
+    "torchvision_version": "0.24.0+cu128",
+    "cuda_version": "12.8",
+    "cudnn_version": 91002,
+    "cuda_device": "NVIDIA RTX A6000",
+    "input_provenance_sha256": "27ba4e670ba4de5ed582cce0e5a6428f9c4cfa843b64deb8731c5c49c97318e1"
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.3553468767423522,
+      "accuracy": 0.9358024691358025
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.12916837503531114,
+      "accuracy": 0.9604938271604938
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.09297858543894266,
+      "accuracy": 0.9580246913580247
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.07584482606800758,
+      "accuracy": 0.9567901234567902
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.059047510825007796,
+      "accuracy": 0.9691358024691358
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.054879629617953396,
+      "accuracy": 0.9777777777777777
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.03467508221282786,
+      "accuracy": 0.9666666666666667
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.029205917667598683,
+      "accuracy": 0.9777777777777777
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.0459333168740327,
+      "accuracy": 0.9666666666666667
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.03862187252769803,
+      "accuracy": 0.9629629629629629
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.03585234059985862,
+      "accuracy": 0.9654320987654321
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.033929307455243585,
+      "accuracy": 0.971604938271605
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.02776901344983048,
+      "accuracy": 0.9740740740740741
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.021805326972510072,
+      "accuracy": 0.9728395061728395
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.019277008934677854,
+      "accuracy": 0.9827160493827161
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.010252157959150273,
+      "accuracy": 0.980246913580247
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.01166012270324586,
+      "accuracy": 0.9777777777777777
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.020557391800643497,
+      "accuracy": 0.9728395061728395
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.023370083717020516,
+      "accuracy": 0.971604938271605
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.02223113212581398,
+      "accuracy": 0.9790123456790123
+    }
+  ]
+}

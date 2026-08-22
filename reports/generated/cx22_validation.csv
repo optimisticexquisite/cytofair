@@ -1,0 +1,7 @@
+name,passed,observed,expected,detail
+unique_crop_id,True,1320,1320,
+parent_id_complete,True,0,0,
+dataset_total,True,1320,1320,
+per_parent_count_sum,True,1320,1320,
+bbox_columns_present,True,True,True,
+bbox_within_parent,True,1320,1320,0 invalid bounding boxes

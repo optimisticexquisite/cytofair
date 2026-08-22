@@ -1,0 +1,143 @@
+{
+  "dataset": "SIPaKMeD",
+  "task": "parent_identity_probe",
+  "architecture": "resnet18",
+  "image_mode": "highpass",
+  "shuffled_labels": false,
+  "seed": 43,
+  "n_parents": 424,
+  "train_crops": 848,
+  "test_crops": 848,
+  "chance_accuracy": 0.0023584905660377358,
+  "test_accuracy": 0.16863207547169812,
+  "best_test_accuracy": 0.16863207547169812,
+  "epochs": 15,
+  "batch_size": 64,
+  "learning_rate": 0.0001,
+  "pretrained": true,
+  "gpu_visible_devices": "1",
+  "git_sha": "67892b715b256c5dfc2afd6de2f4fe7794b154b9",
+  "started_at_utc": "2026-08-22T03:04:31.518802+00:00",
+  "completed_at_utc": "2026-08-22T03:20:27.452930+00:00",
+  "elapsed_seconds": 955.9341928958893,
+  "runtime": {
+    "host": "node1",
+    "command": [
+      "/home/rchethan1/cytofair_repo/src/cytofair/cli.py",
+      "train-probe",
+      "provenance/sipakmed_parent_map.parquet",
+      "--seed",
+      "43",
+      "--output",
+      "results/probe/probe_highpass_observed_seed43.json",
+      "--image-mode",
+      "highpass",
+      "--epochs",
+      "15",
+      "--batch-size",
+      "64",
+      "--workers",
+      "2"
+    ],
+    "python_version": "3.13.9",
+    "platform": "Linux-4.18.0-372.9.1.el8.x86_64-x86_64-with-glibc2.28",
+    "torch_version": "2.9.0+cu128",
+    "torchvision_version": "0.24.0+cu128",
+    "cuda_version": "12.8",
+    "cudnn_version": 91002,
+    "cuda_device": "NVIDIA RTX A6000",
+    "input_provenance_sha256": "809b69060ee86c69e2db8a91f7de26bf32195b24c9392db066438a166f1a670a"
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 6.224016369513746,
+      "train_accuracy": 0.0047169811320754715,
+      "test_accuracy": 0.0011792452830188679
+    },
+    {
+      "epoch": 2,
+      "train_loss": 5.693008242913012,
+      "train_accuracy": 0.049528301886792456,
+      "test_accuracy": 0.0047169811320754715
+    },
+    {
+      "epoch": 3,
+      "train_loss": 5.335155846937647,
+      "train_accuracy": 0.10023584905660378,
+      "test_accuracy": 0.014150943396226415
+    },
+    {
+      "epoch": 4,
+      "train_loss": 5.008027940426233,
+      "train_accuracy": 0.16863207547169812,
+      "test_accuracy": 0.04009433962264151
+    },
+    {
+      "epoch": 5,
+      "train_loss": 4.705320988061293,
+      "train_accuracy": 0.2641509433962264,
+      "test_accuracy": 0.05660377358490566
+    },
+    {
+      "epoch": 6,
+      "train_loss": 4.453847543248591,
+      "train_accuracy": 0.3290094339622642,
+      "test_accuracy": 0.06721698113207547
+    },
+    {
+      "epoch": 7,
+      "train_loss": 4.148848713568921,
+      "train_accuracy": 0.4233490566037736,
+      "test_accuracy": 0.08018867924528301
+    },
+    {
+      "epoch": 8,
+      "train_loss": 3.927069232148944,
+      "train_accuracy": 0.4834905660377358,
+      "test_accuracy": 0.10023584905660378
+    },
+    {
+      "epoch": 9,
+      "train_loss": 3.6846821802967,
+      "train_accuracy": 0.5412735849056604,
+      "test_accuracy": 0.10966981132075472
+    },
+    {
+      "epoch": 10,
+      "train_loss": 3.476319038643027,
+      "train_accuracy": 0.6191037735849056,
+      "test_accuracy": 0.1214622641509434
+    },
+    {
+      "epoch": 11,
+      "train_loss": 3.2409404808620237,
+      "train_accuracy": 0.6544811320754716,
+      "test_accuracy": 0.14268867924528303
+    },
+    {
+      "epoch": 12,
+      "train_loss": 3.0251446265094684,
+      "train_accuracy": 0.6875,
+      "test_accuracy": 0.14150943396226415
+    },
+    {
+      "epoch": 13,
+      "train_loss": 2.8140979442956313,
+      "train_accuracy": 0.7287735849056604,
+      "test_accuracy": 0.15212264150943397
+    },
+    {
+      "epoch": 14,
+      "train_loss": 2.6363965790226773,
+      "train_accuracy": 0.7735849056603774,
+      "test_accuracy": 0.1580188679245283
+    },
+    {
+      "epoch": 15,
+      "train_loss": 2.448531537685754,
+      "train_accuracy": 0.8148584905660378,
+      "test_accuracy": 0.16863207547169812
+    }
+  ]
+}

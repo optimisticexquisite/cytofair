@@ -1,0 +1,164 @@
+{
+  "dataset": "SIPaKMeD",
+  "task": "classification",
+  "architecture": "resnet18",
+  "protocol": "P2",
+  "seed": 29,
+  "accuracy": 0.9593596059113301,
+  "macro_f1": 0.9564468790796556,
+  "balanced_accuracy": 0.9567561164470124,
+  "train_crops": 3237,
+  "test_crops": 812,
+  "n_classes": 5,
+  "class_names": {
+    "Dyskeratotic": 0,
+    "Koilocytotic": 1,
+    "Metaplastic": 2,
+    "Parabasal": 3,
+    "Superficial-Intermediate": 4
+  },
+  "epochs": 20,
+  "batch_size": 64,
+  "learning_rate": 0.0001,
+  "pretrained": true,
+  "split_sha256": "56e91701aaf665c7feed91884b8999554a83b4f0917bc4a7fba8542d46aad3f3",
+  "git_sha": "ab40681a8d3e6d3aedf686ee13dabb2a4a331833",
+  "gpu_visible_devices": "3",
+  "started_at_utc": "2026-08-22T04:17:35.261774+00:00",
+  "completed_at_utc": "2026-08-22T04:20:07.337760+00:00",
+  "elapsed_seconds": 152.0760521888733,
+  "runtime": {
+    "host": "node1",
+    "command": [
+      "/home/rchethan1/cytofair_repo/src/cytofair/cli.py",
+      "train-classifier",
+      "provenance/sipakmed_parent_map_p3.parquet",
+      "--dataset",
+      "SIPaKMeD",
+      "--protocol",
+      "P2",
+      "--architecture",
+      "resnet18",
+      "--seed",
+      "29",
+      "--output",
+      "results/classification/sipakmed_resnet18_p2_seed29.json",
+      "--epochs",
+      "20",
+      "--batch-size",
+      "64",
+      "--workers",
+      "2"
+    ],
+    "python_version": "3.13.9",
+    "platform": "Linux-4.18.0-372.9.1.el8.x86_64-x86_64-with-glibc2.28",
+    "torch_version": "2.9.0+cu128",
+    "torchvision_version": "0.24.0+cu128",
+    "cuda_version": "12.8",
+    "cudnn_version": 91002,
+    "cuda_device": "NVIDIA RTX A6000",
+    "input_provenance_sha256": "27ba4e670ba4de5ed582cce0e5a6428f9c4cfa843b64deb8731c5c49c97318e1"
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.3488755013965183,
+      "accuracy": 0.9236453201970444
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.13224473724053676,
+      "accuracy": 0.9137931034482759
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.0882015052997554,
+      "accuracy": 0.9285714285714286
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.07839511034294967,
+      "accuracy": 0.9519704433497537
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.06302090507008741,
+      "accuracy": 0.9544334975369458
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.03892509498399535,
+      "accuracy": 0.9445812807881774
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.034614549238542035,
+      "accuracy": 0.9495073891625616
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.03380765500951732,
+      "accuracy": 0.9507389162561576
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.03670701885507878,
+      "accuracy": 0.9544334975369458
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.02501511292236894,
+      "accuracy": 0.9544334975369458
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.02630603144969302,
+      "accuracy": 0.9470443349753694
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.019540794038380375,
+      "accuracy": 0.9593596059113301
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.014351664946676635,
+      "accuracy": 0.9433497536945813
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.019914509658924693,
+      "accuracy": 0.9605911330049262
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.014946161791484298,
+      "accuracy": 0.958128078817734
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.01523743343349934,
+      "accuracy": 0.958128078817734
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.016647520206079167,
+      "accuracy": 0.937192118226601
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.016240614029335174,
+      "accuracy": 0.9556650246305419
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.022541359160145803,
+      "accuracy": 0.9568965517241379
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.0250165902278399,
+      "accuracy": 0.9593596059113301
+    }
+  ]
+}

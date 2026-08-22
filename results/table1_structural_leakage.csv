@@ -1,0 +1,5 @@
+dataset,crops,parents,crops_per_parent_mean_sd,analytic_p1_non_straddle_pct,analytic_p1_straddle_pct,monte_carlo_95_low_pct,monte_carlo_95_high_pct,observed_p1_straddle_pct_mean_sd,observed_p1_test_leak_pct_mean_sd,observed_p2_straddle_pct_mean_sd,observed_p3_straddle_pct_mean_sd,analytic_inside_monte_carlo_interval,observed_inside_monte_carlo_interval,analytic_check_passed,protocol_ordering_passed,negative_control,negative_control_passed,n_seeds
+SIPaKMeD,4049,966,4.19 ± 3.70,55.16864457188192,44.83135542811808,42.96066252587992,46.790890269151134,45.63 ± 1.04,92.62 ± 0.40,0.00 ± 0.00,0.00 ± 0.00,True,True,True,True,False,True,5
+Cx22,1320,514,2.57 ± 1.49,66.06653260700391,33.9334673929961,31.517509727626457,36.38132295719844,34.01 ± 1.10,85.23 ± 3.51,0.00 ± 0.00,0.00 ± 0.00,True,True,True,True,False,True,5
+CRIC,11534,400,28.84 ± 21.92,5.1222341351170435,94.87776586488296,93.0,96.75,94.35 ± 1.10,99.97 ± 0.08,0.00 ± 0.00,0.00 ± 0.00,True,True,True,True,False,True,5
+Herlev,917,917,1.00 ± 0.00,100.0,0.0,0.0,0.0,0.00 ± 0.00,0.00 ± 0.00,0.00 ± 0.00,0.00 ± 0.00,True,True,True,True,True,True,5

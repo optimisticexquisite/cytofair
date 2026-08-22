@@ -1,0 +1,14 @@
+{
+  "positive_examples": 3,
+  "negative_examples": 100,
+  "true_positive": 3,
+  "false_positive": 0,
+  "false_negative": 0,
+  "true_negative": 100,
+  "precision": 1.0,
+  "recall": 1.0,
+  "phash_threshold": 6,
+  "dhash_threshold": 6,
+  "base_crop_id": "im_Dyskeratotic/CROPPED/001_01.bmp",
+  "negative_selection": "first 100 lexicographically sorted crops from other parents"
+}

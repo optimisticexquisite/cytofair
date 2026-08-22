@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "valid_result_files": 120,
+  "expected_result_files": 120,
+  "dataset": "SIPaKMeD",
+  "architectures": [
+    "resnet18",
+    "resnet50",
+    "densenet121",
+    "efficientnet_b0",
+    "mobilenet_v2",
+    "vit_b_16"
+  ],
+  "protocols": [
+    "P1",
+    "P1-prime",
+    "P2",
+    "P3"
+  ],
+  "seeds": [
+    17,
+    29,
+    43,
+    71,
+    101
+  ],
+  "expected_git_sha": "4da9f6267b30c2b9e5b1e6165942aa6010dc6e3e",
+  "expected_runtime": {
+    "numpy_version": "2.5.2",
+    "pandas_version": "3.0.5",
+    "scipy_version": "1.18.1",
+    "scikit_learn_version": "1.9.0",
+    "pillow_version": "12.3.0",
+    "opencv_version": "5.0.0",
+    "torch_version": "2.9.0+cu128",
+    "torchvision_version": "0.24.0+cu128",
+    "cuda_version": "12.8"
+  },
+  "expected_train_crops": 3239,
+  "expected_test_crops": 810,
+  "input_provenance_sha256": "27ba4e670ba4de5ed582cce0e5a6428f9c4cfa843b64deb8731c5c49c97318e1",
+  "gpu_visible_devices": [
+    "1",
+    "2",
+    "3"
+  ],
+  "errors": []
+}

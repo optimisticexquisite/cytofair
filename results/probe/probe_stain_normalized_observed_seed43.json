@@ -1,0 +1,143 @@
+{
+  "dataset": "SIPaKMeD",
+  "task": "parent_identity_probe",
+  "architecture": "resnet18",
+  "image_mode": "stain_normalized",
+  "shuffled_labels": false,
+  "seed": 43,
+  "n_parents": 424,
+  "train_crops": 848,
+  "test_crops": 848,
+  "chance_accuracy": 0.0023584905660377358,
+  "test_accuracy": 0.18396226415094338,
+  "best_test_accuracy": 0.18396226415094338,
+  "epochs": 15,
+  "batch_size": 64,
+  "learning_rate": 0.0001,
+  "pretrained": true,
+  "gpu_visible_devices": "3",
+  "git_sha": "67892b715b256c5dfc2afd6de2f4fe7794b154b9",
+  "started_at_utc": "2026-08-22T02:06:21.368747+00:00",
+  "completed_at_utc": "2026-08-22T02:08:36.846884+00:00",
+  "elapsed_seconds": 135.47820115089417,
+  "runtime": {
+    "host": "node1",
+    "command": [
+      "/home/rchethan1/cytofair_repo/src/cytofair/cli.py",
+      "train-probe",
+      "provenance/sipakmed_parent_map.parquet",
+      "--seed",
+      "43",
+      "--output",
+      "results/probe/probe_stain_normalized_observed_seed43.json",
+      "--image-mode",
+      "stain_normalized",
+      "--epochs",
+      "15",
+      "--batch-size",
+      "64",
+      "--workers",
+      "2"
+    ],
+    "python_version": "3.13.9",
+    "platform": "Linux-4.18.0-372.9.1.el8.x86_64-x86_64-with-glibc2.28",
+    "torch_version": "2.9.0+cu128",
+    "torchvision_version": "0.24.0+cu128",
+    "cuda_version": "12.8",
+    "cudnn_version": 91002,
+    "cuda_device": "NVIDIA RTX A6000",
+    "input_provenance_sha256": "809b69060ee86c69e2db8a91f7de26bf32195b24c9392db066438a166f1a670a"
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 6.249248486644817,
+      "train_accuracy": 0.0011792452830188679,
+      "test_accuracy": 0.0047169811320754715
+    },
+    {
+      "epoch": 2,
+      "train_loss": 5.723533126543153,
+      "train_accuracy": 0.03773584905660377,
+      "test_accuracy": 0.015330188679245283
+    },
+    {
+      "epoch": 3,
+      "train_loss": 5.32610070930337,
+      "train_accuracy": 0.11320754716981132,
+      "test_accuracy": 0.031839622641509434
+    },
+    {
+      "epoch": 4,
+      "train_loss": 4.974829322886917,
+      "train_accuracy": 0.2358490566037736,
+      "test_accuracy": 0.05660377358490566
+    },
+    {
+      "epoch": 5,
+      "train_loss": 4.646698978711974,
+      "train_accuracy": 0.3431603773584906,
+      "test_accuracy": 0.07665094339622641
+    },
+    {
+      "epoch": 6,
+      "train_loss": 4.367152771859799,
+      "train_accuracy": 0.4363207547169811,
+      "test_accuracy": 0.07665094339622641
+    },
+    {
+      "epoch": 7,
+      "train_loss": 4.059041671033175,
+      "train_accuracy": 0.5389150943396226,
+      "test_accuracy": 0.09433962264150944
+    },
+    {
+      "epoch": 8,
+      "train_loss": 3.8317047335066885,
+      "train_accuracy": 0.5754716981132075,
+      "test_accuracy": 0.10259433962264151
+    },
+    {
+      "epoch": 9,
+      "train_loss": 3.5611356339364684,
+      "train_accuracy": 0.6709905660377359,
+      "test_accuracy": 0.12735849056603774
+    },
+    {
+      "epoch": 10,
+      "train_loss": 3.319509893093469,
+      "train_accuracy": 0.7334905660377359,
+      "test_accuracy": 0.13797169811320756
+    },
+    {
+      "epoch": 11,
+      "train_loss": 3.0699955382437074,
+      "train_accuracy": 0.7865566037735849,
+      "test_accuracy": 0.1403301886792453
+    },
+    {
+      "epoch": 12,
+      "train_loss": 2.8627212452438644,
+      "train_accuracy": 0.8136792452830188,
+      "test_accuracy": 0.1474056603773585
+    },
+    {
+      "epoch": 13,
+      "train_loss": 2.641639340598628,
+      "train_accuracy": 0.8561320754716981,
+      "test_accuracy": 0.17806603773584906
+    },
+    {
+      "epoch": 14,
+      "train_loss": 2.4365946706735864,
+      "train_accuracy": 0.8832547169811321,
+      "test_accuracy": 0.17688679245283018
+    },
+    {
+      "epoch": 15,
+      "train_loss": 2.2585334687862755,
+      "train_accuracy": 0.8808962264150944,
+      "test_accuracy": 0.18396226415094338
+    }
+  ]
+}
