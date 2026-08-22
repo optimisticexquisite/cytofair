@@ -46,6 +46,11 @@ def extract_manifest(
         else:
             destination = output_root / item["dataset"]
         _extract_archive(archive, destination)
+        for nested in item.get("nested_archives", []):
+            nested_archive = destination / nested["path"]
+            if not nested_archive.is_file():
+                raise FileNotFoundError(f"Declared nested archive is absent: {nested_archive}")
+            nested_destination = destination / nested["destination"]
+            _extract_archive(nested_archive, nested_destination)
         outputs.append(destination)
     return outputs
-

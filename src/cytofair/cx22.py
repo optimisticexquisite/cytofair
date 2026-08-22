@@ -92,7 +92,7 @@ def recover_metadata(root: str | Path, subset: str | None = None) -> pd.DataFram
     return pd.DataFrame(records)
 
 
-def recover_all(root: str | Path) -> pd.DataFrame:
+def recover_all(root: str | Path, image_root: str | Path | None = None) -> pd.DataFrame:
     root = Path(root)
     generator_files = sorted(root.rglob("ImageDataNames.mat"))
     if not generator_files:
@@ -101,7 +101,10 @@ def recover_all(root: str | Path) -> pd.DataFrame:
     out = pd.concat(frames, ignore_index=True)
     if not out.crop_id.is_unique:
         raise ValueError("Cx22 crop IDs are not unique across subsets")
-    return out.sort_values("crop_id").reset_index(drop=True)
+    out = out.sort_values("crop_id").reset_index(drop=True)
+    if image_root is not None:
+        out = add_parent_dimensions(out, image_root)
+    return out
 
 
 def subset_parent_overlap(frame: pd.DataFrame) -> pd.DataFrame:
@@ -134,19 +137,33 @@ def add_parent_dimensions(frame: pd.DataFrame, image_root: str | Path) -> pd.Dat
     from PIL import Image
 
     image_root = Path(image_root)
-    lookup = {path.name: path for path in image_root.rglob("*.png")}
+    paths = sorted(image_root.rglob("*.png"))
+    lookup = {path.name: path for path in paths}
+    if len(lookup) != len(paths):
+        raise ValueError("CCEDD source image names are not unique")
     out = frame.copy()
-    widths, heights = [], []
+    widths, heights, parent_paths = [], [], []
     for name in out.source_name:
         path = lookup.get(name)
         if path is None:
             widths.append(np.nan)
             heights.append(np.nan)
+            parent_paths.append(None)
             continue
         with Image.open(path) as image:
             width, height = image.size
         widths.append(width)
         heights.append(height)
+        parent_paths.append(str(path.resolve()))
     out["parent_width"] = widths
     out["parent_height"] = heights
+    out["parent_path"] = parent_paths
+    if out[["parent_width", "parent_height"]].isna().any().any():
+        missing = sorted(out.loc[out.parent_width.isna(), "source_name"].unique())
+        raise ValueError(f"Missing CCEDD source images: {missing[:10]}")
+    # The authors' MATLAB generator clips requested ROIs at the right/bottom edge.
+    out["requested_width"] = out["width"]
+    out["requested_height"] = out["height"]
+    out["width"] = np.minimum(out["width"], out["parent_width"] - out["x"])
+    out["height"] = np.minimum(out["height"], out["parent_height"] - out["y"])
     return out

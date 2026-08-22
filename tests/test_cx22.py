@@ -2,8 +2,9 @@ from pathlib import Path
 
 import h5py
 import numpy as np
+from PIL import Image
 
-from cytofair.cx22 import recover_metadata, subset_parent_overlap
+from cytofair.cx22 import add_parent_dimensions, recover_metadata, subset_parent_overlap
 
 
 def _write_string_object(path: Path, names: list[str]):
@@ -61,3 +62,26 @@ def test_subset_overlap_counts_shared_parents():
     assert overlap.shared_parents == 1
     assert overlap.jaccard == 1 / 3
 
+
+def test_parent_dimensions_clip_like_matlab_generator(tmp_path: Path):
+    image_root = tmp_path / "images"
+    image_root.mkdir()
+    Image.new("RGB", (100, 80)).save(image_root / "00001.png")
+    import pandas as pd
+
+    frame = pd.DataFrame(
+        {
+            "source_name": ["00001.png"],
+            "x": [90],
+            "y": [70],
+            "width": [20],
+            "height": [15],
+        }
+    )
+    out = add_parent_dimensions(frame, image_root)
+    assert out[["width", "height", "parent_width", "parent_height"]].iloc[0].tolist() == [
+        10,
+        10,
+        100,
+        80,
+    ]

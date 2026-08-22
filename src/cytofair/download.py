@@ -8,7 +8,19 @@ import shutil
 import time
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
+from http.cookiejar import CookieJar
 from pathlib import Path
+
+
+def _urlopen(request: urllib.request.Request, timeout: int):
+    """Open one request with a cookie-aware redirect session.
+
+    Public SharePoint guest links issue a session cookie on the first redirect and
+    reject the redirected request when a downloader silently drops that cookie.
+    A fresh session per range request is cheap and keeps concurrent segments isolated.
+    """
+    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(CookieJar()))
+    return opener.open(request, timeout=timeout)
 
 
 def sha256(path: Path, chunk_size: int = 1024 * 1024) -> str:
@@ -21,7 +33,7 @@ def sha256(path: Path, chunk_size: int = 1024 * 1024) -> str:
 
 def remote_size(url: str, timeout: int = 60) -> int:
     request = urllib.request.Request(url, headers={"Range": "bytes=0-0"})
-    with urllib.request.urlopen(request, timeout=timeout) as response:
+    with _urlopen(request, timeout) as response:
         content_range = response.headers.get("Content-Range")
         if content_range and "/" in content_range:
             return int(content_range.rsplit("/", 1)[1])
@@ -46,7 +58,7 @@ def _download_segment(url: str, path: Path, start: int, end: int, timeout: int) 
             url, headers={"Range": f"bytes={start + current}-{end}"}
         )
         try:
-            with urllib.request.urlopen(request, timeout=timeout) as response, temporary.open(
+            with _urlopen(request, timeout) as response, temporary.open(
                 "ab"
             ) as dst:
                 if response.status != 206:

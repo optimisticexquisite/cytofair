@@ -96,7 +96,14 @@ def _sipak_b(args: argparse.Namespace) -> None:
 
 
 def _cx22(args: argparse.Namespace) -> None:
-    frame = recover_cx22(args.root)
+    frame = recover_cx22(args.root, args.image_root)
+    if len(frame) != 1320:
+        raise ValueError(f"Expected 1320 Cx22 crops; found {len(frame)}")
+    if args.image_root:
+        validation = validate_provenance(frame, expected_total=1320, require_bbox=True)
+        Path(args.validation).parent.mkdir(parents=True, exist_ok=True)
+        validation.frame().to_csv(args.validation, index=False)
+        validation.raise_for_failure()
     write_map(frame, args.output)
     overlap = subset_parent_overlap(frame)
     Path(args.overlap).parent.mkdir(parents=True, exist_ok=True)
@@ -243,8 +250,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     command = commands.add_parser("recover-cx22", help="Read source names and ROIs from Cx22")
     command.add_argument("root")
+    command.add_argument("--image-root", help="extracted CCEDD parent PNG directory")
     command.add_argument("--output", default="provenance/cx22_parent_map.parquet")
     command.add_argument("--overlap", default="reports/generated/cx22_subset_overlap.csv")
+    command.add_argument("--validation", default="reports/generated/cx22_validation.csv")
     command.set_defaults(function=_cx22)
 
     command = commands.add_parser("recover-cric", help="Read CRIC published cell coordinates")

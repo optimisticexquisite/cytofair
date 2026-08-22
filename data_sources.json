@@ -66,6 +66,20 @@
       "terms": "Non-commercial research and education only"
     },
     {
+      "dataset": "ccedd",
+      "filename": "CCEDD.zip",
+      "url": "https://mailustceducn-my.sharepoint.com/:u:/g/personal/nachifur_mail_ustc_edu_cn/EX0v39dd8kRDhavIoFqxHyoBuqXql9sdPXoyaWptsUvfKw?e=8lMSga&download=1",
+      "size": 1507832267,
+      "sha256": "d85e6a380a15923f0c2b38e13dd31467f75d11b49e8d21740f16ee69082cdcb1",
+      "nested_archives": [
+        {
+          "path": "CCEDD/png.zip",
+          "destination": "png"
+        }
+      ],
+      "terms": "Non-commercial research and education only; redistribution prohibited"
+    },
+    {
       "dataset": "cric",
       "filename": "classifications.csv",
       "url": "https://ndownloader.figshare.com/files/22494383",
