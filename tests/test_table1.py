@@ -24,5 +24,7 @@ def test_table1_confirms_p3_p2_p1_order_and_control():
     )
     summary, seeds = structural_table({"cropped": pd.DataFrame(rows), "control": control})
     assert summary.protocol_ordering_passed.all()
+    assert summary.analytic_inside_monte_carlo_interval.all()
+    assert summary.observed_inside_monte_carlo_interval.all()
     assert summary.loc[summary.dataset == "control", "negative_control_passed"].item()
     assert (seeds.p3_straddle_fraction == 0).all()

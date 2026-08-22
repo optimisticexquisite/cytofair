@@ -167,6 +167,36 @@ def monte_carlo_straddle_interval(
     return float(low), float(high)
 
 
+def monte_carlo_p1_straddle_interval(
+    frame: pd.DataFrame,
+    *,
+    test_size: float = 0.2,
+    repetitions: int = 10_000,
+    seed: int = 0,
+) -> tuple[float, float]:
+    """Interval under the exact fixed-size, class-stratified P1 allocation rule."""
+    source = _validate_source(frame)
+    parent_codes, parent_ids = pd.factorize(source.parent_id, sort=True)
+    parent_sizes = np.bincount(parent_codes, minlength=len(parent_ids))
+    indices = np.arange(len(source))
+    random_states = np.random.default_rng(seed).integers(
+        0, np.iinfo(np.int32).max, size=repetitions
+    )
+    values = np.empty(repetitions, dtype=float)
+    for repetition, random_state in enumerate(random_states):
+        _, test = train_test_split(
+            indices,
+            test_size=test_size,
+            random_state=int(random_state),
+            shuffle=True,
+            stratify=source.class_name,
+        )
+        test_counts = np.bincount(parent_codes[test], minlength=len(parent_ids))
+        values[repetition] = np.mean((test_counts > 0) & (test_counts < parent_sizes))
+    low, high = np.quantile(values, [0.025, 0.975])
+    return float(low), float(high)
+
+
 def export_protocol_splits(
     frame: pd.DataFrame,
     output_root: str | Path,

@@ -12,7 +12,7 @@ from .splits import (
     analytic_straddle,
     make_grouped,
     make_p1,
-    monte_carlo_straddle_interval,
+    monte_carlo_p1_straddle_interval,
     structural_leakage,
 )
 
@@ -33,7 +33,7 @@ def structural_table(
     for dataset, frame in maps.items():
         parent_sizes = frame.groupby("parent_id", observed=True).size().to_numpy()
         analytic = analytic_straddle(parent_sizes)
-        mc_low, mc_high = monte_carlo_straddle_interval(parent_sizes)
+        mc_low, mc_high = monte_carlo_p1_straddle_interval(frame)
         p1_straddle, p1_test_leak, p2_straddle, p3_straddle = [], [], [], []
         for seed in seeds:
             p1 = make_p1(frame, seed)
@@ -62,6 +62,8 @@ def structural_table(
         observed = float(np.mean(p1_straddle))
         is_control = bool((parent_sizes == 1).all())
         control_pass = bool(not is_control or (max(p1_straddle) == 0 and max(p1_test_leak) == 0))
+        analytic_inside_mc = bool(mc_low <= analytic <= mc_high)
+        observed_inside_mc = bool(mc_low <= observed <= mc_high)
         summaries.append(
             {
                 "dataset": dataset,
@@ -76,7 +78,9 @@ def structural_table(
                 "observed_p1_test_leak_pct_mean_sd": _format_mean_sd(p1_test_leak, 100),
                 "observed_p2_straddle_pct_mean_sd": _format_mean_sd(p2_straddle, 100),
                 "observed_p3_straddle_pct_mean_sd": _format_mean_sd(p3_straddle, 100),
-                "analytic_check_passed": bool(mc_low <= observed <= mc_high),
+                "analytic_inside_monte_carlo_interval": analytic_inside_mc,
+                "observed_inside_monte_carlo_interval": observed_inside_mc,
+                "analytic_check_passed": bool(analytic_inside_mc and observed_inside_mc),
                 "protocol_ordering_passed": bool(
                     np.mean(p3_straddle) <= np.mean(p2_straddle) <= np.mean(p1_straddle)
                 ),

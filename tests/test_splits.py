@@ -7,6 +7,7 @@ from cytofair.splits import (
     make_grouped,
     make_p1,
     make_p1_prime,
+    monte_carlo_p1_straddle_interval,
     monte_carlo_straddle_interval,
     structural_leakage,
 )
@@ -32,6 +33,14 @@ def test_analytic_formula_and_monte_carlo_agree():
     assert analytic_straddle(sizes) == expected
     low, high = monte_carlo_straddle_interval(sizes, repetitions=5000)
     assert low < expected < high
+
+
+def test_p1_monte_carlo_uses_stratified_fixed_size_rule():
+    frame = source(parents=10, crops_per_parent=2)
+    low, high = monte_carlo_p1_straddle_interval(frame, repetitions=100, seed=5)
+    assert 0 <= low <= high <= 1
+    control = frame.assign(parent_id=frame.crop_id)
+    assert monte_carlo_p1_straddle_interval(control, repetitions=20) == (0.0, 0.0)
 
 
 def test_grouped_split_has_no_parent_leakage():
