@@ -96,6 +96,17 @@ history. The summary command requires five seeds, emits paired effect sizes with
 95% bootstrap intervals, and applies BH once over the stated P1-vs-P2 plus
 P1-prime-vs-P2 classification family.
 
+On a CUDA-12.8 host that already provides compatible system Torch and torchvision,
+create the pinned split/image-library environment without replacing that CUDA build:
+
+```bash
+./scripts/setup_cuda128_training_env.sh /path/to/system/python .venv-cu128
+```
+
+The setup fails if CUDA 12.8 is unavailable or any split/image dependency differs
+from the recorded versions. Model JSONs include all of those versions so an
+environment mismatch cannot remain implicit.
+
 ## Data-use note
 
 Cx22/CCEDD and other source datasets may restrict use to non-commercial research and
