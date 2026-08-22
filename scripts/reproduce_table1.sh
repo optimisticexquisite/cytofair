@@ -8,7 +8,7 @@ uv sync --locked
 uv run cytofair download --manifest data_sources.json --output data/raw --connections 3
 uv run cytofair extract --manifest data_sources.json --raw data/raw --output data/extracted
 
-uv run cytofair recover-sipakmed data/extracted/sipakmed --workers 1
+uv run cytofair recover-sipakmed data/extracted/sipakmed --workers 3
 uv run cytofair recover-cx22 data/extracted/cx22 --image-root data/extracted/ccedd/png
 uv run cytofair recover-cric data/raw/cric/classifications.csv
 uv run cytofair recover-herlev data/extracted/herlev
