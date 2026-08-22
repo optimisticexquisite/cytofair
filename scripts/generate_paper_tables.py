@@ -231,6 +231,62 @@ def ordering_table(ordering: pd.DataFrame) -> str:
     )
 
 
+def ranking_table(ranking: pd.DataFrame) -> str:
+    required = {
+        "dataset",
+        "left_protocol",
+        "right_protocol",
+        "n_architectures",
+        "n_seeds",
+        "p_value",
+        "effect_name",
+        "effect_size",
+        "effect_ci_low",
+        "effect_ci_high",
+        "reordered_pairs",
+        "total_pairs",
+        "tie_changes",
+    }
+    missing = sorted(required - set(ranking.columns))
+    if missing:
+        raise ValueError(f"Ranking table misses columns: {missing}")
+    rows = []
+    for row in ranking.itertuples(index=False):
+        if int(row.n_seeds) < 5:
+            raise ValueError("Ranking stability requires at least five seeds")
+        if (
+            pd.isna(row.p_value)
+            or row.effect_name != "kendall_tau"
+            or pd.isna(row.effect_size)
+            or pd.isna(row.effect_ci_low)
+            or pd.isna(row.effect_ci_high)
+        ):
+            raise ValueError("Ranking p-value requires Kendall tau and 95% CI")
+        rows.append(
+            [
+                row.dataset,
+                f"{PROTOCOL_LABEL[row.left_protocol]} vs {PROTOCOL_LABEL[row.right_protocol]}",
+                int(row.n_architectures),
+                f"{row.effect_size:.3f} [{row.effect_ci_low:.3f}, {row.effect_ci_high:.3f}]",
+                f"unadjusted p={_p(row.p_value)}",
+                f"{int(row.reordered_pairs)}/{int(row.total_pairs)}",
+                int(row.tie_changes),
+            ]
+        )
+    return _markdown(
+        [
+            "Dataset",
+            "Rankings",
+            "Architectures",
+            "Kendall τ [seed-bootstrap 95% CI]",
+            "Inference",
+            "Reordered pairs",
+            "Tie changes",
+        ],
+        rows,
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--structural", default="results/table1_structural_leakage.csv")
@@ -240,6 +296,7 @@ def main() -> None:
         "--secondary", default="results/classification_secondary_contrasts.csv"
     )
     parser.add_argument("--ordering", default="results/classification_protocol_ordering.csv")
+    parser.add_argument("--ranking", default="results/classification_ranking_stability.csv")
     parser.add_argument("--output", default="paper/generated_tables.md")
     args = parser.parse_args()
     structural = structural_table(pd.read_csv(args.structural))
@@ -248,6 +305,7 @@ def main() -> None:
     )
     secondary = secondary_contrast_table(pd.read_csv(args.secondary))
     ordering = ordering_table(pd.read_csv(args.ordering))
+    ranking = ranking_table(pd.read_csv(args.ranking))
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(
@@ -264,7 +322,10 @@ def main() -> None:
         "BH family. Every p-value retains its paired effect and 95% CI.\n\n"
         f"{secondary}\n\n"
         "## Table 2d. Registered protocol-ordering check\n\n"
-        f"{ordering}\n"
+        f"{ordering}\n\n"
+        "## Table 2e. Architecture-ranking stability\n\n"
+        "The ranking p-value is secondary and outside the confirmatory BH family.\n\n"
+        f"{ranking}\n"
     )
     print(output)
 

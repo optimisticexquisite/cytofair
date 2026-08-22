@@ -90,3 +90,36 @@ def test_secondary_and_ordering_tables_make_violations_explicit():
         )
     )
     assert "Violation" in ordering
+
+
+def test_ranking_table_requires_effect_and_ci_for_p_value():
+    module = _module()
+    ranking = pd.DataFrame(
+        [
+            {
+                "dataset": "d",
+                "left_protocol": "P1",
+                "right_protocol": "P2",
+                "n_architectures": 6,
+                "n_seeds": 5,
+                "p_value": 0.2,
+                "effect_name": "kendall_tau",
+                "effect_size": 0.6,
+                "effect_ci_low": 0.1,
+                "effect_ci_high": 1.0,
+                "reordered_pairs": 3,
+                "total_pairs": 15,
+                "tie_changes": 0,
+            }
+        ]
+    )
+    rendered = module.ranking_table(ranking)
+    assert "0.600 [0.100, 1.000]" in rendered
+    assert "3/15" in rendered
+    ranking.loc[0, "effect_ci_low"] = float("nan")
+    try:
+        module.ranking_table(ranking)
+    except ValueError as error:
+        assert "95% CI" in str(error)
+    else:
+        raise AssertionError("Ranking p-value without effect CI was accepted")

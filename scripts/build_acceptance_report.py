@@ -47,8 +47,12 @@ def main() -> None:
         "--primary-contrasts", default="results/classification_primary_contrasts.csv"
     )
     parser.add_argument(
+        "--secondary-contrasts", default="results/classification_secondary_contrasts.csv"
+    )
+    parser.add_argument(
         "--ordering", default="results/classification_protocol_ordering.csv"
     )
+    parser.add_argument("--ranking", default="results/classification_ranking_stability.csv")
     parser.add_argument(
         "--classification-validation",
         default="reports/generated/classification_matrix_validation.json",
@@ -70,7 +74,9 @@ def main() -> None:
         probe_control=_json(args.probe_control),
         classification_summary=_csv(args.classification_summary),
         primary_contrasts=_csv(args.primary_contrasts),
+        secondary_contrasts=_csv(args.secondary_contrasts),
         classification_ordering=_csv(args.ordering),
+        ranking_stability=_csv(args.ranking),
         classification_validation=_json(args.classification_validation),
         clean_clone_evidence=_json(args.clean_clone_evidence),
         paper_checklist=_json(args.paper_checklist),

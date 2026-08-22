@@ -9,7 +9,13 @@ from pathlib import Path
 
 import pandas as pd
 
-from .statistics import apply_bh_family, mean_sd, paired_contrasts, verify_protocol_order
+from .statistics import (
+    apply_bh_family,
+    mean_sd,
+    paired_contrasts,
+    ranking_stability,
+    verify_protocol_order,
+)
 
 
 def _semantic_split_hash(split: pd.DataFrame) -> str:
@@ -162,8 +168,8 @@ def read_json_runs(paths: list[str | Path]) -> pd.DataFrame:
 
 def summarize_classification(
     paths: list[str | Path], *, bootstrap_repetitions: int = 10_000
-) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    """Return mean/SD, the single confirmatory BH family, secondary P2/P3, and order."""
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    """Return summaries, confirmatory/secondary contrasts, ordering, and ranking."""
     runs = read_json_runs(paths)
     required = {"accuracy", "macro_f1", "balanced_accuracy"}
     missing = sorted(required - set(runs.columns))
@@ -211,4 +217,7 @@ def summarize_classification(
     ordering = verify_protocol_order(
         runs, value="accuracy", by=["dataset", "architecture"]
     )
-    return summary, primary, secondary, ordering
+    ranking = ranking_stability(
+        runs, value="accuracy", bootstrap_repetitions=bootstrap_repetitions
+    )
+    return summary, primary, secondary, ordering, ranking

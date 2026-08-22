@@ -289,12 +289,13 @@ def _train_classifier(args: argparse.Namespace) -> None:
 def _summarize_classification(args: argparse.Namespace) -> None:
     from .results import summarize_classification
 
-    summary, primary, secondary, ordering = summarize_classification(args.results)
+    summary, primary, secondary, ordering, ranking = summarize_classification(args.results)
     outputs = {
         args.output: summary,
         args.contrasts: primary,
         args.secondary: secondary,
         args.ordering: ordering,
+        args.ranking: ranking,
     }
     for path, frame in outputs.items():
         Path(path).parent.mkdir(parents=True, exist_ok=True)
@@ -495,6 +496,7 @@ def build_parser() -> argparse.ArgumentParser:
     command.add_argument("--contrasts", default="results/classification_primary_contrasts.csv")
     command.add_argument("--secondary", default="results/classification_secondary_contrasts.csv")
     command.add_argument("--ordering", default="results/classification_ordering.csv")
+    command.add_argument("--ranking", default="results/classification_ranking_stability.csv")
     command.set_defaults(function=_summarize_classification)
 
     command = commands.add_parser("audit-duplicates", help="Hash crops and create P3 groups")

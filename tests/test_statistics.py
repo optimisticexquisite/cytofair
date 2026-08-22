@@ -5,6 +5,7 @@ from cytofair.statistics import (
     apply_bh_family,
     mean_sd,
     paired_contrasts,
+    ranking_stability,
     shuffled_probe_check,
     verify_protocol_order,
 )
@@ -87,6 +88,22 @@ def test_shuffled_probe_handles_constant_scores():
     check = shuffled_probe_check([0.1] * 5, chance=0.1)
     assert check["passed"]
     assert check["ci_low"] == check["ci_high"] == 0.1
+
+
+def test_ranking_stability_reports_effect_ci_and_reordered_pairs():
+    frame = run_table()
+    extra = frame.assign(architecture="c")
+    extra.loc[extra.protocol == "P1", "accuracy"] -= 0.2
+    extra.loc[extra.protocol == "P2", "accuracy"] += 0.2
+    ranking = ranking_stability(
+        pd.concat([frame, extra], ignore_index=True),
+        value="accuracy",
+        bootstrap_repetitions=30,
+    )
+    assert len(ranking) == 1
+    assert ranking.effect_name.item() == "kendall_tau"
+    assert ranking.effect_ci_low.notna().all()
+    assert ranking.reordered_pairs.item() > 0
 
 
 def test_acceptance_report_never_silently_passes_missing_evidence(tmp_path):

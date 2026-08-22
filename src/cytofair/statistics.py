@@ -220,3 +220,102 @@ def shuffled_probe_check(
         "passed": bool(interval[0] <= chance <= interval[1]),
         "alpha": float(alpha),
     }
+
+
+def ranking_stability(
+    runs: pd.DataFrame,
+    *,
+    value: str,
+    dataset_column: str = "dataset",
+    architecture_column: str = "architecture",
+    left_protocol: str = "P1",
+    right_protocol: str = "P2",
+    min_seeds: int = 5,
+    bootstrap_repetitions: int = 10_000,
+) -> pd.DataFrame:
+    """Kendall ranking stability with a seed-level paired bootstrap interval."""
+    required = {
+        dataset_column,
+        architecture_column,
+        "protocol",
+        "seed",
+        value,
+    }
+    missing = sorted(required - set(runs.columns))
+    if missing:
+        raise ValueError(f"Run table misses ranking columns: {missing}")
+    records = []
+    for dataset, group in runs.groupby(dataset_column, dropna=False, observed=True):
+        selected = group.loc[group.protocol.isin([left_protocol, right_protocol])]
+        wide = selected.pivot_table(
+            index=architecture_column, columns=["protocol", "seed"], values=value, aggfunc="first"
+        )
+        left_seeds = set(wide[left_protocol].columns) if left_protocol in wide else set()
+        right_seeds = set(wide[right_protocol].columns) if right_protocol in wide else set()
+        common_seeds = sorted(left_seeds & right_seeds)
+        complete_architectures = [
+            architecture
+            for architecture in wide.index
+            if common_seeds
+            and wide.loc[architecture, (left_protocol, common_seeds)].notna().all()
+            and wide.loc[architecture, (right_protocol, common_seeds)].notna().all()
+        ]
+        if len(common_seeds) < min_seeds or len(complete_architectures) < 2:
+            continue
+        left = wide.loc[complete_architectures, (left_protocol, common_seeds)].to_numpy(
+            dtype=float
+        )
+        right = wide.loc[complete_architectures, (right_protocol, common_seeds)].to_numpy(
+            dtype=float
+        )
+        left_means, right_means = left.mean(axis=1), right.mean(axis=1)
+        observed = stats.kendalltau(left_means, right_means)
+        rng = np.random.default_rng(
+            _stable_seed((dataset, left_protocol, right_protocol, "ranking"))
+        )
+        bootstrap = np.empty(bootstrap_repetitions, dtype=float)
+        for repetition in range(bootstrap_repetitions):
+            sample = rng.integers(0, len(common_seeds), size=len(common_seeds))
+            bootstrap[repetition] = stats.kendalltau(
+                left[:, sample].mean(axis=1), right[:, sample].mean(axis=1)
+            ).statistic
+        finite = bootstrap[np.isfinite(bootstrap)]
+        ci_low, ci_high = (
+            tuple(float(value) for value in np.quantile(finite, [0.025, 0.975]))
+            if len(finite)
+            else (float("nan"), float("nan"))
+        )
+        reordered_pairs = 0
+        tie_changes = 0
+        for first, second in pairwise_combinations(range(len(complete_architectures))):
+            left_sign = np.sign(left_means[first] - left_means[second])
+            right_sign = np.sign(right_means[first] - right_means[second])
+            reordered_pairs += int(left_sign * right_sign < 0)
+            tie_changes += int(left_sign != right_sign and left_sign * right_sign == 0)
+        n_architectures = len(complete_architectures)
+        records.append(
+            {
+                dataset_column: dataset,
+                "left_protocol": left_protocol,
+                "right_protocol": right_protocol,
+                "n_architectures": n_architectures,
+                "n_seeds": len(common_seeds),
+                "test": "kendall_tau_secondary_unadjusted",
+                "p_value": float(observed.pvalue),
+                "effect_name": "kendall_tau",
+                "effect_size": float(observed.statistic),
+                "effect_ci_low": ci_low,
+                "effect_ci_high": ci_high,
+                "reordered_pairs": reordered_pairs,
+                "total_pairs": n_architectures * (n_architectures - 1) // 2,
+                "tie_changes": tie_changes,
+            }
+        )
+    return pd.DataFrame(records)
+
+
+def pairwise_combinations(values: Sequence[int]):
+    """Yield unordered pairs without importing a second itertools helper at call sites."""
+    for index, left in enumerate(values):
+        for right in values[index + 1 :]:
+            yield left, right

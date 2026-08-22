@@ -80,7 +80,9 @@ def acceptance_contract_report(
     probe_control: dict[str, object] | None = None,
     classification_summary: pd.DataFrame | None = None,
     primary_contrasts: pd.DataFrame | None = None,
+    secondary_contrasts: pd.DataFrame | None = None,
     classification_ordering: pd.DataFrame | None = None,
+    ranking_stability: pd.DataFrame | None = None,
     classification_validation: dict[str, object] | None = None,
     clean_clone_evidence: dict[str, object] | None = None,
     paper_checklist: dict[str, object] | None = None,
@@ -175,6 +177,8 @@ def acceptance_contract_report(
         valid = (
             primary_contrasts.loc[reported, "q_value"].notna()
             & primary_contrasts.loc[reported, "effect_size"].notna()
+            & primary_contrasts.loc[reported, "effect_ci_low"].notna()
+            & primary_contrasts.loc[reported, "effect_ci_high"].notna()
             & primary_contrasts.loc[reported, "effect_name"].astype(str).ne("")
         )
         one_family = primary_contrasts.multiplicity_family.nunique() == 1
@@ -184,6 +188,34 @@ def acceptance_contract_report(
                 "BH family and effect for every p-value",
                 bool(valid.all() and one_family),
                 f"{int(valid.sum())}/{int(reported.sum())} p-values; one_family={one_family}",
+            )
+        )
+    if secondary_contrasts is None or ranking_stability is None:
+        items.append(
+            _item(
+                "statistics",
+                "secondary p-values have effects and 95% CIs",
+                None,
+                "secondary contrast or ranking output absent",
+            )
+        )
+    else:
+        secondary_outputs = pd.concat(
+            [secondary_contrasts, ranking_stability], ignore_index=True, sort=False
+        )
+        reported = secondary_outputs.p_value.notna()
+        valid = (
+            secondary_outputs.loc[reported, "effect_size"].notna()
+            & secondary_outputs.loc[reported, "effect_ci_low"].notna()
+            & secondary_outputs.loc[reported, "effect_ci_high"].notna()
+            & secondary_outputs.loc[reported, "effect_name"].astype(str).ne("")
+        )
+        items.append(
+            _item(
+                "statistics",
+                "secondary p-values have effects and 95% CIs",
+                bool(valid.all()),
+                f"{int(valid.sum())}/{int(reported.sum())} secondary p-values",
             )
         )
     if classification_ordering is not None:

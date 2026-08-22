@@ -24,7 +24,7 @@ def test_classification_summary_uses_five_seeds_and_one_bh_family(tmp_path):
                 )
             )
             paths.append(path)
-    summary, primary, secondary, ordering = summarize_classification(
+    summary, primary, secondary, ordering, ranking = summarize_classification(
         paths, bootstrap_repetitions=20
     )
     assert len(summary) == 12
@@ -34,6 +34,7 @@ def test_classification_summary_uses_five_seeds_and_one_bh_family(tmp_path):
     assert primary.multiplicity_family.nunique() == 1
     assert secondary.effect_size.notna().all()
     assert ordering.ordering_passed.all()
+    assert ranking.empty
 
 
 def test_matrix_verifier_matches_semantic_split_hash_and_runtime(tmp_path):
