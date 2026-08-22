@@ -3,6 +3,7 @@ import pandas as pd
 
 from cytofair.splits import (
     analytic_straddle,
+    export_protocol_splits,
     make_grouped,
     make_p1,
     make_p1_prime,
@@ -58,3 +59,11 @@ def test_herlev_style_unique_parent_is_negative_control():
     assert metrics.leaked_test_crop_fraction == 0
     assert np.isclose(analytic_straddle([1] * 20), 0)
 
+
+def test_exported_split_assets_cover_all_protocols(tmp_path):
+    frame = source()
+    frame["p3_group_id"] = frame.parent_id
+    manifest = export_protocol_splits(frame, tmp_path, dataset="toy", seeds=[17])
+    assert set(manifest.protocol) == {"P1", "P1-prime", "P2", "P3"}
+    assert manifest.sha256.str.len().eq(64).all()
+    assert (tmp_path / "toy_manifest.csv").is_file()

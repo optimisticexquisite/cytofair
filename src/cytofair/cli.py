@@ -19,6 +19,7 @@ from .probe import summarize_probe, train_parent_probe
 from .provenance import read_map, validate_provenance, write_map
 from .results import summarize_classification
 from .sipakmed import bbox_iou_pairs, recover_branch_a, recover_branch_b
+from .splits import export_protocol_splits
 from .table1 import structural_table
 from .verification import git_preregistration_evidence
 
@@ -148,6 +149,15 @@ def _table1(args: argparse.Namespace) -> None:
 
 def _git_evidence(args: argparse.Namespace) -> None:
     print(json.dumps(git_preregistration_evidence(args.repository), indent=2))
+
+
+def _make_splits(args: argparse.Namespace) -> None:
+    from .constants import CONFIRMATORY_SEEDS
+
+    manifest = export_protocol_splits(
+        read_map(args.map), args.output, dataset=args.dataset, seeds=CONFIRMATORY_SEEDS
+    )
+    print(manifest.to_string(index=False))
 
 
 def _train_probe(args: argparse.Namespace) -> None:
@@ -302,6 +312,12 @@ def build_parser() -> argparse.ArgumentParser:
     command = commands.add_parser("git-evidence", help="Verify preregistration chronology")
     command.add_argument("repository", nargs="?", default=".")
     command.set_defaults(function=_git_evidence)
+
+    command = commands.add_parser("make-splits", help="Export fixed P1/P1-prime/P2/P3 assets")
+    command.add_argument("map")
+    command.add_argument("--dataset", required=True)
+    command.add_argument("--output", default="splits")
+    command.set_defaults(function=_make_splits)
 
     command = commands.add_parser("train-probe", help="Train one parent-identity probe run")
     command.add_argument("map")

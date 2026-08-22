@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from collections.abc import Iterable
 from dataclasses import dataclass
+from hashlib import sha256
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -156,3 +158,54 @@ def monte_carlo_straddle_interval(
         values[index] = np.mean((train_counts > 0) & (train_counts < sizes))
     low, high = np.quantile(values, [0.025, 0.975])
     return float(low), float(high)
+
+
+def export_protocol_splits(
+    frame: pd.DataFrame,
+    output_root: str | Path,
+    *,
+    dataset: str,
+    seeds: Iterable[int],
+) -> pd.DataFrame:
+    """Write deterministic P1/P1-prime/P2/P3 split assets and their hashes."""
+    output_root = Path(output_root)
+    output_root.mkdir(parents=True, exist_ok=True)
+    records = []
+    for seed in seeds:
+        p1 = make_p1(frame, seed)
+        p2 = make_grouped(frame, seed, protocol="P2")
+        p1_prime = make_p1_prime(p1, p2, seed)
+        p3_group = "p3_group_id" if "p3_group_id" in frame.columns else "parent_id"
+        p3 = make_grouped(frame, seed, protocol="P3", group_column=p3_group)
+        for protocol, split in (("P1", p1), ("P1-prime", p1_prime), ("P2", p2), ("P3", p3)):
+            safe_protocol = protocol.lower().replace("-", "_")
+            path = output_root / f"{dataset.lower()}_{safe_protocol}_seed{seed}.csv"
+            columns = [
+                column
+                for column in (
+                    "crop_id",
+                    "parent_id",
+                    "class_name",
+                    "partition",
+                    "protocol",
+                    "seed",
+                )
+                if column in split.columns
+            ]
+            payload = split.sort_values("crop_id")[columns].to_csv(index=False, lineterminator="\n")
+            path.write_text(payload)
+            records.append(
+                {
+                    "dataset": dataset,
+                    "protocol": protocol,
+                    "seed": seed,
+                    "path": path.name,
+                    "rows": len(split),
+                    "train_crops": int((split.partition == "train").sum()),
+                    "test_crops": int((split.partition == "test").sum()),
+                    "sha256": sha256(payload.encode()).hexdigest(),
+                }
+            )
+    manifest = pd.DataFrame(records)
+    manifest.to_csv(output_root / f"{dataset.lower()}_manifest.csv", index=False)
+    return manifest
