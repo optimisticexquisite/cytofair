@@ -17,7 +17,7 @@ from .extract import extract_manifest
 from .herlev import recover_one_cell_per_image
 from .probe import summarize_probe, train_parent_probe
 from .provenance import read_map, validate_provenance, write_map
-from .sipakmed import recover_branch_a, recover_branch_b
+from .sipakmed import bbox_iou_pairs, recover_branch_a, recover_branch_b
 from .table1 import structural_table
 from .verification import git_preregistration_evidence
 
@@ -47,12 +47,16 @@ def _sipak(args: argparse.Namespace) -> None:
         expected_parent_counts=SIPAKMED_PARENT_COUNTS,
         branch_a=branch_a,
         branch_b=branch_b,
+        min_accepted_fraction=0.95,
         require_bbox=True,
     )
     write_map(branch_a, args.branch_a)
     write_map(branch_b, args.branch_b)
     Path(args.validation).parent.mkdir(parents=True, exist_ok=True)
     validation.frame().to_csv(args.validation, index=False)
+    overlaps = bbox_iou_pairs(branch_b)
+    Path(args.overlap).parent.mkdir(parents=True, exist_ok=True)
+    overlaps.to_parquet(args.overlap, index=False)
     validation.raise_for_failure()
 
 
@@ -79,11 +83,15 @@ def _sipak_b(args: argparse.Namespace) -> None:
         expected_parent_counts=SIPAKMED_PARENT_COUNTS,
         branch_a=branch_a,
         branch_b=branch_b,
+        min_accepted_fraction=0.95,
         require_bbox=True,
     )
     write_map(branch_b, args.output)
     Path(args.validation).parent.mkdir(parents=True, exist_ok=True)
     validation.frame().to_csv(args.validation, index=False)
+    overlaps = bbox_iou_pairs(branch_b)
+    Path(args.overlap).parent.mkdir(parents=True, exist_ok=True)
+    overlaps.to_parquet(args.overlap, index=False)
     validation.raise_for_failure()
 
 
@@ -216,6 +224,7 @@ def build_parser() -> argparse.ArgumentParser:
     command.add_argument("--branch-a", default="provenance/sipakmed_branch_a.parquet")
     command.add_argument("--branch-b", default="provenance/sipakmed_parent_map.parquet")
     command.add_argument("--validation", default="reports/generated/sipakmed_validation.csv")
+    command.add_argument("--overlap", default="reports/generated/sipakmed_bbox_overlap.parquet")
     command.set_defaults(function=_sipak)
 
     command = commands.add_parser("recover-sipakmed-a", help="Run filename provenance only")
@@ -229,6 +238,7 @@ def build_parser() -> argparse.ArgumentParser:
     command.add_argument("--workers", type=int, default=1)
     command.add_argument("--output", default="provenance/sipakmed_parent_map.parquet")
     command.add_argument("--validation", default="reports/generated/sipakmed_validation.csv")
+    command.add_argument("--overlap", default="reports/generated/sipakmed_bbox_overlap.parquet")
     command.set_defaults(function=_sipak_b)
 
     command = commands.add_parser("recover-cx22", help="Read source names and ROIs from Cx22")

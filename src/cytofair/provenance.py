@@ -76,6 +76,7 @@ def validate_provenance(
     branch_a: pd.DataFrame | None = None,
     branch_b: pd.DataFrame | None = None,
     min_branch_agreement: float = 0.99,
+    min_accepted_fraction: float | None = None,
     require_bbox: bool = False,
 ) -> ProvenanceValidation:
     """Validate all supplied acceptance criteria and return every check."""
@@ -142,6 +143,24 @@ def validate_provenance(
             )
         )
 
+    if min_accepted_fraction is not None:
+        if not 0 <= min_accepted_fraction <= 1:
+            raise ValueError("min_accepted_fraction must be in [0, 1]")
+        available = "accepted" in out.columns
+        checks.append(Check("accepted_column_present", available, available, True))
+        if available:
+            accepted = out["accepted"].eq(True)
+            fraction = float(accepted.mean()) if len(out) else float("nan")
+            checks.append(
+                Check(
+                    "image_match_accepted_fraction",
+                    bool(len(out) and fraction >= min_accepted_fraction),
+                    fraction,
+                    min_accepted_fraction,
+                    detail=f"{int(accepted.sum())}/{len(out)} crops accepted",
+                )
+            )
+
     return ProvenanceValidation(checks)
 
 
@@ -158,4 +177,3 @@ def write_map(frame: pd.DataFrame, path: str | Path) -> None:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     normalise_map(frame).to_parquet(path, index=False)
-

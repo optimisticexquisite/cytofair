@@ -65,3 +65,8 @@ def test_shuffled_probe_confirms_chance():
     with np.testing.assert_raises(ValueError):
         shuffled_probe_check([0.1] * 4, chance=0.1)
 
+
+def test_shuffled_probe_handles_constant_scores():
+    check = shuffled_probe_check([0.1] * 5, chance=0.1)
+    assert check["passed"]
+    assert check["ci_low"] == check["ci_high"] == 0.1

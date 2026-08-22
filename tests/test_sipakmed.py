@@ -23,10 +23,14 @@ def test_sipakmed_filename_and_template_branches(tmp_path: Path):
     assert branch_b.accepted.all()
     assert set(zip(branch_b.x, branch_b.y)) == {(20, 10), (35, 30)}
     validation = validate_provenance(
-        branch_b, expected_total=2, branch_a=branch_a, branch_b=branch_b, require_bbox=True
+        branch_b,
+        expected_total=2,
+        branch_a=branch_a,
+        branch_b=branch_b,
+        min_accepted_fraction=0.95,
+        require_bbox=True,
     )
     assert validation.passed
     overlaps = bbox_iou_pairs(branch_b)
     assert len(overlaps) == 1
     assert overlaps.iloc[0].intersection_pixels > 0
-

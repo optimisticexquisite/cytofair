@@ -189,7 +189,12 @@ def shuffled_probe_check(
         raise ValueError("At least five shuffled-label seeds are required")
     alpha = 1.0 - confidence
     sem = stats.sem(scores)
-    interval = stats.t.interval(confidence, df=len(scores) - 1, loc=scores.mean(), scale=sem)
+    if sem == 0:
+        interval = (float(scores.mean()), float(scores.mean()))
+    else:
+        interval = stats.t.interval(
+            confidence, df=len(scores) - 1, loc=scores.mean(), scale=sem
+        )
     return {
         "n": len(scores),
         "mean": float(scores.mean()),

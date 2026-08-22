@@ -49,3 +49,11 @@ def test_branch_agreement_uses_crop_intersection():
     assert count == 2
     assert agreement == 0.5
 
+
+def test_match_acceptance_fraction_is_an_explicit_gate():
+    frame = example_map()
+    frame["accepted"] = [True, False]
+    validation = validate_provenance(frame, min_accepted_fraction=0.95)
+    check = validation.frame().set_index("name").loc["image_match_accepted_fraction"]
+    assert not check.passed
+    assert check.observed == 0.5
