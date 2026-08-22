@@ -26,6 +26,7 @@ def test_provenance_accepts_complete_contained_map():
         frame,
         expected_total=2,
         expected_parent_counts={"x": 1},
+        expected_class_crop_counts={"x": 2},
         branch_a=frame,
         branch_b=frame,
         require_bbox=True,

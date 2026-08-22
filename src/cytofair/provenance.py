@@ -73,6 +73,7 @@ def validate_provenance(
     *,
     expected_total: int | None = None,
     expected_parent_counts: Mapping[str, int] | None = None,
+    expected_class_crop_counts: Mapping[str, int] | None = None,
     branch_a: pd.DataFrame | None = None,
     branch_b: pd.DataFrame | None = None,
     min_branch_agreement: float = 0.99,
@@ -100,6 +101,19 @@ def validate_provenance(
             checks.append(
                 Check(
                     f"parent_count:{class_name}",
+                    observed == expected,
+                    observed,
+                    expected,
+                )
+            )
+
+    if expected_class_crop_counts is not None:
+        actual_crops = out.groupby("class_name", observed=True).size().to_dict()
+        for class_name, expected in expected_class_crop_counts.items():
+            observed = int(actual_crops.get(class_name, 0))
+            checks.append(
+                Check(
+                    f"crop_count:{class_name}",
                     observed == expected,
                     observed,
                     expected,

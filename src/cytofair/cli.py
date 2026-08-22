@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 
 from .classification import train_classifier
-from .constants import SIPAKMED_PARENT_COUNTS, SIPAKMED_TOTAL_CROPS
+from .constants import SIPAKMED_CROP_COUNTS, SIPAKMED_PARENT_COUNTS, SIPAKMED_TOTAL_CROPS
 from .cric import recover_classifications
 from .cx22 import recover_all as recover_cx22
 from .cx22 import subset_parent_overlap
@@ -49,6 +49,7 @@ def _sipak(args: argparse.Namespace) -> None:
         branch_b,
         expected_total=SIPAKMED_TOTAL_CROPS,
         expected_parent_counts=SIPAKMED_PARENT_COUNTS,
+        expected_class_crop_counts=SIPAKMED_CROP_COUNTS,
         branch_a=branch_a,
         branch_b=branch_b,
         min_accepted_fraction=0.95,
@@ -71,6 +72,7 @@ def _sipak_a(args: argparse.Namespace) -> None:
         branch_a,
         expected_total=SIPAKMED_TOTAL_CROPS,
         expected_parent_counts=SIPAKMED_PARENT_COUNTS,
+        expected_class_crop_counts=SIPAKMED_CROP_COUNTS,
     )
     write_map(branch_a, args.output)
     Path(args.validation).parent.mkdir(parents=True, exist_ok=True)
@@ -89,6 +91,7 @@ def _sipak_b(args: argparse.Namespace) -> None:
         branch_b,
         expected_total=SIPAKMED_TOTAL_CROPS,
         expected_parent_counts=SIPAKMED_PARENT_COUNTS,
+        expected_class_crop_counts=SIPAKMED_CROP_COUNTS,
         branch_a=branch_a,
         branch_b=branch_b,
         min_accepted_fraction=0.95,
