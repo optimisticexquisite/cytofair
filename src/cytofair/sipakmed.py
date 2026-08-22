@@ -154,7 +154,10 @@ def recover_branch_b(
             image, None, fx=coarse_scale, fy=coarse_scale, interpolation=cv2.INTER_AREA
         )
 
-    @lru_cache(maxsize=24)
+    # Same-class crops are adjacent in the deterministic release order. Keeping a
+    # substantial but bounded parent working set avoids repeatedly decoding 9.4 MB
+    # BMPs while remaining far below the host's available memory.
+    @lru_cache(maxsize=128)
     def full_parent(path: str) -> np.ndarray:
         return _read_rgb(path)
 
