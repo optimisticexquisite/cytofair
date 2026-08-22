@@ -7,8 +7,8 @@ SIPAKMED_PARENT_COUNTS = {
     "Superficial-Intermediate": 126,
     "Parabasal": 108,
     "Koilocytotic": 238,
-    "Dyskeratotic": 271,
-    "Metaplastic": 223,
+    "Metaplastic": 271,
+    "Dyskeratotic": 223,
 }
 
 SIPAKMED_CROP_COUNTS = {

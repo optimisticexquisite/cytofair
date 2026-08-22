@@ -123,3 +123,12 @@ The run records environment versions, input checksums, seed, command, timestamps
 host, and Git SHA. The verification report will use `git log --follow` to demonstrate
 that this preregistration commit predates the first result commit.
 
+## Amendment 1 — factual class-order correction (2026-08-22, Asia/Kolkata)
+
+Before any SIPaKMeD result was computed, the Branch-A integrity gate exposed that
+criterion 4 above transcribed the final two class names in the wrong order. The
+published/release vector `126, 108, 238, 271, 223` follows the website/archive order:
+Superficial-Intermediate, Parabasal, Koilocytotic, **Metaplastic**, Dyskeratotic.
+Accordingly the fixed mapping is Metaplastic = 271 parents and Dyskeratotic = 223
+parents. No numeric target changed and no observed effect informed this correction.
+The original preregistration remains recoverable as Git commit `67e8ded`.
