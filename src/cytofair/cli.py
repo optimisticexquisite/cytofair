@@ -54,6 +54,37 @@ def _sipak(args: argparse.Namespace) -> None:
     validation.raise_for_failure()
 
 
+def _sipak_a(args: argparse.Namespace) -> None:
+    branch_a = recover_branch_a(args.root)
+    validation = validate_provenance(
+        branch_a,
+        expected_total=SIPAKMED_TOTAL_CROPS,
+        expected_parent_counts=SIPAKMED_PARENT_COUNTS,
+    )
+    write_map(branch_a, args.output)
+    Path(args.validation).parent.mkdir(parents=True, exist_ok=True)
+    validation.frame().to_csv(args.validation, index=False)
+    validation.raise_for_failure()
+    print(f"SIPaKMeD crops={len(branch_a)} parents={branch_a.parent_id.nunique()}")
+
+
+def _sipak_b(args: argparse.Namespace) -> None:
+    branch_a = read_map(args.branch_a)
+    branch_b = recover_branch_b(branch_a, workers=args.workers)
+    validation = validate_provenance(
+        branch_b,
+        expected_total=SIPAKMED_TOTAL_CROPS,
+        expected_parent_counts=SIPAKMED_PARENT_COUNTS,
+        branch_a=branch_a,
+        branch_b=branch_b,
+        require_bbox=True,
+    )
+    write_map(branch_b, args.output)
+    Path(args.validation).parent.mkdir(parents=True, exist_ok=True)
+    validation.frame().to_csv(args.validation, index=False)
+    validation.raise_for_failure()
+
+
 def _cx22(args: argparse.Namespace) -> None:
     frame = recover_cx22(args.root)
     write_map(frame, args.output)
@@ -144,6 +175,19 @@ def build_parser() -> argparse.ArgumentParser:
     command.add_argument("--branch-b", default="provenance/sipakmed_parent_map.parquet")
     command.add_argument("--validation", default="reports/generated/sipakmed_validation.csv")
     command.set_defaults(function=_sipak)
+
+    command = commands.add_parser("recover-sipakmed-a", help="Run filename provenance only")
+    command.add_argument("root")
+    command.add_argument("--output", default="provenance/sipakmed_branch_a.parquet")
+    command.add_argument("--validation", default="reports/generated/sipakmed_branch_a_validation.csv")
+    command.set_defaults(function=_sipak_a)
+
+    command = commands.add_parser("recover-sipakmed-b", help="Run exhaustive image provenance")
+    command.add_argument("branch_a")
+    command.add_argument("--workers", type=int, default=1)
+    command.add_argument("--output", default="provenance/sipakmed_parent_map.parquet")
+    command.add_argument("--validation", default="reports/generated/sipakmed_validation.csv")
+    command.set_defaults(function=_sipak_b)
 
     command = commands.add_parser("recover-cx22", help="Read source names and ROIs from Cx22")
     command.add_argument("root")
