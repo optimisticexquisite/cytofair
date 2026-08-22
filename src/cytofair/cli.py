@@ -17,6 +17,7 @@ from .extract import extract_manifest
 from .herlev import recover_one_cell_per_image
 from .probe import summarize_probe, train_parent_probe
 from .provenance import read_map, validate_provenance, write_map
+from .results import summarize_classification
 from .sipakmed import bbox_iou_pairs, recover_branch_a, recover_branch_b
 from .table1 import structural_table
 from .verification import git_preregistration_evidence
@@ -185,6 +186,21 @@ def _train_classifier(args: argparse.Namespace) -> None:
     print(json.dumps({key: value for key, value in result.items() if key != "history"}, indent=2))
 
 
+def _summarize_classification(args: argparse.Namespace) -> None:
+    summary, primary, secondary, ordering = summarize_classification(args.results)
+    outputs = {
+        args.output: summary,
+        args.contrasts: primary,
+        args.secondary: secondary,
+        args.ordering: ordering,
+    }
+    for path, frame in outputs.items():
+        Path(path).parent.mkdir(parents=True, exist_ok=True)
+        frame.to_csv(path, index=False)
+    print(summary.to_string(index=False))
+    print(primary.to_string(index=False))
+
+
 def _duplicates(args: argparse.Namespace) -> None:
     provenance = read_map(args.map)
     hashes = hash_manifest(provenance)
@@ -324,6 +340,16 @@ def build_parser() -> argparse.ArgumentParser:
     command.add_argument("--no-pretrained", action="store_true")
     command.add_argument("--repository", default=".")
     command.set_defaults(function=_train_classifier)
+
+    command = commands.add_parser(
+        "summarize-classification", help="Summarize seeds, effects, BH family, and ordering"
+    )
+    command.add_argument("results", nargs="+")
+    command.add_argument("--output", default="results/classification_summary.csv")
+    command.add_argument("--contrasts", default="results/classification_primary_contrasts.csv")
+    command.add_argument("--secondary", default="results/classification_secondary_contrasts.csv")
+    command.add_argument("--ordering", default="results/classification_ordering.csv")
+    command.set_defaults(function=_summarize_classification)
 
     command = commands.add_parser("audit-duplicates", help="Hash crops and create P3 groups")
     command.add_argument("map")

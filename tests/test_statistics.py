@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 
 from cytofair.statistics import (
+    apply_bh_family,
     mean_sd,
     paired_contrasts,
     shuffled_probe_check,
@@ -50,6 +51,21 @@ def test_paired_inference_emits_effect_and_bh_q():
     assert contrasts.q_value.notna().all()
     assert contrasts.effect_name.ne("").all()
     assert contrasts.effect_size.notna().all()
+
+
+def test_bh_can_be_applied_over_one_combined_declared_family():
+    first = paired_contrasts(
+        run_table(),
+        value="accuracy",
+        family_columns=["dataset", "architecture"],
+        left_protocol="P1",
+        right_protocol="P2",
+        bootstrap_repetitions=20,
+        apply_bh=False,
+    )
+    second = first.copy()
+    combined = apply_bh_family(pd.concat([first, second], ignore_index=True))
+    assert combined.q_value.notna().all()
 
 
 def test_expected_protocol_order():

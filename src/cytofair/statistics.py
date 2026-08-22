@@ -71,6 +71,7 @@ def paired_contrasts(
     right_protocol: str,
     min_seeds: int = 5,
     bootstrap_repetitions: int = 10_000,
+    apply_bh: bool = True,
 ) -> pd.DataFrame:
     """Compare left-right per family, then BH-correct the emitted p-values."""
     required = set(family_columns) | {"protocol", "seed", value}
@@ -154,6 +155,20 @@ def paired_contrasts(
     out = pd.DataFrame(records)
     if out.empty:
         return out
+    out["q_value"] = np.nan
+    eligible = out.p_value.notna()
+    if apply_bh and eligible.any():
+        out.loc[eligible, "q_value"] = multipletests(
+            out.loc[eligible, "p_value"], method="fdr_bh"
+        )[1]
+    return out
+
+
+def apply_bh_family(contrasts: pd.DataFrame) -> pd.DataFrame:
+    """Apply BH once over exactly the supplied, explicitly stated family."""
+    if "p_value" not in contrasts.columns:
+        raise ValueError("Contrast family has no p_value column")
+    out = contrasts.copy()
     out["q_value"] = np.nan
     eligible = out.p_value.notna()
     if eligible.any():
