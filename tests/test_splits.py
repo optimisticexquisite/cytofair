@@ -51,6 +51,16 @@ def test_random_split_leaks_and_size_match_is_exact():
     )
 
 
+def test_grouped_fold_never_makes_p1_prime_upsample():
+    frame = source(parents=21, crops_per_parent=5)
+    p1 = make_p1(frame, 101)
+    p2 = make_grouped(frame, 101)
+    assert (p2.partition == "train").sum() <= (p1.partition == "train").sum()
+    assert (make_p1_prime(p1, p2, 101).partition == "train").sum() == (
+        p2.partition == "train"
+    ).sum()
+
+
 def test_herlev_style_unique_parent_is_negative_control():
     frame = source(parents=20, crops_per_parent=1)
     split = make_p1(frame, 17)

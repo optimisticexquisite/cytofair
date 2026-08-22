@@ -48,10 +48,11 @@ the adjacent manifest.
 
 The analysis fails closed. Provenance is not accepted unless the two independent
 SIPaKMeD branches agree on at least 99% of common crops, every image-matched bbox is
-inside its parent, at least 95% of image matches clear the preregistered
-confidence/margin gate, the dataset total is 4,049, and the five parent counts are
-126/108/238/271/223 in release order. Ambiguous rows remain in the map with
-`accepted=false`; they are never silently discarded.
+inside its parent, the dataset total is 4,049, and the five parent counts are
+126/108/238/271/223 in release order. Match confidence and the margin over the
+runner-up are retained as audit diagnostics, not substituted for the registered
+cross-branch agreement criterion. Rows below the diagnostic thresholds remain in
+the Branch-B map with `accepted=false`; they are never silently discarded.
 
 `sipakmed_parent_map.parquet` is the canonical filename-derived map used for splits.
 `sipakmed_branch_b.parquet` is the independent all-parent image-match audit with

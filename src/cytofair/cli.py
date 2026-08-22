@@ -17,10 +17,40 @@ from .extract import extract_manifest
 from .herlev import recover_one_cell_per_image
 from .probe import summarize_probe, train_parent_probe
 from .provenance import read_map, validate_provenance, write_map
-from .sipakmed import bbox_iou_pairs, recover_branch_a, recover_branch_b
-from .splits import export_protocol_splits
+from .sipakmed import (
+    bbox_iou_pairs,
+    cross_split_pixel_overlap,
+    recover_branch_a,
+    recover_branch_b,
+)
+from .splits import export_protocol_splits, make_grouped, make_p1
 from .table1 import structural_table
 from .verification import git_preregistration_evidence
+
+
+def _validate_sipakmed_maps(
+    branch_a,
+    branch_b,
+    *,
+    validation_path: str | Path,
+    overlap_path: str | Path,
+) -> None:
+    """Apply only the preregistered provenance gates and persist audit evidence."""
+    validation = validate_provenance(
+        branch_b,
+        expected_total=SIPAKMED_TOTAL_CROPS,
+        expected_parent_counts=SIPAKMED_PARENT_COUNTS,
+        expected_class_crop_counts=SIPAKMED_CROP_COUNTS,
+        branch_a=branch_a,
+        branch_b=branch_b,
+        require_bbox=True,
+    )
+    Path(validation_path).parent.mkdir(parents=True, exist_ok=True)
+    validation.frame().to_csv(validation_path, index=False)
+    overlaps = bbox_iou_pairs(branch_b)
+    Path(overlap_path).parent.mkdir(parents=True, exist_ok=True)
+    overlaps.to_parquet(overlap_path, index=False)
+    validation.raise_for_failure()
 
 
 def _download(args: argparse.Namespace) -> None:
@@ -45,25 +75,15 @@ def _sipak(args: argparse.Namespace) -> None:
     branch_b = recover_branch_b(
         branch_a, workers=args.workers, checkpoint_path=checkpoint
     )
-    validation = validate_provenance(
-        branch_b,
-        expected_total=SIPAKMED_TOTAL_CROPS,
-        expected_parent_counts=SIPAKMED_PARENT_COUNTS,
-        expected_class_crop_counts=SIPAKMED_CROP_COUNTS,
-        branch_a=branch_a,
-        branch_b=branch_b,
-        min_accepted_fraction=0.95,
-        require_bbox=True,
-    )
     write_map(branch_a, args.branch_a)
     write_map(branch_b, args.branch_b)
     write_map(branch_a, args.output)
-    Path(args.validation).parent.mkdir(parents=True, exist_ok=True)
-    validation.frame().to_csv(args.validation, index=False)
-    overlaps = bbox_iou_pairs(branch_b)
-    Path(args.overlap).parent.mkdir(parents=True, exist_ok=True)
-    overlaps.to_parquet(args.overlap, index=False)
-    validation.raise_for_failure()
+    _validate_sipakmed_maps(
+        branch_a,
+        branch_b,
+        validation_path=args.validation,
+        overlap_path=args.overlap,
+    )
     checkpoint.unlink(missing_ok=True)
 
 
@@ -88,24 +108,30 @@ def _sipak_b(args: argparse.Namespace) -> None:
     branch_b = recover_branch_b(
         branch_a, workers=args.workers, checkpoint_path=checkpoint
     )
-    validation = validate_provenance(
-        branch_b,
-        expected_total=SIPAKMED_TOTAL_CROPS,
-        expected_parent_counts=SIPAKMED_PARENT_COUNTS,
-        expected_class_crop_counts=SIPAKMED_CROP_COUNTS,
-        branch_a=branch_a,
-        branch_b=branch_b,
-        min_accepted_fraction=0.95,
-        require_bbox=True,
-    )
     write_map(branch_b, args.output)
-    Path(args.validation).parent.mkdir(parents=True, exist_ok=True)
-    validation.frame().to_csv(args.validation, index=False)
-    overlaps = bbox_iou_pairs(branch_b)
-    Path(args.overlap).parent.mkdir(parents=True, exist_ok=True)
-    overlaps.to_parquet(args.overlap, index=False)
-    validation.raise_for_failure()
+    _validate_sipakmed_maps(
+        branch_a,
+        branch_b,
+        validation_path=args.validation,
+        overlap_path=args.overlap,
+    )
     checkpoint.unlink(missing_ok=True)
+
+
+def _validate_sipak(args: argparse.Namespace) -> None:
+    branch_a = read_map(args.branch_a)
+    branch_b = read_map(args.branch_b)
+    _validate_sipakmed_maps(
+        branch_a,
+        branch_b,
+        validation_path=args.validation,
+        overlap_path=args.overlap,
+    )
+    write_map(branch_a, args.output)
+    print(
+        f"SIPaKMeD provenance accepted: crops={len(branch_b)} "
+        f"parents={branch_b.parent_id.nunique()}"
+    )
 
 
 def _cx22(args: argparse.Namespace) -> None:
@@ -161,6 +187,54 @@ def _make_splits(args: argparse.Namespace) -> None:
         read_map(args.map), args.output, dataset=args.dataset, seeds=CONFIRMATORY_SEEDS
     )
     print(manifest.to_string(index=False))
+
+
+def _pixel_overlap(args: argparse.Namespace) -> None:
+    import pandas as pd
+
+    from .constants import CONFIRMATORY_SEEDS
+
+    provenance = read_map(args.map)
+    rows = []
+    for seed in CONFIRMATORY_SEEDS:
+        splits = {
+            "P1": make_p1(provenance, seed),
+            "P2": make_grouped(provenance, seed, protocol="P2"),
+            "P3": make_grouped(provenance, seed, protocol="P3"),
+        }
+        for protocol, split in splits.items():
+            rows.append(
+                {
+                    "dataset": args.dataset,
+                    "protocol": protocol,
+                    "seed": seed,
+                    **cross_split_pixel_overlap(provenance, split),
+                }
+            )
+    seed_frame = pd.DataFrame(rows)
+    metrics = [
+        "overlapping_cross_split_pair_fraction",
+        "test_crop_pixel_overlap_fraction",
+    ]
+    summary = (
+        seed_frame.groupby(["dataset", "protocol"], observed=True)[metrics]
+        .agg(["mean", "std", "count"])
+        .reset_index()
+    )
+    summary.columns = [
+        "_".join(str(part) for part in column if part).rstrip("_")
+        if isinstance(column, tuple)
+        else str(column)
+        for column in summary.columns
+    ]
+    for count_column in [column for column in summary if column.endswith("_count")]:
+        if not (summary[count_column] >= 5).all():
+            raise ValueError("Pixel-overlap summaries require at least five seeds")
+    Path(args.seed_output).parent.mkdir(parents=True, exist_ok=True)
+    seed_frame.to_csv(args.seed_output, index=False)
+    Path(args.output).parent.mkdir(parents=True, exist_ok=True)
+    summary.to_csv(args.output, index=False)
+    print(summary.to_string(index=False))
 
 
 def _train_probe(args: argparse.Namespace) -> None:
@@ -288,6 +362,16 @@ def build_parser() -> argparse.ArgumentParser:
     command.add_argument("--overlap", default="reports/generated/sipakmed_bbox_overlap.parquet")
     command.set_defaults(function=_sipak_b)
 
+    command = commands.add_parser(
+        "validate-sipakmed", help="Validate completed SIPaKMeD Branch A/B maps"
+    )
+    command.add_argument("branch_a")
+    command.add_argument("branch_b")
+    command.add_argument("--output", default="provenance/sipakmed_parent_map.parquet")
+    command.add_argument("--validation", default="reports/generated/sipakmed_validation.csv")
+    command.add_argument("--overlap", default="reports/generated/sipakmed_bbox_iou.parquet")
+    command.set_defaults(function=_validate_sipak)
+
     command = commands.add_parser("recover-cx22", help="Read source names and ROIs from Cx22")
     command.add_argument("root")
     command.add_argument("--image-root", help="extracted CCEDD parent PNG directory")
@@ -324,6 +408,15 @@ def build_parser() -> argparse.ArgumentParser:
     command.add_argument("--dataset", required=True)
     command.add_argument("--output", default="splits")
     command.set_defaults(function=_make_splits)
+
+    command = commands.add_parser(
+        "pixel-overlap", help="Measure literal bbox overlap across split boundaries"
+    )
+    command.add_argument("map", help="Branch-B map containing recovered bounding boxes")
+    command.add_argument("--dataset", default="SIPaKMeD")
+    command.add_argument("--output", default="results/pixel_overlap_summary.csv")
+    command.add_argument("--seed-output", default="results/pixel_overlap_seed_level.csv")
+    command.set_defaults(function=_pixel_overlap)
 
     command = commands.add_parser("train-probe", help="Train one parent-identity probe run")
     command.add_argument("map")

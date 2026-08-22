@@ -72,7 +72,14 @@ def make_grouped(
     if groups.isna().any():
         raise ValueError(f"Grouping column {group_column} contains missing values")
     splitter = StratifiedGroupKFold(n_splits=n_splits, shuffle=True, random_state=seed)
-    _, test = next(splitter.split(source.crop_id, source.class_name, groups))
+    folds = list(splitter.split(source.crop_id, source.class_name, groups))
+    # P1 contains exactly floor((1 - 1/n_splits) * n) training crops. Select the
+    # closest stratified grouped fold whose test arm is not smaller than the P1
+    # test arm, so the preregistered P1-prime training-size match is always a true
+    # downsample. Ties retain sklearn's deterministic fold order.
+    target_test = int(np.ceil(len(source) / n_splits))
+    eligible = [test for _, test in folds if len(test) >= target_test]
+    test = min(eligible, key=lambda indices: abs(len(indices) - target_test))
     out = _partition_frame(source, np.asarray(test), protocol, seed)
     leakage = structural_leakage(out)
     if leakage.n_straddled_parents:
