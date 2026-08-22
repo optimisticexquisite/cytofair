@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 from concurrent.futures import ThreadPoolExecutor
+from functools import lru_cache
 from pathlib import Path
 
 import cv2
@@ -114,52 +115,104 @@ def _best_match(crop: np.ndarray, parent: np.ndarray) -> tuple[float, int, int, 
     return best
 
 
-def _match_one(row: dict) -> dict:
-    crop = _read_rgb(row["crop_path"])
-    parent = _read_rgb(row["parent_path"])
-    score, x, y, width, height = _best_match(crop, parent)
-    parent_height, parent_width = parent.shape[:2]
-    crop_height, crop_width = crop.shape[:2]
-    return {
-        **row,
-        "x": x,
-        "y": y,
-        "width": width,
-        "height": height,
-        "crop_width": crop_width,
-        "crop_height": crop_height,
-        "parent_width": parent_width,
-        "parent_height": parent_height,
-        "match_confidence": score,
-        "method": "template_ncc_within_filename_parent",
-    }
-
-
 def recover_branch_b(
     branch_a: pd.DataFrame,
     *,
     workers: int = 1,
     minimum_confidence: float = 0.95,
+    minimum_margin: float = 0.02,
+    coarse_scale: float = 0.25,
+    top_k: int = 5,
 ) -> pd.DataFrame:
-    """Independently locate each crop inside its Branch-A candidate parent.
+    """Independently identify and locate each crop among every same-class parent.
 
-    The parent candidate is constrained by class and filename, but the acceptance
-    evidence (pixel location and NCC) is image-derived. A later exhaustive matcher can
-    challenge candidate identity on ambiguous/failed rows without wasting O(4049*200)
-    comparisons for exact release files.
+    Branch-A parent assignments are deliberately excluded from crop queries. Branch A
+    supplies only the complete candidate-parent inventory and crop/class paths. A
+    downscaled NCC pass ranks all parents; full-resolution NCC refines the top-k.
     """
     required = {"crop_id", "parent_id", "class_name", "crop_path", "parent_path"}
     missing = sorted(required - set(branch_a.columns))
     if missing:
         raise ValueError(f"Branch A table misses: {missing}")
-    records = branch_a[list(required)].to_dict("records")
+    if not 0 < coarse_scale <= 1:
+        raise ValueError("coarse_scale must be in (0, 1]")
+    parents = branch_a[["parent_id", "class_name", "parent_path"]].drop_duplicates()
+    if parents.parent_id.duplicated().any():
+        raise ValueError("A parent_id maps to multiple candidate images")
+    candidates = {
+        class_name: group[["parent_id", "parent_path"]].to_dict("records")
+        for class_name, group in parents.groupby("class_name", observed=True)
+    }
+    coarse_parents = {}
+    for candidate in parents.itertuples(index=False):
+        image = cv2.cvtColor(_read_rgb(candidate.parent_path), cv2.COLOR_BGR2GRAY)
+        coarse_parents[candidate.parent_id] = cv2.resize(
+            image, None, fx=coarse_scale, fy=coarse_scale, interpolation=cv2.INTER_AREA
+        )
+
+    @lru_cache(maxsize=24)
+    def full_parent(path: str) -> np.ndarray:
+        return _read_rgb(path)
+
+    def match_one(row: dict) -> dict:
+        crop = _read_rgb(row["crop_path"])
+        coarse_crop = cv2.resize(
+            cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY),
+            None,
+            fx=coarse_scale,
+            fy=coarse_scale,
+            interpolation=cv2.INTER_AREA,
+        )
+        ranked = []
+        for candidate in candidates[row["class_name"]]:
+            parent = coarse_parents[candidate["parent_id"]]
+            if coarse_crop.shape[0] > parent.shape[0] or coarse_crop.shape[1] > parent.shape[1]:
+                score = -np.inf
+            else:
+                response = cv2.matchTemplate(parent, coarse_crop, cv2.TM_CCOEFF_NORMED)
+                score = float(response.max())
+            ranked.append((score, candidate))
+        ranked.sort(key=lambda item: item[0], reverse=True)
+        refined = []
+        for coarse_score, candidate in ranked[:top_k]:
+            parent = full_parent(candidate["parent_path"])
+            score, x, y, width, height = _best_match(crop, parent)
+            refined.append((score, coarse_score, candidate, x, y, width, height, parent.shape))
+        refined.sort(key=lambda item: item[0], reverse=True)
+        best = refined[0]
+        second_score = refined[1][0] if len(refined) > 1 else -1.0
+        score, coarse_score, candidate, x, y, width, height, parent_shape = best
+        parent_height, parent_width = parent_shape[:2]
+        crop_height, crop_width = crop.shape[:2]
+        return {
+            **row,
+            "parent_id": candidate["parent_id"],
+            "parent_path": candidate["parent_path"],
+            "x": x,
+            "y": y,
+            "width": width,
+            "height": height,
+            "crop_width": crop_width,
+            "crop_height": crop_height,
+            "parent_width": parent_width,
+            "parent_height": parent_height,
+            "coarse_match_confidence": coarse_score,
+            "match_confidence": score,
+            "second_best_confidence": second_score,
+            "match_margin": score - second_score,
+            "method": "template_ncc_all_same_class_parents",
+        }
+
+    crop_records = branch_a[["crop_id", "class_name", "crop_path"]].to_dict("records")
     if workers == 1:
-        matched = [_match_one(record) for record in records]
+        matched = [match_one(record) for record in crop_records]
     else:
         with ThreadPoolExecutor(max_workers=workers) as pool:
-            matched = list(pool.map(_match_one, records))
+            matched = list(pool.map(match_one, crop_records))
     out = pd.DataFrame(matched).sort_values("crop_id").reset_index(drop=True)
-    out["accepted"] = out.match_confidence >= minimum_confidence
+    out["accepted"] = (out.match_confidence >= minimum_confidence) & (
+        out.match_margin >= minimum_margin
+    )
     return out
 
 
@@ -190,4 +243,3 @@ def bbox_iou_pairs(provenance: pd.DataFrame) -> pd.DataFrame:
                     }
                 )
     return pd.DataFrame(records)
-
