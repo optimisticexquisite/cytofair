@@ -132,3 +132,73 @@ Superficial-Intermediate, Parabasal, Koilocytotic, **Metaplastic**, Dyskeratotic
 Accordingly the fixed mapping is Metaplastic = 271 parents and Dyskeratotic = 223
 parents. No numeric target changed and no observed effect informed this correction.
 The original preregistration remains recoverable as Git commit `67e8ded`.
+
+## Amendment 2 — Cx22 model-rescoring extension (2026-08-24, Asia/Kolkata)
+
+This amendment is registered after the completed structural audit of Cx22 but
+before any Cx22 segmentation model is trained or any Cx22 model result is
+computed. The already known parent counts and structural leakage rates motivate
+the experiment but cannot determine a model-score contrast. The earlier
+SIPaKMeD results and the original text above remain unchanged.
+
+### Estimand and datasets
+
+The confirmatory estimand is the effect of evaluation unit on segmentation when
+all 1,320 released Cx22 ROIs (Pair, Multi-Train, and Multi-Test) are pooled and
+repartitioned. This is a stress test of a documented downstream reuse pattern,
+not an audit failure assigned to the Cx22 authors. Their released Multi-Train to
+Multi-Test partition is parent-disjoint and is retained as a descriptive control
+(`OFFICIAL`), with Pair excluded exactly as in the release. It is never pooled
+with the confirmatory contrasts.
+
+RGB ROIs are reconstructed from the named CCEDD sources by the released MATLAB
+generator rule: crop the requested source rectangle, clip at the source boundary,
+resize its longest requested dimension to at most 512 pixels, and paste at the
+top-left of a white 512 by 512 canvas. Released cytoplasm and nucleus instance
+masks must both resolve for every ROI. Materialization is rejected if any ROI or
+mask count differs from 1,320, if any output is not 512 by 512, or if any ROI has
+an empty cytoplasm or nucleus target.
+
+### Tasks, models, and fixed training recipe
+
+The semantic task predicts two non-exclusive binary channels: union of all
+cytoplasm instances and union of all nucleus instances. Its primary endpoint is
+the arithmetic mean of per-image cytoplasm Dice and per-image nucleus Dice.
+Channel-specific Dice and IoU are secondary. The fixed model grid is:
+
+- U-Net with ResNet-34 encoder;
+- U-Net++ with ResNet-34 encoder;
+- DeepLabV3+ with ResNet-50 encoder;
+- FPN with ResNet-34 encoder; and
+- MAnet with ResNet-34 encoder.
+
+The instance task predicts cytoplasm instances. Its primary endpoint is
+per-image mean ground-truth-instance Dice after maximum-weight bipartite matching,
+with unmatched ground-truth instances assigned Dice zero. Detection recall at
+matched Dice at least 0.70 and matched IoU are secondary. The fixed model grid is
+Mask R-CNN ResNet-50-FPN and Mask R-CNN ResNet-50-FPN-v2.
+
+All encoders use ImageNet/COCO initialization where available. Images and masks
+are resized to 256 by 256. Training uses AdamW, learning rate `1e-4`, weight decay
+`1e-4`, 30 epochs, no early stopping or validation-based checkpoint selection,
+and final-epoch evaluation. Semantic batch size is 16; instance batch size is 2.
+Aligned random horizontal/vertical flips and 90-degree rotations are the only
+augmentations. The five confirmatory seeds remain 17, 29, 43, 71, and 101.
+
+### Protocols and inference
+
+P1, P1-prime, P2, and P3 retain their definitions above. P3 uses the already
+registered pHash-and-dHash consensus thresholds of six and groups every connected
+parent component wholly within one partition. Every run saves the exact split
+hash, input-manifest hash, runtime, Git SHA, epoch history, and final predictions'
+aggregate metrics. Interrupted cells resume from an epoch checkpoint without
+changing their seed or allocation; failed attempts remain in the ledger.
+
+For each semantic architecture the paired primary contrasts are P1 minus P2 and
+P1-prime minus P2. Their ten p-values form one Cx22 semantic Benjamini-Hochberg
+family. The corresponding four instance-task contrasts form a separate Cx22
+instance family. The test-selection, effect-size, bootstrap, completeness, and
+ordering rules in the original preregistration apply unchanged. `OFFICIAL` is
+reported as mean plus or minus sample SD over five seeds but is descriptive and
+outside both multiplicity families because it excludes Pair and targets a
+different released sample.
