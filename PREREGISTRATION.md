@@ -202,3 +202,14 @@ ordering rules in the original preregistration apply unchanged. `OFFICIAL` is
 reported as mean plus or minus sample SD over five seeds but is descriptive and
 outside both multiplicity families because it excludes Pair and targets a
 different released sample.
+
+## Amendment 3 — numerical execution detail (2026-08-24, Asia/Kolkata)
+
+Before any Cx22 epoch completed or emitted a metric, server preflight established
+that deterministic full-FP32 execution left the three A6000s predominantly idle
+or made a single U-Net epoch exceed 4.5 minutes. The fixed recipe therefore uses
+CUDA FP16 autocast with dynamic gradient scaling for both segmentation tasks.
+Losses and reported metrics remain accumulated in FP32. This changes no model,
+split, seed, batch size, optimizer, epoch count, checkpoint-selection rule, or
+statistical endpoint. The reason for the change is recorded throughput, not an
+observed segmentation score; no pre-amendment Cx22 checkpoint or result exists.
