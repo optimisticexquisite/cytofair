@@ -125,22 +125,49 @@ def train_instance_segmentation(
     class Cx22InstanceDataset(Dataset):
         def __init__(self, frame: pd.DataFrame, *, train: bool, epoch: int = 0):
             self.frame, self.train, self.epoch = frame, train, epoch
+            self.cached = {
+                "cache_index",
+                "cache_images_path",
+                "cache_instances_path",
+                "cache_instance_start",
+                "cache_instance_count",
+                "cache_image_size",
+            }.issubset(frame.columns)
+            self.cache_images = None
+            self.cache_instances = None
 
         def __len__(self):
             return len(self.frame)
 
         def __getitem__(self, index):
             row = self.frame.iloc[index]
-            with Image.open(row.crop_path) as image:
-                image = vision_functional.pil_to_tensor(image.convert("RGB")).float() / 255
-            with np.load(row.cyto_instances_path) as archive:
-                masks = torch.from_numpy(archive["masks"].astype(np.uint8))
-            image = vision_functional.resize(image, [image_size, image_size], antialias=True)
-            masks = vision_functional.resize(
-                masks,
-                [image_size, image_size],
-                interpolation=InterpolationMode.NEAREST,
-            )
+            if self.cached:
+                if int(row.cache_image_size) != image_size:
+                    raise ValueError(
+                        f"Cache size {row.cache_image_size} does not match run size {image_size}"
+                    )
+                if self.cache_images is None:
+                    self.cache_images = np.load(row.cache_images_path, mmap_mode="r")
+                    self.cache_instances = np.load(row.cache_instances_path, mmap_mode="r")
+                cache_index = int(row.cache_index)
+                start, count = int(row.cache_instance_start), int(row.cache_instance_count)
+                image = torch.from_numpy(
+                    np.array(self.cache_images[cache_index], copy=True)
+                ).permute(2, 0, 1).float() / 255
+                masks = torch.from_numpy(
+                    np.array(self.cache_instances[start : start + count], copy=True)
+                )
+            else:
+                with Image.open(row.crop_path) as image:
+                    image = vision_functional.pil_to_tensor(image.convert("RGB")).float() / 255
+                with np.load(row.cyto_instances_path) as archive:
+                    masks = torch.from_numpy(archive["masks"].astype(np.uint8))
+                image = vision_functional.resize(image, [image_size, image_size], antialias=True)
+                masks = vision_functional.resize(
+                    masks,
+                    [image_size, image_size],
+                    interpolation=InterpolationMode.NEAREST,
+                )
             if self.train:
                 digest = hashlib.sha256(
                     f"{seed}|{self.epoch}|{row.crop_id}".encode()

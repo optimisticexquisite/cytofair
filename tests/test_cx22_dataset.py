@@ -5,7 +5,12 @@ import numpy as np
 import pandas as pd
 from PIL import Image
 
-from cytofair.cx22_dataset import materialize_dataset, read_instance_masks, reconstruct_roi
+from cytofair.cx22_dataset import (
+    build_training_cache,
+    materialize_dataset,
+    read_instance_masks,
+    reconstruct_roi,
+)
 
 
 def _write_nested_masks(path: Path, key: str, masks: list[np.ndarray]) -> None:
@@ -92,3 +97,12 @@ def test_materialize_dataset_writes_complete_manifest(tmp_path: Path):
     assert Path(manifest.iloc[0].crop_path).is_file()
     with np.load(manifest.iloc[0].cyto_instances_path) as archive:
         assert archive["masks"].shape == (1, 512, 512)
+    cached = build_training_cache(
+        manifest, tmp_path / "cache", image_size=32, expected_total=1
+    )
+    images = np.load(cached.iloc[0].cache_images_path, mmap_mode="r")
+    semantic = np.load(cached.iloc[0].cache_semantic_path, mmap_mode="r")
+    instances = np.load(cached.iloc[0].cache_instances_path, mmap_mode="r")
+    assert images.shape == (1, 32, 32, 3)
+    assert semantic.shape == (1, 2, 32, 32)
+    assert instances.shape == (1, 32, 32)

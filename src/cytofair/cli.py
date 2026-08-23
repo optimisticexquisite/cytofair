@@ -11,7 +11,7 @@ from .constants import SIPAKMED_CROP_COUNTS, SIPAKMED_PARENT_COUNTS, SIPAKMED_TO
 from .cric import recover_classifications
 from .cx22 import recover_all as recover_cx22
 from .cx22 import subset_parent_overlap
-from .cx22_dataset import materialize_dataset
+from .cx22_dataset import build_training_cache, materialize_dataset
 from .download import download_manifest
 from .duplicates import (
     attach_p3_groups,
@@ -174,6 +174,15 @@ def _materialize_cx22(args: argparse.Namespace) -> None:
     Path(args.audit).parent.mkdir(parents=True, exist_ok=True)
     Path(args.audit).write_text(json.dumps(audit, indent=2) + "\n")
     print(json.dumps(audit, indent=2))
+
+
+def _cache_cx22(args: argparse.Namespace) -> None:
+    frame = build_training_cache(
+        read_map(args.map), args.cache, image_size=args.image_size
+    )
+    write_map(frame, args.output)
+    marker = json.loads((Path(args.cache) / "cache_manifest.json").read_text())
+    print(json.dumps(marker, indent=2))
 
 
 def _cric(args: argparse.Namespace) -> None:
@@ -483,6 +492,15 @@ def build_parser() -> argparse.ArgumentParser:
     command.add_argument("--audit", default="reports/generated/cx22_materialization.json")
     command.add_argument("--overwrite", action="store_true")
     command.set_defaults(function=_materialize_cx22)
+
+    command = commands.add_parser(
+        "cache-cx22", help="Build contiguous resized arrays for GPU-efficient training"
+    )
+    command.add_argument("map", help="materialized Cx22 model map")
+    command.add_argument("--cache", required=True)
+    command.add_argument("--image-size", type=int, default=256)
+    command.add_argument("--output", default="provenance/cx22_cached_model_map.parquet")
+    command.set_defaults(function=_cache_cx22)
 
     command = commands.add_parser("recover-cric", help="Read CRIC published cell coordinates")
     command.add_argument("classifications")

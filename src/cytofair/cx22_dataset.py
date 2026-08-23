@@ -13,6 +13,7 @@ import pandas as pd
 from PIL import Image
 
 ASSET_SCHEMA_VERSION = 2
+TRAINING_CACHE_VERSION = 1
 
 
 def _matlab_round(value: float) -> int:
@@ -196,3 +197,125 @@ def materialize_dataset(
         )
     version_path.write_text(json.dumps(expected_version, indent=2) + "\n")
     return manifest
+
+
+def build_training_cache(
+    manifest: pd.DataFrame,
+    output_root: str | Path,
+    *,
+    image_size: int = 256,
+    expected_total: int = 1320,
+) -> pd.DataFrame:
+    """Create contiguous uint8 arrays to avoid repeated network-filesystem decoding."""
+    required = {
+        "crop_id",
+        "crop_path",
+        "cyto_mask_path",
+        "nuc_mask_path",
+        "cyto_instances_path",
+        "n_cyto_instances",
+    }
+    missing = sorted(required - set(manifest.columns))
+    if missing:
+        raise ValueError(f"Cx22 cache construction misses manifest columns: {missing}")
+    if len(manifest) != expected_total or not manifest.crop_id.is_unique:
+        raise ValueError(f"Cx22 cache requires {expected_total} unique rows; got {len(manifest)}")
+    output_root = Path(output_root)
+    output_root.mkdir(parents=True, exist_ok=True)
+    final_paths = {
+        "images": output_root / f"images_{image_size}.npy",
+        "semantic": output_root / f"semantic_{image_size}.npy",
+        "instances": output_root / f"instances_{image_size}.npy",
+    }
+    temporary_paths = {
+        key: path.with_name(path.stem + ".tmp.npy") for key, path in final_paths.items()
+    }
+    total_instances = int(manifest.n_cyto_instances.sum())
+    arrays = {
+        "images": np.lib.format.open_memmap(
+            temporary_paths["images"],
+            mode="w+",
+            dtype=np.uint8,
+            shape=(len(manifest), image_size, image_size, 3),
+        ),
+        "semantic": np.lib.format.open_memmap(
+            temporary_paths["semantic"],
+            mode="w+",
+            dtype=np.uint8,
+            shape=(len(manifest), 2, image_size, image_size),
+        ),
+        "instances": np.lib.format.open_memmap(
+            temporary_paths["instances"],
+            mode="w+",
+            dtype=np.uint8,
+            shape=(total_instances, image_size, image_size),
+        ),
+    }
+    rows, instance_offset = [], 0
+    for cache_index, row in enumerate(
+        manifest.sort_values("crop_id").itertuples(index=False)
+    ):
+        with Image.open(row.crop_path) as image:
+            arrays["images"][cache_index] = np.asarray(
+                image.convert("RGB").resize(
+                    (image_size, image_size), Image.Resampling.BILINEAR
+                )
+            )
+        for channel, path in enumerate((row.cyto_mask_path, row.nuc_mask_path)):
+            with Image.open(path) as mask:
+                arrays["semantic"][cache_index, channel] = (
+                    np.asarray(
+                        mask.convert("L").resize(
+                            (image_size, image_size), Image.Resampling.NEAREST
+                        )
+                    )
+                    > 0
+                )
+        with np.load(row.cyto_instances_path) as archive:
+            instances = archive["masks"]
+        count = len(instances)
+        if count != int(row.n_cyto_instances):
+            raise ValueError(f"Instance count changed for {row.crop_id}: {count}")
+        for relative_index, mask in enumerate(instances):
+            arrays["instances"][instance_offset + relative_index] = (
+                np.asarray(
+                    Image.fromarray(mask, mode="L").resize(
+                        (image_size, image_size), Image.Resampling.NEAREST
+                    )
+                )
+                > 0
+            )
+        rows.append(
+            {
+                **row._asdict(),
+                "training_cache_version": TRAINING_CACHE_VERSION,
+                "cache_image_size": image_size,
+                "cache_index": cache_index,
+                "cache_images_path": str(final_paths["images"].resolve()),
+                "cache_semantic_path": str(final_paths["semantic"].resolve()),
+                "cache_instances_path": str(final_paths["instances"].resolve()),
+                "cache_instance_start": instance_offset,
+                "cache_instance_count": count,
+            }
+        )
+        instance_offset += count
+    if instance_offset != total_instances:
+        raise RuntimeError(f"Cx22 cache instance count {instance_offset} != {total_instances}")
+    for array in arrays.values():
+        array.flush()
+    del arrays
+    for key, temporary in temporary_paths.items():
+        temporary.replace(final_paths[key])
+    hashes = {f"cache_{key}_sha256": _sha256(path) for key, path in final_paths.items()}
+    out = pd.DataFrame(rows)
+    for column, value in hashes.items():
+        out[column] = value
+    marker = {
+        "training_cache_version": TRAINING_CACHE_VERSION,
+        "image_size": image_size,
+        "crops": len(out),
+        "cytoplasm_instances": total_instances,
+        **hashes,
+    }
+    (output_root / "cache_manifest.json").write_text(json.dumps(marker, indent=2) + "\n")
+    return out

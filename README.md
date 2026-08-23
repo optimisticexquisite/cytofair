@@ -127,6 +127,10 @@ cytofair audit-duplicates provenance/cx22_model_map.parquet \
   --hashes results/cx22_duplicates/hashes.parquet \
   --pairs results/cx22_duplicates/pairs.csv \
   --output provenance/cx22_model_map_p3.parquet
+
+cytofair cache-cx22 provenance/cx22_model_map_p3.parquet \
+  --cache /path/to/cx22_assets/cache256 \
+  --output provenance/cx22_cached_model_map_p3.parquet
 ```
 
 The detached matrix contains five semantic architectures and two Mask R-CNN
@@ -136,7 +140,7 @@ cell once before failing closed:
 
 ```bash
 nohup python scripts/launch_cx22_segmentation_matrix.py \
-  --map provenance/cx22_model_map_p3.parquet \
+  --map provenance/cx22_cached_model_map_p3.parquet \
   --output results/cx22_segmentation --max-gpus 3 \
   > results/cx22_segmentation/controller.log 2>&1 < /dev/null &
 

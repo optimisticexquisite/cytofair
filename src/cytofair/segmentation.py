@@ -57,6 +57,10 @@ def _manifest_sha256(provenance: pd.DataFrame) -> str:
         "cyto_mask_sha256",
         "nuc_mask_sha256",
         "cyto_instances_sha256",
+        "cache_images_sha256",
+        "cache_semantic_sha256",
+        "cache_instances_sha256",
+        "training_cache_version",
         "p3_group_id",
     ]
     columns = [column for column in columns if column in provenance]
@@ -149,25 +153,51 @@ def train_semantic_segmentation(
     class Cx22SemanticDataset(Dataset):
         def __init__(self, frame: pd.DataFrame, *, train: bool, epoch: int = 0):
             self.frame, self.train, self.epoch = frame, train, epoch
+            self.cached = {
+                "cache_index",
+                "cache_images_path",
+                "cache_semantic_path",
+                "cache_image_size",
+            }.issubset(frame.columns)
+            self.cache_images = None
+            self.cache_semantic = None
 
         def __len__(self):
             return len(self.frame)
 
         def __getitem__(self, index):
             row = self.frame.iloc[index]
-            with Image.open(row.crop_path) as image:
-                image = vision_functional.pil_to_tensor(image.convert("RGB")).float() / 255
-            channels = []
-            for path in (row.cyto_mask_path, row.nuc_mask_path):
-                with Image.open(path) as mask:
-                    channels.append(vision_functional.pil_to_tensor(mask.convert("L"))[0])
-            target = torch.stack(channels).float() / 255
-            image = vision_functional.resize(
-                image, [image_size, image_size], antialias=True
-            )
-            target = vision_functional.resize(
-                target, [image_size, image_size], interpolation=vision_functional.InterpolationMode.NEAREST
-            )
+            if self.cached:
+                if int(row.cache_image_size) != image_size:
+                    raise ValueError(
+                        f"Cache size {row.cache_image_size} does not match run size {image_size}"
+                    )
+                if self.cache_images is None:
+                    self.cache_images = np.load(row.cache_images_path, mmap_mode="r")
+                    self.cache_semantic = np.load(row.cache_semantic_path, mmap_mode="r")
+                cache_index = int(row.cache_index)
+                image = torch.from_numpy(
+                    np.array(self.cache_images[cache_index], copy=True)
+                ).permute(2, 0, 1).float() / 255
+                target = torch.from_numpy(
+                    np.array(self.cache_semantic[cache_index], copy=True)
+                ).float()
+            else:
+                with Image.open(row.crop_path) as image:
+                    image = vision_functional.pil_to_tensor(image.convert("RGB")).float() / 255
+                channels = []
+                for path in (row.cyto_mask_path, row.nuc_mask_path):
+                    with Image.open(path) as mask:
+                        channels.append(vision_functional.pil_to_tensor(mask.convert("L"))[0])
+                target = torch.stack(channels).float() / 255
+                image = vision_functional.resize(
+                    image, [image_size, image_size], antialias=True
+                )
+                target = vision_functional.resize(
+                    target,
+                    [image_size, image_size],
+                    interpolation=vision_functional.InterpolationMode.NEAREST,
+                )
             if self.train:
                 digest = hashlib.sha256(
                     f"{seed}|{self.epoch}|{row.crop_id}".encode()
