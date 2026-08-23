@@ -11,6 +11,7 @@ from .constants import SIPAKMED_CROP_COUNTS, SIPAKMED_PARENT_COUNTS, SIPAKMED_TO
 from .cric import recover_classifications
 from .cx22 import recover_all as recover_cx22
 from .cx22 import subset_parent_overlap
+from .cx22_dataset import materialize_dataset
 from .download import download_manifest
 from .duplicates import (
     attach_p3_groups,
@@ -155,6 +156,26 @@ def _cx22(args: argparse.Namespace) -> None:
     print(overlap.to_string(index=False))
 
 
+def _materialize_cx22(args: argparse.Namespace) -> None:
+    frame = materialize_dataset(
+        read_map(args.map),
+        args.labels,
+        args.assets,
+        overwrite=args.overwrite,
+    )
+    write_map(frame, args.output)
+    audit = {
+        "crops": len(frame),
+        "parents": int(frame.parent_id.nunique()),
+        "cytoplasm_instances": int(frame.n_cyto_instances.sum()),
+        "nucleus_instances": int(frame.n_nuc_instances.sum()),
+        "subsets": {str(key): int(value) for key, value in frame.subset.value_counts().items()},
+    }
+    Path(args.audit).parent.mkdir(parents=True, exist_ok=True)
+    Path(args.audit).write_text(json.dumps(audit, indent=2) + "\n")
+    print(json.dumps(audit, indent=2))
+
+
 def _cric(args: argparse.Namespace) -> None:
     frame = recover_classifications(args.classifications)
     write_map(frame, args.output)
@@ -286,6 +307,58 @@ def _train_classifier(args: argparse.Namespace) -> None:
     print(json.dumps({key: value for key, value in result.items() if key != "history"}, indent=2))
 
 
+def _train_semantic_segmentation(args: argparse.Namespace) -> None:
+    from .segmentation import train_semantic_segmentation
+
+    result = train_semantic_segmentation(
+        read_map(args.map),
+        protocol=args.protocol,
+        architecture=args.architecture,
+        seed=args.seed,
+        output=args.output,
+        epochs=args.epochs,
+        batch_size=args.batch_size,
+        workers=args.workers,
+        learning_rate=args.learning_rate,
+        image_size=args.image_size,
+        pretrained=not args.no_pretrained,
+        repository=args.repository,
+    )
+    print(json.dumps({key: value for key, value in result.items() if key != "history"}, indent=2))
+
+
+def _train_instance_segmentation(args: argparse.Namespace) -> None:
+    from .instance_segmentation import train_instance_segmentation
+
+    result = train_instance_segmentation(
+        read_map(args.map),
+        protocol=args.protocol,
+        architecture=args.architecture,
+        seed=args.seed,
+        output=args.output,
+        epochs=args.epochs,
+        batch_size=args.batch_size,
+        workers=args.workers,
+        learning_rate=args.learning_rate,
+        image_size=args.image_size,
+        pretrained=not args.no_pretrained,
+        repository=args.repository,
+    )
+    print(json.dumps({key: value for key, value in result.items() if key != "history"}, indent=2))
+
+
+def _summarize_segmentation(args: argparse.Namespace) -> None:
+    from .segmentation_results import summarize_segmentation
+
+    frames = summarize_segmentation(args.results)
+    output = Path(args.output)
+    output.mkdir(parents=True, exist_ok=True)
+    for name, frame in frames.items():
+        frame.to_csv(output / f"cx22_segmentation_{name}.csv", index=False)
+    print(frames["summary"].to_string(index=False))
+    print(frames["primary"].to_string(index=False))
+
+
 def _summarize_classification(args: argparse.Namespace) -> None:
     from .results import summarize_classification
 
@@ -400,6 +473,17 @@ def build_parser() -> argparse.ArgumentParser:
     command.add_argument("--validation", default="reports/generated/cx22_validation.csv")
     command.set_defaults(function=_cx22)
 
+    command = commands.add_parser(
+        "materialize-cx22", help="Reconstruct Cx22 RGB ROIs and decode released masks"
+    )
+    command.add_argument("map", help="validated Cx22 provenance map")
+    command.add_argument("--labels", required=True, help="root containing the three Cx22 releases")
+    command.add_argument("--assets", required=True, help="generated RGB/mask asset directory")
+    command.add_argument("--output", default="provenance/cx22_model_map.parquet")
+    command.add_argument("--audit", default="reports/generated/cx22_materialization.json")
+    command.add_argument("--overwrite", action="store_true")
+    command.set_defaults(function=_materialize_cx22)
+
     command = commands.add_parser("recover-cric", help="Read CRIC published cell coordinates")
     command.add_argument("classifications")
     command.add_argument("--output", default="provenance/cric_parent_map.parquet")
@@ -487,6 +571,65 @@ def build_parser() -> argparse.ArgumentParser:
     command.add_argument("--no-pretrained", action="store_true")
     command.add_argument("--repository", default=".")
     command.set_defaults(function=_train_classifier)
+
+    command = commands.add_parser(
+        "train-semantic-segmentation", help="Train one resumable Cx22 semantic run"
+    )
+    command.add_argument("map")
+    command.add_argument(
+        "--protocol", choices=("P1", "P1-prime", "P2", "P3", "OFFICIAL"), required=True
+    )
+    command.add_argument(
+        "--architecture",
+        choices=(
+            "unet_resnet34",
+            "unetplusplus_resnet34",
+            "deeplabv3plus_resnet50",
+            "fpn_resnet34",
+            "manet_resnet34",
+        ),
+        required=True,
+    )
+    command.add_argument("--seed", type=int, required=True)
+    command.add_argument("--output", required=True)
+    command.add_argument("--epochs", type=int, default=30)
+    command.add_argument("--batch-size", type=int, default=16)
+    command.add_argument("--workers", type=int, default=2)
+    command.add_argument("--learning-rate", type=float, default=1e-4)
+    command.add_argument("--image-size", type=int, default=256)
+    command.add_argument("--no-pretrained", action="store_true")
+    command.add_argument("--repository", default=".")
+    command.set_defaults(function=_train_semantic_segmentation)
+
+    command = commands.add_parser(
+        "train-instance-segmentation", help="Train one resumable Cx22 Mask R-CNN run"
+    )
+    command.add_argument("map")
+    command.add_argument(
+        "--protocol", choices=("P1", "P1-prime", "P2", "P3", "OFFICIAL"), required=True
+    )
+    command.add_argument(
+        "--architecture",
+        choices=("maskrcnn_resnet50_fpn", "maskrcnn_resnet50_fpn_v2"),
+        required=True,
+    )
+    command.add_argument("--seed", type=int, required=True)
+    command.add_argument("--output", required=True)
+    command.add_argument("--epochs", type=int, default=30)
+    command.add_argument("--batch-size", type=int, default=2)
+    command.add_argument("--workers", type=int, default=2)
+    command.add_argument("--learning-rate", type=float, default=1e-4)
+    command.add_argument("--image-size", type=int, default=256)
+    command.add_argument("--no-pretrained", action="store_true")
+    command.add_argument("--repository", default=".")
+    command.set_defaults(function=_train_instance_segmentation)
+
+    command = commands.add_parser(
+        "summarize-segmentation", help="Summarize Cx22 segmentation seeds and inference"
+    )
+    command.add_argument("results", nargs="+")
+    command.add_argument("--output", default="results/cx22_segmentation_summary")
+    command.set_defaults(function=_summarize_segmentation)
 
     command = commands.add_parser(
         "summarize-classification", help="Summarize seeds, effects, BH family, and ordering"

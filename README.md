@@ -111,6 +111,42 @@ The setup fails if CUDA 12.8 is unavailable or any split/image dependency differ
 from the recorded versions. Model JSONs include all of those versions so an
 environment mismatch cannot remain implicit.
 
+### Cx22 segmentation extension
+
+The Cx22 model extension is explicitly a pooled-release stress test; the authors'
+parent-disjoint Multi-Train/Multi-Test split is also run as the descriptive
+`OFFICIAL` control. First reconstruct the 512-pixel RGB canvases and decode both
+released label branches, then attach P3 duplicate components:
+
+```bash
+cytofair materialize-cx22 provenance/cx22_parent_map.parquet \
+  --labels /path/to/extracted/cx22 --assets /path/to/cx22_assets \
+  --output provenance/cx22_model_map.parquet
+
+cytofair audit-duplicates provenance/cx22_model_map.parquet \
+  --hashes results/cx22_duplicates/hashes.parquet \
+  --pairs results/cx22_duplicates/pairs.csv \
+  --output provenance/cx22_model_map_p3.parquet
+```
+
+The detached matrix contains five semantic architectures and two Mask R-CNN
+instance baselines under P1/P1-prime/P2/P3/OFFICIAL and five fixed seeds (175
+cells). Every cell checkpoints after each epoch and the launcher retries the same
+cell once before failing closed:
+
+```bash
+nohup python scripts/launch_cx22_segmentation_matrix.py \
+  --map provenance/cx22_model_map_p3.parquet \
+  --output results/cx22_segmentation --max-gpus 3 \
+  > results/cx22_segmentation/controller.log 2>&1 < /dev/null &
+
+python scripts/check_cx22_segmentation.py results/cx22_segmentation
+```
+
+The status report prints controller health, completed/total cells, GPU assignment,
+current epoch, retry count, and exact active/failure log paths. A second invocation
+of the launcher skips valid JSON results and resumes any epoch checkpoints.
+
 ## Data-use note
 
 Cx22/CCEDD and other source datasets may restrict use to non-commercial research and
