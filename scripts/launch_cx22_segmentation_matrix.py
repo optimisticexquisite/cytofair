@@ -272,6 +272,9 @@ def main() -> None:
             state["state"] = "failed"
             update()
             raise RuntimeError(f"Cx22 matrix stopped after failed cell: {failures[0]}")
+        # Refresh epoch counters and controller heartbeat even when no cell has
+        # finished; this is the user's primary detached-run health signal.
+        update()
     state["state"] = "completed"
     state["completed_at_utc"] = datetime.now(UTC).isoformat()
     update()
