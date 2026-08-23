@@ -63,8 +63,8 @@ def test_materialize_dataset_writes_complete_manifest(tmp_path: Path):
     cyto = np.zeros((512, 512), dtype=np.uint8)
     nuc = np.zeros((512, 512), dtype=np.uint8)
     cyto[20:80, 30:90], nuc[40:50, 50:60] = 1, 1
-    _write_nested_masks(labels / "cyto" / "cyto_clumps.mat", "cyto_clumps", [cyto])
-    _write_nested_masks(labels / "nuc" / "nuc_clumps.mat", "nuc_clumps", [nuc])
+    _write_nested_masks(labels / "cyto" / "cyto_ins.mat", "cyto_ins", [cyto])
+    _write_nested_masks(labels / "nuc" / "nuc_ins.mat", "nuc_ins", [nuc])
     parent = tmp_path / "00001.png"
     Image.new("RGB", (100, 80), "pink").save(parent)
     provenance = pd.DataFrame(
@@ -80,7 +80,13 @@ def test_materialize_dataset_writes_complete_manifest(tmp_path: Path):
             "parent_path": [str(parent)],
         }
     )
-    manifest = materialize_dataset(provenance, tmp_path / "labels", tmp_path / "assets", expected_total=1)
+    manifest = materialize_dataset(
+        provenance,
+        tmp_path / "labels",
+        tmp_path / "assets",
+        expected_total=1,
+        expected_instances_per_target=1,
+    )
     assert len(manifest) == 1
     assert manifest.n_cyto_instances.tolist() == [1]
     assert Path(manifest.iloc[0].crop_path).is_file()

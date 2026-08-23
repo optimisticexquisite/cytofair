@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import math
 from pathlib import Path
 
@@ -10,6 +11,8 @@ import h5py
 import numpy as np
 import pandas as pd
 from PIL import Image
+
+ASSET_SCHEMA_VERSION = 2
 
 
 def _matlab_round(value: float) -> int:
@@ -86,6 +89,7 @@ def materialize_dataset(
     output_root: str | Path,
     *,
     expected_total: int = 1320,
+    expected_instances_per_target: int = 7473,
     overwrite: bool = False,
 ) -> pd.DataFrame:
     """Write RGB, semantic masks, and compressed cytoplasm instances for Cx22."""
@@ -113,62 +117,82 @@ def materialize_dataset(
     for directory in directories.values():
         directory.mkdir(parents=True, exist_ok=True)
 
-    label_sets: dict[str, tuple[list[np.ndarray], list[np.ndarray]]] = {}
+    version_path = output_root / "asset_schema.json"
+    expected_version = {"asset_schema_version": ASSET_SCHEMA_VERSION}
+    try:
+        current_version = json.loads(version_path.read_text())
+    except (OSError, ValueError):
+        current_version = None
+    overwrite = overwrite or current_version != expected_version
+
+    rows = []
+    ordered = provenance.sort_values("crop_id").reset_index(drop=True)
     for subset in sorted(provenance.subset.unique()):
         directory = _subset_directory(label_root, str(subset))
-        cyto = read_instance_masks(directory / "cyto" / "cyto_clumps.mat", "cyto_clumps")
-        nuc = read_instance_masks(directory / "nuc" / "nuc_clumps.mat", "nuc_clumps")
-        expected_subset = int((provenance.subset == subset).sum())
+        cyto = read_instance_masks(directory / "cyto" / "cyto_ins.mat", "cyto_ins")
+        nuc = read_instance_masks(directory / "nuc" / "nuc_ins.mat", "nuc_ins")
+        subset_rows = ordered.loc[ordered.subset == subset]
+        expected_subset = len(subset_rows)
         if len(cyto) != expected_subset or len(nuc) != expected_subset:
             raise ValueError(
                 f"{subset} label count mismatch: provenance={expected_subset}, "
                 f"cytoplasm={len(cyto)}, nucleus={len(nuc)}"
             )
-        label_sets[str(subset)] = (cyto, nuc)
-
-    rows = []
-    ordered = provenance.sort_values("crop_id").reset_index(drop=True)
-    for row in ordered.itertuples(index=False):
-        subset = str(row.subset)
-        index = int(str(row.crop_id).rsplit("/", 1)[1])
-        cyto_instances, nuc_instances = (values[index] for values in label_sets[subset])
-        cyto_union = np.any(cyto_instances, axis=0).astype(np.uint8) * 255
-        nuc_union = np.any(nuc_instances, axis=0).astype(np.uint8) * 255
-        if not cyto_union.any() or not nuc_union.any():
-            raise ValueError(f"{row.crop_id} has an empty released target")
-        safe = str(row.crop_id).replace("/", "__")
-        image_path = directories["images"] / f"{safe}.png"
-        cyto_path = directories["cytoplasm"] / f"{safe}.png"
-        nuc_path = directories["nucleus"] / f"{safe}.png"
-        instances_path = directories["instances"] / f"{safe}.npz"
-        targets = (image_path, cyto_path, nuc_path, instances_path)
-        if overwrite or not all(path.is_file() for path in targets):
-            reconstruct_roi(pd.Series(row._asdict())).save(image_path, compress_level=6)
-            Image.fromarray(cyto_union, mode="L").save(cyto_path, compress_level=6)
-            Image.fromarray(nuc_union, mode="L").save(nuc_path, compress_level=6)
-            np.savez_compressed(instances_path, masks=cyto_instances.astype(np.uint8))
-        for path in targets[:3]:
-            with Image.open(path) as image:
-                if image.size != (512, 512):
-                    raise ValueError(f"Materialized Cx22 image has wrong size: {path} {image.size}")
-        rows.append(
-            {
-                **row._asdict(),
-                "crop_path": str(image_path.resolve()),
-                "cyto_mask_path": str(cyto_path.resolve()),
-                "nuc_mask_path": str(nuc_path.resolve()),
-                "cyto_instances_path": str(instances_path.resolve()),
-                "n_cyto_instances": len(cyto_instances),
-                "n_nuc_instances": len(nuc_instances),
-                "image_sha256": _sha256(image_path),
-                "cyto_mask_sha256": _sha256(cyto_path),
-                "nuc_mask_sha256": _sha256(nuc_path),
-                "cyto_instances_sha256": _sha256(instances_path),
-            }
-        )
+        for row in subset_rows.itertuples(index=False):
+            index = int(str(row.crop_id).rsplit("/", 1)[1])
+            cyto_instances, nuc_instances = cyto[index], nuc[index]
+            cyto_union = np.any(cyto_instances, axis=0).astype(np.uint8) * 255
+            nuc_union = np.any(nuc_instances, axis=0).astype(np.uint8) * 255
+            if not cyto_union.any() or not nuc_union.any():
+                raise ValueError(f"{row.crop_id} has an empty released target")
+            safe = str(row.crop_id).replace("/", "__")
+            image_path = directories["images"] / f"{safe}.png"
+            cyto_path = directories["cytoplasm"] / f"{safe}.png"
+            nuc_path = directories["nucleus"] / f"{safe}.png"
+            instances_path = directories["instances"] / f"{safe}.npz"
+            targets = (image_path, cyto_path, nuc_path, instances_path)
+            if overwrite or not all(path.is_file() for path in targets):
+                reconstruct_roi(pd.Series(row._asdict())).save(image_path, compress_level=6)
+                Image.fromarray(cyto_union, mode="L").save(cyto_path, compress_level=6)
+                Image.fromarray(nuc_union, mode="L").save(nuc_path, compress_level=6)
+                np.savez_compressed(instances_path, masks=cyto_instances.astype(np.uint8))
+            for path in targets[:3]:
+                with Image.open(path) as image:
+                    if image.size != (512, 512):
+                        raise ValueError(
+                            f"Materialized Cx22 image has wrong size: {path} {image.size}"
+                        )
+            rows.append(
+                {
+                    **row._asdict(),
+                    "asset_schema_version": ASSET_SCHEMA_VERSION,
+                    "crop_path": str(image_path.resolve()),
+                    "cyto_mask_path": str(cyto_path.resolve()),
+                    "nuc_mask_path": str(nuc_path.resolve()),
+                    "cyto_instances_path": str(instances_path.resolve()),
+                    "n_cyto_instances": len(cyto_instances),
+                    "n_nuc_instances": len(nuc_instances),
+                    "image_sha256": _sha256(image_path),
+                    "cyto_mask_sha256": _sha256(cyto_path),
+                    "nuc_mask_sha256": _sha256(nuc_path),
+                    "cyto_instances_sha256": _sha256(instances_path),
+                }
+            )
+        # Bound peak memory to one release subset rather than all 1,320 ROIs.
+        del cyto, nuc
     manifest = pd.DataFrame(rows)
     if len(manifest) != expected_total or manifest[
         ["crop_path", "cyto_mask_path", "nuc_mask_path", "cyto_instances_path"]
     ].isna().any().any():
         raise RuntimeError("Cx22 materialization failed its final completeness gate")
+    observed_instances = (
+        int(manifest.n_cyto_instances.sum()),
+        int(manifest.n_nuc_instances.sum()),
+    )
+    expected_instances = (expected_instances_per_target, expected_instances_per_target)
+    if observed_instances != expected_instances:
+        raise ValueError(
+            f"Cx22 instance-count gate failed: {observed_instances} != {expected_instances}"
+        )
+    version_path.write_text(json.dumps(expected_version, indent=2) + "\n")
     return manifest
