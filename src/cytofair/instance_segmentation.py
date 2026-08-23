@@ -208,8 +208,10 @@ def train_instance_segmentation(
         return tuple(zip(*batch, strict=True))
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    amp_enabled = device.type == "cuda"
     model = _instance_model(architecture, pretrained, image_size).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate, weight_decay=1e-4)
+    scaler = torch.amp.GradScaler("cuda", enabled=amp_enabled)
     output = Path(output)
     output.parent.mkdir(parents=True, exist_ok=True)
     checkpoint = output.with_suffix(".checkpoint.pt")
@@ -222,6 +224,7 @@ def train_instance_segmentation(
             raise ValueError(f"Refusing incompatible checkpoint {checkpoint}: {observed} != {expected}")
         model.load_state_dict(state["model"])
         optimizer.load_state_dict(state["optimizer"])
+        scaler.load_state_dict(state["scaler"])
         start_epoch, history = int(state["next_epoch"]), list(state["history"])
 
     test_loader = DataLoader(
@@ -252,17 +255,26 @@ def train_instance_segmentation(
                 for target in targets
             ]
             optimizer.zero_grad(set_to_none=True)
-            losses = model(images, targets)
-            loss = sum(losses.values())
-            loss.backward()
-            optimizer.step()
+            with torch.autocast(
+                device_type=device.type, dtype=torch.float16, enabled=amp_enabled
+            ):
+                losses = model(images, targets)
+                loss = sum(losses.values())
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
             train_loss += float(loss.detach()) * len(images)
             train_total += len(images)
         model.eval()
         image_dice, image_iou, all_dice = [], [], []
         with torch.inference_mode():
             for images, targets in test_loader:
-                predictions = model([image.to(device, non_blocking=True) for image in images])
+                with torch.autocast(
+                    device_type=device.type, dtype=torch.float16, enabled=amp_enabled
+                ):
+                    predictions = model(
+                        [image.to(device, non_blocking=True) for image in images]
+                    )
                 prediction = predictions[0]
                 dice, iou = matched_instance_metrics(
                     prediction["masks"][:, 0].cpu(),
@@ -291,6 +303,7 @@ def train_instance_segmentation(
                 "next_epoch": epoch + 1,
                 "model": model.state_dict(),
                 "optimizer": optimizer.state_dict(),
+                "scaler": scaler.state_dict(),
                 "history": history,
             },
             checkpoint,
@@ -312,6 +325,7 @@ def train_instance_segmentation(
         "image_size": image_size,
         "learning_rate": learning_rate,
         "pretrained": pretrained,
+        "mixed_precision": "fp16_dynamic_loss_scaling" if amp_enabled else "disabled",
         "score_threshold": 0.5,
         "match_threshold": 0.70,
         "split_sha256": _split_sha256(split),

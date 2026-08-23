@@ -216,9 +216,11 @@ def train_semantic_segmentation(
             return image, target
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    amp_enabled = device.type == "cuda"
     model = _semantic_model(architecture, pretrained).to(device)
     criterion = nn.BCEWithLogitsLoss()
     optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate, weight_decay=1e-4)
+    scaler = torch.amp.GradScaler("cuda", enabled=amp_enabled)
     output = Path(output)
     output.parent.mkdir(parents=True, exist_ok=True)
     checkpoint = output.with_suffix(".checkpoint.pt")
@@ -231,6 +233,7 @@ def train_semantic_segmentation(
             raise ValueError(f"Refusing incompatible checkpoint {checkpoint}: {observed} != {expected}")
         model.load_state_dict(state["model"])
         optimizer.load_state_dict(state["optimizer"])
+        scaler.load_state_dict(state["scaler"])
         start_epoch, history = int(state["next_epoch"]), list(state["history"])
 
     test_loader = DataLoader(
@@ -256,22 +259,29 @@ def train_semantic_segmentation(
             images = images.to(device, non_blocking=True)
             targets = targets.to(device, non_blocking=True)
             optimizer.zero_grad(set_to_none=True)
-            logits = model(images)
-            bce = criterion(logits, targets)
-            probabilities = logits.sigmoid()
-            intersection = (probabilities * targets).sum(dim=(-2, -1))
-            denominator = probabilities.sum(dim=(-2, -1)) + targets.sum(dim=(-2, -1))
-            soft_dice_loss = 1 - ((2 * intersection + 1) / (denominator + 1)).mean()
-            loss = bce + soft_dice_loss
-            loss.backward()
-            optimizer.step()
+            with torch.autocast(
+                device_type=device.type, dtype=torch.float16, enabled=amp_enabled
+            ):
+                logits = model(images)
+                bce = criterion(logits, targets)
+                probabilities = logits.sigmoid()
+                intersection = (probabilities * targets).sum(dim=(-2, -1))
+                denominator = probabilities.sum(dim=(-2, -1)) + targets.sum(dim=(-2, -1))
+                soft_dice_loss = 1 - ((2 * intersection + 1) / (denominator + 1)).mean()
+                loss = bce + soft_dice_loss
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
             train_loss += float(loss.detach()) * len(targets)
             train_total += len(targets)
         model.eval()
         dice_values, iou_values = [], []
         with torch.inference_mode():
             for images, targets in test_loader:
-                probabilities = model(images.to(device, non_blocking=True)).sigmoid().cpu()
+                with torch.autocast(
+                    device_type=device.type, dtype=torch.float16, enabled=amp_enabled
+                ):
+                    probabilities = model(images.to(device, non_blocking=True)).sigmoid().cpu()
                 dice, iou = binary_channel_metrics(probabilities, targets)
                 dice_values.append(dice)
                 iou_values.append(iou)
@@ -299,6 +309,7 @@ def train_semantic_segmentation(
                 "next_epoch": epoch + 1,
                 "model": model.state_dict(),
                 "optimizer": optimizer.state_dict(),
+                "scaler": scaler.state_dict(),
                 "history": history,
             },
             checkpoint,
@@ -320,6 +331,7 @@ def train_semantic_segmentation(
         "image_size": image_size,
         "learning_rate": learning_rate,
         "pretrained": pretrained,
+        "mixed_precision": "fp16_dynamic_loss_scaling" if amp_enabled else "disabled",
         "split_sha256": _split_sha256(split),
         "input_manifest_sha256": _manifest_sha256(provenance),
         "git_sha": _git_sha(repository),
