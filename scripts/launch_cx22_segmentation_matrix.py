@@ -220,6 +220,7 @@ def main() -> None:
             gpu = next(index for index in gpus if index not in running)
             environment = os.environ.copy()
             environment["CUDA_VISIBLE_DEVICES"] = str(gpu)
+            environment["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
             log_handle = log.open("a")
             process = subprocess.Popen(
                 command,

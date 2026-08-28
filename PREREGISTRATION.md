@@ -232,3 +232,10 @@ epoch checkpoint is written. Failed logs and the rejected MAnet checkpoint are
 retained in the failure ledger and excluded from analysis. This amendment is
 motivated solely by the recorded numerical exception, not by selection among
 completed MAnet scores, because none exists.
+
+Before the corrected FP32 MAnet run completed an epoch, its startup warnings
+identified CUDA matrix multiplications requiring `CUBLAS_WORKSPACE_CONFIG` for
+the already requested deterministic behavior. The controller therefore exports
+the documented `:4096:8` workspace configuration to all remaining child cells.
+No MAnet or instance-model epoch or result existed when this execution setting
+was frozen.
