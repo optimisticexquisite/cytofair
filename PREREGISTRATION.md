@@ -213,3 +213,22 @@ Losses and reported metrics remain accumulated in FP32. This changes no model,
 split, seed, batch size, optimizer, epoch count, checkpoint-selection rule, or
 statistical endpoint. The reason for the change is recorded throughput, not an
 observed segmentation score; no pre-amendment Cx22 checkpoint or result exists.
+
+## Amendment 4 — MAnet numerical-stability correction (2026-08-28, Asia/Kolkata)
+
+The first MAnet cell (`P1`, seed 17) produced a non-finite training loss under
+FP16 autocast at epochs 23 and 24 on its two permitted attempts. The matrix
+therefore failed closed with 100 of 175 cells complete: all 25 cells for each of
+U-Net, U-Net++, DeepLabV3+, and FPN, and no completed MAnet or instance-model
+cell. Before any MAnet result exists, this amendment specifies full-FP32
+execution for every MAnet protocol and seed. MAnet restarts from its fixed seed
+and initialization rather than selecting a pre-divergence checkpoint. Other
+semantic architectures and both instance architectures retain the registered
+FP16 autocast recipe. The training data, splits, seeds, optimizer, learning
+rate, batch size, epoch count, metrics, and analysis families are unchanged.
+
+As a general execution safeguard, a non-finite epoch is rejected before an
+epoch checkpoint is written. Failed logs and the rejected MAnet checkpoint are
+retained in the failure ledger and excluded from analysis. This amendment is
+motivated solely by the recorded numerical exception, not by selection among
+completed MAnet scores, because none exists.

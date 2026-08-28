@@ -3,7 +3,17 @@ import pandas as pd
 import pytest
 
 from cytofair.instance_segmentation import matched_instance_metrics
-from cytofair.segmentation import binary_channel_metrics, segmentation_split
+from cytofair.segmentation import (
+    binary_channel_metrics,
+    segmentation_split,
+    semantic_amp_enabled,
+)
+
+
+def test_manet_uses_fp32_while_other_cuda_semantic_models_use_amp():
+    assert not semantic_amp_enabled("cuda", "manet_resnet34")
+    assert semantic_amp_enabled("cuda", "unet_resnet34")
+    assert not semantic_amp_enabled("cpu", "unet_resnet34")
 
 
 def test_official_cx22_split_is_parent_disjoint_and_excludes_pair():

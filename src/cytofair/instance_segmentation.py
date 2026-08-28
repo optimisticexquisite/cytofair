@@ -293,6 +293,8 @@ def train_instance_segmentation(
         }
         history.append(epoch_record)
         print(json.dumps({"event": "epoch", **epoch_record}), flush=True)
+        if not np.isfinite(epoch_record["train_loss"]):
+            raise FloatingPointError("Non-finite instance segmentation loss")
         _atomic_torch_save(
             torch,
             {
@@ -308,9 +310,6 @@ def train_instance_segmentation(
             },
             checkpoint,
         )
-        if not np.isfinite(epoch_record["train_loss"]):
-            raise FloatingPointError("Non-finite instance segmentation loss")
-
     result = {
         "dataset": "Cx22-pooled" if protocol != "OFFICIAL" else "Cx22-official-Multi",
         "task": "instance_segmentation",

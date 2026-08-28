@@ -26,6 +26,11 @@ SEMANTIC_ARCHITECTURES = {
 }
 
 
+def semantic_amp_enabled(device_type: str, architecture: str) -> bool:
+    """Use AMP except for MAnet, whose attention matmuls overflow in FP16."""
+    return device_type == "cuda" and architecture != "manet_resnet34"
+
+
 def segmentation_split(provenance: pd.DataFrame, protocol: str, seed: int) -> pd.DataFrame:
     if protocol != "OFFICIAL":
         return classification_split(provenance, protocol, seed)
@@ -216,7 +221,7 @@ def train_semantic_segmentation(
             return image, target
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    amp_enabled = device.type == "cuda"
+    amp_enabled = semantic_amp_enabled(device.type, architecture)
     model = _semantic_model(architecture, pretrained).to(device)
     criterion = nn.BCEWithLogitsLoss()
     optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate, weight_decay=1e-4)
@@ -299,6 +304,8 @@ def train_semantic_segmentation(
         }
         history.append(epoch_record)
         print(json.dumps({"event": "epoch", **epoch_record}), flush=True)
+        if not np.isfinite(epoch_record["train_loss"]):
+            raise FloatingPointError("Non-finite semantic segmentation loss")
         _atomic_torch_save(
             torch,
             {
@@ -314,9 +321,6 @@ def train_semantic_segmentation(
             },
             checkpoint,
         )
-        if not np.isfinite(epoch_record["train_loss"]):
-            raise FloatingPointError("Non-finite semantic segmentation loss")
-
     result = {
         "dataset": "Cx22-pooled" if protocol != "OFFICIAL" else "Cx22-official-Multi",
         "task": "semantic_segmentation",
