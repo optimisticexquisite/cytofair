@@ -239,3 +239,26 @@ the already requested deterministic behavior. The controller therefore exports
 the documented `:4096:8` workspace configuration to all remaining child cells.
 No MAnet or instance-model epoch or result existed when this execution setting
 was frozen.
+
+## Amendment 5 — result-invariant instance runtime correction (2026-09-06, Asia/Kolkata)
+
+After all 125 semantic cells and 17 of 50 cells for the first instance
+architecture completed, runtime telemetry localized severe under-utilization to
+three implementation costs: the full test set was evaluated after every epoch,
+binary full-resolution matching was performed on CPU after copying predictions
+off the GPU, and a large optimizer checkpoint was rewritten to the network home
+after every epoch. This amendment is based on runtime and utilization, not on
+choosing among scores.
+
+The registered instance endpoint has always been final-epoch evaluation with no
+validation-based checkpoint selection. Remaining instance cells therefore omit
+test inference at epochs 1--29 and retain the identical complete evaluation at
+epoch 30. Binary mask intersections are computed on GPU before the small Dice
+matrix is transferred to CPU for the identical Hungarian assignment; because
+the operands are thresholded zeros and ones and sums are at most 65,536, these
+counts are represented exactly in FP32. Recovery checkpoints are written every
+five completed epochs and at epoch 30 rather than after every epoch. A restart
+repeats at most four deterministically seeded epochs. None of these changes
+alters training batches, augmentation, initialization, optimizer updates,
+weights, splits, seeds, epoch count, prediction threshold, matching, or final
+metrics. Previously completed result files remain unchanged and are reused.

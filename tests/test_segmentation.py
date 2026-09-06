@@ -2,7 +2,11 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from cytofair.instance_segmentation import matched_instance_metrics
+from cytofair.instance_segmentation import (
+    _should_checkpoint_epoch,
+    _should_evaluate_epoch,
+    matched_instance_metrics,
+)
 from cytofair.segmentation import (
     binary_channel_metrics,
     segmentation_split,
@@ -60,3 +64,11 @@ def test_matched_instance_metrics_assign_zero_to_unmatched_target():
     dice, iou = matched_instance_metrics(predictions, torch.tensor([0.9]), targets)
     assert sorted(dice.tolist()) == [0.0, 1.0]
     assert sorted(iou.tolist()) == [0.0, 1.0]
+
+
+def test_instance_runtime_schedule_preserves_final_evaluation_and_recovery_points():
+    assert [_should_evaluate_epoch(epoch, 30) for epoch in range(30)].count(True) == 1
+    assert _should_evaluate_epoch(29, 30)
+    assert [
+        epoch + 1 for epoch in range(30) if _should_checkpoint_epoch(epoch, 30)
+    ] == [5, 10, 15, 20, 25, 30]

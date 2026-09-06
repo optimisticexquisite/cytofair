@@ -19,6 +19,18 @@ from .probe import _git_sha, _runtime_metadata
 from .segmentation import _atomic_torch_save, _manifest_sha256, _split_sha256, segmentation_split
 
 INSTANCE_ARCHITECTURES = ("maskrcnn_resnet50_fpn", "maskrcnn_resnet50_fpn_v2")
+INSTANCE_CHECKPOINT_INTERVAL = 5
+
+
+def _should_evaluate_epoch(epoch: int, epochs: int) -> bool:
+    """The registered endpoint is final-epoch evaluation only."""
+    return epoch + 1 == epochs
+
+
+def _should_checkpoint_epoch(epoch: int, epochs: int) -> bool:
+    """Bound NFS writes while retaining deterministic five-epoch recovery points."""
+    completed = epoch + 1
+    return completed == epochs or completed % INSTANCE_CHECKPOINT_INTERVAL == 0
 
 
 def matched_instance_metrics(prediction_masks, scores, target_masks, score_threshold: float = 0.5):
@@ -265,51 +277,55 @@ def train_instance_segmentation(
             scaler.update()
             train_loss += float(loss.detach()) * len(images)
             train_total += len(images)
-        model.eval()
-        image_dice, image_iou, all_dice = [], [], []
-        with torch.inference_mode():
-            for images, targets in test_loader:
-                with torch.autocast(
-                    device_type=device.type, dtype=torch.float16, enabled=amp_enabled
-                ):
-                    predictions = model(
-                        [image.to(device, non_blocking=True) for image in images]
-                    )
-                prediction = predictions[0]
-                dice, iou = matched_instance_metrics(
-                    prediction["masks"][:, 0].cpu(),
-                    prediction["scores"].cpu(),
-                    targets[0]["masks"],
-                )
-                image_dice.append(float(dice.mean()))
-                image_iou.append(float(iou.mean()))
-                all_dice.extend(dice.tolist())
         epoch_record = {
             "epoch": epoch + 1,
             "train_loss": train_loss / train_total,
-            "instance_dice": float(np.mean(image_dice)),
-            "instance_iou": float(np.mean(image_iou)),
-            "recall70": float(np.mean(np.asarray(all_dice) >= 0.70)),
         }
+        if _should_evaluate_epoch(epoch, epochs):
+            model.eval()
+            image_dice, image_iou, all_dice = [], [], []
+            with torch.inference_mode():
+                for images, targets in test_loader:
+                    with torch.autocast(
+                        device_type=device.type, dtype=torch.float16, enabled=amp_enabled
+                    ):
+                        predictions = model(
+                            [image.to(device, non_blocking=True) for image in images]
+                        )
+                    prediction = predictions[0]
+                    dice, iou = matched_instance_metrics(
+                        prediction["masks"][:, 0],
+                        prediction["scores"],
+                        targets[0]["masks"].to(device, non_blocking=True),
+                    )
+                    image_dice.append(float(dice.mean()))
+                    image_iou.append(float(iou.mean()))
+                    all_dice.extend(dice.tolist())
+            epoch_record.update(
+                instance_dice=float(np.mean(image_dice)),
+                instance_iou=float(np.mean(image_iou)),
+                recall70=float(np.mean(np.asarray(all_dice) >= 0.70)),
+            )
         history.append(epoch_record)
         print(json.dumps({"event": "epoch", **epoch_record}), flush=True)
         if not np.isfinite(epoch_record["train_loss"]):
             raise FloatingPointError("Non-finite instance segmentation loss")
-        _atomic_torch_save(
-            torch,
-            {
-                "protocol": protocol,
-                "architecture": architecture,
-                "seed": seed,
-                "manifest": _manifest_sha256(provenance),
-                "next_epoch": epoch + 1,
-                "model": model.state_dict(),
-                "optimizer": optimizer.state_dict(),
-                "scaler": scaler.state_dict(),
-                "history": history,
-            },
-            checkpoint,
-        )
+        if _should_checkpoint_epoch(epoch, epochs):
+            _atomic_torch_save(
+                torch,
+                {
+                    "protocol": protocol,
+                    "architecture": architecture,
+                    "seed": seed,
+                    "manifest": _manifest_sha256(provenance),
+                    "next_epoch": epoch + 1,
+                    "model": model.state_dict(),
+                    "optimizer": optimizer.state_dict(),
+                    "scaler": scaler.state_dict(),
+                    "history": history,
+                },
+                checkpoint,
+            )
     result = {
         "dataset": "Cx22-pooled" if protocol != "OFFICIAL" else "Cx22-official-Multi",
         "task": "instance_segmentation",
@@ -327,6 +343,8 @@ def train_instance_segmentation(
         "mixed_precision": "fp16_dynamic_loss_scaling" if amp_enabled else "disabled",
         "score_threshold": 0.5,
         "match_threshold": 0.70,
+        "evaluation_schedule": "final_epoch_only",
+        "checkpoint_interval_epochs": INSTANCE_CHECKPOINT_INTERVAL,
         "split_sha256": _split_sha256(split),
         "input_manifest_sha256": _manifest_sha256(provenance),
         "git_sha": _git_sha(repository),
