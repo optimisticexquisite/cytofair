@@ -262,3 +262,9 @@ repeats at most four deterministically seeded epochs. None of these changes
 alters training batches, augmentation, initialization, optimizer updates,
 weights, splits, seeds, epoch count, prediction threshold, matching, or final
 metrics. Previously completed result files remain unchanged and are reused.
+
+Checkpoint serialization is staged on the node-local temporary filesystem and
+then copied as one completed file to a temporary NFS destination before atomic
+replacement. This preserves the same checkpoint payload and failure semantics
+while avoiding tens of thousands of small serialization writes against the
+shared network filesystem. The local staging file is always removed.

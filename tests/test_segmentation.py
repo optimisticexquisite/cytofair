@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 import pytest
@@ -8,10 +10,24 @@ from cytofair.instance_segmentation import (
     matched_instance_metrics,
 )
 from cytofair.segmentation import (
+    _atomic_torch_save,
     binary_channel_metrics,
     segmentation_split,
     semantic_amp_enabled,
 )
+
+
+def test_atomic_torch_save_stages_locally_and_replaces_destination(tmp_path: Path):
+    class FakeTorch:
+        @staticmethod
+        def save(payload, path):
+            Path(path).write_bytes(payload["contents"])
+
+    output = tmp_path / "checkpoint.pt"
+    output.write_bytes(b"old")
+    _atomic_torch_save(FakeTorch, {"contents": b"new"}, output)
+    assert output.read_bytes() == b"new"
+    assert not output.with_name(output.name + ".tmp").exists()
 
 
 def test_manet_uses_fp32_while_other_cuda_semantic_models_use_amp():

@@ -6,6 +6,8 @@ import hashlib
 import json
 import os
 import random
+import shutil
+import tempfile
 import time
 from datetime import UTC, datetime
 from pathlib import Path
@@ -104,9 +106,18 @@ def binary_channel_metrics(probabilities, targets, threshold: float = 0.5):
 
 
 def _atomic_torch_save(torch, payload: dict, path: Path) -> None:
+    descriptor, local_name = tempfile.mkstemp(
+        prefix=f"cytofair_{path.stem}_", suffix=".pt", dir="/tmp"
+    )
+    os.close(descriptor)
+    local = Path(local_name)
     temporary = path.with_name(path.name + ".tmp")
-    torch.save(payload, temporary)
-    temporary.replace(path)
+    try:
+        torch.save(payload, local)
+        shutil.copyfile(local, temporary)
+        temporary.replace(path)
+    finally:
+        local.unlink(missing_ok=True)
 
 
 def train_semantic_segmentation(
