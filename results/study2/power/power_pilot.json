@@ -1,0 +1,107 @@
+{
+  "pilot": {
+    "mu": 96.837448559671,
+    "pilot_effect": 1.37037037037035,
+    "pilot_effect_se": 0.377815959551379,
+    "pilot_effect_df": 9.07216006799848,
+    "pilot_effect_p": 0.00543809385885533,
+    "sd_int": 0.440561578790372,
+    "sd_slope": 0.357479220874861,
+    "rho": 0,
+    "pilot_rho": -0.999999999734369,
+    "sd_seed": 0,
+    "sd_split_p1": 0.307211479340074,
+    "sd_split_p2": 0.593359225540536,
+    "sd_resid": 0.694506778081894,
+    "pilot_singular_homoscedastic": true,
+    "pilot_singular_heteroscedastic": true,
+    "n_pilot_rows": 60
+  },
+  "homoscedastic_components": [
+    {
+      "grp": "split",
+      "var1": "(Intercept)",
+      "vcov": 0.223228998204235,
+      "sdcor": 0.472471161240806
+    },
+    {
+      "grp": "architecture",
+      "var1": "(Intercept)",
+      "vcov": 0.194090570732696,
+      "sdcor": 0.440557114041638
+    },
+    {
+      "grp": "architecture",
+      "var1": "x",
+      "vcov": 0.1277835277956,
+      "sdcor": 0.357468219280539
+    },
+    {
+      "grp": "architecture",
+      "var1": "(Intercept)",
+      "var2": "x",
+      "vcov": -0.157485167047837,
+      "sdcor": -1
+    },
+    {
+      "grp": "seed",
+      "var1": "(Intercept)",
+      "vcov": 1.06464656623919e-10,
+      "sdcor": 1.03181711860154e-05
+    },
+    {
+      "grp": "Residual",
+      "vcov": 0.482340680661526,
+      "sdcor": 0.694507509434942
+    }
+  ],
+  "heteroscedastic_components": [
+    {
+      "grp": "split",
+      "var1": "is_p2",
+      "vcov": 0.352075170534065,
+      "sdcor": 0.593359225540536
+    },
+    {
+      "grp": "split.1",
+      "var1": "is_p1",
+      "vcov": 0.0943788930383168,
+      "sdcor": 0.307211479340074
+    },
+    {
+      "grp": "architecture",
+      "var1": "(Intercept)",
+      "vcov": 0.194094504706266,
+      "sdcor": 0.440561578790372
+    },
+    {
+      "grp": "architecture",
+      "var1": "x",
+      "vcov": 0.127791393357297,
+      "sdcor": 0.357479220874861
+    },
+    {
+      "grp": "architecture",
+      "var1": "(Intercept)",
+      "var2": "x",
+      "vcov": -0.157491609891546,
+      "sdcor": -0.999999999734369
+    },
+    {
+      "grp": "seed",
+      "var1": "(Intercept)",
+      "vcov": 0,
+      "sdcor": 0
+    },
+    {
+      "grp": "Residual",
+      "vcov": 0.482339664801694,
+      "sdcor": 0.694506778081894
+    }
+  ],
+  "nsim": 1000,
+  "formula": "accuracy ~ x + (1 + x | architecture) + (1 | seed) + (1 | split)",
+  "r_version": "R version 4.4.3 (2025-02-28)",
+  "lme4_version": "2.0.6",
+  "lmerTest_version": "3.2.1"
+}
