@@ -532,6 +532,12 @@ def _build_transplants(args: argparse.Namespace) -> None:
     print(json.dumps(manifest, indent=2))
 
 
+def _risk_report(args: argparse.Namespace) -> None:
+    from .risk import structural_risk
+
+    print(json.dumps(structural_risk(read_map(args.map), test_fraction=args.test_fraction), indent=2))
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="cytofair")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -591,6 +597,13 @@ def build_parser() -> argparse.ArgumentParser:
     command.add_argument("--output", required=True)
     command.add_argument("--name", required=True)
     command.set_defaults(function=_build_transplants)
+
+    command = commands.add_parser(
+        "risk-report", help="Structural leakage-risk ingredients of any crop-to-parent table"
+    )
+    command.add_argument("map", help="table with crop_id, parent_id, class_name (parquet/csv/tsv)")
+    command.add_argument("--test-fraction", type=float, default=0.2)
+    command.set_defaults(function=_risk_report)
 
     command = commands.add_parser("download", help="Download checksum-declared raw sources")
     command.add_argument("--manifest", default="data_sources.json")
