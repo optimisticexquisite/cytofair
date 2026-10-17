@@ -1,0 +1,302 @@
+\documentclass[11pt]{article}
+
+% Text extraction: map ligatures to letters and use T1 encoding under pdfLaTeX.
+\usepackage{iftex}
+\ifPDFTeX
+  \input{glyphtounicode}
+  \pdfgentounicode=1
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\fi
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+
+\newcommand{\meanpm}[2]{#1\,$\pm$\,#2}
+\newcommand{\protocol}[1]{\textsf{#1}}
+\input{generated/numbers.tex}
+
+\title{Do We Train on Test Cells?\\[2pt]
+\large A Preregistered Audit of Hierarchical Leakage in Cervical Cytology Benchmarks}
+\author{Snehasish Ghosh\textsuperscript{1}, Soham Mitra\textsuperscript{2}, Nibaran Das\textsuperscript{2}\\[4pt]
+\small \textsuperscript{1}Indian Institute of Science, Bengaluru, India\quad
+\textsuperscript{2}Jadavpur University, Kolkata, India}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\input{sections/abstract.tex}
+\end{abstract}
+
+\section{Introduction}
+
+Public cervical cytology datasets are usually released as cell crops, and most of those
+crops are cut from a much smaller number of microscope fields or slide images. When a
+benchmark is split at the crop level, crops from one field can land on both sides of
+the train--test boundary. File-level disjointness then looks like independence while the
+test set shares stain, illumination, focus, background, and sometimes literal pixels
+with the training set.
+
+This paper separates three claims that are easy to conflate:
+\emph{structural non-independence} (test observations share a parent with training
+observations), \emph{shortcut availability} (the shared parent leaves a learnable
+fingerprint), and \emph{consequence} (classifiers score higher because they use it).
+Our first study (Study~1) established the first two for four public datasets: random
+crop splitting placed a training parent behind 92.6\% of SIPaKMeD and 99.97\% of CRIC test
+cells, more than half of SIPaKMeD test crops shared source pixels with a training crop,
+and a 424-way parent probe reached 109 times chance (79 times with the cell inpainted
+away), while the one-cell-per-image Herlev control stayed at exactly zero. It did not
+establish the third. All six architectures scored higher under crop-level than
+parent-level splitting, by 0.72--2.25 percentage points, yet none of the six
+per-architecture tests survived Benjamini--Hochberg correction.
+
+That design had four weaknesses, and this paper is a second, separately preregistered
+study (Study~2) built to remove them:
+\begin{enumerate}
+\item \textbf{Specification.} One question was asked six times. We replace the six tests
+  with a single mixed-effects test of the protocol effect, sized by simulation from the
+  Study~1 pilot (twelve architectures, twenty new seeds; Section~\ref{sec:h1}).
+\item \textbf{Availability versus use.} We test whether classifiers \emph{use} acquisition
+  context with counterfactual background transplants (Section~\ref{sec:transplant}) and
+  whether the inflation tracks the fingerprint when an adversary suppresses it
+  (Section~\ref{sec:grl}).
+\item \textbf{Leakage versus diversity.} At equal crop counts, crop-level training sets
+  contain about 18\% more distinct parents than parent-level ones, so the protocol
+  contrast also changes training diversity. A leakage-by-diversity factorial over one
+  common test set separates the two (Section~\ref{sec:factorial}).
+\item \textbf{One rescored benchmark.} We rescore CRIC, whose cells are drawn from 400
+  multi-class slide images (Section~\ref{sec:cric}).
+\end{enumerate}
+Every Study~2 split, model, seed, endpoint, and test was committed before the first
+Study~2 model was trained. All results are reported, including any that do not support
+our hypotheses.
+
+\section{Related work}
+
+\paragraph{Leakage and duplicates.} Kapoor and Narayanan catalogue leakage as a cause of
+irreproducible machine-learning science across fields~\citep{kapoor2023leakage}. Barz and
+Denzler showed that near-duplicates of CIFAR test images inflate reported accuracy and
+released a purged test set~\citep{barz2020cifair}; Laroca et al.\ found the same for
+license plates~\citep{laroca2023lpr}. In medical imaging, patient identity is recoverable
+from chest radiographs~\citep{packhauser2022reidentification}, so image-level splits of
+multi-image patients can share identity across the boundary. Our setting is a hierarchy
+rather than duplication: sibling crops are different cells from one acquisition unit.
+
+\paragraph{Shortcut learning.} Networks often solve a task through cues that are
+predictive in the training distribution but unrelated to the intended concept
+\citep{geirhos2020shortcut}. Medical examples include hospital and scanner signatures in
+pneumonia detection~\citep{zech2018pneumonia}, dataset-source artifacts in COVID-19
+radiograph models~\citep{degrave2021covid}, and models that predict dietary habits from
+knee radiographs~\citep{hill2024shortcutting}; see also the methodological review of
+Varoquaux and Cheplygina~\citep{varoquaux2022failures}. Xiao et al.\ measured background
+reliance by recombining ImageNet foregrounds with backgrounds from other
+classes~\citep{xiao2021noise}; our transplant arm adapts that design to acquisition
+context in cytology.
+
+\paragraph{Removing nuisance information.} Gradient reversal trains a representation
+that is uninformative about a nuisance variable by adversarially training a nuisance
+predictor~\citep{ganin2015backprop,ganin2016dann}. We use it as an intervention on the
+parent fingerprint rather than for domain adaptation.
+
+\paragraph{Variance and inference in benchmarks.} Benchmark comparisons inherit
+variance from data splits and initialization~\citep{bouthillier2021variance}. Crossed
+mixed-effects models with maximal random-effects structure~\citep{barr2013maximal,bates2015lme4}
+and Satterthwaite or Kenward--Roger degrees of freedom~\citep{satterthwaite1946,kenward1997small,kuznetsova2017lmertest}
+are the standard way to generalise a fixed effect over both items and conditions;
+simulation-based power analysis handles their non-closed-form power~\citep{green2016simr}.
+
+\section{Datasets and provenance}
+\label{sec:data}
+
+\input{generated/table_datasets.tex}
+
+Table~\ref{tab:datasets} lists the four audited datasets and their independent units.
+SIPaKMeD crops come from cluster fields~\citep{plissiti2018sipakmed}; Cx22 regions come
+from CCEDD source images~\citep{liu2022cx22}; CRIC cells come from 400 conventional Pap
+smear images~\citep{rezende2021cric}; Herlev releases one cell per image and serves as the
+negative control~\citep{jantzen2005pap}. For SIPaKMeD, two independent recovery branches
+(filename parsing, and template matching of each crop against every same-class field)
+agree on all 4,049 crops, and every recovered box lies inside its field. Raw images are
+never redistributed; the released artifacts are identifiers, coordinates, hashes, and
+split assignments.
+
+\section{Structural leakage and the parent fingerprint}
+\label{sec:structure}
+
+For a parent with $k$ crops allocated independently with test fraction $q$, the probability
+that it straddles the split is $1-(1-q)^k-q^k$, a test crop has a training sibling with
+probability $1-q^{k-1}$, and it has $(1-q)(k-1)$ training siblings on average. Averaging
+these closed forms over the recovered parents predicts the structural leakage of a
+random crop split before any split is drawn (Table~\ref{tab:structure}); the observed
+values agree within Monte Carlo error. The same closed forms give the
+\emph{training-diversity ratio} between crop-level and parent-level splits of equal size,
+$\sum_j\{1-q^{k_j}\}/\{(1-q)m\}$ for $m$ parents, which is 1.18 for SIPaKMeD and 1.25 for
+CRIC. The \texttt{cytofair risk-report} command computes all of these from any
+crop-to-parent table.
+
+\input{generated/table_structure.tex}
+
+The fingerprint is learnable. A ResNet-18 trained to identify 424 SIPaKMeD fields from
+two crops each recognised held-out sibling crops at 25.7\% accuracy (chance 0.24\%), still
+reached 18.7\% from inpainted, cell-removed backgrounds, and fell to chance under shuffled
+labels (Study~1). In SIPaKMeD every field belongs to one class, so recognising the field
+implies the label. In CRIC, slide identity explains 1.23 of the 1.82 bits of class
+entropy (68\%).
+
+\section{Study 2 design}
+\label{sec:design}
+
+\subsection{Governance}
+
+Study~2 was registered as an amendment to the original plan
+(\texttt{PREREGISTRATION\_STUDY2.md}, commit \texttt{\RegistrationCommit},
+\RegistrationTime). Before registration, every split, design table, transplant plan, and
+input cache was generated and hashed, and one-epoch smoke tests were run only on
+crop-level splits, so no protocol contrast could be observed. Study~1 runs serve only as
+pilot estimates; Study~2 seeds are disjoint from Study~1 seeds. While validating the
+analysis code we fitted the registered model to the Study~1 runs; that post hoc reanalysis
+is reported in Appendix~\ref{app:pilot} and is not evidence for Study~2.
+
+\subsection{Common training recipe}
+
+Every run fine-tunes an ImageNet-initialised backbone with a new linear head: AdamW at
+$10^{-4}$ with weight decay $10^{-4}$, batch 64, 20 epochs, final-epoch evaluation, no
+validation split, early stopping, or checkpoint selection; random resized crops (scale
+0.8--1.0) with horizontal and vertical flips. Twelve backbones span classic and modern
+designs: ResNet-18 and -50~\citep{he2016resnet}, DenseNet-121~\citep{huang2017densenet},
+MobileNet-V2~\citep{sandler2018mobilenetv2}, EfficientNet-B0~\citep{tan2019efficientnet},
+ViT-B/16~\citep{dosovitskiy2021vit}, ConvNeXt-T~\citep{liu2022convnext},
+Swin-T~\citep{liu2021swin}, RegNetY-1.6GF~\citep{radosavovic2020regnet},
+EfficientNetV2-S~\citep{tan2021efficientnetv2}, MaxViT-T~\citep{tu2022maxvit}, and the
+self-supervised DINOv2 ViT-S/14~\citep{oquab2024dinov2}. Runs are deterministic (two
+identical runs gave bitwise-identical logits). Each run keeps its per-crop test logits, its
+final weights, and penultimate features of a fixed set of probe crops, so confusion
+matrices and post hoc analyses need no retraining.
+
+\subsection{H1: the protocol effect, tested once}
+\label{sec:h1}
+
+Twelve architectures are trained on P1 (stratified crop-level 80:20), P2 (parent-disjoint),
+and P3 (parent-disjoint after merging near-duplicate-linked parents) for twenty new seeds:
+720 runs. P1-prime, the size-matched control, is byte-identical to P1 for every seed because
+P2 always has exactly 810 test crops. The primary endpoint is test accuracy, analysed with
+\begin{equation}
+\text{acc} \sim x + (1 + x \mid \text{architecture}) + (1 \mid \text{seed}) + (1 \mid \text{split}),
+\label{eq:h1}
+\end{equation}
+where $x=\pm\tfrac12$ codes P1 versus P2, so the fixed effect is the P1--P2 difference
+averaged over architectures, and \emph{split} is the seed-by-protocol partition shared by
+all twelve architectures. Omitting it would count twelve evaluations of one test set as
+twelve independent test sets. We fit by REML with lme4~\citep{bates2015lme4} and test with
+Satterthwaite degrees of freedom~\citep{kuznetsova2017lmertest}, two-sided $\alpha=0.05$;
+H1 is supported if $p<0.05$ and the estimate is positive. The design was chosen by
+simulating~\eqref{eq:h1} from the Study~1 variance components: twenty seeds and twelve
+architectures give 0.98 power for a 0.8-pp effect, and 0.78 with every variance inflated
+by half (Appendix~\ref{app:power}). Kenward--Roger degrees of freedom, a binomial
+mixed model, a two-way cluster bootstrap, and a seed-level sign-flip test are reported as
+sensitivity analyses; per-architecture differences are descriptive.
+
+\subsection{Leakage versus diversity at matched size (H3)}
+\label{sec:factorial}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/design.pdf}
+\caption{The 2C factorial for one seed. Every cell shares the same test crops (half of each
+evaluation field's crops). Leak cells add the evaluation fields' remaining sibling crops;
+clean cells use other fields instead. Within a diversity level, crop and field counts are
+identical; low-diversity field sets are nested inside high-diversity ones.}
+\label{fig:design}
+\end{figure}
+
+The 2C factorial (Figure~\ref{fig:design}) fixes one test set per seed and varies only the
+training set. Thirty percent of SIPaKMeD fields with at least two crops are evaluation
+fields; half of each one's crops (rounded down) form the common test set (about 527
+crops) and the rest are its \emph{donor siblings}. Six fields per class are reserved as
+unseen background donors for Section~\ref{sec:transplant}. Four training sets each hold
+exactly 220 crops per class. The clean cells draw only from non-evaluation fields; the
+leak cells replace the last $|E|$ fields of the same random permutation with the
+evaluation fields' donor siblings. High-diversity cells use 720 distinct fields and
+low-diversity cells 504, a 1.43-fold contrast that brackets the natural 1.18. Within a
+diversity level, leak and clean therefore have the same crop count, the same number of
+distinct fields, and the same allocation rule; they differ only in whether the test
+fields' siblings are present. ResNet-50, DenseNet-121, ConvNeXt-T, and ViT-B/16 are
+trained on all four cells for ten seeds (160 runs). H3 is the leak main effect in
+\begin{equation}
+\text{acc} \sim \text{leak}\times\text{div} + (1+\text{leak}\mid\text{architecture}) + (1\mid\text{seed}) + (1\mid\text{training set}).
+\end{equation}
+Because the low-diversity leak cell gives each test crop more training siblings (3.0
+versus 2.0), the diversity effect is estimated within clean cells only and the interaction
+is exploratory.
+
+\subsection{Counterfactual background transplants (H4)}
+\label{sec:transplant}
+
+Every 2C model is also evaluated on composites of its test set. Each test cell's
+foreground (the Study~1 background-only mask) is feathered onto the inpainted background
+of a donor crop: its own background (\emph{self}, which isolates seam and inpainting
+artifacts), a sibling from the same field (\emph{sibling}), an unseen field of the same
+class (\emph{unseen same-class}), and unseen fields of every other class. Leak models have
+seen each test cell's field context with the correct label; clean models have not. The
+per-run quantity $\text{route} = \text{acc(sibling)} - \text{acc(unseen same-class)}$
+measures how much the cell's own acquisition context contributes beyond class-typical
+context, and H4 is its leak-minus-clean difference:
+\begin{equation}
+\text{route} \sim \text{leak} + \text{div} + (1+\text{leak}\mid\text{architecture}) + (1\mid\text{seed}) + (1\mid\text{training set}).
+\end{equation}
+The ratio of H4 to the leakage effect on unmodified images estimates the share of the
+inflation carried by the context route. The probability shift toward the donor class
+under other-class backgrounds measures, separately, whether classifiers read class
+information from backgrounds at all.
+
+\subsection{Adversarial fingerprint suppression (H5)}
+\label{sec:grl}
+
+A two-layer parent-identity head is attached to the penultimate features through a
+gradient-reversal layer~\citep{ganin2015backprop,ganin2016dann}, with the DANN ramp
+reaching a maximum coefficient $\lambda\in\{0,0.01,0.03,0.1,0.3,1,3\}$. The head only
+discriminates fields \emph{within} the sample's class, so suppressing it never requires
+removing class information. ResNet-50 and ConvNeXt-T are trained on the natural P1 and P2
+splits of ten seeds (280 runs). Fingerprint recoverability $R$ is the within-class
+field-identification accuracy of a logistic-regression probe on frozen features of the
+balanced 424-field probe crops, reported against its class-only floor. Within the
+non-degenerate regime (mean P2 accuracy within 1~pp of $\lambda=0$), and provided
+suppression removes at least a quarter of the above-floor recoverability, H5 is a positive
+slope of the per-seed P1--P2 gap on $R$. If the shortcut account is right, the gap closes
+as the fingerprint is suppressed while P2 accuracy stays flat; if P1 stays inflated while
+$R$ collapses, the gap is something else.
+
+\subsection{CRIC (H2)}
+\label{sec:cric}
+
+CRIC cells are $100\times100$ windows centred on the published nucleus coordinates of
+the 400 Figshare slide images (six Bethesda classes). ResNet-18, ResNet-50, DenseNet-121,
+EfficientNet-B0, ConvNeXt-T, and ViT-B/16 are trained on P1, P1-prime (which differs from P1
+by 2--11 training cells), and P2 for ten seeds (180 runs). H2 applies~\eqref{eq:h1} to CRIC
+accuracy.
+
+\subsection{Multiplicity}
+
+H1 is the single primary endpoint. H2--H5 form one Holm family~\citep{holm1979}
+(family-wise $\alpha=0.05$); each is supported only if its adjusted $p<0.05$ and its estimate
+has the predicted sign. All other analyses are secondary or exploratory.
+
+\input{sections/results.tex}
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+\appendix
+\input{sections/appendix.tex}
+
+\end{document}
