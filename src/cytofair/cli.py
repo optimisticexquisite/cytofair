@@ -422,9 +422,175 @@ def _validate_duplicate_detector(args: argparse.Namespace) -> None:
     print(json.dumps(result, indent=2))
 
 
+def _build_crop_cache(args: argparse.Namespace) -> None:
+    from .image_cache import build_file_cache, build_window_cache
+
+    provenance = read_map(args.map)
+    if args.windows_from:
+        manifest = build_window_cache(provenance, args.windows_from, args.output, args.name, size=args.window)
+    else:
+        manifest = build_file_cache(provenance, args.output, args.name)
+    print(json.dumps(manifest, indent=2))
+
+
+def _study2_design(args: argparse.Namespace) -> None:
+    import pandas as pd
+
+    from .study2_design import (
+        MECHANISM_SEEDS,
+        STUDY2_SEEDS,
+        export_factorial,
+        export_probe_split,
+        export_protocol_splits,
+        export_transplant_plans,
+    )
+
+    root = Path(args.output)
+    sipakmed = read_map(args.sipakmed_map)
+    boxes = read_map(args.sipakmed_boxes)
+    protocol_manifest = export_protocol_splits(
+        sipakmed, root / "sipakmed", dataset="SIPaKMeD", seeds=STUDY2_SEEDS
+    )
+    factorial_manifest, designs = export_factorial(
+        sipakmed, root / "sipakmed_2c", seeds=MECHANISM_SEEDS, boxes=boxes
+    )
+    transplant_manifest = export_transplant_plans(designs, root / "sipakmed_2b")
+    probe_sha = export_probe_split(sipakmed, root / "sipakmed_probe_split.csv")
+    frames = [protocol_manifest, factorial_manifest]
+    if args.cric_map:
+        frames.append(
+            export_protocol_splits(
+                read_map(args.cric_map),
+                root / "cric",
+                dataset="CRIC",
+                seeds=MECHANISM_SEEDS,
+                protocols=("P1", "P1-prime", "P2"),
+            )
+        )
+    manifest = pd.concat(frames, ignore_index=True, sort=False)
+    manifest.to_csv(root / "study2_split_manifest.csv", index=False)
+    transplant_manifest.to_csv(root / "study2_transplant_manifest.csv", index=False)
+    (root / "sipakmed_probe_split.sha256").write_text(probe_sha + "\n")
+    print(manifest.groupby(["dataset", "protocol"]).size().to_string())
+
+
+def _train_study2(args: argparse.Namespace) -> None:
+    from .train_study2 import train_study2
+
+    extra = []
+    for item in args.extra_eval:
+        name, location = item.split("=", 1)
+        directory, cache_name = location.rsplit(":", 1)
+        extra.append((name, directory, cache_name))
+    result = train_study2(
+        cache_dir=args.cache_dir,
+        cache_name=args.cache_name,
+        split_path=args.split,
+        split_sha256=args.split_sha256,
+        dataset=args.dataset,
+        protocol=args.protocol,
+        architecture=args.architecture,
+        seed=args.seed,
+        output_dir=args.output,
+        run_name=args.run_name,
+        epochs=args.epochs,
+        batch_size=args.batch_size,
+        learning_rate=args.learning_rate,
+        adversary_lambda=args.adversary_lambda,
+        feature_split_path=args.feature_split,
+        extra_eval=extra,
+        save_checkpoint=not args.no_checkpoint,
+        repository=args.repository,
+    )
+    print(json.dumps({k: v for k, v in result.items() if k not in {"history", "confusion_matrix"}}, indent=2))
+
+
+def _train_fingerprint(args: argparse.Namespace) -> None:
+    from .fingerprint import train_fingerprint_encoder
+
+    record = train_fingerprint_encoder(
+        read_map(args.map),
+        cache_dir=args.cache_dir,
+        cache_name=args.cache_name,
+        output_dir=args.output,
+        seed=args.seed,
+        repository=args.repository,
+    )
+    print(json.dumps({k: v for k, v in record.items() if k != "history"}, indent=2))
+
+
+def _build_transplants(args: argparse.Namespace) -> None:
+    import pandas as pd
+
+    from .image_cache import CropCache
+    from .transplant import build_transplant_cache
+
+    cache = CropCache(args.cache_dir, args.cache_name, verify=True)
+    design = pd.read_csv(args.design)
+    manifest, plan = build_transplant_cache(design, cache, args.output, args.name)
+    plan.to_csv(Path(args.output) / f"{args.name}_plan.csv", index=False)
+    print(json.dumps(manifest, indent=2))
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="cytofair")
     commands = parser.add_subparsers(dest="command", required=True)
+
+    command = commands.add_parser("build-crop-cache", help="Pack crops into a node-local uint8 cache")
+    command.add_argument("map", help="provenance map with crop paths (or CRIC cell coordinates)")
+    command.add_argument("--output", required=True)
+    command.add_argument("--name", required=True)
+    command.add_argument("--windows-from", help="source-image directory for centred windows (CRIC)")
+    command.add_argument("--window", type=int, default=100)
+    command.set_defaults(function=_build_crop_cache)
+
+    command = commands.add_parser("study2-design", help="Export every registered Study 2 split")
+    command.add_argument("--sipakmed-map", default="provenance/sipakmed_parent_map_p3.parquet")
+    command.add_argument("--sipakmed-boxes", default="provenance/sipakmed_branch_b.parquet")
+    command.add_argument("--cric-map", default="provenance/cric_parent_map.parquet")
+    command.add_argument("--output", default="splits/study2")
+    command.set_defaults(function=_study2_design)
+
+    command = commands.add_parser("train-study2", help="Train one Study 2 run with full artifacts")
+    command.add_argument("--cache-dir", required=True)
+    command.add_argument("--cache-name", required=True)
+    command.add_argument("--split", required=True)
+    command.add_argument("--split-sha256")
+    command.add_argument("--dataset", required=True)
+    command.add_argument("--protocol", required=True)
+    command.add_argument("--architecture", required=True)
+    command.add_argument("--seed", type=int, required=True)
+    command.add_argument("--output", required=True)
+    command.add_argument("--run-name", required=True)
+    command.add_argument("--epochs", type=int, default=20)
+    command.add_argument("--batch-size", type=int, default=64)
+    command.add_argument("--learning-rate", type=float, default=1e-4)
+    command.add_argument("--adversary-lambda", type=float)
+    command.add_argument("--feature-split")
+    command.add_argument(
+        "--extra-eval", action="append", default=[], metavar="NAME=DIR:CACHE",
+        help="evaluate an additional packed cache and save its logits",
+    )
+    command.add_argument("--no-checkpoint", action="store_true")
+    command.add_argument("--repository", default=".")
+    command.set_defaults(function=_train_study2)
+
+    command = commands.add_parser("train-fingerprint", help="Retrain and keep the RGB parent probe")
+    command.add_argument("map")
+    command.add_argument("--cache-dir", required=True)
+    command.add_argument("--cache-name", required=True)
+    command.add_argument("--output", required=True)
+    command.add_argument("--seed", type=int, default=17)
+    command.add_argument("--repository", default=".")
+    command.set_defaults(function=_train_fingerprint)
+
+    command = commands.add_parser("build-transplants", help="Render 2B counterfactual composites")
+    command.add_argument("design", help="2C design CSV for one seed")
+    command.add_argument("--cache-dir", required=True)
+    command.add_argument("--cache-name", required=True)
+    command.add_argument("--output", required=True)
+    command.add_argument("--name", required=True)
+    command.set_defaults(function=_build_transplants)
 
     command = commands.add_parser("download", help="Download checksum-declared raw sources")
     command.add_argument("--manifest", default="data_sources.json")
