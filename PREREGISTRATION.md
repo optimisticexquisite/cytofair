@@ -268,3 +268,17 @@ then copied as one completed file to a temporary NFS destination before atomic
 replacement. This preserves the same checkpoint payload and failure semantics
 while avoiding tens of thousands of small serialization writes against the
 shared network filesystem. The local staging file is always removed.
+
+## Amendment 6 — Study 2: powered replication and causal decomposition (2026-10-18, Asia/Kolkata)
+
+Study 1 is complete and frozen; nothing in this amendment changes its estimands, results,
+or declared research stop. A second, separately registered study addresses the limitations
+found after Study 1: one mixed-model test of the protocol effect replaces six
+per-architecture tests (powered by simulation from the Study 1 pilot), a leakage-by-diversity
+factorial with a common test set separates leakage from training diversity, counterfactual
+background transplants and adversarial fingerprint suppression test whether classifiers use
+the parent fingerprint, and CRIC is rescored. The complete plan is `PREREGISTRATION_STUDY2.md`
+(registered in the same commit as this amendment); its endpoints, models, seeds, stopping
+rule, multiplicity strategy, and analysis code are fixed by that file and the hashes in
+`reports/study2/registration_hashes.txt`. Study 2 seeds are disjoint from Study 1 seeds, and
+no Study 1 run enters any Study 2 test.
