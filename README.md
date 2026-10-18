@@ -151,6 +151,45 @@ The status report prints controller health, completed/total cells, GPU assignmen
 current epoch, retry count, and exact active/failure log paths. A second invocation
 of the launcher skips valid JSON results and resumes any epoch checkpoints.
 
+## Study 2: powered replication and causal decomposition
+
+Study 1 established that crop-level splits share parents and that the parent
+fingerprint is learnable, but its six per-architecture tests could not certify the
+accuracy inflation. Study 2 is a separate preregistered study
+(`PREREGISTRATION_STUDY2.md`, registered as Amendment 6 before any Study 2 model was
+trained) with one primary test and four mechanism hypotheses:
+
+| Hypothesis | Design |
+|---|---|
+| H1 (primary) | One mixed model of SIPaKMeD P1 - P2 accuracy over 12 architectures x 20 new seeds, sized by simulation from the Study 1 pilot |
+| H2 | The same model on CRIC (6 architectures x 10 seeds) |
+| H3 | 2C factorial: leakage x training diversity at matched crop and parent counts over one common test set |
+| H4 | 2B counterfactual background transplants: does a classifier use its test cells' own acquisition context? |
+| H5 | 2A gradient-reversal suppression of the parent fingerprint: does the inflation track it? |
+
+H2-H5 form one Holm family. Every split, task, analysis script, and input cache is
+pinned by SHA-256 in `reports/study2/registration_hashes.txt`.
+
+The training host limits each user to four CPU cores, so Study 2 decodes crops once
+into checksummed caches on node-local storage and augments them on the GPU
+(`cytofair.gpu_augment`, an exact port of torchvision's crop sampling). Runs are
+deterministic and keep per-crop logits, float16 final weights, and probe-crop features,
+so confusion matrices and post hoc analyses never need retraining.
+
+```bash
+uv run cytofair study2-design                       # regenerate every registered split
+scripts/study2/node_prepare.sh ROOT PYTHON CRIC_IMAGE_DIR   # CRIC + transplant caches
+python scripts/study2/launch_matrix.py splits/study2/tasks/*.jsonl \
+  --gpus 0,3,4,5 --logs ROOT/runs/logs --status ROOT/runs/status.json
+analysis/study2/run_all.sh ROOT PYTHON RSCRIPT     # registered analysis (fails closed)
+python scripts/study2/paper_numbers.py            # numbers and tables for paper/v2
+```
+
+`uv run cytofair risk-report MAP` computes, for any crop-to-parent table, the
+closed-form ingredients of crop-level optimism: expected straddle, test crops with a
+training sibling, siblings per test crop, the training-diversity ratio, and
+class-parent dependence.
+
 ## Data-use note
 
 Cx22/CCEDD and other source datasets may restrict use to non-commercial research and
