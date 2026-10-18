@@ -18,7 +18,7 @@ export PYTHONPATH="$PWD/src${PYTHONPATH:+:$PYTHONPATH}"
 
 "$python" analysis/study2/collect_runs.py \
   "$tasks/fingerprint.jsonl" "$tasks/phase1.jsonl" "$tasks/factorial.jsonl" "$tasks/grl.jsonl" "$tasks/cric.jsonl" \
-  --output "$output/runs"
+  --output "$output/runs" --diverged-logs "$root/runs/logs"
 
 # H1 (primary) and its registered secondary contrasts.
 "$rscript" analysis/study2/protocol_lmm.R "$output/runs/phase1_runs.csv" "$output/h1_accuracy.json" accuracy P1 P2 12 20
@@ -36,7 +36,8 @@ export PYTHONPATH="$PWD/src${PYTHONPATH:+:$PYTHONPATH}"
 "$python" analysis/study2/prepare_mechanism.py --runs "$output/runs" --output "$output/mechanism" --workers 4
 "$rscript" analysis/study2/mechanism_lmm.R \
   "$output/runs/factorial_runs.csv" "$output/mechanism/transplant_runs.csv" \
-  "$output/mechanism/grl_recoverability.csv" "$output/h2_cric_accuracy.json" "$output/mechanism.json"
+  "$output/mechanism/grl_recoverability.csv" "$output/h2_cric_accuracy.json" "$output/mechanism.json" \
+  "$output/runs/diverged.csv"
 
 # Registered secondary analyses.
 "$python" analysis/study2/secondary.py --runs "$output/runs" --mechanism "$output/mechanism" \

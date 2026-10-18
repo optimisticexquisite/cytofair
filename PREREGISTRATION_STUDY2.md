@@ -271,3 +271,24 @@ It determines framing only. All registered results are reported whatever the gat
 The analysis code (`analysis/study2/*.R`, `analysis/study2/*.py`), split manifest, task
 builder, and caches are fixed by this commit; their SHA-256 hashes are listed in
 `reports/study2/registration_hashes.txt`.
+
+## Amendment 7 — failure handling (2026-10-18, Asia/Kolkata)
+
+Registered while Phase 1 was running and before any 2A run had started; no Study 2
+result had been analysed or inspected. Two cases were not handled by Section 3:
+
+1. **Infrastructure failures.** A run that fails because of the host rather than the run
+   itself (out-of-memory caused by another user's process on the same GPU, loss of the
+   host, session, or controller, or a filesystem error, each identifiable from the
+   attempt log) does not count toward the one-retry limit. It is rerun with the identical
+   seed, split, and code, and every attempt stays in the log.
+2. **Divergence in the 2A sweep.** Runs are deterministic, so a run whose training loss
+   becomes non-finite diverges again on retry. In the gradient-reversal arm only, such a
+   run is recorded as *diverged* rather than missing: a lambda with any diverged run of an
+   architecture lies outside that architecture's non-degenerate regime, the diverged runs
+   are excluded from H5, and the sweep table reports them with the epoch at which the loss
+   became non-finite. A diverged run in any other arm still makes the tests that need it
+   fail closed, as registered.
+
+The collector (`analysis/study2/collect_runs.py --diverged-logs`) and `mechanism_lmm.R`
+implement point 2; their new hashes are appended to `reports/study2/registration_hashes.txt`.

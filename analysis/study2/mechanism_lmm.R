@@ -10,7 +10,11 @@
 # alone at alpha = 0.05 by protocol_lmm.R and is not part of this family.
 #
 # Usage:
-#   Rscript mechanism_lmm.R FACTORIAL_RUNS TRANSPLANT_RUNS GRL_RUNS CRIC_JSON OUTPUT_JSON
+#   Rscript mechanism_lmm.R FACTORIAL_RUNS TRANSPLANT_RUNS GRL_RUNS CRIC_JSON OUTPUT_JSON [DIVERGED_CSV]
+#
+# DIVERGED_CSV (Amendment 7) lists gradient-reversal runs whose loss became
+# non-finite; a lambda with any such run lies outside that architecture's
+# non-degenerate regime.
 
 suppressPackageStartupMessages({
   library(lme4)
@@ -19,7 +23,14 @@ suppressPackageStartupMessages({
 })
 
 args <- commandArgs(trailingOnly = TRUE)
-if (length(args) != 5) stop("usage: mechanism_lmm.R FACTORIAL TRANSPLANT GRL CRIC_JSON OUTPUT_JSON")
+if (!(length(args) %in% c(5, 6))) {
+  stop("usage: mechanism_lmm.R FACTORIAL TRANSPLANT GRL CRIC_JSON OUTPUT_JSON [DIVERGED_CSV]")
+}
+diverged <- if (length(args) == 6 && file.exists(args[[6]])) {
+  read.csv(args[[6]], stringsAsFactors = FALSE)
+} else {
+  data.frame(architecture = character(), adversary_lambda = numeric(), diverged_at_epoch = integer())
+}
 control <- lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5))
 
 fit_ladder <- function(formulas, data) {
@@ -139,6 +150,7 @@ for (arch_name in sort(unique(pairs$architecture))) {
   baseline <- p2$value[p2$adversary_lambda == 0]
   # Non-degenerate regime: mean P2 accuracy within 1 pp of the lambda = 0 baseline.
   lambdas <- sort(p2$adversary_lambda[p2$value >= baseline - 1.0])
+  lambdas <- setdiff(lambdas, diverged$adversary_lambda[diverged$architecture == arch_name])
   lambda_star <- max(lambdas)
   arch_pairs <- pairs[pairs$architecture == arch_name, ]
   floor_value <- mean(grl$floor[grl$architecture == arch_name])
@@ -154,6 +166,7 @@ for (arch_name in sort(unique(pairs$architecture))) {
   if (passed) eligible[[arch_name]] <- arch_pairs[arch_pairs$adversary_lambda %in% lambdas, ]
 }
 out$H5_manipulation_checks <- checks
+out$grl_diverged_runs <- diverged
 if (length(eligible) == 0) {
   out$H5 <- list(status = "untestable: fingerprint suppression failed its manipulation check", p = NA, estimate = NA)
 } else {
