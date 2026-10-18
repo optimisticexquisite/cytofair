@@ -1,0 +1,25 @@
+\subsection{Recommendations for dataset releases and evaluations}
+\label{sec:recommendations}
+
+\begin{enumerate}
+\item \textbf{Release the hierarchy.} Every observation should carry a stable
+  observation identifier, its acquisition parent (field, source image, or slide), a
+  patient or specimen identifier where ethics and law permit, and, if duplicates were
+  audited, a duplicate-component identifier.
+\item \textbf{Split at the deepest released unit and publish the split.} Evaluate on
+  parent-disjoint (or patient-disjoint) folds and release the exact fold manifest with
+  its hash, so that results reported under one dataset name are comparable.
+\item \textbf{Report both units.} State observation and parent counts for every split,
+  and the fraction of test observations with a training sibling.
+\item \textbf{Check the structure before training.} The closed forms of
+  Section~\ref{sec:structure} (\texttt{cytofair risk-report}) give the expected straddle,
+  sibling rate, diversity ratio, and class--parent dependence of a crop-level split from
+  the parent table alone.
+\item \textbf{Treat one question as one test.} When the same question is asked of many
+  architectures, test it once with a mixed model that treats architectures and splits as
+  random effects, and size the study by simulation; report per-architecture contrasts
+  descriptively.
+\item \textbf{Keep the evidence.} Save per-sample predictions, final weights, and the
+  exact split for every run, so that confusion matrices, calibration, and later
+  mechanistic analyses do not require retraining.
+\end{enumerate}

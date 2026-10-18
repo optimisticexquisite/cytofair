@@ -1,0 +1,39 @@
+\subsection{Limitations}
+\label{sec:limitations}
+
+\paragraph{Parents are not patients.} SIPaKMeD fields, Cx22 source images, and CRIC slide
+images are the deepest units the releases identify. Several fields can come from one
+patient, so parent-disjoint evaluation is necessary but may not be sufficient for
+clinical independence, and every estimate here is a lower bound on what patient-level
+grouping would remove.
+
+\paragraph{The factorial trains on fewer crops.} Holding crop and field counts equal
+across leak and clean cells requires 220 crops per class (1,100 in total, against 3,239
+in Phase~1), so the 2C and 2B effects are measured on smaller training sets than the
+headline contrast. The decomposition that transfers them to the natural splits assumes
+the leakage effect scales with the leak rate and the diversity effect scales with the
+logarithm of the field-count ratio; it is labelled approximate.
+
+\paragraph{Transplants are imperfect interventions.} The foreground mask is a fixed
+threshold rule, inpainting leaves a smoothed background, and feathering mixes a few
+pixels of donor and recipient. The \emph{self} condition measures these artifacts, and
+every contrast compares conditions that share them, but composites are still off the
+training manifold.
+
+\paragraph{Gradient reversal removes what its head can see.} The adversary suppresses
+parent identity that a two-layer head can read from pooled features; information that
+remains decodable by another probe, or that enters through spatial features before
+pooling, can survive. Recoverability is therefore measured with an independent probe,
+and H5 is declared untestable rather than refuted if suppression does not work.
+
+\paragraph{One recipe.} Every model uses the same fixed fine-tuning recipe. Stronger
+augmentation, longer training, or stain normalisation could change both the size of
+the inflation and the models' reliance on acquisition context.
+
+\paragraph{One host.} All runs used one four-GPU server with a four-core CPU allowance,
+which is why augmentation runs on the GPU. Wall-clock times are not portable, and the
+GPU implementation of antialiased resizing differs from PIL's by uint8 rounding.
+
+\paragraph{No clinical claim.} The study audits research benchmarks. It does not
+estimate screening sensitivity, specificity, prevalence-calibrated performance, or
+effects on readers.
