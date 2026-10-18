@@ -1,0 +1,133 @@
+{
+  "value": "macro_dice",
+  "left": "P1",
+  "right": "P2",
+  "n_rows": 50,
+  "n_architectures": 5,
+  "n_seeds": 5,
+  "model_messages": {
+    "full": "boundary (singular) fit: see help('isSingular')"
+  },
+  "model_used": "full",
+  "r_version": "R version 4.4.3 (2025-02-28)",
+  "lme4_version": "2.0.6",
+  "lmerTest_version": "3.2.1",
+  "raw_mean_difference": 0.16382646560669,
+  "estimate": 0.163826465606675,
+  "se": 0.188460735683727,
+  "df_satterthwaite": 4.02942304961604,
+  "t": 0.869286989739902,
+  "p_satterthwaite": 0.433406653810399,
+  "ci95": [-0.357921011352539, 0.685573942565889],
+  "df_kenward_roger": 3.94815848326705,
+  "p_kenward_roger": 0.43434258488222,
+  "singular": true,
+  "variance_components": [
+    {
+      "grp": "split",
+      "var1": "(Intercept)",
+      "vcov": 0.0764484971079742,
+      "sdcor": 0.276493213493522
+    },
+    {
+      "grp": "seed",
+      "var1": "(Intercept)",
+      "vcov": 0.079499120080112,
+      "sdcor": 0.281955883215995
+    },
+    {
+      "grp": "architecture",
+      "var1": "(Intercept)",
+      "vcov": 0.58812273529657,
+      "sdcor": 0.76689160596304
+    },
+    {
+      "grp": "architecture",
+      "var1": "x",
+      "vcov": 0.000753699865949106,
+      "sdcor": 0.0274535947727999
+    },
+    {
+      "grp": "architecture",
+      "var1": "(Intercept)",
+      "var2": "x",
+      "vcov": 0.021053931384771,
+      "sdcor": 1
+    },
+    {
+      "grp": "Residual",
+      "vcov": 0.0598413759759048,
+      "sdcor": 0.244624970058056
+    }
+  ],
+  "assumptions": {
+    "residual_skewness": -0.953747466690313,
+    "residual_excess_kurtosis": 2.36112719044688,
+    "residual_shapiro_p": 0.00652913394617728,
+    "architecture_slope_blups": [-0.0312224377805456, -0.0270372038403608, 0.0121791690974598, 0.0171856788236154, 0.0288947937000671],
+    "residual_sd_by_protocol": [0.13501716281095, 0.27104493548179]
+  },
+  "assumptions_violated": false,
+  "cluster_bootstrap": {
+    "replicates": 10000,
+    "ci95": [-0.223068404197693, 0.476956522464752],
+    "p_two_sided": 0.3846
+  },
+  "sign_flip": {
+    "statistic": 0.16382646560669,
+    "permutations": 32,
+    "p_two_sided": 0.4375
+  },
+  "primary_source": "lmm",
+  "primary_p": 0.433406653810399,
+  "primary_ci95": [-0.357921011352539, 0.685573942565889],
+  "primary_estimate": 0.163826465606675,
+  "supported": false,
+  "per_architecture_descriptive": [
+    {
+      "architecture": "deeplabv3plus_resnet50",
+      "mean_difference": 0.257736444473267,
+      "sd_difference": 0.418013593006356,
+      "ci_low": -0.261295984722526,
+      "ci_high": 0.776768873669059,
+      "n": 5,
+      "_row": "deeplabv3plus_resnet50"
+    },
+    {
+      "architecture": "fpn_resnet34",
+      "mean_difference": 0.0104713439941406,
+      "sd_difference": 0.467598813791045,
+      "ci_low": -0.570129268692986,
+      "ci_high": 0.591071956681267,
+      "n": 5,
+      "_row": "fpn_resnet34"
+    },
+    {
+      "architecture": "manet_resnet34",
+      "mean_difference": 0.0654375553131104,
+      "sd_difference": 0.449694391623154,
+      "ci_low": -0.492931780959504,
+      "ci_high": 0.623806891585725,
+      "n": 5,
+      "_row": "manet_resnet34"
+    },
+    {
+      "architecture": "unet_resnet34",
+      "mean_difference": 0.29719948768616,
+      "sd_difference": 0.767370488196835,
+      "ci_low": -0.655616820791897,
+      "ci_high": 1.25001579616422,
+      "n": 5,
+      "_row": "unet_resnet34"
+    },
+    {
+      "architecture": "unetplusplus_resnet34",
+      "mean_difference": 0.188287496566772,
+      "sd_difference": 0.405861516594174,
+      "ci_low": -0.315656136844593,
+      "ci_high": 0.692231129978138,
+      "n": 5,
+      "_row": "unetplusplus_resnet34"
+    }
+  ]
+}

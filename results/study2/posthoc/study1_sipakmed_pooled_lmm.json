@@ -1,0 +1,147 @@
+{
+  "value": "accuracy",
+  "left": "P1",
+  "right": "P2",
+  "n_rows": 60,
+  "n_architectures": 6,
+  "n_seeds": 5,
+  "model_messages": {
+    "full": "boundary (singular) fit: see help('isSingular')"
+  },
+  "model_used": "full",
+  "r_version": "R version 4.4.3 (2025-02-28)",
+  "lme4_version": "2.0.6",
+  "lmerTest_version": "3.2.1",
+  "raw_mean_difference": 1.37037037037037,
+  "estimate": 1.37037037037033,
+  "se": 0.377820934940795,
+  "df_satterthwaite": 9.07200013388279,
+  "t": 3.6270366293627,
+  "p_satterthwaite": 0.00543865929872857,
+  "ci95": [0.516712930562028, 2.22402781017862],
+  "df_kenward_roger": 4.75563058503457,
+  "p_kenward_roger": 0.0164809521972561,
+  "singular": true,
+  "variance_components": [
+    {
+      "grp": "split",
+      "var1": "(Intercept)",
+      "vcov": 0.223235224260667,
+      "sdcor": 0.472477750016513
+    },
+    {
+      "grp": "architecture",
+      "var1": "(Intercept)",
+      "vcov": 0.194091220699666,
+      "sdcor": 0.440557851705841
+    },
+    {
+      "grp": "architecture",
+      "var1": "x",
+      "vcov": 0.127792005159147,
+      "sdcor": 0.357480076590497
+    },
+    {
+      "grp": "architecture",
+      "var1": "(Intercept)",
+      "var2": "x",
+      "vcov": -0.157490654570349,
+      "sdcor": -1
+    },
+    {
+      "grp": "seed",
+      "var1": "(Intercept)",
+      "vcov": 0,
+      "sdcor": 0
+    },
+    {
+      "grp": "Residual",
+      "vcov": 0.482338524731178,
+      "sdcor": 0.694505957304311
+    }
+  ],
+  "assumptions": {
+    "residual_skewness": -0.598286557506592,
+    "residual_excess_kurtosis": 0.355669565776648,
+    "residual_shapiro_p": 0.0184910270909868,
+    "architecture_slope_blups": [-0.330051580700401, -0.261105614807285, 0.419926589860226, 0.11902819866455, -0.254624080246967, 0.306826487230174],
+    "residual_sd_by_protocol": [0.439634179919237, 0.777838391956175]
+  },
+  "assumptions_violated": false,
+  "cluster_bootstrap": {
+    "replicates": 2000,
+    "ci95": [0.423559670781885, 2.29228395061729],
+    "p_two_sided": 0.004
+  },
+  "sign_flip": {
+    "statistic": 1.37037037037037,
+    "permutations": 32,
+    "p_two_sided": 0.125
+  },
+  "primary_source": "lmm",
+  "primary_p": 0.00543865929872857,
+  "primary_ci95": [0.516712930562028, 2.22402781017862],
+  "primary_estimate": 1.37037037037033,
+  "supported": true,
+  "binomial_glmm": {
+    "log_odds_ratio": 0.452339378952304,
+    "se": 0.103500158338711,
+    "p_wald": 1.24006591511571e-05
+  },
+  "per_architecture_descriptive": [
+    {
+      "architecture": "densenet121",
+      "mean_difference": 1.40740740740741,
+      "sd_difference": 0.901319123379948,
+      "ci_low": 0.288271901013952,
+      "ci_high": 2.52654291380087,
+      "n": 5,
+      "_row": "densenet121"
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "mean_difference": 1.08641975308642,
+      "sd_difference": 1.84855673918466,
+      "ci_low": -1.20886659859611,
+      "ci_high": 3.38170610476896,
+      "n": 5,
+      "_row": "efficientnet_b0"
+    },
+    {
+      "architecture": "mobilenet_v2",
+      "mean_difference": 2.24691358024692,
+      "sd_difference": 1.63177935276787,
+      "ci_low": 0.220791904902817,
+      "ci_high": 4.27303525559102,
+      "n": 5,
+      "_row": "mobilenet_v2"
+    },
+    {
+      "architecture": "resnet18",
+      "mean_difference": 1.18518518518519,
+      "sd_difference": 1.28478130772816,
+      "ci_low": -0.410081510186018,
+      "ci_high": 2.7804518805564,
+      "n": 5,
+      "_row": "resnet18"
+    },
+    {
+      "architecture": "resnet50",
+      "mean_difference": 0.716049382716045,
+      "sd_difference": 0.83001166982576,
+      "ci_low": -0.314546225795591,
+      "ci_high": 1.74664499122768,
+      "n": 5,
+      "_row": "resnet50"
+    },
+    {
+      "architecture": "vit_b_16",
+      "mean_difference": 1.58024691358024,
+      "sd_difference": 1.6981480359555,
+      "ci_low": -0.528282366286137,
+      "ci_high": 3.68877619344662,
+      "n": 5,
+      "_row": "vit_b_16"
+    }
+  ]
+}
