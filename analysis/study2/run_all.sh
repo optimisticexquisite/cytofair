@@ -12,7 +12,7 @@ root=$1
 python=$2
 rscript=$3
 output=${4:-results/study2/analysis}
-tasks=splits/study2/tasks
+tasks=${TASKS_DIR:-splits/study2/tasks}
 mkdir -p "$output"
 export PYTHONPATH="$PWD/src${PYTHONPATH:+:$PYTHONPATH}"
 
