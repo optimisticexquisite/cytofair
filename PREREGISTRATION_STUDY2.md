@@ -301,3 +301,9 @@ on how leakage is used — CRIC slide-context pull, test-time carrier ablations,
 removal during training, rank-limited LEACE erasure, a stain-normalisation dose, a
 probe-matched linear adversary, and a pooled dose-response — in their own Holm family. It
 does not change H1-H5 or their verdicts. Full text: `PREREGISTRATION_STUDY2_AMENDMENT8.md`.
+
+## Amendment 9 — preparer bug fix (2026-10-20, Asia/Kolkata)
+
+A labelling bug in `analysis/study2/followup/prepare_followup.py` (standard-recipe carrier runs
+labelled `colour`) was fixed before any F3 or F4 estimate was seen. Details in
+`PREREGISTRATION_STUDY2_AMENDMENT8.md`.

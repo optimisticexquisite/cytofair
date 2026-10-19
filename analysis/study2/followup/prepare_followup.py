@@ -80,6 +80,17 @@ class Prober:
         return within_class_recoverability(features, self.probe, {crop: i for i, crop in enumerate(crop_ids)})
 
 
+def carrier_condition(record: dict) -> str:
+    """Registered carrier condition, read from the run record itself (Amendment 9).
+
+    A missing colour augmentation is ``None`` in the record; deciding from the
+    record rather than from a DataFrame row avoids ``None`` becoming a truthy NaN.
+    """
+    if record["cache_name"] == "sipakmed_masked":
+        return "masked"
+    return "colour" if record.get("color_augment") == "hed_strong_bc" else "standard"
+
+
 def ablation_tables(records: list[dict]):
     rows, cams = [], []
     for record in records:
@@ -167,9 +178,7 @@ def main() -> None:
     if "carrier" in records:
         carrier = training_table(records["carrier"])
         carrier["cell"] = carrier.protocol
-        carrier["condition"] = carrier.apply(
-            lambda row: "masked" if row.cache_name == "sipakmed_masked"
-            else ("colour" if row.color_augment else "standard"), axis=1)
+        carrier["condition"] = [carrier_condition(record) for record in records["carrier"]]
         carrier.to_csv(output / "carrier_runs.csv", index=False)
     if "linadv" in records:
         training_table(records["linadv"], prober).to_csv(output / "linadv_recoverability.csv", index=False)

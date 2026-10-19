@@ -183,3 +183,20 @@ manifests, and task files are fixed by this commit; their SHA-256 hashes are lis
 derived caches. A synthetic dry run of `followup_lmm.R`
 (`analysis/study2/followup/simulate_followup_inputs.py`) recovered every planted effect before
 registration.
+
+## Amendment 9 — preparer bug fix (2026-10-20, Asia/Kolkata)
+
+When the registered models were first run on the completed carrier arm, `followup_lmm.R`
+stopped at F4 because `prepare_followup.py` had labelled all 160 standard-recipe runs as
+`colour`: the label was derived from a DataFrame row in which a missing colour augmentation
+(`None` in the run record) had become a truthy NaN. The masked runs were labelled correctly.
+The script halted before writing any output, so no F3 or F4 estimate was seen. The fix
+derives each run's condition from its own record (`carrier_condition`: background-masked
+cache -> `masked`; `color_augment == "hed_strong_bc"` -> `colour`; otherwise `standard`), which
+is the registered definition; no model, rule, or data changes. A unit test
+(`tests/test_followup_prepare.py`) covers it. The synthetic dry run had not exercised the
+preparer, which is why the error was not caught before registration.
+
+Known when this amendment was written: the arm-level results of F1, F2 (with the Grad-CAM
+description), and F5, analysed with the registered code once their arms were complete, as
+section 10 allows. Not known: any F3, F4, F6, F7, or F8 estimate.
