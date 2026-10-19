@@ -292,3 +292,12 @@ result had been analysed or inspected. Two cases were not handled by Section 3:
 
 The collector (`analysis/study2/collect_runs.py --diverged-logs`) and `mechanism_lmm.R`
 implement point 2; their new hashes are appended to `reports/study2/registration_hashes.txt`.
+
+## Amendment 8 — follow-up experiments (2026-10-19, Asia/Kolkata)
+
+Registered after the Study 2 analysis was complete, before any follow-up model was trained
+or any follow-up analysis was run on existing outputs. It adds eight new hypotheses (F1-F8)
+on how leakage is used — CRIC slide-context pull, test-time carrier ablations, carrier
+removal during training, rank-limited LEACE erasure, a stain-normalisation dose, a
+probe-matched linear adversary, and a pooled dose-response — in their own Holm family. It
+does not change H1-H5 or their verdicts. Full text: `PREREGISTRATION_STUDY2_AMENDMENT8.md`.
