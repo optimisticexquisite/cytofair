@@ -27,6 +27,11 @@ STUDY2_SEEDS = (
     601, 653, 701, 751, 809, 853, 907, 953, 1009, 1051,
 )
 MECHANISM_SEEDS = STUDY2_SEEDS[:10]
+# Amendment 8 (follow-up). Retraining arms on natural splits use the ten Study 2
+# seeds that no mechanism arm used; the carrier-removal factorial uses ten seeds
+# never used for any model, each checked feasible for FACTORIAL_CONFIG.
+FOLLOWUP_SPLIT_SEEDS = STUDY2_SEEDS[10:]
+FOLLOWUP_FACTORIAL_SEEDS = (1103, 1151, 1201, 1249, 1301, 1361, 1409, 1451, 1499, 1553)
 PROBE_SPLIT_SEED = 17
 # 220 crops per class and a 0.70 low/high parent ratio were feasible for every
 # registered seed and for 100/100 unrelated seeds; 240 crops failed for seed 307

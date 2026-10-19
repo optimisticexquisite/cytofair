@@ -176,6 +176,18 @@ def build_parent_adversary(feature_dim: int, n_parents: int, hidden: int = 512):
     return nn.Sequential(nn.Linear(feature_dim, hidden), nn.ReLU(inplace=True), nn.Linear(hidden, n_parents))
 
 
+def build_linear_parent_adversary(feature_dim: int, n_parents: int):
+    """Probe-matched adversary (Amendment 8): per-feature standardisation, then one linear layer.
+
+    It has the same form as the logistic recoverability probe (standardised
+    features, linear logits), so features cannot hide parent identity from the
+    adversary while leaving it readable by the probe.
+    """
+    from torch import nn
+
+    return nn.Sequential(nn.BatchNorm1d(feature_dim, affine=False), nn.Linear(feature_dim, n_parents))
+
+
 def dann_schedule(progress: float, maximum: float) -> float:
     """Ganin et al. (2016) ramp: ``maximum * (2 / (1 + exp(-10 p)) - 1)``."""
     import math

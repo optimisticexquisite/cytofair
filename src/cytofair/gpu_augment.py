@@ -22,6 +22,37 @@ import math
 IMAGENET_MEAN = (0.485, 0.456, 0.406)
 IMAGENET_STD = (0.229, 0.224, 0.225)
 
+# Stain vectors of skimage's ``rgb_from_hed`` (Ruifrok and Johnston). Pap stain is
+# not H&E, so HED jitter acts here as a strong, stain-shaped perturbation of
+# optical density rather than a faithful stain model.
+RGB_FROM_HED = ((0.65, 0.70, 0.29), (0.07, 0.99, 0.11), (0.27, 0.57, 0.78))
+# Amendment 8 colour augmentation: "HED-strong" (Tellez et al., 2019) followed by
+# brightness and contrast jitter as in torchvision's ColorJitter(0.2, 0.2).
+COLOR_AUGMENTATIONS = {"hed_strong_bc": {"hed_sigma": 0.2, "brightness": 0.2, "contrast": 0.2}}
+
+
+def color_jitter(batch, generator, *, hed_sigma: float, brightness: float, contrast: float):
+    """Per-image HED optical-density jitter, then brightness and contrast, on [0, 1] RGB."""
+    import torch
+
+    n = batch.shape[0]
+    alpha = torch.empty(n, 3).uniform_(1.0 - hed_sigma, 1.0 + hed_sigma, generator=generator)
+    beta = torch.empty(n, 3).uniform_(-hed_sigma, hed_sigma, generator=generator)
+    gain = torch.empty(n).uniform_(1.0 - brightness, 1.0 + brightness, generator=generator)
+    spread = torch.empty(n).uniform_(1.0 - contrast, 1.0 + contrast, generator=generator)
+    device = batch.device
+    rgb_from_hed = torch.tensor(RGB_FROM_HED, dtype=torch.float64)
+    hed_from_rgb = torch.linalg.inv(rgb_from_hed).float().to(device)
+    rgb_from_hed = rgb_from_hed.float().to(device)
+    density = -torch.log(batch.clamp_min(1e-6))
+    stains = torch.einsum("nchw,cd->ndhw", density, hed_from_rgb)
+    stains = stains * alpha.to(device)[..., None, None] + beta.to(device)[..., None, None]
+    rgb = torch.exp(-torch.einsum("ndhw,dc->nchw", stains, rgb_from_hed)).clamp(0.0, 1.0)
+    rgb = (rgb * gain.to(device).view(n, 1, 1, 1)).clamp(0.0, 1.0)
+    weights = torch.tensor((0.299, 0.587, 0.114), device=device).view(1, 3, 1, 1)
+    mean = (rgb * weights).sum(dim=1, keepdim=True).mean(dim=(2, 3), keepdim=True)
+    return ((rgb - mean) * spread.to(device).view(n, 1, 1, 1) + mean).clamp(0.0, 1.0)
+
 
 def random_resized_crop_params(
     height: int,
@@ -87,8 +118,13 @@ class GpuCrops:
             antialias=True,
         )
 
-    def train_batch(self, indices, generator, *, size: int = 224, scale=(0.8, 1.0)):
-        """Augmented, normalised float batch for the given crop indices."""
+    def train_batch(self, indices, generator, *, size: int = 224, scale=(0.8, 1.0), color: str | None = None):
+        """Augmented, normalised float batch for the given crop indices.
+
+        ``color`` names an entry of :data:`COLOR_AUGMENTATIONS`; its parameters are
+        drawn from the same generator after the geometry, so ``color=None``
+        reproduces the registered Study 2 stream exactly.
+        """
         import torch
 
         out = []
@@ -102,7 +138,10 @@ class GpuCrops:
             if torch.rand(1, generator=generator).item() < 0.5:
                 crop = crop.flip(-2)
             out.append(crop)
-        return (torch.cat(out) - self.mean) / self.std
+        batch = torch.cat(out)
+        if color is not None:
+            batch = color_jitter(batch, generator, **COLOR_AUGMENTATIONS[color])
+        return (batch - self.mean) / self.std
 
     def eval_batch(self, indices, *, size: int = 224):
         """Deterministic ``Resize((size, size))`` + normalisation."""

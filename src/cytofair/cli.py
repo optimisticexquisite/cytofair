@@ -497,6 +497,10 @@ def _train_study2(args: argparse.Namespace) -> None:
         batch_size=args.batch_size,
         learning_rate=args.learning_rate,
         adversary_lambda=args.adversary_lambda,
+        adversary_kind=args.adversary_kind,
+        adversary_reset_epochs=args.adversary_reset_epochs,
+        adversary_learning_rate=args.adversary_learning_rate,
+        color_augment=args.color_augment,
         feature_split_path=args.feature_split,
         extra_eval=extra,
         save_checkpoint=not args.no_checkpoint,
@@ -530,6 +534,85 @@ def _build_transplants(args: argparse.Namespace) -> None:
     manifest, plan = build_transplant_cache(design, cache, args.output, args.name)
     plan.to_csv(Path(args.output) / f"{args.name}_plan.csv", index=False)
     print(json.dumps(manifest, indent=2))
+
+
+def _followup_design(args: argparse.Namespace) -> None:
+    import pandas as pd
+
+    from .carriers import ablation_plan
+    from .study2_design import FOLLOWUP_FACTORIAL_SEEDS, MECHANISM_SEEDS, export_factorial
+
+    root = Path(args.output)
+    sipakmed = read_map(args.sipakmed_map)
+    boxes = read_map(args.sipakmed_boxes)
+    manifest, _ = export_factorial(sipakmed, root / "sipakmed_2c", seeds=FOLLOWUP_FACTORIAL_SEEDS, boxes=boxes)
+    manifest.to_csv(root / "followup_split_manifest.csv", index=False)
+    records = []
+    for seed in MECHANISM_SEEDS:
+        design = pd.read_csv(Path(args.study2_root) / "sipakmed_2c" / f"sipakmed_2c_design_seed{seed}.csv")
+        transplants = pd.read_csv(Path(args.study2_root) / "sipakmed_2b" / f"sipakmed_2b_plan_seed{seed}.csv")
+        plan = ablation_plan(design, transplants)
+        path = root / "ablations" / f"ablation_plan_seed{seed}.csv"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        payload = plan.sort_values("ablated_id").to_csv(index=False, lineterminator="\n")
+        path.write_text(payload)
+        records.append({"seed": seed, "path": path.as_posix(), "rows": len(plan),
+                        "sha256": __import__("hashlib").sha256(payload.encode()).hexdigest()})
+    pd.DataFrame(records).to_csv(root / "followup_ablation_manifest.csv", index=False)
+    print(manifest.groupby("protocol").size().to_string())
+
+
+def _build_carrier_caches(args: argparse.Namespace) -> None:
+    import pandas as pd
+
+    from .carriers import (
+        build_ablation_cache,
+        build_masked_cache,
+        build_reinhard_cache,
+        reference_statistics,
+    )
+    from .image_cache import CropCache
+
+    cache = CropCache(args.cache_dir, args.cache_name, verify=True)
+    crops = cache.index.crop_id.tolist()
+    output = Path(args.output)
+    summary = {}
+    if "masked" in args.kinds:
+        manifest, fractions = build_masked_cache(cache, crops, output, f"{args.cache_name}_masked")
+        fractions.to_csv(output / f"{args.cache_name}_masked_foreground.csv", index=False)
+        summary["masked"] = manifest["pixels_sha256"]
+    if "reinhard" in args.kinds:
+        reference = reference_statistics(cache, crops)
+        for strength in (0.5, 1.0):
+            name = f"{args.cache_name}_reinhard{round(100 * strength)}"
+            summary[name] = build_reinhard_cache(cache, crops, output, name, strength=strength, reference=reference)[
+                "pixels_sha256"
+            ]
+    if "ablations" in args.kinds:
+        for plan_path in sorted(Path(args.ablation_plans).glob("ablation_plan_seed*.csv")):
+            seed = plan_path.stem.removeprefix("ablation_plan_seed")
+            name = f"ablation_seed{seed}"
+            summary[name] = build_ablation_cache(pd.read_csv(plan_path), cache, output, name)["pixels_sha256"]
+    print(json.dumps(summary, indent=2))
+
+
+def _followup_factorial(args: argparse.Namespace) -> None:
+    from .followup_eval import factorial_followup
+
+    record = factorial_followup(
+        args.run_json, args.cache_dir, args.cache_name, args.ablation_dir, args.ablation_name, args.output,
+        repository=args.repository,
+    )
+    print(json.dumps({k: v for k, v in record.items() if k != "artifacts"}, indent=2))
+
+
+def _followup_leace(args: argparse.Namespace) -> None:
+    from .followup_eval import leace_followup
+
+    record = leace_followup(
+        args.run_json, args.cache_dir, args.cache_name, args.probe_split, args.output, repository=args.repository
+    )
+    print(json.dumps({k: v for k, v in record.items() if k not in {"artifacts", "ranks"}}, indent=2))
 
 
 def _risk_report(args: argparse.Namespace) -> None:
@@ -572,6 +655,10 @@ def build_parser() -> argparse.ArgumentParser:
     command.add_argument("--batch-size", type=int, default=64)
     command.add_argument("--learning-rate", type=float, default=1e-4)
     command.add_argument("--adversary-lambda", type=float)
+    command.add_argument("--adversary-kind", choices=("mlp", "linear_bn"), default="mlp")
+    command.add_argument("--adversary-reset-epochs", type=int)
+    command.add_argument("--adversary-learning-rate", type=float)
+    command.add_argument("--color-augment", choices=("hed_strong_bc",))
     command.add_argument("--feature-split")
     command.add_argument(
         "--extra-eval", action="append", default=[], metavar="NAME=DIR:CACHE",
@@ -589,6 +676,41 @@ def build_parser() -> argparse.ArgumentParser:
     command.add_argument("--seed", type=int, default=17)
     command.add_argument("--repository", default=".")
     command.set_defaults(function=_train_fingerprint)
+
+    command = commands.add_parser("followup-design", help="Export Amendment 8 splits and ablation plans")
+    command.add_argument("--sipakmed-map", default="provenance/sipakmed_parent_map_p3.parquet")
+    command.add_argument("--sipakmed-boxes", default="provenance/sipakmed_branch_b.parquet")
+    command.add_argument("--study2-root", default="splits/study2")
+    command.add_argument("--output", default="splits/study2/followup")
+    command.set_defaults(function=_followup_design)
+
+    command = commands.add_parser("build-carrier-caches", help="Build masked, Reinhard, and ablation caches")
+    command.add_argument("--cache-dir", required=True)
+    command.add_argument("--cache-name", required=True)
+    command.add_argument("--output", required=True)
+    command.add_argument("--ablation-plans", default="splits/study2/followup/ablations")
+    command.add_argument("--kinds", nargs="+", default=["masked", "reinhard", "ablations"],
+                         choices=["masked", "reinhard", "ablations"])
+    command.set_defaults(function=_build_carrier_caches)
+
+    command = commands.add_parser("followup-factorial", help="Carrier ablations and Grad-CAM for one 2C model")
+    command.add_argument("run_json")
+    command.add_argument("--cache-dir", required=True)
+    command.add_argument("--cache-name", required=True)
+    command.add_argument("--ablation-dir", required=True)
+    command.add_argument("--ablation-name", required=True)
+    command.add_argument("--output", required=True)
+    command.add_argument("--repository", default=".")
+    command.set_defaults(function=_followup_factorial)
+
+    command = commands.add_parser("followup-leace", help="Rank-limited parent-identity erasure for one model")
+    command.add_argument("run_json")
+    command.add_argument("--cache-dir", required=True)
+    command.add_argument("--cache-name", required=True)
+    command.add_argument("--probe-split", required=True)
+    command.add_argument("--output", required=True)
+    command.add_argument("--repository", default=".")
+    command.set_defaults(function=_followup_leace)
 
     command = commands.add_parser("build-transplants", help="Render 2B counterfactual composites")
     command.add_argument("design", help="2C design CSV for one seed")

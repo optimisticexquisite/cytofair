@@ -31,8 +31,14 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import balanced_accuracy_score, confusion_matrix, f1_score
 
-from .backbones import build_classifier, build_parent_adversary, dann_schedule, gradient_reversal
-from .gpu_augment import IMAGENET_MEAN, IMAGENET_STD, GpuCrops
+from .backbones import (
+    build_classifier,
+    build_linear_parent_adversary,
+    build_parent_adversary,
+    dann_schedule,
+    gradient_reversal,
+)
+from .gpu_augment import COLOR_AUGMENTATIONS, IMAGENET_MEAN, IMAGENET_STD, GpuCrops
 from .image_cache import CropCache
 from .probe import _git_sha, _runtime_metadata
 
@@ -123,6 +129,10 @@ def train_study2(
     learning_rate: float = 1e-4,
     weight_decay: float = 1e-4,
     adversary_lambda: float | None = None,
+    adversary_kind: str = "mlp",
+    adversary_reset_epochs: int | None = None,
+    adversary_learning_rate: float | None = None,
+    color_augment: str | None = None,
     feature_split_path: str | Path | None = None,
     extra_eval: list[tuple[str, str | Path, str]] | None = None,
     save_checkpoint: bool = True,
@@ -148,6 +158,13 @@ def train_study2(
     torch.backends.cuda.enable_mem_efficient_sdp(False)
     torch.backends.cuda.enable_cudnn_sdp(False)
     torch.backends.cuda.enable_math_sdp(True)
+
+    if color_augment is not None and color_augment not in COLOR_AUGMENTATIONS:
+        raise ValueError(f"Unknown colour augmentation: {color_augment}")
+    if adversary_kind not in {"mlp", "linear_bn"}:
+        raise ValueError(f"Unknown adversary kind: {adversary_kind}")
+    if adversary_lambda is None and (adversary_reset_epochs or adversary_learning_rate or adversary_kind != "mlp"):
+        raise ValueError("adversary options need --adversary-lambda")
 
     output_dir = Path(output_dir)
     cache = CropCache(cache_dir, cache_name, verify=True)
@@ -180,12 +197,27 @@ def train_study2(
     model = model.to(device)
     parameters = list(model.parameters())
     adversary = None
+    adversary_optimizer = None
     parent_mask = None
+
+    def build_adversary():
+        if adversary_kind == "linear_bn":
+            return build_linear_parent_adversary(spec.feature_dim, len(train_parents))
+        return build_parent_adversary(spec.feature_dim, len(train_parents))
+
+    def adversary_optimizer_for(module):
+        return torch.optim.AdamW(module.parameters(), lr=adversary_learning_rate, weight_decay=0.0)
+
     if adversary_lambda is not None:
         if adversary_lambda < 0:
             raise ValueError("adversary_lambda must be non-negative")
-        adversary = build_parent_adversary(spec.feature_dim, len(train_parents)).to(device)
-        parameters += list(adversary.parameters())
+        adversary = build_adversary().to(device)
+        if adversary_learning_rate is None:
+            parameters += list(adversary.parameters())
+        else:
+            # Amendment 8: the probe-matched adversary has its own optimizer so it can
+            # be re-initialised, state and all, without touching the classifier's.
+            adversary_optimizer = adversary_optimizer_for(adversary)
         # Class-conditional adversary: only parents of the sample's own class
         # compete, so suppressing parent identity never requires removing class
         # information that the classifier legitimately needs.
@@ -214,8 +246,19 @@ def train_study2(
     history = []
     started = time.time()
     started_at = datetime.now(UTC).isoformat()
+    resets = 0
     for epoch in range(epochs):
         model.train()
+        if adversary is not None and adversary_reset_epochs and epoch > 0 and epoch % adversary_reset_epochs == 0:
+            # Periodic re-initialisation stops the encoder from co-adapting to one
+            # adversary's blind spots. The fresh weights come from a forked CPU
+            # stream, so the classifier's random streams are untouched.
+            with torch.random.fork_rng(devices=[]):
+                torch.manual_seed(seed * 1000 + epoch)
+                fresh = build_adversary()
+            adversary.load_state_dict(fresh.state_dict())
+            adversary_optimizer = adversary_optimizer_for(adversary)
+            resets += 1
         if adversary is not None:
             adversary.train()
         loss_sum = torch.zeros((), device=device)
@@ -225,10 +268,12 @@ def train_study2(
         order = torch.randperm(n_train, generator=shuffle_generator)
         for start in range(0, n_train, batch_size):
             batch = order[start : start + batch_size]
-            images = train_store.train_batch(batch.tolist(), augmentation_generator)
+            images = train_store.train_batch(batch.tolist(), augmentation_generator, color=color_augment)
             batch_device = batch.to(device)
             targets = train_targets[batch_device]
             optimizer.zero_grad(set_to_none=True)
+            if adversary_optimizer is not None:
+                adversary_optimizer.zero_grad(set_to_none=True)
             features = model.features(images)
             loss = criterion(model.head(features), targets)
             total = loss
@@ -243,6 +288,8 @@ def train_study2(
                 adv_correct += (parent_logits.argmax(dim=1) == parents).sum()
             total.backward()
             optimizer.step()
+            if adversary_optimizer is not None:
+                adversary_optimizer.step()
             loss_sum += loss.detach() * len(batch)
             step += 1
         train_loss = float(loss_sum) / n_train
@@ -384,18 +431,26 @@ def train_study2(
             "interpolation": "bilinear_antialias",
             "shuffle_seed": seed,
             "augmentation_seed": seed + AUGMENTATION_STREAM_OFFSET,
+            "color": None if color_augment is None else {"name": color_augment, **COLOR_AUGMENTATIONS[color_augment]},
         },
+        "color_augment": color_augment,
         "pretrained": pretrained,
         "weights": spec.weights,
         "feature_dim": spec.feature_dim,
         "adversary_lambda": adversary_lambda,
+        "adversary_kind": None if adversary is None else adversary_kind,
         "adversary": None
         if adversary is None
         else {
-            "kind": "class_conditional_parent_head_behind_gradient_reversal",
+            "kind": "class_conditional_parent_head_behind_gradient_reversal"
+            if adversary_kind == "mlp"
+            else "class_conditional_standardised_linear_parent_head_behind_gradient_reversal",
             "schedule": "dann_ramp",
-            "hidden": 512,
+            "hidden": 512 if adversary_kind == "mlp" else None,
             "n_parents": len(train_parents),
+            "learning_rate": learning_rate if adversary_learning_rate is None else adversary_learning_rate,
+            "reset_every_epochs": adversary_reset_epochs,
+            "resets": resets,
         },
         "split_path": str(split_path),
         "split_file_sha256": sha256_file(split_path),
