@@ -1,0 +1,36 @@
+{
+  "estimate": -4.28600200921333,
+  "ci95": [
+    -8.596214254796333,
+    -1.3680558921850465
+  ],
+  "p_two_sided": 0.0002,
+  "cells": 1144,
+  "slides": 230,
+  "replicates": 10000,
+  "quantity": "within-cell P1 - P2 probability of the slide's context class, discordant cells (pp)"
+}
+{"collected": {"carrier": 480, "ffact": 160, "leace": 480, "linadv": 300, "normalization": 160}, "diverged": 0} 0 problems
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+F1 estimate=-4.286 p=0.0002 p_holm=0.0014 supported=FALSE
+F2 estimate=1.267 p=0.005404 p_holm=0.03242 supported=TRUE
+F3 estimate=1.862 p=1.427e-08 p_holm=1.141e-07 supported=TRUE
+F4 estimate=-0.231 p=0.4347 p_holm=1 supported=FALSE
+F5 estimate=-0.014 p=0.724 p_holm=1 supported=FALSE
+F6 estimate=0.015 p=0.9423 p_holm=1 supported=FALSE
+F7 estimate=0.000 p=0.9858 p_holm=1 supported=FALSE
+F8 estimate=-0.000 p=0.9313 p_holm=1 supported=FALSE

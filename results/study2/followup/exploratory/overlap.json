@@ -1,0 +1,115 @@
+{
+  "note": "EXPLORATORY, not registered",
+  "summary": [
+    {
+      "condition": "Study 2, original",
+      "subset": "not overlapping",
+      "pairs": 80,
+      "mean_crops": 319.6,
+      "leak_minus_clean_pp": 1.6817195498828965,
+      "ci95": [
+        1.2710606974507288,
+        2.0923784023150644
+      ]
+    },
+    {
+      "condition": "Study 2, original",
+      "subset": "overlapping",
+      "pairs": 80,
+      "mean_crops": 207.3,
+      "leak_minus_clean_pp": 1.7757803519022892,
+      "ci95": [
+        1.3658245521145278,
+        2.1857361516900506
+      ]
+    },
+    {
+      "condition": "Study 2, stain transfer",
+      "subset": "not overlapping",
+      "pairs": 80,
+      "mean_crops": 319.6,
+      "leak_minus_clean_pp": 0.6966640286444192,
+      "ci95": [
+        0.042516557861494664,
+        1.3508114994273437
+      ]
+    },
+    {
+      "condition": "Study 2, stain transfer",
+      "subset": "overlapping",
+      "pairs": 80,
+      "mean_crops": 207.3,
+      "leak_minus_clean_pp": 0.07536859505359594,
+      "ci95": [
+        -0.58607194400803,
+        0.7368091341152219
+      ]
+    },
+    {
+      "condition": "carrier, colour",
+      "subset": "not overlapping",
+      "pairs": 80,
+      "mean_crops": 328.55,
+      "leak_minus_clean_pp": 1.7985321170304451,
+      "ci95": [
+        1.367025275638654,
+        2.230038958422236
+      ]
+    },
+    {
+      "condition": "carrier, colour",
+      "subset": "overlapping",
+      "pairs": 80,
+      "mean_crops": 205.65,
+      "leak_minus_clean_pp": 1.537668837055554,
+      "ci95": [
+        0.9836842309348268,
+        2.0916534431762814
+      ]
+    },
+    {
+      "condition": "carrier, masked",
+      "subset": "not overlapping",
+      "pairs": 80,
+      "mean_crops": 328.55,
+      "leak_minus_clean_pp": 1.9558021943759765,
+      "ci95": [
+        1.486953633619983,
+        2.42465075513197
+      ]
+    },
+    {
+      "condition": "carrier, masked",
+      "subset": "overlapping",
+      "pairs": 80,
+      "mean_crops": 205.65,
+      "leak_minus_clean_pp": 1.686728075401041,
+      "ci95": [
+        1.2952193356489896,
+        2.078236815153092
+      ]
+    },
+    {
+      "condition": "carrier, standard",
+      "subset": "not overlapping",
+      "pairs": 80,
+      "mean_crops": 328.55,
+      "leak_minus_clean_pp": 1.6423870764608648,
+      "ci95": [
+        1.0281686463120545,
+        2.256605506609675
+      ]
+    },
+    {
+      "condition": "carrier, standard",
+      "subset": "overlapping",
+      "pairs": 80,
+      "mean_crops": 205.65,
+      "leak_minus_clean_pp": 1.2636143820696297,
+      "ci95": [
+        0.7747689860887368,
+        1.7524597780505227
+      ]
+    }
+  ]
+}

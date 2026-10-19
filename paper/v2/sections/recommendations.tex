@@ -19,6 +19,10 @@
   architectures, test it once with a mixed model that treats architectures and splits as
   random effects, and size the study by simulation; report per-architecture contrasts
   descriptively.
+\item \textbf{Do not certify a split with a probe, a saliency map, or an augmentation.} Leakage
+  inflated accuracy with field identity erased from the features, with identical Grad-CAM maps,
+  with backgrounds removed, and with strong colour augmentation. Only a parent-disjoint split
+  removes it.
 \item \textbf{Keep the evidence.} Save per-sample predictions, final weights, and the
   exact split for every run, so that confusion matrices, calibration, and later
   mechanistic analyses do not require retraining.

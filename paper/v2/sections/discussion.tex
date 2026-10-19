@@ -1,7 +1,61 @@
 \section{Discussion}
 \label{sec:discussion}
 
-[Discussion to be finalised once the registered follow-up analysis is complete.]
+\paragraph{Crop-level splitting inflates accuracy, and the inflation is leakage.} With one
+registered test, sized by simulation, Study~2 detects what Study~1's six separate tests could
+not: on SIPaKMeD, crop-level splitting raises accuracy by \HoneEst~pp, consistently across
+twelve architectures from ResNet-18 to DINOv2. The factorial removes the obvious alternative.
+At equal crop and field counts, giving the model the test fields' siblings raises accuracy by
+\HthreeEst~pp, and the effect replicated on fresh seeds (\HthreeRepEst~pp), while giving it 43\%
+more distinct fields without leakage does nothing. The natural gap is therefore leakage, not
+the extra training diversity that crop-level splits also bring.
+
+\paragraph{The size of the inflation follows the structure.} SIPaKMeD releases about four crops
+per field and every field belongs to one class; CRIC releases about 29 cells per slide image,
+and slide identity carries most of the class information (Section~\ref{sec:structure}). The
+inflation scales accordingly, from \HoneEst~pp (an error rate \SipErrorRatio\ times higher at
+the parent level) to \HtwoEst~pp (\CricErrorRatio\ times), with balanced accuracy on CRIC
+falling by \CricBaccEst~pp. The closed forms of Section~\ref{sec:structure} predict which
+benchmarks are exposed before any model is trained.
+
+\paragraph{How the leak is used.} The two registered mechanism tests of Study~2 and the eight
+follow-up tests converge on a description by elimination. The leaked advantage does not need a
+background: it survives masking every background in training and testing (F3) and removing it
+at test time, and the background-transplant route was small and uncertain (H4). It is not
+memorisation of shared pixels: it is as large for test cells that share no pixel with any
+training crop (exploratory). It is not a slide-level label prior: on CRIC, seen slides helped
+cells whose class disagreed with the slide's majority as much as cells that agreed, and pulled
+them \emph{away} from the majority class (F1). And it is not carried by a separable,
+linearly decodable code for the field: erasing that code from the features in closed form,
+or suppressing it with an adversary that cannot hide it from a linear probe, cut
+recoverability by \RecoveryCutMin--\RecoveryCutMax\% of its baseline without moving the gap (F5, F7, F8). What remains is that the
+advantage depends on the cell being rendered as its own field renders cells: transferring a
+test cell's colour statistics to another field of the same class removed about three quarters
+of it (F2). The simplest account consistent with all of this is that a model trained on a
+field's siblings calibrates its class evidence to that field's appearance (stain, colour
+balance, and the texture they produce in the cell itself), so cells from a seen field sit
+further inside their class region. Random colour jitter during training did not prevent this
+(F4), presumably because jitter perturbs each image around its own appearance and leaves the
+field-specific structure of that appearance learnable.
+
+\paragraph{Decodable is not used, and saliency is not use either.} Study~1 established
+\emph{availability}: a probe recognised fields at 109 times chance. Study~2 shows that
+availability and use come apart. The field identity a linear probe can read can be removed
+almost entirely without touching the inflation, in line with evidence from language models that
+probe-decodable information need not be what a model relies on~\citep{elazar2021amnesic,ravichander2021probing}.
+Grad-CAM, the tool most often used to argue that a medical classifier looks at the right
+thing, showed leak and clean models attending to the same places; a saliency audit would have
+cleared both. Neither probes nor saliency maps can certify that an evaluation is free of
+hierarchical leakage; only the split can.
+
+\paragraph{What survives, and what does not fix it.} Within a benchmark, crop-level splitting
+preserved the architecture ranking reasonably well (Kendall $\tau=\KendallTau$), so relative
+comparisons under one protocol are not meaningless. Absolute numbers are another matter: results
+reported for the same dataset under crop-level and parent-level splits are not comparable, and on
+CRIC the protocol difference is several times larger than the spread between the six
+architectures under either protocol. Neither of the usual robustness measures removed the
+inflation: background removal left it intact (F3), strong colour augmentation left it intact
+(F4), and stain normalisation reduced recoverability only slightly while costing accuracy (F6).
 
 \input{sections/limitations.tex}
 \input{sections/recommendations.tex}

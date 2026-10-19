@@ -1,0 +1,3015 @@
+{
+  "r_version": "R version 4.4.3 (2025-02-28)",
+  "F2": {
+    "model_used": "full",
+    "term": "leak:ablated",
+    "sign": -1,
+    "estimate": 1.26699113242306,
+    "se": 0.452156069870297,
+    "df": 302.99999908374,
+    "p": 0.00540390079829752,
+    "ci95": [0.377227522176628, 2.1567547426695],
+    "singular": true,
+    "variance_components": [
+      {
+        "grp": "run",
+        "var1": "(Intercept)",
+        "vcov": 0,
+        "sdcor": 0
+      },
+      {
+        "grp": "training_set",
+        "var1": "(Intercept)",
+        "vcov": 0,
+        "sdcor": 0
+      },
+      {
+        "grp": "seed",
+        "var1": "(Intercept)",
+        "vcov": 0.791946623753199,
+        "sdcor": 0.889913829397655
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "vcov": 0.739418972074644,
+        "sdcor": 0.859894744765105
+      },
+      {
+        "grp": "architecture",
+        "var1": "leak",
+        "vcov": 0.00043758760989311,
+        "sdcor": 0.0209185948355311
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "var2": "leak",
+        "vcov": -0.0179877897669437,
+        "sdcor": -1
+      },
+      {
+        "grp": "Residual",
+        "vcov": 4.08890223041105,
+        "sdcor": 2.02210341733826
+      }
+    ]
+  },
+  "ablation_reductions_secondary": {
+    "grey": {
+      "model_used": "full",
+      "term": "leak:ablated",
+      "sign": -1,
+      "estimate": 0.761167903292275,
+      "se": 1.06971663202616,
+      "df": 271.999983515228,
+      "p": 0.477346888503893,
+      "ci95": [-1.34480874067163, 2.86714454725618],
+      "singular": true,
+      "variance_components": [
+        {
+          "grp": "run",
+          "var1": "(Intercept)",
+          "vcov": 1.91457165771541e-14,
+          "sdcor": 1.38368047529601e-07
+        },
+        {
+          "grp": "training_set",
+          "var1": "(Intercept)",
+          "vcov": 0.410797335264369,
+          "sdcor": 0.640934735573263
+        },
+        {
+          "grp": "seed",
+          "var1": "(Intercept)",
+          "vcov": 0.429074872781647,
+          "sdcor": 0.655038069719346
+        },
+        {
+          "grp": "architecture",
+          "var1": "(Intercept)",
+          "vcov": 2.70739968603051,
+          "sdcor": 1.64541778464635
+        },
+        {
+          "grp": "architecture",
+          "var1": "leak",
+          "vcov": 0.852710489162848,
+          "sdcor": 0.923423244868163
+        },
+        {
+          "grp": "architecture",
+          "var1": "(Intercept)",
+          "var2": "leak",
+          "vcov": 1.33660811714958,
+          "sdcor": 0.87968483364376
+        },
+        {
+          "grp": "Residual",
+          "vcov": 22.8858734566678,
+          "sdcor": 4.78391821174524
+        }
+      ]
+    },
+    "low_pass": {
+      "model_used": "full",
+      "term": "leak:ablated",
+      "sign": -1,
+      "estimate": -0.888624955499682,
+      "se": 1.99425234046357,
+      "df": 311.999999447898,
+      "p": 0.656200271128451,
+      "ci95": [-4.8125088755302, 3.03525896453083],
+      "singular": true,
+      "variance_components": [
+        {
+          "grp": "run",
+          "var1": "(Intercept)",
+          "vcov": 0,
+          "sdcor": 0
+        },
+        {
+          "grp": "training_set",
+          "var1": "(Intercept)",
+          "vcov": 0,
+          "sdcor": 0
+        },
+        {
+          "grp": "seed",
+          "var1": "(Intercept)",
+          "vcov": 0,
+          "sdcor": 0
+        },
+        {
+          "grp": "architecture",
+          "var1": "(Intercept)",
+          "vcov": 61.1659395637867,
+          "sdcor": 7.82086565309664
+        },
+        {
+          "grp": "architecture",
+          "var1": "leak",
+          "vcov": 0.437300975077629,
+          "sdcor": 0.661287361952146
+        },
+        {
+          "grp": "architecture",
+          "var1": "(Intercept)",
+          "var2": "leak",
+          "vcov": -5.17183961591843,
+          "sdcor": -1
+        },
+        {
+          "grp": "Residual",
+          "vcov": 79.5408479488885,
+          "sdcor": 8.91856759512919
+        }
+      ]
+    },
+    "illumination_flat": {
+      "model_used": "full",
+      "term": "leak:ablated",
+      "sign": -1,
+      "estimate": 0.41959047428001,
+      "se": 0.392243685453993,
+      "df": 157.99999526196,
+      "p": 0.286377341447101,
+      "ci95": [-0.35512691961083, 1.19430786817085],
+      "singular": true,
+      "variance_components": [
+        {
+          "grp": "run",
+          "var1": "(Intercept)",
+          "vcov": 0.80097024175762,
+          "sdcor": 0.894969408280317
+        },
+        {
+          "grp": "training_set",
+          "var1": "(Intercept)",
+          "vcov": 0,
+          "sdcor": 0
+        },
+        {
+          "grp": "seed",
+          "var1": "(Intercept)",
+          "vcov": 0.662302079572067,
+          "sdcor": 0.813819439170672
+        },
+        {
+          "grp": "architecture",
+          "var1": "(Intercept)",
+          "vcov": 0.685330820796377,
+          "sdcor": 0.827847099890056
+        },
+        {
+          "grp": "architecture",
+          "var1": "leak",
+          "vcov": 0.024135217403054,
+          "sdcor": 0.155355133172528
+        },
+        {
+          "grp": "architecture",
+          "var1": "(Intercept)",
+          "var2": "leak",
+          "vcov": -0.128610296449911,
+          "sdcor": -1
+        },
+        {
+          "grp": "Residual",
+          "vcov": 3.07710217557062,
+          "sdcor": 1.75416708884035
+        }
+      ]
+    },
+    "background_grey": {
+      "model_used": "full",
+      "term": "leak:ablated",
+      "sign": -1,
+      "estimate": 0.549564480463196,
+      "se": 0.627532103090329,
+      "df": 302.99999743304,
+      "p": 0.381856859359756,
+      "ci95": [-0.685308314152952, 1.78443727507934],
+      "singular": true,
+      "variance_components": [
+        {
+          "grp": "run",
+          "var1": "(Intercept)",
+          "vcov": 0,
+          "sdcor": 0
+        },
+        {
+          "grp": "training_set",
+          "var1": "(Intercept)",
+          "vcov": 0,
+          "sdcor": 0
+        },
+        {
+          "grp": "seed",
+          "var1": "(Intercept)",
+          "vcov": 0.400096085564949,
+          "sdcor": 0.632531489781299
+        },
+        {
+          "grp": "architecture",
+          "var1": "(Intercept)",
+          "vcov": 2.44465163968206,
+          "sdcor": 1.56353817979673
+        },
+        {
+          "grp": "architecture",
+          "var1": "leak",
+          "vcov": 0.17224581452363,
+          "sdcor": 0.415025076981657
+        },
+        {
+          "grp": "architecture",
+          "var1": "(Intercept)",
+          "var2": "leak",
+          "vcov": -0.64890755343364,
+          "sdcor": -0.999999999999604
+        },
+        {
+          "grp": "Residual",
+          "vcov": 7.87593080817944,
+          "sdcor": 2.80640888114677
+        }
+      ]
+    }
+  },
+  "leak_effect_by_ablation_secondary": {
+    "background_grey": {
+      "model_used": "intercepts",
+      "term": "leak",
+      "sign": 1,
+      "estimate": 1.17272363359658,
+      "se": 0.474466004274277,
+      "df": 145.000000381068,
+      "p": 0.0146055504438367,
+      "ci95": [0.234960762325197, 2.11048650486796],
+      "singular": true,
+      "variance_components": [
+        {
+          "grp": "training_set",
+          "var1": "(Intercept)",
+          "vcov": 0,
+          "sdcor": 0
+        },
+        {
+          "grp": "seed",
+          "var1": "(Intercept)",
+          "vcov": 1.03845944374654,
+          "sdcor": 1.01904830295062
+        },
+        {
+          "grp": "architecture",
+          "var1": "(Intercept)",
+          "vcov": 11.0118894033837,
+          "sdcor": 3.31841670128749
+        },
+        {
+          "grp": "Residual",
+          "vcov": 9.00471956847992,
+          "sdcor": 3.0007864916518
+        }
+      ]
+    },
+    "grey": {
+      "model_used": "intercepts",
+      "term": "leak",
+      "sign": 1,
+      "estimate": 0.961120210767504,
+      "se": 1.09811555132241,
+      "df": 28.0000007009079,
+      "p": 0.388887043010412,
+      "ci95": [-1.28826752454099, 3.210507946076],
+      "singular": false,
+      "variance_components": [
+        {
+          "grp": "training_set",
+          "var1": "(Intercept)",
+          "vcov": 2.44573781735622,
+          "sdcor": 1.56388548728998
+        },
+        {
+          "grp": "seed",
+          "var1": "(Intercept)",
+          "vcov": 1.88560023619254,
+          "sdcor": 1.37317159750431
+        },
+        {
+          "grp": "architecture",
+          "var1": "(Intercept)",
+          "vcov": 9.68824569715187,
+          "sdcor": 3.1125946888652
+        },
+        {
+          "grp": "Residual",
+          "vcov": 38.4513592928198,
+          "sdcor": 6.20091600433515
+        }
+      ]
+    },
+    "illumination_flat": {
+      "model_used": "intercepts",
+      "term": "leak",
+      "sign": 1,
+      "estimate": 1.30269763977977,
+      "se": 0.35998407914356,
+      "df": 144.999999832909,
+      "p": 0.000408126199912533,
+      "ci95": [0.591203664153977, 2.01419161540556],
+      "singular": true,
+      "variance_components": [
+        {
+          "grp": "training_set",
+          "var1": "(Intercept)",
+          "vcov": 0,
+          "sdcor": 0
+        },
+        {
+          "grp": "seed",
+          "var1": "(Intercept)",
+          "vcov": 1.50299609133326,
+          "sdcor": 1.22596741038792
+        },
+        {
+          "grp": "architecture",
+          "var1": "(Intercept)",
+          "vcov": 1.98256112678079,
+          "sdcor": 1.40803449062187
+        },
+        {
+          "grp": "Residual",
+          "vcov": 5.18354148947348,
+          "sdcor": 2.27673922298393
+        }
+      ]
+    },
+    "low_pass": {
+      "model_used": "intercepts",
+      "term": "leak",
+      "sign": 1,
+      "estimate": 2.61091306955946,
+      "se": 1.33004680676626,
+      "df": 27.9994098687235,
+      "p": 0.0596473160181259,
+      "ci95": [-0.113566895327096, 5.33539303444602],
+      "singular": false,
+      "variance_components": [
+        {
+          "grp": "training_set",
+          "var1": "(Intercept)",
+          "vcov": 4.47504663955592,
+          "sdcor": 2.11543060381472
+        },
+        {
+          "grp": "seed",
+          "var1": "(Intercept)",
+          "vcov": 0.0357529678869042,
+          "sdcor": 0.189084552216473
+        },
+        {
+          "grp": "architecture",
+          "var1": "(Intercept)",
+          "vcov": 254.044957557163,
+          "sdcor": 15.9387878321145
+        },
+        {
+          "grp": "Residual",
+          "vcov": 52.8607937693414,
+          "sdcor": 7.2705428799603
+        }
+      ]
+    },
+    "original": {
+      "model_used": "intercepts",
+      "term": "leak",
+      "sign": 1,
+      "estimate": 1.72228811405978,
+      "se": 0.189898105351546,
+      "df": 145.000000101521,
+      "p": 7.72435283338536e-16,
+      "ci95": [1.34696218781406, 2.0976140403055],
+      "singular": true,
+      "variance_components": [
+        {
+          "grp": "training_set",
+          "var1": "(Intercept)",
+          "vcov": 0,
+          "sdcor": 0
+        },
+        {
+          "grp": "seed",
+          "var1": "(Intercept)",
+          "vcov": 0.479875037564385,
+          "sdcor": 0.692730133287404
+        },
+        {
+          "grp": "architecture",
+          "var1": "(Intercept)",
+          "vcov": 0.076499789824209,
+          "sdcor": 0.276585953772438
+        },
+        {
+          "grp": "Residual",
+          "vcov": 1.44245161664427,
+          "sdcor": 1.20102107252299
+        }
+      ]
+    },
+    "stain_transfer": {
+      "model_used": "intercepts",
+      "term": "leak",
+      "sign": 1,
+      "estimate": 0.455296981636714,
+      "se": 0.304727754296948,
+      "df": 145.000000085922,
+      "p": 0.137319674224,
+      "ci95": [-0.146985102340138, 1.05757906561357],
+      "singular": true,
+      "variance_components": [
+        {
+          "grp": "training_set",
+          "var1": "(Intercept)",
+          "vcov": 0,
+          "sdcor": 0
+        },
+        {
+          "grp": "seed",
+          "var1": "(Intercept)",
+          "vcov": 3.16597948494332,
+          "sdcor": 1.77931995013357
+        },
+        {
+          "grp": "architecture",
+          "var1": "(Intercept)",
+          "vcov": 2.88511268824034,
+          "sdcor": 1.69856194713067
+        },
+        {
+          "grp": "Residual",
+          "vcov": 3.71436016955445,
+          "sdcor": 1.92726753969304
+        }
+      ]
+    }
+  },
+  "ablation_cell_means": [
+    {
+      "ablation": "background_grey",
+      "cell": "clean_high",
+      "value": 87.1246129367737
+    },
+    {
+      "ablation": "grey",
+      "cell": "clean_high",
+      "value": 59.9920465186789
+    },
+    {
+      "ablation": "illumination_flat",
+      "cell": "clean_high",
+      "value": 90.7888438745108
+    },
+    {
+      "ablation": "low_pass",
+      "cell": "clean_high",
+      "value": 74.8914967955608
+    },
+    {
+      "ablation": "original",
+      "cell": "clean_high",
+      "value": 94.6717419389546
+    },
+    {
+      "ablation": "stain_transfer",
+      "cell": "clean_high",
+      "value": 89.7728345812377
+    },
+    {
+      "ablation": "background_grey",
+      "cell": "clean_low",
+      "value": 87.9242356269832
+    },
+    {
+      "ablation": "grey",
+      "cell": "clean_low",
+      "value": 59.908864556568
+    },
+    {
+      "ablation": "illumination_flat",
+      "cell": "clean_low",
+      "value": 90.0116457851603
+    },
+    {
+      "ablation": "low_pass",
+      "cell": "clean_low",
+      "value": 76.1984500931827
+    },
+    {
+      "ablation": "original",
+      "cell": "clean_low",
+      "value": 94.6556556960521
+    },
+    {
+      "ablation": "stain_transfer",
+      "cell": "clean_low",
+      "value": 89.4706786737784
+    },
+    {
+      "ablation": "background_grey",
+      "cell": "leak_high",
+      "value": 88.5747768644667
+    },
+    {
+      "ablation": "grey",
+      "cell": "leak_high",
+      "value": 61.7149666031199
+    },
+    {
+      "ablation": "illumination_flat",
+      "cell": "leak_high",
+      "value": 91.7024224176325
+    },
+    {
+      "ablation": "low_pass",
+      "cell": "leak_high",
+      "value": 78.2384887190585
+    },
+    {
+      "ablation": "original",
+      "cell": "leak_high",
+      "value": 96.2884955355203
+    },
+    {
+      "ablation": "stain_transfer",
+      "cell": "leak_high",
+      "value": 90.2581694180448
+    },
+    {
+      "ablation": "background_grey",
+      "cell": "leak_low",
+      "value": 88.8195189664835
+    },
+    {
+      "ablation": "grey",
+      "cell": "leak_low",
+      "value": 60.108184893662
+    },
+    {
+      "ablation": "illumination_flat",
+      "cell": "leak_low",
+      "value": 91.7034625215981
+    },
+    {
+      "ablation": "low_pass",
+      "cell": "leak_low",
+      "value": 78.073284308804
+    },
+    {
+      "ablation": "original",
+      "cell": "leak_low",
+      "value": 96.483478327606
+    },
+    {
+      "ablation": "stain_transfer",
+      "cell": "leak_low",
+      "value": 89.8959378002446
+    }
+  ],
+  "original_prediction_agreement": {
+    "Min.": 0.996146435452794,
+    "1st Qu.": 1,
+    "Median": 1,
+    "Mean": 0.999857166537558,
+    "3rd Qu.": 1,
+    "Max.": 1
+  },
+  "gradcam_descriptive": {
+    "leak_effect_on_background_attribution": {
+      "model_used": "intercepts",
+      "term": "leak",
+      "sign": 1,
+      "estimate": -0.0892179410239937,
+      "se": 0.243142245259359,
+      "df": 106.000012915372,
+      "p": 0.714397337905416,
+      "ci95": [-0.571271090016629, 0.392835207968641],
+      "singular": true,
+      "variance_components": [
+        {
+          "grp": "training_set",
+          "var1": "(Intercept)",
+          "vcov": 0,
+          "sdcor": 0
+        },
+        {
+          "grp": "seed",
+          "var1": "(Intercept)",
+          "vcov": 0.0792452222499909,
+          "sdcor": 0.281505279257763
+        },
+        {
+          "grp": "architecture",
+          "var1": "(Intercept)",
+          "vcov": 47.4500374946944,
+          "sdcor": 6.88839876130109
+        },
+        {
+          "grp": "Residual",
+          "vcov": 1.77354454289287,
+          "sdcor": 1.33174492411004
+        }
+      ]
+    },
+    "means": [
+      {
+        "cell": "clean_high",
+        "architecture": "convnext_tiny",
+        "value": 25.0288437121694,
+        "excess": -9.56345772275117,
+        "random_head_spearman": 0.0776377554982901
+      },
+      {
+        "cell": "clean_low",
+        "architecture": "convnext_tiny",
+        "value": 24.9364984369268,
+        "excess": -9.65580299799375,
+        "random_head_spearman": 0.0957295916974545
+      },
+      {
+        "cell": "leak_high",
+        "architecture": "convnext_tiny",
+        "value": 24.3971028192975,
+        "excess": -10.1951986156231,
+        "random_head_spearman": 0.0962653078138828
+      },
+      {
+        "cell": "leak_low",
+        "architecture": "convnext_tiny",
+        "value": 24.8390356988661,
+        "excess": -9.75326573605454,
+        "random_head_spearman": 0.0791326534934342
+      },
+      {
+        "cell": "clean_high",
+        "architecture": "densenet121",
+        "value": 26.4587472077346,
+        "excess": -8.13355422718599,
+        "random_head_spearman": 0.0451632657262962
+      },
+      {
+        "cell": "clean_low",
+        "architecture": "densenet121",
+        "value": 26.8797810922153,
+        "excess": -7.71252034270533,
+        "random_head_spearman": 0.0479030603077263
+      },
+      {
+        "cell": "leak_high",
+        "architecture": "densenet121",
+        "value": 26.7864019373371,
+        "excess": -7.80589949758351,
+        "random_head_spearman": 0.0462959184776992
+      },
+      {
+        "cell": "leak_low",
+        "architecture": "densenet121",
+        "value": 26.7085917081404,
+        "excess": -7.88370972678019,
+        "random_head_spearman": 0.0535408163443208
+      },
+      {
+        "cell": "clean_high",
+        "architecture": "resnet50",
+        "value": 13.8746602024517,
+        "excess": -20.7176412324689,
+        "random_head_spearman": 0.105336734652519
+      },
+      {
+        "cell": "clean_low",
+        "architecture": "resnet50",
+        "value": 13.9719982895354,
+        "excess": -20.6203031453852,
+        "random_head_spearman": 0.108739796094596
+      },
+      {
+        "cell": "leak_high",
+        "architecture": "resnet50",
+        "value": 14.0010099532582,
+        "excess": -20.5912914816624,
+        "random_head_spearman": 0.0872091840952635
+      },
+      {
+        "cell": "leak_low",
+        "architecture": "resnet50",
+        "value": 13.88307917799,
+        "excess": -20.7092222569306,
+        "random_head_spearman": 0.0817448977380991
+      }
+    ]
+  },
+  "F3": {
+    "model_used": "full",
+    "term": "leak",
+    "sign": 1,
+    "estimate": 1.86208764603042,
+    "se": 0.210918466761149,
+    "df": 21.3483469010611,
+    "p": 1.42663579488262e-08,
+    "ci95": [1.4238940764471, 2.30028121561375],
+    "singular": true,
+    "variance_components": [
+      {
+        "grp": "training_set",
+        "var1": "(Intercept)",
+        "vcov": 0.12453227691802,
+        "sdcor": 0.352891310346429
+      },
+      {
+        "grp": "seed",
+        "var1": "(Intercept)",
+        "vcov": 0.980264956856214,
+        "sdcor": 0.990083308038376
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "vcov": 0.201768611988303,
+        "sdcor": 0.449186611541688
+      },
+      {
+        "grp": "architecture",
+        "var1": "leak",
+        "vcov": 0.00423365438422249,
+        "sdcor": 0.065066538129998
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "var2": "leak",
+        "vcov": -0.0292270177873619,
+        "sdcor": -1
+      },
+      {
+        "grp": "Residual",
+        "vcov": 1.23899833332066,
+        "sdcor": 1.11310302008424
+      }
+    ]
+  },
+  "H3_replication_secondary": {
+    "model_used": "full",
+    "term": "leak",
+    "sign": 1,
+    "estimate": 1.4749744655006,
+    "se": 0.486204019200512,
+    "df": 3.56552556957407,
+    "p": 0.0448776977950695,
+    "ci95": [0.0576410574206521, 2.89230787358055],
+    "singular": true,
+    "variance_components": [
+      {
+        "grp": "training_set",
+        "var1": "(Intercept)",
+        "vcov": 0.159493961526852,
+        "sdcor": 0.399366950969721
+      },
+      {
+        "grp": "seed",
+        "var1": "(Intercept)",
+        "vcov": 0.530705122283783,
+        "sdcor": 0.728495107934008
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "vcov": 0.520699604007395,
+        "sdcor": 0.721595180144238
+      },
+      {
+        "grp": "architecture",
+        "var1": "leak",
+        "vcov": 0.663199225793138,
+        "sdcor": 0.814370447519517
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "var2": "leak",
+        "vcov": 0.587645789781989,
+        "sdcor": 1
+      },
+      {
+        "grp": "Residual",
+        "vcov": 2.1858058274304,
+        "sdcor": 1.478447099977
+      }
+    ]
+  },
+  "F4": {
+    "model_used": "full",
+    "term": "leak:treated",
+    "sign": -1,
+    "estimate": -0.231063876619466,
+    "se": 0.295327914266387,
+    "df": 274.999996958327,
+    "p": 0.434654066313274,
+    "ci95": [-0.81245463971196, 0.350326886473028],
+    "singular": true,
+    "variance_components": [
+      {
+        "grp": "training_set",
+        "var1": "(Intercept)",
+        "vcov": 0.202838274410013,
+        "sdcor": 0.450375703618671
+      },
+      {
+        "grp": "seed",
+        "var1": "(Intercept)",
+        "vcov": 0.704257405403265,
+        "sdcor": 0.839200456031373
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "vcov": 0.328039659874896,
+        "sdcor": 0.572747466057158
+      },
+      {
+        "grp": "architecture",
+        "var1": "leak",
+        "vcov": 0.186767048611842,
+        "sdcor": 0.432165533808333
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "var2": "leak",
+        "vcov": 0.247521714405962,
+        "sdcor": 1
+      },
+      {
+        "grp": "Residual",
+        "vcov": 1.74437153889869,
+        "sdcor": 1.32074658390574
+      }
+    ]
+  },
+  "masking_reduction_secondary": {
+    "model_used": "full",
+    "term": "leak:treated",
+    "sign": -1,
+    "estimate": -0.387113180530998,
+    "se": 0.292067810450505,
+    "df": 274.999998724585,
+    "p": 0.1861311954309,
+    "ci95": [-0.962086012373055, 0.187859651311058],
+    "singular": true,
+    "variance_components": [
+      {
+        "grp": "training_set",
+        "var1": "(Intercept)",
+        "vcov": 0.214487539833199,
+        "sdcor": 0.463127995086886
+      },
+      {
+        "grp": "seed",
+        "var1": "(Intercept)",
+        "vcov": 0.762046297990134,
+        "sdcor": 0.872952632157172
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "vcov": 0.32654301980333,
+        "sdcor": 0.571439427939069
+      },
+      {
+        "grp": "architecture",
+        "var1": "leak",
+        "vcov": 0.0966869163800347,
+        "sdcor": 0.310945198355007
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "var2": "leak",
+        "vcov": 0.177686346268385,
+        "sdcor": 1
+      },
+      {
+        "grp": "Residual",
+        "vcov": 1.70607211802705,
+        "sdcor": 1.30616695641371
+      }
+    ]
+  },
+  "carrier_cell_means": [
+    {
+      "condition": "colour",
+      "cell": "clean_high",
+      "architecture": "convnext_tiny",
+      "value": 94.2355530554315
+    },
+    {
+      "condition": "masked",
+      "cell": "clean_high",
+      "architecture": "convnext_tiny",
+      "value": 93.1538212536193
+    },
+    {
+      "condition": "standard",
+      "cell": "clean_high",
+      "architecture": "convnext_tiny",
+      "value": 95.0482027787569
+    },
+    {
+      "condition": "colour",
+      "cell": "clean_low",
+      "architecture": "convnext_tiny",
+      "value": 93.4439566339393
+    },
+    {
+      "condition": "masked",
+      "cell": "clean_low",
+      "architecture": "convnext_tiny",
+      "value": 93.6134467447745
+    },
+    {
+      "condition": "standard",
+      "cell": "clean_low",
+      "architecture": "convnext_tiny",
+      "value": 93.9998321554591
+    },
+    {
+      "condition": "colour",
+      "cell": "leak_high",
+      "architecture": "convnext_tiny",
+      "value": 95.2995071442004
+    },
+    {
+      "condition": "masked",
+      "cell": "leak_high",
+      "architecture": "convnext_tiny",
+      "value": 94.8028459723237
+    },
+    {
+      "condition": "standard",
+      "cell": "leak_high",
+      "architecture": "convnext_tiny",
+      "value": 96.5553789582473
+    },
+    {
+      "condition": "colour",
+      "cell": "leak_low",
+      "architecture": "convnext_tiny",
+      "value": 95.7663382887242
+    },
+    {
+      "condition": "masked",
+      "cell": "leak_low",
+      "architecture": "convnext_tiny",
+      "value": 95.2894768074396
+    },
+    {
+      "condition": "standard",
+      "cell": "leak_low",
+      "architecture": "convnext_tiny",
+      "value": 96.6624368370595
+    },
+    {
+      "condition": "colour",
+      "cell": "clean_high",
+      "architecture": "densenet121",
+      "value": 94.4665483800014
+    },
+    {
+      "condition": "masked",
+      "cell": "clean_high",
+      "architecture": "densenet121",
+      "value": 94.2070998423969
+    },
+    {
+      "condition": "standard",
+      "cell": "clean_high",
+      "architecture": "densenet121",
+      "value": 95.1413324685047
+    },
+    {
+      "condition": "colour",
+      "cell": "clean_low",
+      "architecture": "densenet121",
+      "value": 94.5411664957516
+    },
+    {
+      "condition": "masked",
+      "cell": "clean_low",
+      "architecture": "densenet121",
+      "value": 93.9869700296744
+    },
+    {
+      "condition": "standard",
+      "cell": "clean_low",
+      "architecture": "densenet121",
+      "value": 94.84900230899
+    },
+    {
+      "condition": "colour",
+      "cell": "leak_high",
+      "architecture": "densenet121",
+      "value": 96.1956755071629
+    },
+    {
+      "condition": "masked",
+      "cell": "leak_high",
+      "architecture": "densenet121",
+      "value": 95.5869552607362
+    },
+    {
+      "condition": "standard",
+      "cell": "leak_high",
+      "architecture": "densenet121",
+      "value": 96.3346413494937
+    },
+    {
+      "condition": "colour",
+      "cell": "leak_low",
+      "architecture": "densenet121",
+      "value": 96.4482953963444
+    },
+    {
+      "condition": "masked",
+      "cell": "leak_low",
+      "architecture": "densenet121",
+      "value": 96.194382675398
+    },
+    {
+      "condition": "standard",
+      "cell": "leak_low",
+      "architecture": "densenet121",
+      "value": 97.0075451869676
+    },
+    {
+      "condition": "colour",
+      "cell": "clean_high",
+      "architecture": "resnet50",
+      "value": 93.7861146033841
+    },
+    {
+      "condition": "masked",
+      "cell": "clean_high",
+      "architecture": "resnet50",
+      "value": 93.4234872584557
+    },
+    {
+      "condition": "standard",
+      "cell": "clean_high",
+      "architecture": "resnet50",
+      "value": 93.9855524241271
+    },
+    {
+      "condition": "colour",
+      "cell": "clean_low",
+      "architecture": "resnet50",
+      "value": 94.1020799279015
+    },
+    {
+      "condition": "masked",
+      "cell": "clean_low",
+      "architecture": "resnet50",
+      "value": 93.8744171754618
+    },
+    {
+      "condition": "standard",
+      "cell": "clean_low",
+      "architecture": "resnet50",
+      "value": 94.4809882236924
+    },
+    {
+      "condition": "colour",
+      "cell": "leak_high",
+      "architecture": "resnet50",
+      "value": 95.6222127395942
+    },
+    {
+      "condition": "masked",
+      "cell": "leak_high",
+      "architecture": "resnet50",
+      "value": 95.4575312768981
+    },
+    {
+      "condition": "standard",
+      "cell": "leak_high",
+      "architecture": "resnet50",
+      "value": 96.064976642953
+    },
+    {
+      "condition": "colour",
+      "cell": "leak_low",
+      "architecture": "resnet50",
+      "value": 95.8351663912229
+    },
+    {
+      "condition": "masked",
+      "cell": "leak_low",
+      "architecture": "resnet50",
+      "value": 95.6864606488028
+    },
+    {
+      "condition": "standard",
+      "cell": "leak_low",
+      "architecture": "resnet50",
+      "value": 96.3971779811656
+    },
+    {
+      "condition": "colour",
+      "cell": "clean_high",
+      "architecture": "vit_b_16",
+      "value": 93.5259548007909
+    },
+    {
+      "condition": "masked",
+      "cell": "clean_high",
+      "architecture": "vit_b_16",
+      "value": 92.9541343551921
+    },
+    {
+      "condition": "standard",
+      "cell": "clean_high",
+      "architecture": "vit_b_16",
+      "value": 93.5975989345914
+    },
+    {
+      "condition": "colour",
+      "cell": "clean_low",
+      "architecture": "vit_b_16",
+      "value": 93.5082104241006
+    },
+    {
+      "condition": "masked",
+      "cell": "clean_low",
+      "architecture": "vit_b_16",
+      "value": 92.7391359846059
+    },
+    {
+      "condition": "standard",
+      "cell": "clean_low",
+      "architecture": "vit_b_16",
+      "value": 94.4921169658092
+    },
+    {
+      "condition": "colour",
+      "cell": "leak_high",
+      "architecture": "vit_b_16",
+      "value": 95.0522596461883
+    },
+    {
+      "condition": "masked",
+      "cell": "leak_high",
+      "architecture": "vit_b_16",
+      "value": 94.9184299866688
+    },
+    {
+      "condition": "standard",
+      "cell": "leak_high",
+      "architecture": "vit_b_16",
+      "value": 93.3982206719988
+    },
+    {
+      "condition": "colour",
+      "cell": "leak_low",
+      "architecture": "vit_b_16",
+      "value": 95.0384359448154
+    },
+    {
+      "condition": "masked",
+      "cell": "leak_low",
+      "architecture": "vit_b_16",
+      "value": 94.9131311841577
+    },
+    {
+      "condition": "standard",
+      "cell": "leak_low",
+      "architecture": "vit_b_16",
+      "value": 94.9740443560415
+    }
+  ],
+  "F5_manipulation_checks": {
+    "convnext_tiny": {
+      "levels_in_regime": [0, 4, 16, 64, 256],
+      "strongest": 256,
+      "R_baseline": 29.5047175139189,
+      "R_strongest": 5.18573121167719,
+      "within_class_floor": 1.17924528301887,
+      "manipulation_check_passed": true
+    },
+    "densenet121": {
+      "levels_in_regime": [0, 4, 16, 64, 256],
+      "strongest": 256,
+      "R_baseline": 29.3956373631954,
+      "R_strongest": 4.05365569051355,
+      "within_class_floor": 1.17924528301887,
+      "manipulation_check_passed": true
+    },
+    "dinov2_vits14": {
+      "levels_in_regime": [0, 4, 16, 64, 256],
+      "strongest": 256,
+      "R_baseline": 30.5483496934175,
+      "R_strongest": 9.51945766806602,
+      "within_class_floor": 1.17924528301887,
+      "manipulation_check_passed": true
+    },
+    "efficientnet_b0": {
+      "levels_in_regime": [0, 4, 16, 64, 256],
+      "strongest": 256,
+      "R_baseline": 22.5353777036071,
+      "R_strongest": 5.50412741489708,
+      "within_class_floor": 1.17924528301887,
+      "manipulation_check_passed": true
+    },
+    "efficientnet_v2_s": {
+      "levels_in_regime": [0, 4, 16, 64, 256],
+      "strongest": 256,
+      "R_baseline": 19.9262975901365,
+      "R_strongest": 3.87676894897595,
+      "within_class_floor": 1.17924528301887,
+      "manipulation_check_passed": true
+    },
+    "maxvit_t": {
+      "levels_in_regime": [0, 4, 16, 64, 256],
+      "strongest": 256,
+      "R_baseline": 22.0961087569594,
+      "R_strongest": 3.88856141828001,
+      "within_class_floor": 1.17924528301887,
+      "manipulation_check_passed": true
+    },
+    "mobilenet_v2": {
+      "levels_in_regime": [0, 4, 16, 64, 256],
+      "strongest": 256,
+      "R_baseline": 20.7871464639902,
+      "R_strongest": 4.18337270151824,
+      "within_class_floor": 1.17924528301887,
+      "manipulation_check_passed": true
+    },
+    "regnet_y_1_6gf": {
+      "levels_in_regime": [0, 4, 16, 64, 256],
+      "strongest": 256,
+      "R_baseline": 21.0554248094559,
+      "R_strongest": 3.35200476460159,
+      "within_class_floor": 1.17924528301887,
+      "manipulation_check_passed": true
+    },
+    "resnet18": {
+      "levels_in_regime": [0, 4, 16, 64, 256],
+      "strongest": 256,
+      "R_baseline": 23.1957551836967,
+      "R_strongest": 2.14622644009069,
+      "within_class_floor": 1.17924528301887,
+      "manipulation_check_passed": true
+    },
+    "resnet50": {
+      "levels_in_regime": [0, 4, 16, 64, 256],
+      "strongest": 256,
+      "R_baseline": 24.7169815376401,
+      "R_strongest": 10.4127359949052,
+      "within_class_floor": 1.17924528301887,
+      "manipulation_check_passed": true
+    },
+    "swin_t": {
+      "levels_in_regime": [0, 4, 16, 64, 256],
+      "strongest": 256,
+      "R_baseline": 28.8944578915834,
+      "R_strongest": 6.58313689753413,
+      "within_class_floor": 1.17924528301887,
+      "manipulation_check_passed": true
+    },
+    "vit_b_16": {
+      "levels_in_regime": [0, 4, 16, 64, 256],
+      "strongest": 256,
+      "R_baseline": 29.0949296206236,
+      "R_strongest": 6.19693404063582,
+      "within_class_floor": 1.17924528301887,
+      "manipulation_check_passed": true
+    }
+  },
+  "leace_means": [
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P1",
+      "rank": 0,
+      "value": 98.1975349783897,
+      "R": 29.3219345808029,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P1",
+      "rank": 0,
+      "value": 98.2407456636429,
+      "R": 29.5459911227226,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "dinov2_vits14",
+      "protocol": "P1",
+      "rank": 0,
+      "value": 95.9135848283768,
+      "R": 30.813679844141,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "protocol": "P1",
+      "rank": 0,
+      "value": 98.0432140827179,
+      "R": 22.3113211244345,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_v2_s",
+      "protocol": "P1",
+      "rank": 0,
+      "value": 97.6975348591805,
+      "R": 19.4811324775219,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "maxvit_t",
+      "protocol": "P1",
+      "rank": 0,
+      "value": 97.8765475749969,
+      "R": 21.5860851109028,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "mobilenet_v2",
+      "protocol": "P1",
+      "rank": 0,
+      "value": 97.4074119329453,
+      "R": 20.6191039830446,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "regnet_y_1_6gf",
+      "protocol": "P1",
+      "rank": 0,
+      "value": 97.8703746199608,
+      "R": 21.0023588687181,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet18",
+      "protocol": "P1",
+      "rank": 0,
+      "value": 97.8950670361519,
+      "R": 23.1426890939474,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P1",
+      "rank": 0,
+      "value": 98.1172892451286,
+      "R": 24.5695759356022,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "swin_t",
+      "protocol": "P1",
+      "rank": 0,
+      "value": 98.1728434562683,
+      "R": 28.9858494699001,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "vit_b_16",
+      "protocol": "P1",
+      "rank": 0,
+      "value": 97.8271654248238,
+      "R": 28.7971702218056,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P2",
+      "rank": 0,
+      "value": 97.2963005304337,
+      "R": 29.6875004470348,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P2",
+      "rank": 0,
+      "value": 97.5246959924698,
+      "R": 29.2452836036682,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "dinov2_vits14",
+      "protocol": "P2",
+      "rank": 0,
+      "value": 93.9567941427231,
+      "R": 30.2830195426941,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "protocol": "P2",
+      "rank": 0,
+      "value": 97.3024731874466,
+      "R": 22.7594342827797,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_v2_s",
+      "protocol": "P2",
+      "rank": 0,
+      "value": 96.8580287694931,
+      "R": 20.3714627027512,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "maxvit_t",
+      "protocol": "P2",
+      "rank": 0,
+      "value": 97.0987695455551,
+      "R": 22.6061324030161,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "mobilenet_v2",
+      "protocol": "P2",
+      "rank": 0,
+      "value": 96.6111156344414,
+      "R": 20.9551889449358,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "regnet_y_1_6gf",
+      "protocol": "P2",
+      "rank": 0,
+      "value": 96.9074121117592,
+      "R": 21.1084907501936,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet18",
+      "protocol": "P2",
+      "rank": 0,
+      "value": 97.3086461424828,
+      "R": 23.2488212734461,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P2",
+      "rank": 0,
+      "value": 97.1604976058006,
+      "R": 24.864387139678,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "swin_t",
+      "protocol": "P2",
+      "rank": 0,
+      "value": 97.2037082910538,
+      "R": 28.8030663132668,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "vit_b_16",
+      "protocol": "P2",
+      "rank": 0,
+      "value": 96.8271639943123,
+      "R": 29.3926890194416,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P1",
+      "rank": 4,
+      "value": 98.1728437542915,
+      "R": 28.8443401455879,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P1",
+      "rank": 4,
+      "value": 98.2654368877411,
+      "R": 29.1155664622784,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "dinov2_vits14",
+      "protocol": "P1",
+      "rank": 4,
+      "value": 95.8148187398911,
+      "R": 30.483490973711,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "protocol": "P1",
+      "rank": 4,
+      "value": 98.0493867397308,
+      "R": 21.9870287179947,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_v2_s",
+      "protocol": "P1",
+      "rank": 4,
+      "value": 97.6851895451546,
+      "R": 19.5341985672712,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "maxvit_t",
+      "protocol": "P1",
+      "rank": 4,
+      "value": 97.8580287098885,
+      "R": 20.9433963894844,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "mobilenet_v2",
+      "protocol": "P1",
+      "rank": 4,
+      "value": 97.407411634922,
+      "R": 20.2299530804157,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "regnet_y_1_6gf",
+      "protocol": "P1",
+      "rank": 4,
+      "value": 97.8024736046791,
+      "R": 20.4952835291624,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet18",
+      "protocol": "P1",
+      "rank": 4,
+      "value": 97.8642019629478,
+      "R": 22.2287739813328,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P1",
+      "rank": 4,
+      "value": 98.117288351059,
+      "R": 25.913915336132,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "swin_t",
+      "protocol": "P1",
+      "rank": 4,
+      "value": 98.117288351059,
+      "R": 28.6556607484818,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "vit_b_16",
+      "protocol": "P1",
+      "rank": 4,
+      "value": 97.8580287098885,
+      "R": 28.0896231532097,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P2",
+      "rank": 4,
+      "value": 97.2777828574181,
+      "R": 29.0212267637253,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P2",
+      "rank": 4,
+      "value": 97.5308680534363,
+      "R": 28.8561323285103,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "dinov2_vits14",
+      "protocol": "P2",
+      "rank": 4,
+      "value": 93.9321038126945,
+      "R": 30.0412741303444,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "protocol": "P2",
+      "rank": 4,
+      "value": 97.3024725914001,
+      "R": 22.3879720270634,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_v2_s",
+      "protocol": "P2",
+      "rank": 4,
+      "value": 96.9321030378342,
+      "R": 20.2417455613613,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "maxvit_t",
+      "protocol": "P2",
+      "rank": 4,
+      "value": 97.1234607696533,
+      "R": 22.0283024013042,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "mobilenet_v2",
+      "protocol": "P2",
+      "rank": 4,
+      "value": 96.6234618425369,
+      "R": 20.6662738323212,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "regnet_y_1_6gf",
+      "protocol": "P2",
+      "rank": 4,
+      "value": 96.8456837534904,
+      "R": 20.7665096968412,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet18",
+      "protocol": "P2",
+      "rank": 4,
+      "value": 97.3209920525551,
+      "R": 22.5235852599144,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P2",
+      "rank": 4,
+      "value": 97.0925968885422,
+      "R": 25.8549528568983,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "swin_t",
+      "protocol": "P2",
+      "rank": 4,
+      "value": 97.1790170669556,
+      "R": 28.4316040575504,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "vit_b_16",
+      "protocol": "P2",
+      "rank": 4,
+      "value": 96.8086460232735,
+      "R": 28.7028308212757,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P1",
+      "rank": 16,
+      "value": 98.1543251872063,
+      "R": 25.4658021777868,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P1",
+      "rank": 16,
+      "value": 98.1666710972786,
+      "R": 26.226415336132,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "dinov2_vits14",
+      "protocol": "P1",
+      "rank": 16,
+      "value": 95.7037082314491,
+      "R": 28.4257081151009,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "protocol": "P1",
+      "rank": 16,
+      "value": 98.0802515149117,
+      "R": 20.5896228551865,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_v2_s",
+      "protocol": "P1",
+      "rank": 16,
+      "value": 97.6975351572037,
+      "R": 16.6509436815977,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "maxvit_t",
+      "protocol": "P1",
+      "rank": 16,
+      "value": 97.7963006496429,
+      "R": 18.3431605994701,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "mobilenet_v2",
+      "protocol": "P1",
+      "rank": 16,
+      "value": 97.333337366581,
+      "R": 18.4787738323212,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "regnet_y_1_6gf",
+      "protocol": "P1",
+      "rank": 16,
+      "value": 97.8209915757179,
+      "R": 18.5259437561035,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet18",
+      "protocol": "P1",
+      "rank": 16,
+      "value": 97.9197579622269,
+      "R": 18.7146228551865,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P1",
+      "rank": 16,
+      "value": 98.01235049963,
+      "R": 27.5766514241695,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "swin_t",
+      "protocol": "P1",
+      "rank": 16,
+      "value": 98.1913620233536,
+      "R": 26.4858493208885,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "vit_b_16",
+      "protocol": "P1",
+      "rank": 16,
+      "value": 97.8271648287773,
+      "R": 25.34787774086,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P2",
+      "rank": 16,
+      "value": 97.2407448291779,
+      "R": 25.5660379678011,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P2",
+      "rank": 16,
+      "value": 97.413584291935,
+      "R": 26.3561326265335,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "dinov2_vits14",
+      "protocol": "P2",
+      "rank": 16,
+      "value": 93.7592634558678,
+      "R": 28.8620287179947,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "protocol": "P2",
+      "rank": 16,
+      "value": 97.2962999343872,
+      "R": 20.7665096223354,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_v2_s",
+      "protocol": "P2",
+      "rank": 16,
+      "value": 96.8642023205757,
+      "R": 17.7653305605054,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "maxvit_t",
+      "protocol": "P2",
+      "rank": 16,
+      "value": 97.0679053664207,
+      "R": 19.1745284199715,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "mobilenet_v2",
+      "protocol": "P2",
+      "rank": 16,
+      "value": 96.5864244103432,
+      "R": 18.6556607484818,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "regnet_y_1_6gf",
+      "protocol": "P2",
+      "rank": 16,
+      "value": 96.7283999919891,
+      "R": 18.3726417273283,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet18",
+      "protocol": "P2",
+      "rank": 16,
+      "value": 97.3086467385292,
+      "R": 18.7382077425718,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P2",
+      "rank": 16,
+      "value": 97.1111151576042,
+      "R": 27.216981574893,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "swin_t",
+      "protocol": "P2",
+      "rank": 16,
+      "value": 97.2345727682114,
+      "R": 26.1733492463827,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "vit_b_16",
+      "protocol": "P2",
+      "rank": 16,
+      "value": 96.7777815461159,
+      "R": 25.7724063843489,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P1",
+      "rank": 64,
+      "value": 98.1419801712036,
+      "R": 16.8219340592623,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P1",
+      "rank": 64,
+      "value": 98.1851905584335,
+      "R": 17.1344342082739,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "dinov2_vits14",
+      "protocol": "P1",
+      "rank": 64,
+      "value": 95.654324889183,
+      "R": 23.2193401455879,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "protocol": "P1",
+      "rank": 64,
+      "value": 98.0617329478264,
+      "R": 16.0908020287752,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_v2_s",
+      "protocol": "P1",
+      "rank": 64,
+      "value": 97.6358070969582,
+      "R": 11.0495284199715,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "maxvit_t",
+      "protocol": "P1",
+      "rank": 64,
+      "value": 97.8950661420822,
+      "R": 12.4469340592623,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "mobilenet_v2",
+      "protocol": "P1",
+      "rank": 64,
+      "value": 97.3827201128006,
+      "R": 13.696934171021,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "regnet_y_1_6gf",
+      "protocol": "P1",
+      "rank": 64,
+      "value": 97.8271645307541,
+      "R": 12.3113210126758,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet18",
+      "protocol": "P1",
+      "rank": 64,
+      "value": 97.808646261692,
+      "R": 10.5306604877114,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P1",
+      "rank": 64,
+      "value": 98.0000048875809,
+      "R": 24.6462269127369,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "swin_t",
+      "protocol": "P1",
+      "rank": 64,
+      "value": 98.1234610080719,
+      "R": 19.5754719525576,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "vit_b_16",
+      "protocol": "P1",
+      "rank": 64,
+      "value": 97.8765475749969,
+      "R": 17.5766512751579,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P2",
+      "rank": 64,
+      "value": 97.2716093063354,
+      "R": 16.6214625537395,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P2",
+      "rank": 64,
+      "value": 97.5370413064957,
+      "R": 17.0283021777868,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "dinov2_vits14",
+      "protocol": "P2",
+      "rank": 64,
+      "value": 93.9135840535164,
+      "R": 23.0306607484818,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "protocol": "P2",
+      "rank": 64,
+      "value": 97.2592636942863,
+      "R": 15.6721702218056,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_v2_s",
+      "protocol": "P2",
+      "rank": 64,
+      "value": 96.8456837534904,
+      "R": 12.8655663132668,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "maxvit_t",
+      "protocol": "P2",
+      "rank": 64,
+      "value": 97.1049425005913,
+      "R": 12.5884436443448,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "mobilenet_v2",
+      "protocol": "P2",
+      "rank": 64,
+      "value": 96.6296342015266,
+      "R": 13.490566201508,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "regnet_y_1_6gf",
+      "protocol": "P2",
+      "rank": 64,
+      "value": 96.7222267389297,
+      "R": 11.9162737205625,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet18",
+      "protocol": "P2",
+      "rank": 64,
+      "value": 97.1234613656998,
+      "R": 10.1827831193805,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P2",
+      "rank": 64,
+      "value": 97.0987695455551,
+      "R": 23.8915096223354,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "swin_t",
+      "protocol": "P2",
+      "rank": 64,
+      "value": 97.3395106196404,
+      "R": 19.1686324030161,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "vit_b_16",
+      "protocol": "P2",
+      "rank": 64,
+      "value": 96.7345720529556,
+      "R": 17.7476416528225,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P1",
+      "rank": 256,
+      "value": 98.0987697839737,
+      "R": 5.08254723623395,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P1",
+      "rank": 256,
+      "value": 97.9876583814621,
+      "R": 3.70283021591604,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "dinov2_vits14",
+      "protocol": "P1",
+      "rank": 256,
+      "value": 95.3271645307541,
+      "R": 9.28655672818422,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "protocol": "P1",
+      "rank": 256,
+      "value": 97.9938322305679,
+      "R": 5.5129717476666,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_v2_s",
+      "protocol": "P1",
+      "rank": 256,
+      "value": 97.6543253660202,
+      "R": 3.37264155969024,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "maxvit_t",
+      "protocol": "P1",
+      "rank": 256,
+      "value": 97.8024739027023,
+      "R": 3.78537743352354,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "mobilenet_v2",
+      "protocol": "P1",
+      "rank": 256,
+      "value": 97.1913626790047,
+      "R": 4.20990572310984,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "regnet_y_1_6gf",
+      "protocol": "P1",
+      "rank": 256,
+      "value": 97.7222269773483,
+      "R": 3.32547173835337,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet18",
+      "protocol": "P1",
+      "rank": 256,
+      "value": 97.7654352784157,
+      "R": 1.9516509771347,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P1",
+      "rank": 256,
+      "value": 97.9135850071907,
+      "R": 10.6957548856735,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "swin_t",
+      "protocol": "P1",
+      "rank": 256,
+      "value": 98.135806620121,
+      "R": 6.45047180354595,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "vit_b_16",
+      "protocol": "P1",
+      "rank": 256,
+      "value": 97.8024736046791,
+      "R": 6.13207552582026,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P2",
+      "rank": 256,
+      "value": 97.2839552164078,
+      "R": 5.28891518712044,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P2",
+      "rank": 256,
+      "value": 97.3395097255707,
+      "R": 4.40448116511106,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "dinov2_vits14",
+      "protocol": "P2",
+      "rank": 256,
+      "value": 93.1172880530357,
+      "R": 9.75235860794783,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "protocol": "P2",
+      "rank": 256,
+      "value": 97.2901284694672,
+      "R": 5.49528308212757,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_v2_s",
+      "protocol": "P2",
+      "rank": 256,
+      "value": 96.7530909180641,
+      "R": 4.38089633826166,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "maxvit_t",
+      "protocol": "P2",
+      "rank": 256,
+      "value": 97.1234607696533,
+      "R": 3.99174540303648,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "mobilenet_v2",
+      "protocol": "P2",
+      "rank": 256,
+      "value": 96.4691400527954,
+      "R": 4.15683967992663,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "regnet_y_1_6gf",
+      "protocol": "P2",
+      "rank": 256,
+      "value": 96.6172882914543,
+      "R": 3.3785377908498,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet18",
+      "protocol": "P2",
+      "rank": 256,
+      "value": 96.9753131270409,
+      "R": 2.34080190304667,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P2",
+      "rank": 256,
+      "value": 97.1419787406921,
+      "R": 10.1297171041369,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "swin_t",
+      "protocol": "P2",
+      "rank": 256,
+      "value": 97.1728438138962,
+      "R": 6.71580199152231,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "vit_b_16",
+      "protocol": "P2",
+      "rank": 256,
+      "value": 96.7407447099686,
+      "R": 6.26179255545139,
+      "floor": 1.17924528301887
+    }
+  ],
+  "F5": {
+    "model_used": "crossed",
+    "term": "(Intercept)",
+    "sign": 1,
+    "estimate": -0.0138887266318003,
+    "se": 0.0383399466381351,
+    "df": 11.0000013441499,
+    "p": 0.724027092561194,
+    "ci95": [-0.0982743789629694, 0.0704969256993687],
+    "singular": true,
+    "variance_components": [
+      {
+        "grp": "seed",
+        "var1": "(Intercept)",
+        "vcov": 0,
+        "sdcor": 0
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "vcov": 0.00172484353075254,
+        "sdcor": 0.0415312356034894
+      },
+      {
+        "grp": "Residual",
+        "vcov": 0.318291491356561,
+        "sdcor": 0.56417328132105
+      }
+    ],
+    "architectures": ["convnext_tiny", "densenet121", "dinov2_vits14", "efficientnet_b0", "efficientnet_v2_s", "maxvit_t", "mobilenet_v2", "regnet_y_1_6gf", "resnet18", "resnet50", "swin_t", "vit_b_16"]
+  },
+  "F5_reductions": [
+    {
+      "architecture": "convnext_tiny",
+      "reduction": 0.0864198803901672
+    },
+    {
+      "architecture": "densenet121",
+      "reduction": 0.0679010152816772
+    },
+    {
+      "architecture": "dinov2_vits14",
+      "reduction": -0.253085792064667
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "reduction": 0.0370371341705322
+    },
+    {
+      "architecture": "efficientnet_v2_s",
+      "reduction": -0.0617283582687378
+    },
+    {
+      "architecture": "maxvit_t",
+      "reduction": 0.0987648963928223
+    },
+    {
+      "architecture": "mobilenet_v2",
+      "reduction": 0.0740736722946167
+    },
+    {
+      "architecture": "regnet_y_1_6gf",
+      "reduction": -0.141976177692413
+    },
+    {
+      "architecture": "resnet18",
+      "reduction": -0.203701257705688
+    },
+    {
+      "architecture": "resnet50",
+      "reduction": 0.185185372829437
+    },
+    {
+      "architecture": "swin_t",
+      "reduction": 0.00617235898971558
+    },
+    {
+      "architecture": "vit_b_16",
+      "reduction": -0.0617274641990662
+    }
+  ],
+  "F6": {
+    "model_used": "fixed_architecture",
+    "term": "strength",
+    "sign": -1,
+    "estimate": 0.0154320987654315,
+    "se": 0.212785442953898,
+    "df": 106.000000055872,
+    "p": 0.942321399613382,
+    "ci95": [-0.406435737775959, 0.437299935306822],
+    "singular": false,
+    "variance_components": [
+      {
+        "grp": "seed",
+        "var1": "(Intercept)",
+        "vcov": 0.355936280317923,
+        "sdcor": 0.596603956002575
+      },
+      {
+        "grp": "Residual",
+        "vcov": 0.905552894661732,
+        "sdcor": 0.951605430134639
+      }
+    ]
+  },
+  "F6_regime_secondary": {
+    "convnext_tiny": {
+      "levels_in_regime": 0,
+      "strongest": 0,
+      "R_baseline": 29.2924533784389,
+      "R_strongest": 29.2924533784389,
+      "within_class_floor": 1.17924528301887,
+      "manipulation_check_passed": false
+    },
+    "densenet121": {
+      "levels_in_regime": [0, 0.5],
+      "strongest": 0.5,
+      "R_baseline": 29.3632081151009,
+      "R_strongest": 28.3785384893417,
+      "within_class_floor": 1.17924528301887,
+      "manipulation_check_passed": false
+    },
+    "efficientnet_b0": {
+      "levels_in_regime": [0, 0.5],
+      "strongest": 0.5,
+      "R_baseline": 22.3938682675362,
+      "R_strongest": 21.1202833801508,
+      "within_class_floor": 1.17924528301887,
+      "manipulation_check_passed": false
+    },
+    "resnet50": {
+      "levels_in_regime": [0, 0.5],
+      "strongest": 0.5,
+      "R_baseline": 24.8466984927654,
+      "R_strongest": 21.4976418763399,
+      "within_class_floor": 1.17924528301887,
+      "manipulation_check_passed": false
+    }
+  },
+  "normalization_means": [
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P1",
+      "strength": 0,
+      "value": 97.2592592592593,
+      "R": 28.7028306722641,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P1",
+      "strength": 0,
+      "value": 97.679012345679,
+      "R": 29.386793076992,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "protocol": "P1",
+      "strength": 0,
+      "value": 97.9876543209877,
+      "R": 22.1344342827797,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P1",
+      "strength": 0,
+      "value": 97.6296296296296,
+      "R": 24.7051890194416,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P2",
+      "strength": 0,
+      "value": 96.7283950617284,
+      "R": 29.8820760846138,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P2",
+      "strength": 0,
+      "value": 96.9506172839506,
+      "R": 29.3396231532097,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "protocol": "P2",
+      "strength": 0,
+      "value": 97.0740740740741,
+      "R": 22.6533022522926,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P2",
+      "strength": 0,
+      "value": 96.7654320987654,
+      "R": 24.9882079660892,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P1",
+      "strength": 0.5,
+      "value": 97.0123456790123,
+      "R": 26.9929249584675,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P1",
+      "strength": 0.5,
+      "value": 97.5061728395062,
+      "R": 28.1957551836967,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "protocol": "P1",
+      "strength": 0.5,
+      "value": 97.3703703703704,
+      "R": 21.002358943224,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P1",
+      "strength": 0.5,
+      "value": 97.3086419753086,
+      "R": 21.6155664622784,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P2",
+      "strength": 0.5,
+      "value": 95.5432098765432,
+      "R": 27.8655669093132,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P2",
+      "strength": 0.5,
+      "value": 96.2962962962963,
+      "R": 28.5613217949867,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "protocol": "P2",
+      "strength": 0.5,
+      "value": 96.5432098765432,
+      "R": 21.2382078170776,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P2",
+      "strength": 0.5,
+      "value": 96.1234567901235,
+      "R": 21.3797172904015,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P1",
+      "strength": 1,
+      "value": 96.1111111111111,
+      "R": 25.2240572869778,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P1",
+      "strength": 1,
+      "value": 96.1975308641975,
+      "R": 24.4811323285103,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "protocol": "P1",
+      "strength": 1,
+      "value": 96.2098765432099,
+      "R": 17.9952834546566,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P1",
+      "strength": 1,
+      "value": 95.8271604938272,
+      "R": 17.9599063098431,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P2",
+      "strength": 1,
+      "value": 95.4691358024691,
+      "R": 25.3655664622784,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P2",
+      "strength": 1,
+      "value": 95.2962962962963,
+      "R": 25.1415100693703,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "protocol": "P2",
+      "strength": 1,
+      "value": 95.5925925925926,
+      "R": 18.2193398475647,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P2",
+      "strength": 1,
+      "value": 95.0123456790123,
+      "R": 18.4669815003872,
+      "floor": 1.17924528301887
+    }
+  ],
+  "F7_manipulation_checks": {
+    "convnext_tiny": {
+      "levels_in_regime": [0, 0.1, 0.3, 1],
+      "strongest": 1,
+      "R_baseline": 29.8643872141838,
+      "R_strongest": 16.9870286434889,
+      "within_class_floor": 1.17924528301887,
+      "manipulation_check_passed": true
+    },
+    "densenet121": {
+      "levels_in_regime": [0, 0.1, 0.3],
+      "strongest": 0.3,
+      "R_baseline": 29.3632081151009,
+      "R_strongest": 18.1132078170776,
+      "within_class_floor": 1.17924528301887,
+      "manipulation_check_passed": true
+    },
+    "resnet50": {
+      "levels_in_regime": [0, 0.1, 0.3],
+      "strongest": 0.3,
+      "R_baseline": 24.8466984927654,
+      "R_strongest": 8.50825488567352,
+      "within_class_floor": 1.17924528301887,
+      "manipulation_check_passed": true
+    }
+  },
+  "linadv_means": [
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P1",
+      "adversary_lambda": 0,
+      "value": 97.7654320987654,
+      "R": 29.6933966875076,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P1",
+      "adversary_lambda": 0,
+      "value": 97.679012345679,
+      "R": 29.386793076992,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P1",
+      "adversary_lambda": 0,
+      "value": 97.6296296296296,
+      "R": 24.7051890194416,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P2",
+      "adversary_lambda": 0,
+      "value": 96.5432098765432,
+      "R": 30.03537774086,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P2",
+      "adversary_lambda": 0,
+      "value": 96.9506172839506,
+      "R": 29.3396231532097,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P2",
+      "adversary_lambda": 0,
+      "value": 96.7654320987654,
+      "R": 24.9882079660892,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P1",
+      "adversary_lambda": 0.1,
+      "value": 97.5555555555556,
+      "R": 19.0330192446709,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P1",
+      "adversary_lambda": 0.1,
+      "value": 97.037037037037,
+      "R": 16.733490973711,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P1",
+      "adversary_lambda": 0.1,
+      "value": 97.1234567901235,
+      "R": 9.89386796951294,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P2",
+      "adversary_lambda": 0.1,
+      "value": 96.5555555555556,
+      "R": 19.1155661642551,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P2",
+      "adversary_lambda": 0.1,
+      "value": 96.8148148148148,
+      "R": 17.2051890194416,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P2",
+      "adversary_lambda": 0.1,
+      "value": 96.2839506172839,
+      "R": 10.2240567654371,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P1",
+      "adversary_lambda": 0.3,
+      "value": 97.5802469135802,
+      "R": 17.20518887043,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P1",
+      "adversary_lambda": 0.3,
+      "value": 96.6296296296296,
+      "R": 18.3490568399429,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P1",
+      "adversary_lambda": 0.3,
+      "value": 96.8024691358025,
+      "R": 8.06603796780109,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P2",
+      "adversary_lambda": 0.3,
+      "value": 96.0246913580247,
+      "R": 17.3702831566334,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P2",
+      "adversary_lambda": 0.3,
+      "value": 96.0493827160494,
+      "R": 17.8773587942123,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P2",
+      "adversary_lambda": 0.3,
+      "value": 95.8888888888889,
+      "R": 8.95047180354595,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P1",
+      "adversary_lambda": 1,
+      "value": 97,
+      "R": 16.450472176075,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P1",
+      "adversary_lambda": 1,
+      "value": 91.4814814814815,
+      "R": 16.6391514241695,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P1",
+      "adversary_lambda": 1,
+      "value": 94.1975308641975,
+      "R": 7.42924533784389,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P2",
+      "adversary_lambda": 1,
+      "value": 95.6296296296296,
+      "R": 17.5235851109028,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P2",
+      "adversary_lambda": 1,
+      "value": 87.962962962963,
+      "R": 16.4858491718769,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P2",
+      "adversary_lambda": 1,
+      "value": 93.2098765432099,
+      "R": 8.14858507364988,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P1",
+      "adversary_lambda": 3,
+      "value": 88.358024691358,
+      "R": 14.0448112785816,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P1",
+      "adversary_lambda": 3,
+      "value": 65.9259259259259,
+      "R": 15.8726419508457,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P1",
+      "adversary_lambda": 3,
+      "value": 83.6666666666667,
+      "R": 6.98113232851028,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P2",
+      "adversary_lambda": 3,
+      "value": 71.9506172839506,
+      "R": 14.3160378187895,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "densenet121",
+      "protocol": "P2",
+      "adversary_lambda": 3,
+      "value": 66.1111111111111,
+      "R": 17.0047174394131,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P2",
+      "adversary_lambda": 3,
+      "value": 81.8888888888889,
+      "R": 6.74528308212757,
+      "floor": 1.17924528301887
+    }
+  ],
+  "linadv_diverged": [],
+  "F7": {
+    "model_used": "fixed_architecture",
+    "term": "R_pair",
+    "sign": 1,
+    "estimate": 0.000344495108694526,
+    "se": 0.0193660532055451,
+    "df": 87.1545595838588,
+    "p": 0.985848153736804,
+    "ci95": [-0.038146670164299, 0.0388356603816881],
+    "singular": false,
+    "variance_components": [
+      {
+        "grp": "seed",
+        "var1": "(Intercept)",
+        "vcov": 0.244711205079728,
+        "sdcor": 0.494682933887686
+      },
+      {
+        "grp": "Residual",
+        "vcov": 1.41343306708159,
+        "sdcor": 1.1888789118668
+      }
+    ],
+    "architectures": ["convnext_tiny", "densenet121", "resnet50"]
+  },
+  "F8": {
+    "model_used": "within_cell",
+    "term": "R_pair",
+    "sign": 1,
+    "estimate": -0.000223779569307133,
+    "se": 0.00259429518065726,
+    "df": 1256.50973194989,
+    "p": 0.931274805770363,
+    "ci95": [-0.00531340731968115, 0.00486584818106689],
+    "singular": false,
+    "variance_components": [
+      {
+        "grp": "block",
+        "var1": "(Intercept)",
+        "vcov": 0.493687924532418,
+        "sdcor": 0.70262929381888
+      },
+      {
+        "grp": "Residual",
+        "vcov": 0.499712069919217,
+        "sdcor": 0.70690315455458
+      }
+    ],
+    "manipulations": ["leace", "linear_adversary"],
+    "cells": 15
+  },
+  "F1": {
+    "estimate": -4.28600200921333,
+    "p": 0.0002,
+    "ci95": [-8.59621425479633, -1.36805589218505],
+    "source": "slide bootstrap"
+  },
+  "holm": [
+    {
+      "hypothesis": "F1",
+      "p": 0.0002,
+      "p_holm": 0.0014,
+      "estimate": -4.28600200921333,
+      "supported": false
+    },
+    {
+      "hypothesis": "F2",
+      "p": 0.00540390079829752,
+      "p_holm": 0.0324234047897851,
+      "estimate": 1.26699113242306,
+      "supported": true
+    },
+    {
+      "hypothesis": "F3",
+      "p": 1.42663579488262e-08,
+      "p_holm": 1.1413086359061e-07,
+      "estimate": 1.86208764603042,
+      "supported": true
+    },
+    {
+      "hypothesis": "F4",
+      "p": 0.434654066313274,
+      "p_holm": 1,
+      "estimate": -0.231063876619466,
+      "supported": false
+    },
+    {
+      "hypothesis": "F5",
+      "p": 0.724027092561194,
+      "p_holm": 1,
+      "estimate": -0.0138887266318003,
+      "supported": false
+    },
+    {
+      "hypothesis": "F6",
+      "p": 0.942321399613382,
+      "p_holm": 1,
+      "estimate": 0.0154320987654315,
+      "supported": false
+    },
+    {
+      "hypothesis": "F7",
+      "p": 0.985848153736804,
+      "p_holm": 1,
+      "estimate": 0.000344495108694526,
+      "supported": false
+    },
+    {
+      "hypothesis": "F8",
+      "p": 0.931274805770363,
+      "p_holm": 1,
+      "estimate": -0.000223779569307133,
+      "supported": false
+    }
+  ]
+}

@@ -20,11 +20,18 @@ pixels of donor and recipient. The \emph{self} condition measures these artifact
 every contrast compares conditions that share them, but composites are still off the
 training manifold.
 
-\paragraph{Gradient reversal removes what its head can see.} The adversary suppresses
-parent identity that a two-layer head can read from pooled features; information that
-remains decodable by another probe, or that enters through spatial features before
-pooling, can survive. Recoverability is therefore measured with an independent probe,
-and H5 is declared untestable rather than refuted if suppression does not work.
+\paragraph{Suppression and erasure act on pooled features.} The adversaries and the LEACE eraser
+remove parent identity that is linearly readable from the pooled penultimate features. Identity
+carried non-linearly, or in spatial features before pooling, can survive; the null dose-response
+therefore rules out a linearly decodable field code as the carrier, not every form of field
+information. The colour arms used one augmentation strength and one normalisation reference, and
+stain normalisation failed its own manipulation check.
+
+\paragraph{The follow-up was registered after Study~2.} Amendment~8 was written knowing the
+Study~2 results and was motivated by them. Its hypotheses, designs, and analyses were fixed
+before any follow-up model was trained or any follow-up analysis was run, but they are follow-up
+questions, and the one analysis added afterwards (the pixel-overlap split) is labelled
+exploratory.
 
 \paragraph{One recipe.} Every model uses the same fixed fine-tuning recipe. Stronger
 augmentation, longer training, or stain normalisation could change both the size of

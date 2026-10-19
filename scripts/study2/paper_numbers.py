@@ -69,12 +69,12 @@ def contrast_macros(prefix: str, record) -> dict[str, str]:
     }
 
 
-def coefficient_macros(prefix: str, record, holm=None) -> dict[str, str]:
+def coefficient_macros(prefix: str, record, holm=None, digits: int = 2) -> dict[str, str]:
     ci = get(record, "ci95", default=[None, None])
     out = {
-        f"{prefix}Est": number(get(record, "estimate")),
-        f"{prefix}Lo": number(ci[0]),
-        f"{prefix}Hi": number(ci[1]),
+        f"{prefix}Est": number(get(record, "estimate"), digits),
+        f"{prefix}Lo": number(ci[0], digits),
+        f"{prefix}Hi": number(ci[1], digits),
         f"{prefix}P": pvalue(get(record, "p")),
     }
     if holm is not None:
@@ -156,7 +156,7 @@ def followup_macros(root: Path) -> dict[str, str]:
         if key == "F1":
             continue
         record = get(followup, key)
-        out.update({k: v for k, v in coefficient_macros(prefix, record).items()})
+        out.update(coefficient_macros(prefix, record, digits=3 if key in {"F7", "F8"} else 2))
         out[f"{prefix}Status"] = PENDING if record is None else str(record.get("status", "tested"))
     for name, prefix in (("grey", "AblGrey"), ("low_pass", "AblLow"), ("illumination_flat", "AblFlat"),
                          ("background_grey", "AblBg")):
@@ -164,6 +164,78 @@ def followup_macros(root: Path) -> dict[str, str]:
     out.update(coefficient_macros("HthreeRep", get(followup, "H3_replication_secondary")))
     out.update(coefficient_macros("MaskReduction", get(followup, "masking_reduction_secondary")))
     out.update(coefficient_macros("CamLeak", get(followup, "gradcam_descriptive", "leak_effect_on_background_attribution")))
+    out.update(followup_descriptive(root, followup))
+    return out
+
+
+def followup_descriptive(root: Path, followup) -> dict[str, str]:
+    """Descriptive follow-up numbers the text quotes (condition means, checks, exploratory splits)."""
+    keys = ("LeakUnderOriginal", "LeakUnderStain", "LeakUnderBg", "LeakUnderFlat", "CamBgAttribution",
+            "CamBgPixels", "CamSpearman", "LeaceRzero", "LeaceRtop", "LeaceGapZero", "LeaceGapTop", "LeaceAccDrop",
+            "LinRzeroMin", "LinRzeroMax", "LinRstarMin", "LinRstarMax", "NormRzero", "NormRtop", "NormAccDrop",
+            "ProbeAgreement", "OverlapYes", "OverlapNo", "OverlapStainYes", "OverlapStainNo", "CarrierStandard",
+            "CarrierMasked", "CarrierColour", "FeightCells", "RFloor", "RecoveryCutMin", "RecoveryCutMax")
+    out = dict.fromkeys(keys, PENDING)
+    if followup is None:
+        return out
+    by_ablation = followup.get("leak_effect_by_ablation_secondary", {})
+    for name, key in (("original", "LeakUnderOriginal"), ("stain_transfer", "LeakUnderStain"),
+                      ("background_grey", "LeakUnderBg"), ("illumination_flat", "LeakUnderFlat")):
+        out[key] = number(get(by_ablation, name, "estimate"))
+    cams = pd.DataFrame(get(followup, "gradcam_descriptive", "means", default=[]))
+    tables = root / "tables"
+    if (tables / "gradcam_runs.csv").is_file():
+        runs = pd.read_csv(tables / "gradcam_runs.csv")
+        out["CamBgAttribution"] = number(100 * runs.background_attribution_fraction.mean(), 1)
+        out["CamBgPixels"] = number(100 * runs.background_pixel_fraction.mean(), 1)
+        out["CamSpearman"] = number(runs.random_head_spearman.median())
+    del cams
+    if (tables / "leace_runs.csv").is_file():
+        leace = pd.read_csv(tables / "leace_runs.csv")
+        means = leace.groupby(["protocol", "rank"])[["accuracy", "within_class_accuracy"]].mean().mul(100)
+        top = int(leace["rank"].max())
+        out["LeaceRzero"] = number(means.loc[(slice(None), 0), "within_class_accuracy"].mean(), 1)
+        out["LeaceRtop"] = number(means.loc[(slice(None), top), "within_class_accuracy"].mean(), 1)
+        out["LeaceGapZero"] = number(means.loc[("P1", 0), "accuracy"] - means.loc[("P2", 0), "accuracy"])
+        out["LeaceGapTop"] = number(means.loc[("P1", top), "accuracy"] - means.loc[("P2", top), "accuracy"])
+        out["LeaceAccDrop"] = number(means.loc[("P2", 0), "accuracy"] - means.loc[("P2", top), "accuracy"])
+        out["RFloor"] = number(100 * leace.within_class_floor.mean(), 1)
+    checks = followup.get("F7_manipulation_checks", {})
+    if checks:
+        zero = [c["R_baseline"] for c in checks.values()]
+        star = [c["R_strongest"] for c in checks.values()]
+        out["LinRzeroMin"], out["LinRzeroMax"] = number(min(zero), 1), number(max(zero), 1)
+        out["LinRstarMin"], out["LinRstarMax"] = number(min(star), 1), number(max(star), 1)
+    if (tables / "normalization_recoverability.csv").is_file():
+        normal = pd.read_csv(tables / "normalization_recoverability.csv")
+        means = normal.groupby(["protocol", "strength"])[["accuracy", "within_class_accuracy"]].mean().mul(100)
+        out["NormRzero"] = number(means.loc[(slice(None), 0.0), "within_class_accuracy"].mean(), 1)
+        out["NormRtop"] = number(means.loc[(slice(None), 1.0), "within_class_accuracy"].mean(), 1)
+        out["NormAccDrop"] = number(means.loc[("P2", 0.0), "accuracy"] - means.loc[("P2", 1.0), "accuracy"])
+    if (tables / "probe_agreement.csv").is_file():
+        agreement = pd.read_csv(tables / "probe_agreement.csv")
+        out["ProbeAgreement"] = number(agreement.sklearn.corr(agreement.device), 3)
+    overlap = load(root / "exploratory" / "overlap.json")
+    if overlap is not None:
+        values = {(item["condition"], item["subset"]): item["leak_minus_clean_pp"] for item in overlap["summary"]}
+        out["OverlapYes"] = number(values[("Study 2, original", "overlapping")])
+        out["OverlapNo"] = number(values[("Study 2, original", "not overlapping")])
+        out["OverlapStainYes"] = number(values[("Study 2, stain transfer", "overlapping")])
+        out["OverlapStainNo"] = number(values[("Study 2, stain transfer", "not overlapping")])
+    if (tables / "carrier_runs.csv").is_file():
+        carrier = pd.read_csv(tables / "carrier_runs.csv")
+        carrier["leak"] = carrier.cell.str.startswith("leak")
+        for condition, key in (("standard", "CarrierStandard"), ("masked", "CarrierMasked"), ("colour", "CarrierColour")):
+            group = carrier.loc[carrier.condition == condition]
+            out[key] = number(100 * (group.loc[group.leak, "accuracy"].mean() - group.loc[~group.leak, "accuracy"].mean()))
+    out["FeightCells"] = str(get(followup, "F8", "cells", default=PENDING))
+    cuts = []
+    for name in ("F5_manipulation_checks", "F7_manipulation_checks"):
+        for check in followup.get(name, {}).values():
+            if check.get("manipulation_check_passed"):
+                cuts.append(100 * (check["R_baseline"] - check["R_strongest"]) / check["R_baseline"])
+    if cuts:
+        out["RecoveryCutMin"], out["RecoveryCutMax"] = number(min(cuts), 0), number(max(cuts), 0)
     return out
 
 

@@ -39,10 +39,10 @@ def t_interval(values) -> tuple[float, float, float]:
     return mean, mean - half, mean + half
 
 
-def fmt(record, key="estimate") -> str:
+def fmt(record, key="estimate", digits: int = 2) -> str:
     if not record or record.get(key) is None:
         return "pending"
-    text = f"{record['estimate']:.2f} [{record['ci95'][0]:.2f}, {record['ci95'][1]:.2f}]"
+    text = f"{record['estimate']:.{digits}f} [{record['ci95'][0]:.{digits}f}, {record['ci95'][1]:.{digits}f}]"
     return text.replace("-", "−")
 
 
@@ -113,21 +113,32 @@ def pairs(frame: pd.DataFrame, level: str) -> pd.DataFrame:
     return out
 
 
-def dose_panel(ax, frame, level, label, color, checks, title):
-    included = [arch for arch in frame.architecture.unique() if checks.get(arch, {}).get("manipulation_check_passed")]
-    if not checks:
-        included = list(frame.architecture.unique())
+def dose_panel(ax, frame, level, label, color, checks, title, *, all_levels=False):
+    """Gap against recoverability per architecture (grey) and pooled (colour), in-regime levels only.
+
+    ``all_levels`` keeps every level and architecture (F6 is tested over all strengths);
+    otherwise each architecture shows only its registered regime, and the pooled line
+    uses architectures that passed the manipulation check and levels they all share.
+    """
+    included, shared = [], None
     for arch, group in frame.groupby("architecture"):
-        means = group.groupby(level)[["R_pair", "gap"]].mean()
-        ax.plot(means.R_pair, means.gap, color=style.GRAY_SERIES if arch in included else style.GRID,
-                linewidth=0.8, zorder=1)
-    pooled = frame.loc[frame.architecture.isin(included)].groupby(level)[["R_pair", "gap"]].mean()
+        check = checks.get(arch, {})
+        levels = sorted(group[level].unique()) if all_levels else check.get("levels_in_regime", [])
+        levels = levels if isinstance(levels, list) else [levels]
+        means = group.loc[group[level].isin(levels)].groupby(level)[["R_pair", "gap"]].mean()
+        ax.plot(means.R_pair, means.gap, color=style.GRAY_SERIES, linewidth=0.8, zorder=1)
+        if all_levels or check.get("manipulation_check_passed"):
+            included.append(arch)
+            shared = set(levels) if shared is None else shared & set(levels)
+    pooled = frame.loc[frame.architecture.isin(included) & frame[level].isin(shared or [])]
+    pooled = pooled.groupby(level)[["R_pair", "gap"]].mean()
     if len(pooled):
         ax.plot(pooled.R_pair, pooled.gap, color=color, linewidth=1.6, zorder=2)
         style.ring(ax, pooled.R_pair, pooled.gap, color, size=26, zorder=3)
-        for value, row in pooled.iterrows():
-            ax.annotate(label(value), (row.R_pair, row.gap), xytext=(4, 4), textcoords="offset points",
-                        fontsize=6.5, color=style.INK_2)
+        for value in (pooled.index[0], pooled.index[-1]):
+            row = pooled.loc[value]
+            ax.annotate(label(value), (row.R_pair, row.gap), xytext=(0, 6), textcoords="offset points",
+                        ha="center", fontsize=6.5, color=style.INK_2)
     style.zero_line(ax, "horizontal")
     ax.set_xlabel("Recoverability R (%)")
     ax.set_title(title, loc="left", color=style.INK)
@@ -136,17 +147,18 @@ def dose_panel(ax, frame, level, label, color, checks, title):
 def figure_dose(root: Path, output: Path) -> None:
     tables = root / "tables"
     followup = load(root / "followup.json") or {}
-    figure, axes = plt.subplots(1, 3, figsize=(7.2, 2.5), sharey=False)
+    figure, axes = plt.subplots(1, 3, figsize=(7.2, 2.5), sharey=True)
     leace = pairs(pd.read_csv(tables / "leace_runs.csv"), "rank")
     dose_panel(axes[0], leace, "rank", lambda v: f"r={v:g}", style.BLUE, followup.get("F5_manipulation_checks", {}),
                f"LEACE erasure\nF5 {fmt(followup.get('F5'))}")
     normal = pairs(pd.read_csv(tables / "normalization_recoverability.csv"), "strength")
     dose_panel(axes[1], normal, "strength", lambda v: f"s={v:g}", style.AQUA, followup.get("F6_regime_secondary", {}),
-               f"Stain normalisation\nF6 {fmt(followup.get('F6'))}")
+               f"Stain normalisation\nF6 {fmt(followup.get('F6'))}", all_levels=True)
     linear = pairs(pd.read_csv(tables / "linadv_recoverability.csv"), "adversary_lambda")
-    dose_panel(axes[2], linear, "adversary_lambda", lambda v: f"λ={v:g}", style.ORANGE,
-               followup.get("F7_manipulation_checks", {}), f"Linear adversary\nF7 {fmt(followup.get('F7'))}")
+    dose_panel(axes[2], linear, "adversary_lambda", lambda v: f"\u03bb={v:g}", style.ORANGE,
+               followup.get("F7_manipulation_checks", {}), f"Linear adversary\nF7 {fmt(followup.get('F7'), digits=3)}")
     axes[0].set_ylabel("P1 minus P2 (pp)")
+    axes[0].set_ylim(-0.2, 2.4)
     figure.tight_layout(w_pad=1.2)
     figure.savefig(output)
     figure.savefig(output.with_suffix(".png"))

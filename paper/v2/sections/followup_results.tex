@@ -1,6 +1,11 @@
 \subsection{Follow-up results}
 \label{sec:followup-results}
 
+All 1,580 follow-up tasks completed without failure or divergence. One labelling bug in the
+analysis preparer (standard carrier runs labelled as colour-augmented) halted the registered
+script before it produced any output; it was fixed and recorded as Amendment~9 before any F3
+or F4 estimate was seen. Table~\ref{tab:followup} gives the eight registered tests.
+
 \begin{table}[t]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
@@ -24,33 +29,82 @@ F8 & Gap tracks $R$ (pooled) & \FeightEst & \FeightLo\ to \FeightHi & \FeightPho
 \end{tabular}
 \end{table}
 
-\paragraph{CRIC models do not apply a slide-level label prior (F1).} Over \FoneCells\ discordant
-cells from \FoneSlides\ slides, the probability of the slide's majority class was
-\FoneEst~pp \emph{lower}, not higher, when the cell's slide was in training (\FoneLo\ to
-\FoneHi; F1 \FoneSupported). Crop-level training improved accuracy as much for cells whose class
-disagreed with their slide's majority (\FoneDiscordant~pp) as for cells that agreed
-(\FoneConcordant~pp; contrast \FoneContrast~pp, \FoneContrastLo\ to \FoneContrastHi). Whatever
-the models learn from seen slides helps each cell toward its own class rather than toward the
-slide's typical class.
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/carriers.pdf}
+\caption{Where the leaked signal lives. Left: leak minus clean accuracy of the 160 Study~2 2C
+models under each test-time ablation (mean and 95\% $t$ interval over 80
+architecture--seed--diversity pairs); stain transfer (F2) highlighted. Middle: the same contrast
+for models trained on fresh seeds under the standard recipe, with every background masked
+(F3), or with HED colour augmentation (F4). Right: CRIC, within-cell P1 $-$ P2 accuracy for
+cells whose class agrees or disagrees with their slide's majority, and the context-class
+probability for disagreeing cells (F1); slide-bootstrap intervals.}
+\label{fig:carriers}
+\end{figure}
 
-\paragraph{Carriers at test time (F2).} Stain transfer changed the leak advantage by
-\FtwoEst~pp (\FtwoLo\ to \FtwoHi; F2 \FtwoSupported). The corresponding reductions were
-\AblGreyEst~pp for greyscale (\AblGreyLo\ to \AblGreyHi), \AblLowEst~pp for low-pass filtering
-(\AblLowLo\ to \AblLowHi), \AblFlatEst~pp for illumination flattening (\AblFlatLo\ to
-\AblFlatHi), and \AblBgEst~pp for removing the background (\AblBgLo\ to \AblBgHi).
-Grad-CAM attribution outside the cell mask differed between leak and clean models by
-\CamLeakEst~pp (\CamLeakLo\ to \CamLeakHi; descriptive).
+\paragraph{The leak needs no background (F3).} Trained and tested with every background replaced
+by a constant, leak models beat clean models by \FthreeEst~pp (\FthreeLo--\FthreeHi; Holm
+$p$~\FthreePholm), at least as much as under the standard recipe on the same fresh seeds
+(\CarrierStandard~pp, which also replicates H3: \HthreeRepEst~pp, \HthreeRepLo--\HthreeRepHi).
+At test time, removing the background from the original 2C models' inputs likewise left most of
+the advantage (\LeakUnderBg~pp of \LeakUnderOriginal; Figure~\ref{fig:carriers}).
 
-\paragraph{Carriers in training (F3, F4).} On fresh seeds the standard recipe replicated H3
-(\HthreeRepEst~pp, \HthreeRepLo\ to \HthreeRepHi). With every background masked in training
-and testing the leak effect was \FthreeEst~pp (\FthreeLo\ to \FthreeHi; F3 \FthreeSupported);
-masking reduced it by \MaskReductionEst~pp relative to the standard recipe
-(\MaskReductionLo\ to \MaskReductionHi). Colour augmentation reduced it by \FfourEst~pp
-(\FfourLo\ to \FfourHi; F4 \FfourSupported).
+\paragraph{The leak is tied to the field's colour rendering at test time (F2), but colour
+augmentation does not prevent it (F4).} Moving each test cell's LAB colour statistics to those
+of an unseen field of the same class cut the leak advantage from \LeakUnderOriginal\ to
+\LeakUnderStain~pp, a reduction of \FtwoEst~pp (\FtwoLo--\FtwoHi; Holm $p=\FtwoPholm$). The
+other interventions with comparable accuracy costs did not: with illumination flattened the
+advantage was \LeakUnderFlat~pp and with the background removed \LeakUnderBg~pp; greyscale and
+low-pass filtering degraded accuracy too far to be informative. Yet models trained with strong
+HED colour augmentation leaked as much as standard models (\CarrierColour\ versus
+\CarrierStandard~pp; F4 reduction \FfourEst, \FfourLo\ to \FfourHi).
 
-\paragraph{Dose-response (F5--F8).} Erasing within-class parent identity reduced the gap by
-\FfiveEst~pp at the strongest in-regime rank (\FfiveLo\ to \FfiveHi; F5 \FfiveSupported). Each
-unit of normalisation strength reduced it by \FsixEst~pp (\FsixLo\ to \FsixHi; F6
-\FsixSupported). Under the probe-matched adversary the slope of gap on recoverability was
-\FsevenEst\ (\FsevenLo\ to \FsevenHi; F7 \FsevenSupported), and pooled over all included
-manipulations \FeightEst\ (\FeightLo\ to \FeightHi; F8 \FeightSupported).
+\paragraph{Exploratory: not shared pixels.} In leak cells a third or more of the test crops
+overlap a training sibling in the source image. The leak advantage was the same on crops that
+share no pixel with any training crop (\OverlapNo~pp) as on crops that do (\OverlapYes~pp), so
+the leak generalises to new cells from a seen field rather than reflecting memorised pixels;
+stain transfer removed it in both subsets (\OverlapStainNo\ and \OverlapStainYes~pp). This split
+was not registered.
+
+\paragraph{No slide-level label prior (F1).} CRIC cells whose class disagreed with the majority
+class of their slide received \emph{less}, not more, probability on that majority class when
+their slide was in training (\FoneEst~pp, \FoneLo\ to \FoneHi, over \FoneCells\ cells from
+\FoneSlides\ slides; F1 not supported). Crop-level training raised accuracy as much for these
+cells (\FoneDiscordant~pp) as for cells agreeing with their slide (\FoneConcordant~pp; contrast
+\FoneContrast~pp, \FoneContrastLo\ to \FoneContrastHi): seen slides help each cell toward its own
+class, not toward the slide's typical class.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/dose.pdf}
+\caption{The P1 $-$ P2 gap against within-class parent recoverability $R$ along three
+manipulations (grey: architectures; colour: pooled over architectures that passed the
+manipulation check, at levels they share; only registered in-regime levels are shown). Left:
+rank-limited LEACE erasure, ranks 0--256, twelve architectures. Middle: Reinhard normalisation
+strength 0--1, four architectures (all failed the manipulation check and are excluded from F8).
+Right: probe-matched linear adversary, three architectures.}
+\label{fig:dose}
+\end{figure}
+
+\paragraph{The gap does not track the fingerprint (F5--F8).} Three manipulations lowered $R$ by
+different routes, and none moved the gap (Figure~\ref{fig:dose}). Rank-256 LEACE erasure cut
+recoverability from \LeaceRzero\% to \LeaceRtop\% (the class-only floor is \RFloor\%) in all twelve
+architectures while costing P2 \LeaceAccDrop~pp, and the gap stayed at \LeaceGapZero\ to
+\LeaceGapTop~pp (F5 \FfiveEst, \FfiveLo\ to \FfiveHi). The probe-matched linear adversary passed
+its manipulation check in all three architectures, lowering $R$ from \LinRzeroMin--\LinRzeroMax\%
+to \LinRstarMin--\LinRstarMax\% inside the regime, with a slope of gap on $R$ of \FsevenEst\
+(\FsevenLo\ to \FsevenHi). Stain normalisation lowered $R$ only from \NormRzero\% to \NormRtop\%
+while costing P2 \NormAccDrop~pp, failed its manipulation check for every architecture, and left
+the gap unchanged (F6 \FsixEst~pp per unit strength, \FsixLo\ to \FsixHi). Pooled over the
+\FeightCells\ included manipulation--architecture cells, the slope was \FeightEst\
+(\FeightLo\ to \FeightHi): even a 20-pp loss of recoverability would move the gap by at most
+about 0.1~pp. The device probe used for $R$ agreed with the registered sklearn probe on the 280
+Study~2 adversarial runs ($r=\ProbeAgreement$).
+
+\paragraph{Grad-CAM sees no difference (descriptive).} Leak and clean models placed the same
+share of Grad-CAM attribution outside the cell mask (\CamBgAttribution\% on average, against a
+background pixel share of \CamBgPixels\%; leak minus clean \CamLeakEst~pp, \CamLeakLo\ to
+\CamLeakHi). The maps depended on the trained head (median Spearman correlation \CamSpearman\
+with a random head), so the absence of a difference is not a failure of the method's sanity
+check; it is the expected result if the leaked signal lies in how the cell is rendered rather
+than in where the model looks.

@@ -1,0 +1,11 @@
+{
+  "collected": {
+    "carrier": 480,
+    "ffact": 160,
+    "leace": 480,
+    "linadv": 300,
+    "normalization": 160
+  },
+  "diverged": 0,
+  "problems": []
+}

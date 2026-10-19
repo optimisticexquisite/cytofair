@@ -1,0 +1,801 @@
+condition,subset,architecture,seed,div,crops,difference
+"Study 2, original",overlapping,convnext_tiny,137,high,185,1.0810810810810811
+"Study 2, original",not overlapping,convnext_tiny,137,high,337,-0.29673590504450953
+"Study 2, original",overlapping,convnext_tiny,173,high,178,-0.5617977528089901
+"Study 2, original",not overlapping,convnext_tiny,173,high,339,0.2949852507374562
+"Study 2, original",overlapping,convnext_tiny,211,high,183,2.732240437158473
+"Study 2, original",not overlapping,convnext_tiny,211,high,336,2.67857142857143
+"Study 2, original",overlapping,convnext_tiny,257,high,182,3.296703296703296
+"Study 2, original",not overlapping,convnext_tiny,257,high,341,1.1730205278592365
+"Study 2, original",overlapping,convnext_tiny,307,high,184,1.0869565217391353
+"Study 2, original",not overlapping,convnext_tiny,307,high,328,1.8292682926829285
+"Study 2, original",overlapping,convnext_tiny,349,high,180,2.2222222222222143
+"Study 2, original",not overlapping,convnext_tiny,349,high,352,0.8522727272727293
+"Study 2, original",overlapping,convnext_tiny,401,high,173,1.1560693641618491
+"Study 2, original",not overlapping,convnext_tiny,401,high,344,2.9069767441860517
+"Study 2, original",overlapping,convnext_tiny,457,high,203,1.9704433497536922
+"Study 2, original",not overlapping,convnext_tiny,457,high,344,-0.8720930232558155
+"Study 2, original",overlapping,convnext_tiny,503,high,188,0.5319148936170248
+"Study 2, original",not overlapping,convnext_tiny,503,high,342,0.5847953216374324
+"Study 2, original",overlapping,convnext_tiny,557,high,172,1.1627906976744207
+"Study 2, original",not overlapping,convnext_tiny,557,high,378,-0.5291005291005235
+"Study 2, original",overlapping,convnext_tiny,137,low,237,0.42194092827003704
+"Study 2, original",not overlapping,convnext_tiny,137,low,285,2.1052631578947323
+"Study 2, original",overlapping,convnext_tiny,173,low,228,1.7543859649122862
+"Study 2, original",not overlapping,convnext_tiny,173,low,289,0.34602076124568004
+"Study 2, original",overlapping,convnext_tiny,211,low,222,-0.9009009009008917
+"Study 2, original",not overlapping,convnext_tiny,211,low,297,-2.6936026936026924
+"Study 2, original",overlapping,convnext_tiny,257,low,235,5.531914893617018
+"Study 2, original",not overlapping,convnext_tiny,257,low,288,0.6944444444444531
+"Study 2, original",overlapping,convnext_tiny,307,low,223,0.4484304932735439
+"Study 2, original",not overlapping,convnext_tiny,307,low,289,2.422145328719716
+"Study 2, original",overlapping,convnext_tiny,349,low,242,1.2396694214875992
+"Study 2, original",not overlapping,convnext_tiny,349,low,290,-2.758620689655178
+"Study 2, original",overlapping,convnext_tiny,401,low,223,2.2421524663677195
+"Study 2, original",not overlapping,convnext_tiny,401,low,294,-1.7006802721088454
+"Study 2, original",overlapping,convnext_tiny,457,low,250,5.599999999999994
+"Study 2, original",not overlapping,convnext_tiny,457,low,297,4.040404040404044
+"Study 2, original",overlapping,convnext_tiny,503,low,232,1.2931034482758563
+"Study 2, original",not overlapping,convnext_tiny,503,low,298,0.0
+"Study 2, original",overlapping,convnext_tiny,557,low,226,2.212389380530977
+"Study 2, original",not overlapping,convnext_tiny,557,low,324,0.6172839506172756
+"Study 2, original",overlapping,densenet121,137,high,185,1.0810810810810811
+"Study 2, original",not overlapping,densenet121,137,high,337,0.29673590504450953
+"Study 2, original",overlapping,densenet121,173,high,178,1.1235955056179803
+"Study 2, original",not overlapping,densenet121,173,high,339,2.359882005899705
+"Study 2, original",overlapping,densenet121,211,high,183,1.6393442622950838
+"Study 2, original",not overlapping,densenet121,211,high,336,1.7857142857142905
+"Study 2, original",overlapping,densenet121,257,high,182,2.197802197802201
+"Study 2, original",not overlapping,densenet121,257,high,341,0.5865102639296182
+"Study 2, original",overlapping,densenet121,307,high,184,1.6304347826086918
+"Study 2, original",not overlapping,densenet121,307,high,328,4.57317073170731
+"Study 2, original",overlapping,densenet121,349,high,180,6.111111111111112
+"Study 2, original",not overlapping,densenet121,349,high,352,3.125
+"Study 2, original",overlapping,densenet121,401,high,173,1.1560693641618491
+"Study 2, original",not overlapping,densenet121,401,high,344,3.779069767441867
+"Study 2, original",overlapping,densenet121,457,high,203,2.9556650246305383
+"Study 2, original",not overlapping,densenet121,457,high,344,1.4534883720930258
+"Study 2, original",overlapping,densenet121,503,high,188,-0.5319148936170137
+"Study 2, original",not overlapping,densenet121,503,high,342,0.8771929824561431
+"Study 2, original",overlapping,densenet121,557,high,172,-1.1627906976744207
+"Study 2, original",not overlapping,densenet121,557,high,378,2.645502645502651
+"Study 2, original",overlapping,densenet121,137,low,237,2.1097046413502074
+"Study 2, original",not overlapping,densenet121,137,low,285,2.1052631578947323
+"Study 2, original",overlapping,densenet121,173,low,228,0.8771929824561431
+"Study 2, original",not overlapping,densenet121,173,low,289,1.730103806228378
+"Study 2, original",overlapping,densenet121,211,low,222,3.603603603603611
+"Study 2, original",not overlapping,densenet121,211,low,297,1.6835016835016758
+"Study 2, original",overlapping,densenet121,257,low,235,0.42553191489361764
+"Study 2, original",not overlapping,densenet121,257,low,288,1.041666666666663
+"Study 2, original",overlapping,densenet121,307,low,223,1.7937219730941645
+"Study 2, original",not overlapping,densenet121,307,low,289,5.190311418685123
+"Study 2, original",overlapping,densenet121,349,low,242,7.024793388429751
+"Study 2, original",not overlapping,densenet121,349,low,290,5.862068965517242
+"Study 2, original",overlapping,densenet121,401,low,223,0.8968609865470767
+"Study 2, original",not overlapping,densenet121,401,low,294,1.7006802721088454
+"Study 2, original",overlapping,densenet121,457,low,250,1.200000000000001
+"Study 2, original",not overlapping,densenet121,457,low,297,4.040404040404033
+"Study 2, original",overlapping,densenet121,503,low,232,0.8620689655172376
+"Study 2, original",not overlapping,densenet121,503,low,298,1.6778523489932806
+"Study 2, original",overlapping,densenet121,557,low,226,2.212389380530977
+"Study 2, original",not overlapping,densenet121,557,low,324,2.1604938271605034
+"Study 2, original",overlapping,resnet50,137,high,185,0.5405405405405461
+"Study 2, original",not overlapping,resnet50,137,high,337,-0.29673590504450953
+"Study 2, original",overlapping,resnet50,173,high,178,1.6853932584269593
+"Study 2, original",not overlapping,resnet50,173,high,339,0.8849557522123908
+"Study 2, original",overlapping,resnet50,211,high,183,1.6393442622950838
+"Study 2, original",not overlapping,resnet50,211,high,336,1.7857142857142794
+"Study 2, original",overlapping,resnet50,257,high,182,2.19780219780219
+"Study 2, original",not overlapping,resnet50,257,high,341,2.639296187683293
+"Study 2, original",overlapping,resnet50,307,high,184,0.0
+"Study 2, original",not overlapping,resnet50,307,high,328,0.9146341463414642
+"Study 2, original",overlapping,resnet50,349,high,180,3.3333333333333326
+"Study 2, original",not overlapping,resnet50,349,high,352,2.272727272727282
+"Study 2, original",overlapping,resnet50,401,high,173,2.8901734104046173
+"Study 2, original",not overlapping,resnet50,401,high,344,3.197674418604657
+"Study 2, original",overlapping,resnet50,457,high,203,1.4778325123152691
+"Study 2, original",not overlapping,resnet50,457,high,344,0.0
+"Study 2, original",overlapping,resnet50,503,high,188,0.5319148936170248
+"Study 2, original",not overlapping,resnet50,503,high,342,1.4619883040935644
+"Study 2, original",overlapping,resnet50,557,high,172,2.9069767441860406
+"Study 2, original",not overlapping,resnet50,557,high,378,1.5873015873015817
+"Study 2, original",overlapping,resnet50,137,low,237,1.6877637130801704
+"Study 2, original",not overlapping,resnet50,137,low,285,1.403508771929829
+"Study 2, original",overlapping,resnet50,173,low,228,1.754385964912275
+"Study 2, original",not overlapping,resnet50,173,low,289,1.730103806228378
+"Study 2, original",overlapping,resnet50,211,low,222,2.7027027027026973
+"Study 2, original",not overlapping,resnet50,211,low,297,3.367003367003363
+"Study 2, original",overlapping,resnet50,257,low,235,1.276595744680853
+"Study 2, original",not overlapping,resnet50,257,low,288,2.083333333333337
+"Study 2, original",overlapping,resnet50,307,low,223,3.139013452914796
+"Study 2, original",not overlapping,resnet50,307,low,289,4.498269896193763
+"Study 2, original",overlapping,resnet50,349,low,242,2.4793388429751984
+"Study 2, original",not overlapping,resnet50,349,low,290,2.4137931034482807
+"Study 2, original",overlapping,resnet50,401,low,223,1.3452914798206317
+"Study 2, original",not overlapping,resnet50,401,low,294,1.7006802721088454
+"Study 2, original",overlapping,resnet50,457,low,250,1.200000000000001
+"Study 2, original",not overlapping,resnet50,457,low,297,-0.33670033670033517
+"Study 2, original",overlapping,resnet50,503,low,232,2.155172413793094
+"Study 2, original",not overlapping,resnet50,503,low,298,1.34228187919464
+"Study 2, original",overlapping,resnet50,557,low,226,2.212389380530977
+"Study 2, original",not overlapping,resnet50,557,low,324,0.30864197530864335
+"Study 2, original",overlapping,vit_b_16,137,high,185,1.0810810810810811
+"Study 2, original",not overlapping,vit_b_16,137,high,337,2.9673590504450953
+"Study 2, original",overlapping,vit_b_16,173,high,178,5.617977528089879
+"Study 2, original",not overlapping,vit_b_16,173,high,339,7.669616519174038
+"Study 2, original",overlapping,vit_b_16,211,high,183,1.0928961748633892
+"Study 2, original",not overlapping,vit_b_16,211,high,336,1.1904761904761973
+"Study 2, original",overlapping,vit_b_16,257,high,182,1.098901098901106
+"Study 2, original",not overlapping,vit_b_16,257,high,341,0.8797653958944385
+"Study 2, original",overlapping,vit_b_16,307,high,184,-1.6304347826086918
+"Study 2, original",not overlapping,vit_b_16,307,high,328,0.9146341463414642
+"Study 2, original",overlapping,vit_b_16,349,high,180,6.111111111111112
+"Study 2, original",not overlapping,vit_b_16,349,high,352,1.1363636363636354
+"Study 2, original",overlapping,vit_b_16,401,high,173,0.0
+"Study 2, original",not overlapping,vit_b_16,401,high,344,2.3255813953488413
+"Study 2, original",overlapping,vit_b_16,457,high,203,-0.9852216748768461
+"Study 2, original",not overlapping,vit_b_16,457,high,344,-0.5813953488372103
+"Study 2, original",overlapping,vit_b_16,503,high,188,4.78723404255319
+"Study 2, original",not overlapping,vit_b_16,503,high,342,3.2163742690058506
+"Study 2, original",overlapping,vit_b_16,557,high,172,-2.3255813953488302
+"Study 2, original",not overlapping,vit_b_16,557,high,378,1.85185185185186
+"Study 2, original",overlapping,vit_b_16,137,low,237,-2.1097046413502185
+"Study 2, original",not overlapping,vit_b_16,137,low,285,-1.0526315789473606
+"Study 2, original",overlapping,vit_b_16,173,low,228,3.508771929824561
+"Study 2, original",not overlapping,vit_b_16,173,low,289,5.536332179930792
+"Study 2, original",overlapping,vit_b_16,211,low,222,2.2522522522522515
+"Study 2, original",not overlapping,vit_b_16,211,low,297,3.703703703703698
+"Study 2, original",overlapping,vit_b_16,257,low,235,2.9787234042553123
+"Study 2, original",not overlapping,vit_b_16,257,low,288,4.1666666666666625
+"Study 2, original",overlapping,vit_b_16,307,low,223,3.139013452914796
+"Study 2, original",not overlapping,vit_b_16,307,low,289,1.384083044982698
+"Study 2, original",overlapping,vit_b_16,349,low,242,3.7190082644628086
+"Study 2, original",not overlapping,vit_b_16,349,low,290,0.34482758620689724
+"Study 2, original",overlapping,vit_b_16,401,low,223,2.6905829596412523
+"Study 2, original",not overlapping,vit_b_16,401,low,294,3.74149659863946
+"Study 2, original",overlapping,vit_b_16,457,low,250,-0.40000000000000036
+"Study 2, original",not overlapping,vit_b_16,457,low,297,0.6734006734006703
+"Study 2, original",overlapping,vit_b_16,503,low,232,3.879310344827591
+"Study 2, original",not overlapping,vit_b_16,503,low,298,2.684563758389258
+"Study 2, original",overlapping,vit_b_16,557,low,226,-1.327433628318575
+"Study 2, original",not overlapping,vit_b_16,557,low,324,-1.5432098765432056
+"Study 2, stain transfer",overlapping,convnext_tiny,137,high,185,1.6216216216216273
+"Study 2, stain transfer",not overlapping,convnext_tiny,137,high,337,0.5934718100890302
+"Study 2, stain transfer",overlapping,convnext_tiny,173,high,178,-1.6853932584269593
+"Study 2, stain transfer",not overlapping,convnext_tiny,173,high,339,-0.5899705014749235
+"Study 2, stain transfer",overlapping,convnext_tiny,211,high,183,2.1857923497267673
+"Study 2, stain transfer",not overlapping,convnext_tiny,211,high,336,4.166666666666674
+"Study 2, stain transfer",overlapping,convnext_tiny,257,high,182,6.043956043956045
+"Study 2, stain transfer",not overlapping,convnext_tiny,257,high,341,5.278592375366575
+"Study 2, stain transfer",overlapping,convnext_tiny,307,high,184,-1.0869565217391242
+"Study 2, stain transfer",not overlapping,convnext_tiny,307,high,328,1.2195121951219523
+"Study 2, stain transfer",overlapping,convnext_tiny,349,high,180,0.5555555555555536
+"Study 2, stain transfer",not overlapping,convnext_tiny,349,high,352,0.28409090909090606
+"Study 2, stain transfer",overlapping,convnext_tiny,401,high,173,1.1560693641618491
+"Study 2, stain transfer",not overlapping,convnext_tiny,401,high,344,2.034883720930225
+"Study 2, stain transfer",overlapping,convnext_tiny,457,high,203,-0.49261083743842304
+"Study 2, stain transfer",not overlapping,convnext_tiny,457,high,344,-2.6162790697674354
+"Study 2, stain transfer",overlapping,convnext_tiny,503,high,188,-0.5319148936170137
+"Study 2, stain transfer",not overlapping,convnext_tiny,503,high,342,-2.3391812865497075
+"Study 2, stain transfer",overlapping,convnext_tiny,557,high,172,-4.651162790697672
+"Study 2, stain transfer",not overlapping,convnext_tiny,557,high,378,0.0
+"Study 2, stain transfer",overlapping,convnext_tiny,137,low,237,-0.42194092827003704
+"Study 2, stain transfer",not overlapping,convnext_tiny,137,low,285,1.403508771929829
+"Study 2, stain transfer",overlapping,convnext_tiny,173,low,228,2.6315789473684292
+"Study 2, stain transfer",not overlapping,convnext_tiny,173,low,289,0.34602076124568004
+"Study 2, stain transfer",overlapping,convnext_tiny,211,low,222,-2.2522522522522515
+"Study 2, stain transfer",not overlapping,convnext_tiny,211,low,297,-2.020202020202011
+"Study 2, stain transfer",overlapping,convnext_tiny,257,low,235,1.276595744680853
+"Study 2, stain transfer",not overlapping,convnext_tiny,257,low,288,3.125
+"Study 2, stain transfer",overlapping,convnext_tiny,307,low,223,0.0
+"Study 2, stain transfer",not overlapping,convnext_tiny,307,low,289,0.692041522491349
+"Study 2, stain transfer",overlapping,convnext_tiny,349,low,242,-2.066115702479332
+"Study 2, stain transfer",not overlapping,convnext_tiny,349,low,290,1.0344827586206917
+"Study 2, stain transfer",overlapping,convnext_tiny,401,low,223,-1.3452914798206317
+"Study 2, stain transfer",not overlapping,convnext_tiny,401,low,294,-3.401360544217691
+"Study 2, stain transfer",overlapping,convnext_tiny,457,low,250,7.9999999999999964
+"Study 2, stain transfer",not overlapping,convnext_tiny,457,low,297,5.05050505050505
+"Study 2, stain transfer",overlapping,convnext_tiny,503,low,232,0.8620689655172376
+"Study 2, stain transfer",not overlapping,convnext_tiny,503,low,298,2.348993288590595
+"Study 2, stain transfer",overlapping,convnext_tiny,557,low,226,-0.8849557522123908
+"Study 2, stain transfer",not overlapping,convnext_tiny,557,low,324,-2.777777777777779
+"Study 2, stain transfer",overlapping,densenet121,137,high,185,0.0
+"Study 2, stain transfer",not overlapping,densenet121,137,high,337,-3.857566765578635
+"Study 2, stain transfer",overlapping,densenet121,173,high,178,-1.1235955056179692
+"Study 2, stain transfer",not overlapping,densenet121,173,high,339,1.7699115044247704
+"Study 2, stain transfer",overlapping,densenet121,211,high,183,-0.5464480874316946
+"Study 2, stain transfer",not overlapping,densenet121,211,high,336,0.29761904761904656
+"Study 2, stain transfer",overlapping,densenet121,257,high,182,-2.197802197802201
+"Study 2, stain transfer",not overlapping,densenet121,257,high,341,-1.4662756598240456
+"Study 2, stain transfer",overlapping,densenet121,307,high,184,1.630434782608703
+"Study 2, stain transfer",not overlapping,densenet121,307,high,328,3.0487804878048808
+"Study 2, stain transfer",overlapping,densenet121,349,high,180,1.1111111111111072
+"Study 2, stain transfer",not overlapping,densenet121,349,high,352,-0.5681818181818232
+"Study 2, stain transfer",overlapping,densenet121,401,high,173,0.0
+"Study 2, stain transfer",not overlapping,densenet121,401,high,344,3.488372093023251
+"Study 2, stain transfer",overlapping,densenet121,457,high,203,1.9704433497536922
+"Study 2, stain transfer",not overlapping,densenet121,457,high,344,1.744186046511631
+"Study 2, stain transfer",overlapping,densenet121,503,high,188,2.659574468085113
+"Study 2, stain transfer",not overlapping,densenet121,503,high,342,1.4619883040935644
+"Study 2, stain transfer",overlapping,densenet121,557,high,172,-0.5813953488372103
+"Study 2, stain transfer",not overlapping,densenet121,557,high,378,-0.7936507936507908
+"Study 2, stain transfer",overlapping,densenet121,137,low,237,4.2194092827004255
+"Study 2, stain transfer",not overlapping,densenet121,137,low,285,-0.7017543859649145
+"Study 2, stain transfer",overlapping,densenet121,173,low,228,3.9473684210526327
+"Study 2, stain transfer",not overlapping,densenet121,173,low,289,0.692041522491349
+"Study 2, stain transfer",overlapping,densenet121,211,low,222,0.0
+"Study 2, stain transfer",not overlapping,densenet121,211,low,297,-4.040404040404044
+"Study 2, stain transfer",overlapping,densenet121,257,low,235,-5.106382978723412
+"Study 2, stain transfer",not overlapping,densenet121,257,low,288,1.736111111111116
+"Study 2, stain transfer",overlapping,densenet121,307,low,223,4.0358744394618835
+"Study 2, stain transfer",not overlapping,densenet121,307,low,289,0.34602076124568004
+"Study 2, stain transfer",overlapping,densenet121,349,low,242,4.958677685950407
+"Study 2, stain transfer",not overlapping,densenet121,349,low,290,3.4482758620689613
+"Study 2, stain transfer",overlapping,densenet121,401,low,223,-0.4484304932735439
+"Study 2, stain transfer",not overlapping,densenet121,401,low,294,-0.6802721088435382
+"Study 2, stain transfer",overlapping,densenet121,457,low,250,1.200000000000001
+"Study 2, stain transfer",not overlapping,densenet121,457,low,297,3.0303030303030387
+"Study 2, stain transfer",overlapping,densenet121,503,low,232,-1.2931034482758674
+"Study 2, stain transfer",not overlapping,densenet121,503,low,298,-0.3355704697986517
+"Study 2, stain transfer",overlapping,densenet121,557,low,226,0.0
+"Study 2, stain transfer",not overlapping,densenet121,557,low,324,0.6172839506172756
+"Study 2, stain transfer",overlapping,resnet50,137,high,185,0.5405405405405461
+"Study 2, stain transfer",not overlapping,resnet50,137,high,337,-0.5934718100890191
+"Study 2, stain transfer",overlapping,resnet50,173,high,178,-0.5617977528089901
+"Study 2, stain transfer",not overlapping,resnet50,173,high,339,0.0
+"Study 2, stain transfer",overlapping,resnet50,211,high,183,2.1857923497267784
+"Study 2, stain transfer",not overlapping,resnet50,211,high,336,4.464285714285721
+"Study 2, stain transfer",overlapping,resnet50,257,high,182,3.296703296703296
+"Study 2, stain transfer",not overlapping,resnet50,257,high,341,0.8797653958944274
+"Study 2, stain transfer",overlapping,resnet50,307,high,184,2.717391304347827
+"Study 2, stain transfer",not overlapping,resnet50,307,high,328,0.0
+"Study 2, stain transfer",overlapping,resnet50,349,high,180,-3.3333333333333326
+"Study 2, stain transfer",not overlapping,resnet50,349,high,352,0.8522727272727293
+"Study 2, stain transfer",overlapping,resnet50,401,high,173,2.8901734104046173
+"Study 2, stain transfer",not overlapping,resnet50,401,high,344,2.6162790697674354
+"Study 2, stain transfer",overlapping,resnet50,457,high,203,0.0
+"Study 2, stain transfer",not overlapping,resnet50,457,high,344,-0.29069767441860517
+"Study 2, stain transfer",overlapping,resnet50,503,high,188,1.5957446808510634
+"Study 2, stain transfer",not overlapping,resnet50,503,high,342,-2.6315789473684292
+"Study 2, stain transfer",overlapping,resnet50,557,high,172,4.651162790697672
+"Study 2, stain transfer",not overlapping,resnet50,557,high,378,-0.5291005291005235
+"Study 2, stain transfer",overlapping,resnet50,137,low,237,-0.8438818565400852
+"Study 2, stain transfer",not overlapping,resnet50,137,low,285,0.7017543859649145
+"Study 2, stain transfer",overlapping,resnet50,173,low,228,-4.824561403508765
+"Study 2, stain transfer",not overlapping,resnet50,173,low,289,-3.806228373702425
+"Study 2, stain transfer",overlapping,resnet50,211,low,222,1.8018018018017945
+"Study 2, stain transfer",not overlapping,resnet50,211,low,297,0.0
+"Study 2, stain transfer",overlapping,resnet50,257,low,235,0.8510638297872353
+"Study 2, stain transfer",not overlapping,resnet50,257,low,288,2.083333333333337
+"Study 2, stain transfer",overlapping,resnet50,307,low,223,-5.829596412556059
+"Study 2, stain transfer",not overlapping,resnet50,307,low,289,-6.57439446366782
+"Study 2, stain transfer",overlapping,resnet50,349,low,242,-2.066115702479332
+"Study 2, stain transfer",not overlapping,resnet50,349,low,290,-1.0344827586206806
+"Study 2, stain transfer",overlapping,resnet50,401,low,223,3.139013452914796
+"Study 2, stain transfer",not overlapping,resnet50,401,low,294,-2.0408163265306034
+"Study 2, stain transfer",overlapping,resnet50,457,low,250,1.6000000000000014
+"Study 2, stain transfer",not overlapping,resnet50,457,low,297,5.387205387205396
+"Study 2, stain transfer",overlapping,resnet50,503,low,232,-2.5862068965517238
+"Study 2, stain transfer",not overlapping,resnet50,503,low,298,-2.684563758389258
+"Study 2, stain transfer",overlapping,resnet50,557,low,226,2.212389380530966
+"Study 2, stain transfer",not overlapping,resnet50,557,low,324,1.2345679012345623
+"Study 2, stain transfer",overlapping,vit_b_16,137,high,185,3.2432432432432434
+"Study 2, stain transfer",not overlapping,vit_b_16,137,high,337,0.29673590504450953
+"Study 2, stain transfer",overlapping,vit_b_16,173,high,178,-0.5617977528089901
+"Study 2, stain transfer",not overlapping,vit_b_16,173,high,339,7.374631268436582
+"Study 2, stain transfer",overlapping,vit_b_16,211,high,183,1.0928961748633892
+"Study 2, stain transfer",not overlapping,vit_b_16,211,high,336,3.8690476190476164
+"Study 2, stain transfer",overlapping,vit_b_16,257,high,182,1.098901098901095
+"Study 2, stain transfer",not overlapping,vit_b_16,257,high,341,0.5865102639296182
+"Study 2, stain transfer",overlapping,vit_b_16,307,high,184,-7.065217391304346
+"Study 2, stain transfer",not overlapping,vit_b_16,307,high,328,2.7439024390243816
+"Study 2, stain transfer",overlapping,vit_b_16,349,high,180,0.0
+"Study 2, stain transfer",not overlapping,vit_b_16,349,high,352,-1.9886363636363646
+"Study 2, stain transfer",overlapping,vit_b_16,401,high,173,-8.092485549132943
+"Study 2, stain transfer",not overlapping,vit_b_16,401,high,344,0.29069767441860517
+"Study 2, stain transfer",overlapping,vit_b_16,457,high,203,-6.403940886699511
+"Study 2, stain transfer",not overlapping,vit_b_16,457,high,344,-9.593023255813948
+"Study 2, stain transfer",overlapping,vit_b_16,503,high,188,4.255319148936176
+"Study 2, stain transfer",not overlapping,vit_b_16,503,high,342,3.801169590643272
+"Study 2, stain transfer",overlapping,vit_b_16,557,high,172,-5.232558139534882
+"Study 2, stain transfer",not overlapping,vit_b_16,557,high,378,2.3809523809523725
+"Study 2, stain transfer",overlapping,vit_b_16,137,low,237,-4.2194092827004255
+"Study 2, stain transfer",not overlapping,vit_b_16,137,low,285,3.157894736842115
+"Study 2, stain transfer",overlapping,vit_b_16,173,low,228,-0.877192982456132
+"Study 2, stain transfer",not overlapping,vit_b_16,173,low,289,9.688581314878885
+"Study 2, stain transfer",overlapping,vit_b_16,211,low,222,0.0
+"Study 2, stain transfer",not overlapping,vit_b_16,211,low,297,3.0303030303030276
+"Study 2, stain transfer",overlapping,vit_b_16,257,low,235,-2.127659574468088
+"Study 2, stain transfer",not overlapping,vit_b_16,257,low,288,0.6944444444444531
+"Study 2, stain transfer",overlapping,vit_b_16,307,low,223,-2.6905829596412523
+"Study 2, stain transfer",not overlapping,vit_b_16,307,low,289,0.34602076124568004
+"Study 2, stain transfer",overlapping,vit_b_16,349,low,242,0.8264462809917328
+"Study 2, stain transfer",not overlapping,vit_b_16,349,low,290,1.0344827586206917
+"Study 2, stain transfer",overlapping,vit_b_16,401,low,223,1.3452914798206317
+"Study 2, stain transfer",not overlapping,vit_b_16,401,low,294,2.0408163265306145
+"Study 2, stain transfer",overlapping,vit_b_16,457,low,250,-2.399999999999991
+"Study 2, stain transfer",not overlapping,vit_b_16,457,low,297,-3.0303030303030276
+"Study 2, stain transfer",overlapping,vit_b_16,503,low,232,1.7241379310344862
+"Study 2, stain transfer",not overlapping,vit_b_16,503,low,298,2.348993288590606
+"Study 2, stain transfer",overlapping,vit_b_16,557,low,226,1.3274336283185861
+"Study 2, stain transfer",not overlapping,vit_b_16,557,low,324,5.555555555555558
+"carrier, colour",overlapping,convnext_tiny,1103,high,184,-3.2608695652173947
+"carrier, colour",not overlapping,convnext_tiny,1103,high,377,0.0
+"carrier, colour",overlapping,convnext_tiny,1151,high,168,-2.9761904761904767
+"carrier, colour",not overlapping,convnext_tiny,1151,high,392,-1.7857142857142905
+"carrier, colour",overlapping,convnext_tiny,1201,high,177,2.824858757062154
+"carrier, colour",not overlapping,convnext_tiny,1201,high,314,0.6369426751592355
+"carrier, colour",overlapping,convnext_tiny,1249,high,197,-1.0152284263959421
+"carrier, colour",not overlapping,convnext_tiny,1249,high,380,3.421052631578947
+"carrier, colour",overlapping,convnext_tiny,1301,high,182,-0.5494505494505475
+"carrier, colour",not overlapping,convnext_tiny,1301,high,346,0.0
+"carrier, colour",overlapping,convnext_tiny,1361,high,188,1.5957446808510634
+"carrier, colour",not overlapping,convnext_tiny,1361,high,365,1.9178082191780854
+"carrier, colour",overlapping,convnext_tiny,1409,high,176,-2.2727272727272707
+"carrier, colour",not overlapping,convnext_tiny,1409,high,338,0.0
+"carrier, colour",overlapping,convnext_tiny,1451,high,183,4.91803278688524
+"carrier, colour",not overlapping,convnext_tiny,1451,high,368,4.6195652173912976
+"carrier, colour",overlapping,convnext_tiny,1499,high,170,2.941176470588236
+"carrier, colour",not overlapping,convnext_tiny,1499,high,336,2.9761904761904767
+"carrier, colour",overlapping,convnext_tiny,1553,high,177,1.1299435028248594
+"carrier, colour",not overlapping,convnext_tiny,1553,high,324,2.4691358024691357
+"carrier, colour",overlapping,convnext_tiny,1103,low,236,0.8474576271186418
+"carrier, colour",not overlapping,convnext_tiny,1103,low,325,2.4615384615384706
+"carrier, colour",overlapping,convnext_tiny,1151,low,240,-1.2499999999999956
+"carrier, colour",not overlapping,convnext_tiny,1151,low,320,0.9375000000000022
+"carrier, colour",overlapping,convnext_tiny,1201,low,215,0.46511627906976605
+"carrier, colour",not overlapping,convnext_tiny,1201,low,276,2.536231884057971
+"carrier, colour",overlapping,convnext_tiny,1249,low,235,1.7021276595744594
+"carrier, colour",not overlapping,convnext_tiny,1249,low,342,0.0
+"carrier, colour",overlapping,convnext_tiny,1301,low,230,1.30434782608696
+"carrier, colour",not overlapping,convnext_tiny,1301,low,298,3.691275167785235
+"carrier, colour",overlapping,convnext_tiny,1361,low,231,0.8658008658008698
+"carrier, colour",not overlapping,convnext_tiny,1361,low,322,2.795031055900621
+"carrier, colour",overlapping,convnext_tiny,1409,low,229,0.8733624454148492
+"carrier, colour",not overlapping,convnext_tiny,1409,low,285,-1.7543859649122862
+"carrier, colour",overlapping,convnext_tiny,1451,low,253,1.5810276679841917
+"carrier, colour",not overlapping,convnext_tiny,1451,low,298,4.026845637583887
+"carrier, colour",overlapping,convnext_tiny,1499,low,214,-0.9345794392523366
+"carrier, colour",not overlapping,convnext_tiny,1499,low,292,3.767123287671237
+"carrier, colour",overlapping,convnext_tiny,1553,low,228,11.403508771929827
+"carrier, colour",not overlapping,convnext_tiny,1553,low,273,9.523809523809524
+"carrier, colour",overlapping,densenet121,1103,high,184,2.717391304347816
+"carrier, colour",not overlapping,densenet121,1103,high,377,1.0610079575596898
+"carrier, colour",overlapping,densenet121,1151,high,168,3.57142857142857
+"carrier, colour",not overlapping,densenet121,1151,high,392,1.5306122448979553
+"carrier, colour",overlapping,densenet121,1201,high,177,2.259887005649719
+"carrier, colour",not overlapping,densenet121,1201,high,314,-0.9554140127388533
+"carrier, colour",overlapping,densenet121,1249,high,197,0.5076142131979711
+"carrier, colour",not overlapping,densenet121,1249,high,380,1.5789473684210464
+"carrier, colour",overlapping,densenet121,1301,high,182,3.8461538461538436
+"carrier, colour",not overlapping,densenet121,1301,high,346,1.4450867052023142
+"carrier, colour",overlapping,densenet121,1361,high,188,0.5319148936170248
+"carrier, colour",not overlapping,densenet121,1361,high,365,0.8219178082191747
+"carrier, colour",overlapping,densenet121,1409,high,176,0.0
+"carrier, colour",not overlapping,densenet121,1409,high,338,2.071005917159763
+"carrier, colour",overlapping,densenet121,1451,high,183,2.1857923497267784
+"carrier, colour",not overlapping,densenet121,1451,high,368,1.6304347826086918
+"carrier, colour",overlapping,densenet121,1499,high,170,2.941176470588236
+"carrier, colour",not overlapping,densenet121,1499,high,336,3.57142857142857
+"carrier, colour",overlapping,densenet121,1553,high,177,3.3898305084745783
+"carrier, colour",not overlapping,densenet121,1553,high,324,2.1604938271604923
+"carrier, colour",overlapping,densenet121,1103,low,236,1.6949152542372836
+"carrier, colour",not overlapping,densenet121,1103,low,325,2.1538461538461617
+"carrier, colour",overlapping,densenet121,1151,low,240,-0.8333333333333304
+"carrier, colour",not overlapping,densenet121,1151,low,320,5.000000000000004
+"carrier, colour",overlapping,densenet121,1201,low,215,0.9302325581395321
+"carrier, colour",not overlapping,densenet121,1201,low,276,-1.0869565217391242
+"carrier, colour",overlapping,densenet121,1249,low,235,2.9787234042553123
+"carrier, colour",not overlapping,densenet121,1249,low,342,3.2163742690058506
+"carrier, colour",overlapping,densenet121,1301,low,230,1.7391304347826098
+"carrier, colour",not overlapping,densenet121,1301,low,298,0.6711409395973145
+"carrier, colour",overlapping,densenet121,1361,low,231,1.2987012987012991
+"carrier, colour",not overlapping,densenet121,1361,low,322,3.105590062111807
+"carrier, colour",overlapping,densenet121,1409,low,229,1.3100436681222627
+"carrier, colour",not overlapping,densenet121,1409,low,285,0.0
+"carrier, colour",overlapping,densenet121,1451,low,253,1.5810276679841917
+"carrier, colour",not overlapping,densenet121,1451,low,298,1.34228187919464
+"carrier, colour",overlapping,densenet121,1499,low,214,-1.4018691588784993
+"carrier, colour",not overlapping,densenet121,1499,low,292,3.7671232876712257
+"carrier, colour",overlapping,densenet121,1553,low,228,8.333333333333325
+"carrier, colour",not overlapping,densenet121,1553,low,273,1.46520146520146
+"carrier, colour",overlapping,resnet50,1103,high,184,1.6304347826086918
+"carrier, colour",not overlapping,resnet50,1103,high,377,0.7957559681697646
+"carrier, colour",overlapping,resnet50,1151,high,168,-0.5952380952380931
+"carrier, colour",not overlapping,resnet50,1151,high,392,1.2755102040816313
+"carrier, colour",overlapping,resnet50,1201,high,177,2.259887005649719
+"carrier, colour",not overlapping,resnet50,1201,high,314,0.31847133757961776
+"carrier, colour",overlapping,resnet50,1249,high,197,1.0152284263959421
+"carrier, colour",not overlapping,resnet50,1249,high,380,0.7894736842105288
+"carrier, colour",overlapping,resnet50,1301,high,182,2.197802197802201
+"carrier, colour",not overlapping,resnet50,1301,high,346,4.335260115606943
+"carrier, colour",overlapping,resnet50,1361,high,188,1.0638297872340496
+"carrier, colour",not overlapping,resnet50,1361,high,365,1.6438356164383494
+"carrier, colour",overlapping,resnet50,1409,high,176,2.2727272727272707
+"carrier, colour",not overlapping,resnet50,1409,high,338,3.2544378698224907
+"carrier, colour",overlapping,resnet50,1451,high,183,0.0
+"carrier, colour",not overlapping,resnet50,1451,high,368,3.532608695652173
+"carrier, colour",overlapping,resnet50,1499,high,170,1.176470588235301
+"carrier, colour",not overlapping,resnet50,1499,high,336,2.678571428571419
+"carrier, colour",overlapping,resnet50,1553,high,177,2.259887005649719
+"carrier, colour",not overlapping,resnet50,1553,high,324,2.1604938271605034
+"carrier, colour",overlapping,resnet50,1103,low,236,4.23728813559322
+"carrier, colour",not overlapping,resnet50,1103,low,325,2.1538461538461506
+"carrier, colour",overlapping,resnet50,1151,low,240,-2.499999999999991
+"carrier, colour",not overlapping,resnet50,1151,low,320,3.125
+"carrier, colour",overlapping,resnet50,1201,low,215,2.7906976744186074
+"carrier, colour",not overlapping,resnet50,1201,low,276,-0.7246376811594124
+"carrier, colour",overlapping,resnet50,1249,low,235,5.106382978723401
+"carrier, colour",not overlapping,resnet50,1249,low,342,5.847953216374268
+"carrier, colour",overlapping,resnet50,1301,low,230,1.7391304347826098
+"carrier, colour",not overlapping,resnet50,1301,low,298,-1.6778523489932806
+"carrier, colour",overlapping,resnet50,1361,low,231,0.8658008658008587
+"carrier, colour",not overlapping,resnet50,1361,low,322,2.1739130434782594
+"carrier, colour",overlapping,resnet50,1409,low,229,3.056768558951961
+"carrier, colour",not overlapping,resnet50,1409,low,285,1.403508771929829
+"carrier, colour",overlapping,resnet50,1451,low,253,-1.5810276679841917
+"carrier, colour",not overlapping,resnet50,1451,low,298,4.026845637583887
+"carrier, colour",overlapping,resnet50,1499,low,214,-0.4672897196261738
+"carrier, colour",not overlapping,resnet50,1499,low,292,0.3424657534246589
+"carrier, colour",overlapping,resnet50,1553,low,228,5.263157894736848
+"carrier, colour",not overlapping,resnet50,1553,low,273,-0.366300366300365
+"carrier, colour",overlapping,vit_b_16,1103,high,184,5.434782608695654
+"carrier, colour",not overlapping,vit_b_16,1103,high,377,0.0
+"carrier, colour",overlapping,vit_b_16,1151,high,168,2.9761904761904767
+"carrier, colour",not overlapping,vit_b_16,1151,high,392,2.5510204081632626
+"carrier, colour",overlapping,vit_b_16,1201,high,177,0.5649717514124353
+"carrier, colour",not overlapping,vit_b_16,1201,high,314,2.547770700636942
+"carrier, colour",overlapping,vit_b_16,1249,high,197,-0.5076142131979711
+"carrier, colour",not overlapping,vit_b_16,1249,high,380,-3.421052631578947
+"carrier, colour",overlapping,vit_b_16,1301,high,182,1.6483516483516536
+"carrier, colour",not overlapping,vit_b_16,1301,high,346,0.0
+"carrier, colour",overlapping,vit_b_16,1361,high,188,0.5319148936170137
+"carrier, colour",not overlapping,vit_b_16,1361,high,365,3.013698630136985
+"carrier, colour",overlapping,vit_b_16,1409,high,176,-1.1363636363636354
+"carrier, colour",not overlapping,vit_b_16,1409,high,338,2.071005917159763
+"carrier, colour",overlapping,vit_b_16,1451,high,183,0.5464480874316946
+"carrier, colour",not overlapping,vit_b_16,1451,high,368,4.07608695652174
+"carrier, colour",overlapping,vit_b_16,1499,high,170,0.0
+"carrier, colour",not overlapping,vit_b_16,1499,high,336,1.488095238095244
+"carrier, colour",overlapping,vit_b_16,1553,high,177,6.214689265536721
+"carrier, colour",not overlapping,vit_b_16,1553,high,324,2.4691358024691357
+"carrier, colour",overlapping,vit_b_16,1103,low,236,3.3898305084745783
+"carrier, colour",not overlapping,vit_b_16,1103,low,325,1.538461538461544
+"carrier, colour",overlapping,vit_b_16,1151,low,240,1.6666666666666607
+"carrier, colour",not overlapping,vit_b_16,1151,low,320,1.8750000000000044
+"carrier, colour",overlapping,vit_b_16,1201,low,215,3.2558139534883623
+"carrier, colour",not overlapping,vit_b_16,1201,low,276,2.1739130434782594
+"carrier, colour",overlapping,vit_b_16,1249,low,235,1.276595744680853
+"carrier, colour",not overlapping,vit_b_16,1249,low,342,2.3391812865497075
+"carrier, colour",overlapping,vit_b_16,1301,low,230,3.913043478260869
+"carrier, colour",not overlapping,vit_b_16,1301,low,298,2.0134228187919545
+"carrier, colour",overlapping,vit_b_16,1361,low,231,-1.2987012987012991
+"carrier, colour",not overlapping,vit_b_16,1361,low,322,0.6211180124223614
+"carrier, colour",overlapping,vit_b_16,1409,low,229,-1.3100436681222738
+"carrier, colour",not overlapping,vit_b_16,1409,low,285,0.0
+"carrier, colour",overlapping,vit_b_16,1451,low,253,-2.7667984189723382
+"carrier, colour",not overlapping,vit_b_16,1451,low,298,-1.342281879194629
+"carrier, colour",overlapping,vit_b_16,1499,low,214,0.4672897196261627
+"carrier, colour",not overlapping,vit_b_16,1499,low,292,3.424657534246578
+"carrier, colour",overlapping,vit_b_16,1553,low,228,6.578947368421062
+"carrier, colour",not overlapping,vit_b_16,1553,low,273,2.564102564102555
+"carrier, masked",overlapping,convnext_tiny,1103,high,184,2.1739130434782594
+"carrier, masked",not overlapping,convnext_tiny,1103,high,377,6.896551724137934
+"carrier, masked",overlapping,convnext_tiny,1151,high,168,1.1904761904761862
+"carrier, masked",not overlapping,convnext_tiny,1151,high,392,0.7653061224489721
+"carrier, masked",overlapping,convnext_tiny,1201,high,177,2.259887005649719
+"carrier, masked",not overlapping,convnext_tiny,1201,high,314,0.31847133757961776
+"carrier, masked",overlapping,convnext_tiny,1249,high,197,3.0456852791878264
+"carrier, masked",not overlapping,convnext_tiny,1249,high,380,1.5789473684210464
+"carrier, masked",overlapping,convnext_tiny,1301,high,182,0.5494505494505475
+"carrier, masked",not overlapping,convnext_tiny,1301,high,346,3.4682080924855474
+"carrier, masked",overlapping,convnext_tiny,1361,high,188,-2.127659574468077
+"carrier, masked",not overlapping,convnext_tiny,1361,high,365,-1.3698630136986356
+"carrier, masked",overlapping,convnext_tiny,1409,high,176,1.7045454545454475
+"carrier, masked",not overlapping,convnext_tiny,1409,high,338,-0.887573964497046
+"carrier, masked",overlapping,convnext_tiny,1451,high,183,0.0
+"carrier, masked",not overlapping,convnext_tiny,1451,high,368,0.8152173913043459
+"carrier, masked",overlapping,convnext_tiny,1499,high,170,0.588235294117645
+"carrier, masked",not overlapping,convnext_tiny,1499,high,336,2.083333333333326
+"carrier, masked",overlapping,convnext_tiny,1553,high,177,2.824858757062143
+"carrier, masked",not overlapping,convnext_tiny,1553,high,324,4.938271604938271
+"carrier, masked",overlapping,convnext_tiny,1103,low,236,4.23728813559322
+"carrier, masked",not overlapping,convnext_tiny,1103,low,325,3.076923076923077
+"carrier, masked",overlapping,convnext_tiny,1151,low,240,-0.4166666666666652
+"carrier, masked",not overlapping,convnext_tiny,1151,low,320,0.6250000000000089
+"carrier, masked",overlapping,convnext_tiny,1201,low,215,1.3953488372093092
+"carrier, masked",not overlapping,convnext_tiny,1201,low,276,2.1739130434782705
+"carrier, masked",overlapping,convnext_tiny,1249,low,235,0.42553191489361764
+"carrier, masked",not overlapping,convnext_tiny,1249,low,342,2.3391812865497075
+"carrier, masked",overlapping,convnext_tiny,1301,low,230,-1.30434782608696
+"carrier, masked",not overlapping,convnext_tiny,1301,low,298,-2.348993288590606
+"carrier, masked",overlapping,convnext_tiny,1361,low,231,-1.2987012987012991
+"carrier, masked",not overlapping,convnext_tiny,1361,low,322,5.590062111801242
+"carrier, masked",overlapping,convnext_tiny,1409,low,229,1.3100436681222627
+"carrier, masked",not overlapping,convnext_tiny,1409,low,285,-0.35087719298245723
+"carrier, masked",overlapping,convnext_tiny,1451,low,253,1.5810276679841917
+"carrier, masked",not overlapping,convnext_tiny,1451,low,298,1.342281879194629
+"carrier, masked",overlapping,convnext_tiny,1499,low,214,3.2710280373831724
+"carrier, masked",not overlapping,convnext_tiny,1499,low,292,1.3698630136986356
+"carrier, masked",overlapping,convnext_tiny,1553,low,228,6.578947368421051
+"carrier, masked",not overlapping,convnext_tiny,1553,low,273,3.296703296703296
+"carrier, masked",overlapping,densenet121,1103,high,184,2.717391304347827
+"carrier, masked",not overlapping,densenet121,1103,high,377,1.0610079575596787
+"carrier, masked",overlapping,densenet121,1151,high,168,1.1904761904761862
+"carrier, masked",not overlapping,densenet121,1151,high,392,2.0408163265306145
+"carrier, masked",overlapping,densenet121,1201,high,177,1.1299435028248594
+"carrier, masked",not overlapping,densenet121,1201,high,314,2.547770700636942
+"carrier, masked",overlapping,densenet121,1249,high,197,2.0304568527918843
+"carrier, masked",not overlapping,densenet121,1249,high,380,0.5263157894736858
+"carrier, masked",overlapping,densenet121,1301,high,182,0.0
+"carrier, masked",not overlapping,densenet121,1301,high,346,3.1791907514450823
+"carrier, masked",overlapping,densenet121,1361,high,188,1.5957446808510634
+"carrier, masked",not overlapping,densenet121,1361,high,365,2.73972602739726
+"carrier, masked",overlapping,densenet121,1409,high,176,0.0
+"carrier, masked",not overlapping,densenet121,1409,high,338,0.0
+"carrier, masked",overlapping,densenet121,1451,high,183,-1.0928961748633892
+"carrier, masked",not overlapping,densenet121,1451,high,368,1.630434782608703
+"carrier, masked",overlapping,densenet121,1499,high,170,1.764705882352935
+"carrier, masked",not overlapping,densenet121,1499,high,336,2.678571428571419
+"carrier, masked",overlapping,densenet121,1553,high,177,1.1299435028248594
+"carrier, masked",not overlapping,densenet121,1553,high,324,-0.92592592592593
+"carrier, masked",overlapping,densenet121,1103,low,236,2.5423728813559254
+"carrier, masked",not overlapping,densenet121,1103,low,325,0.9230769230769265
+"carrier, masked",overlapping,densenet121,1151,low,240,1.2499999999999956
+"carrier, masked",not overlapping,densenet121,1151,low,320,3.125
+"carrier, masked",overlapping,densenet121,1201,low,215,0.46511627906977715
+"carrier, masked",not overlapping,densenet121,1201,low,276,-0.7246376811594124
+"carrier, masked",overlapping,densenet121,1249,low,235,2.9787234042553123
+"carrier, masked",not overlapping,densenet121,1249,low,342,3.508771929824561
+"carrier, masked",overlapping,densenet121,1301,low,230,1.304347826086949
+"carrier, masked",not overlapping,densenet121,1301,low,298,2.348993288590606
+"carrier, masked",overlapping,densenet121,1361,low,231,1.2987012987012991
+"carrier, masked",not overlapping,densenet121,1361,low,322,2.795031055900632
+"carrier, masked",overlapping,densenet121,1409,low,229,1.7467248908296873
+"carrier, masked",not overlapping,densenet121,1409,low,285,-1.403508771929829
+"carrier, masked",overlapping,densenet121,1451,low,253,1.9762845849802368
+"carrier, masked",not overlapping,densenet121,1451,low,298,5.033557046979875
+"carrier, masked",overlapping,densenet121,1499,low,214,1.4018691588784993
+"carrier, masked",not overlapping,densenet121,1499,low,292,2.397260273972601
+"carrier, masked",overlapping,densenet121,1553,low,228,4.824561403508776
+"carrier, masked",not overlapping,densenet121,1553,low,273,5.860805860805862
+"carrier, masked",overlapping,resnet50,1103,high,184,0.5434782608695676
+"carrier, masked",not overlapping,resnet50,1103,high,377,0.7957559681697535
+"carrier, masked",overlapping,resnet50,1151,high,168,0.0
+"carrier, masked",not overlapping,resnet50,1151,high,392,1.7857142857142905
+"carrier, masked",overlapping,resnet50,1201,high,177,2.824858757062143
+"carrier, masked",not overlapping,resnet50,1201,high,314,0.9554140127388533
+"carrier, masked",overlapping,resnet50,1249,high,197,2.0304568527918843
+"carrier, masked",not overlapping,resnet50,1249,high,380,2.1052631578947434
+"carrier, masked",overlapping,resnet50,1301,high,182,2.19780219780219
+"carrier, masked",not overlapping,resnet50,1301,high,346,2.3121387283236983
+"carrier, masked",overlapping,resnet50,1361,high,188,0.5319148936170248
+"carrier, masked",not overlapping,resnet50,1361,high,365,4.383561643835621
+"carrier, masked",overlapping,resnet50,1409,high,176,1.7045454545454586
+"carrier, masked",not overlapping,resnet50,1409,high,338,3.2544378698224907
+"carrier, masked",overlapping,resnet50,1451,high,183,-1.0928961748633892
+"carrier, masked",not overlapping,resnet50,1451,high,368,2.9891304347826053
+"carrier, masked",overlapping,resnet50,1499,high,170,3.529411764705881
+"carrier, masked",not overlapping,resnet50,1499,high,336,2.083333333333337
+"carrier, masked",overlapping,resnet50,1553,high,177,4.519774011299438
+"carrier, masked",not overlapping,resnet50,1553,high,324,1.2345679012345734
+"carrier, masked",overlapping,resnet50,1103,low,236,2.5423728813559254
+"carrier, masked",not overlapping,resnet50,1103,low,325,1.8461538461538418
+"carrier, masked",overlapping,resnet50,1151,low,240,1.6666666666666607
+"carrier, masked",not overlapping,resnet50,1151,low,320,3.750000000000009
+"carrier, masked",overlapping,resnet50,1201,low,215,3.7209302325581395
+"carrier, masked",not overlapping,resnet50,1201,low,276,2.898550724637683
+"carrier, masked",overlapping,resnet50,1249,low,235,2.9787234042553123
+"carrier, masked",not overlapping,resnet50,1249,low,342,0.0
+"carrier, masked",overlapping,resnet50,1301,low,230,2.608695652173909
+"carrier, masked",not overlapping,resnet50,1301,low,298,-1.0067114093959773
+"carrier, masked",overlapping,resnet50,1361,low,231,-1.2987012987012991
+"carrier, masked",not overlapping,resnet50,1361,low,322,0.6211180124223614
+"carrier, masked",overlapping,resnet50,1409,low,229,0.8733624454148492
+"carrier, masked",not overlapping,resnet50,1409,low,285,1.403508771929829
+"carrier, masked",overlapping,resnet50,1451,low,253,1.9762845849802368
+"carrier, masked",not overlapping,resnet50,1451,low,298,3.3557046979865723
+"carrier, masked",overlapping,resnet50,1499,low,214,1.869158878504673
+"carrier, masked",not overlapping,resnet50,1499,low,292,1.3698630136986356
+"carrier, masked",overlapping,resnet50,1553,low,228,3.508771929824561
+"carrier, masked",not overlapping,resnet50,1553,low,273,2.197802197802201
+"carrier, masked",overlapping,vit_b_16,1103,high,184,3.2608695652173836
+"carrier, masked",not overlapping,vit_b_16,1103,high,377,3.4482758620689613
+"carrier, masked",overlapping,vit_b_16,1151,high,168,5.952380952380953
+"carrier, masked",not overlapping,vit_b_16,1151,high,392,8.163265306122458
+"carrier, masked",overlapping,vit_b_16,1201,high,177,5.649717514124298
+"carrier, masked",not overlapping,vit_b_16,1201,high,314,3.1847133757961776
+"carrier, masked",overlapping,vit_b_16,1249,high,197,2.030456852791873
+"carrier, masked",not overlapping,vit_b_16,1249,high,380,0.0
+"carrier, masked",overlapping,vit_b_16,1301,high,182,-2.197802197802201
+"carrier, masked",not overlapping,vit_b_16,1301,high,346,-1.7341040462427793
+"carrier, masked",overlapping,vit_b_16,1361,high,188,-0.5319148936170137
+"carrier, masked",not overlapping,vit_b_16,1361,high,365,-3.561643835616435
+"carrier, masked",overlapping,vit_b_16,1409,high,176,2.840909090909094
+"carrier, masked",not overlapping,vit_b_16,1409,high,338,2.3668639053254448
+"carrier, masked",overlapping,vit_b_16,1451,high,183,0.5464480874316946
+"carrier, masked",not overlapping,vit_b_16,1451,high,368,0.8152173913043459
+"carrier, masked",overlapping,vit_b_16,1499,high,170,2.352941176470591
+"carrier, masked",not overlapping,vit_b_16,1499,high,336,3.2738095238095233
+"carrier, masked",overlapping,vit_b_16,1553,high,177,0.5649717514124353
+"carrier, masked",not overlapping,vit_b_16,1553,high,324,3.0864197530864113
+"carrier, masked",overlapping,vit_b_16,1103,low,236,3.8135593220338992
+"carrier, masked",not overlapping,vit_b_16,1103,low,325,3.6923076923076947
+"carrier, masked",overlapping,vit_b_16,1151,low,240,2.083333333333337
+"carrier, masked",not overlapping,vit_b_16,1151,low,320,0.9375000000000022
+"carrier, masked",overlapping,vit_b_16,1201,low,215,1.3953488372092981
+"carrier, masked",not overlapping,vit_b_16,1201,low,276,-1.449275362318836
+"carrier, masked",overlapping,vit_b_16,1249,low,235,1.7021276595744705
+"carrier, masked",not overlapping,vit_b_16,1249,low,342,2.3391812865497075
+"carrier, masked",overlapping,vit_b_16,1301,low,230,3.0434782608695587
+"carrier, masked",not overlapping,vit_b_16,1301,low,298,2.684563758389269
+"carrier, masked",overlapping,vit_b_16,1361,low,231,-1.7316017316017396
+"carrier, masked",not overlapping,vit_b_16,1361,low,322,-0.6211180124223614
+"carrier, masked",overlapping,vit_b_16,1409,low,229,0.0
+"carrier, masked",not overlapping,vit_b_16,1409,low,285,1.7543859649122862
+"carrier, masked",overlapping,vit_b_16,1451,low,253,2.371541501976282
+"carrier, masked",not overlapping,vit_b_16,1451,low,298,5.033557046979864
+"carrier, masked",overlapping,vit_b_16,1499,low,214,2.8037383177570097
+"carrier, masked",not overlapping,vit_b_16,1499,low,292,3.424657534246578
+"carrier, masked",overlapping,vit_b_16,1553,low,228,3.508771929824561
+"carrier, masked",not overlapping,vit_b_16,1553,low,273,6.227106227106227
+"carrier, standard",overlapping,convnext_tiny,1103,high,184,1.630434782608703
+"carrier, standard",not overlapping,convnext_tiny,1103,high,377,0.5305039787798504
+"carrier, standard",overlapping,convnext_tiny,1151,high,168,1.1904761904761862
+"carrier, standard",not overlapping,convnext_tiny,1151,high,392,3.0612244897959218
+"carrier, standard",overlapping,convnext_tiny,1201,high,177,3.3898305084745783
+"carrier, standard",not overlapping,convnext_tiny,1201,high,314,-0.6369426751592355
+"carrier, standard",overlapping,convnext_tiny,1249,high,197,0.5076142131979711
+"carrier, standard",not overlapping,convnext_tiny,1249,high,380,1.5789473684210575
+"carrier, standard",overlapping,convnext_tiny,1301,high,182,2.7472527472527375
+"carrier, standard",not overlapping,convnext_tiny,1301,high,346,3.1791907514450823
+"carrier, standard",overlapping,convnext_tiny,1361,high,188,0.0
+"carrier, standard",not overlapping,convnext_tiny,1361,high,365,1.3698630136986245
+"carrier, standard",overlapping,convnext_tiny,1409,high,176,0.5681818181818121
+"carrier, standard",not overlapping,convnext_tiny,1409,high,338,0.8875739644970349
+"carrier, standard",overlapping,convnext_tiny,1451,high,183,-3.2786885245901676
+"carrier, standard",not overlapping,convnext_tiny,1451,high,368,2.1739130434782594
+"carrier, standard",overlapping,convnext_tiny,1499,high,170,1.764705882352935
+"carrier, standard",not overlapping,convnext_tiny,1499,high,336,1.1904761904761862
+"carrier, standard",overlapping,convnext_tiny,1553,high,177,3.3898305084745783
+"carrier, standard",not overlapping,convnext_tiny,1553,high,324,3.0864197530864224
+"carrier, standard",overlapping,convnext_tiny,1103,low,236,2.9661016949152463
+"carrier, standard",not overlapping,convnext_tiny,1103,low,325,1.846153846153853
+"carrier, standard",overlapping,convnext_tiny,1151,low,240,2.083333333333337
+"carrier, standard",not overlapping,convnext_tiny,1151,low,320,7.8125
+"carrier, standard",overlapping,convnext_tiny,1201,low,215,0.0
+"carrier, standard",not overlapping,convnext_tiny,1201,low,276,1.0869565217391353
+"carrier, standard",overlapping,convnext_tiny,1249,low,235,1.7021276595744705
+"carrier, standard",not overlapping,convnext_tiny,1249,low,342,2.046783625730997
+"carrier, standard",overlapping,convnext_tiny,1301,low,230,0.8695652173912993
+"carrier, standard",not overlapping,convnext_tiny,1301,low,298,1.0067114093959773
+"carrier, standard",overlapping,convnext_tiny,1361,low,231,0.43290043290042934
+"carrier, standard",not overlapping,convnext_tiny,1361,low,322,1.2422360248447228
+"carrier, standard",overlapping,convnext_tiny,1409,low,229,3.056768558951972
+"carrier, standard",not overlapping,convnext_tiny,1409,low,285,2.1052631578947434
+"carrier, standard",overlapping,convnext_tiny,1451,low,253,1.9762845849802368
+"carrier, standard",not overlapping,convnext_tiny,1451,low,298,7.7181208053691215
+"carrier, standard",overlapping,convnext_tiny,1499,low,214,1.4018691588785104
+"carrier, standard",not overlapping,convnext_tiny,1499,low,292,1.3698630136986245
+"carrier, standard",overlapping,convnext_tiny,1553,low,228,3.0701754385964897
+"carrier, standard",not overlapping,convnext_tiny,1553,low,273,7.692307692307699
+"carrier, standard",overlapping,densenet121,1103,high,184,0.5434782608695676
+"carrier, standard",not overlapping,densenet121,1103,high,377,0.5305039787798504
+"carrier, standard",overlapping,densenet121,1151,high,168,-2.3809523809523725
+"carrier, standard",not overlapping,densenet121,1151,high,392,2.2959183673469385
+"carrier, standard",overlapping,densenet121,1201,high,177,2.259887005649719
+"carrier, standard",not overlapping,densenet121,1201,high,314,1.5923566878980888
+"carrier, standard",overlapping,densenet121,1249,high,197,0.50761421319796
+"carrier, standard",not overlapping,densenet121,1249,high,380,2.1052631578947323
+"carrier, standard",overlapping,densenet121,1301,high,182,0.5494505494505475
+"carrier, standard",not overlapping,densenet121,1301,high,346,0.578034682080919
+"carrier, standard",overlapping,densenet121,1361,high,188,1.0638297872340385
+"carrier, standard",not overlapping,densenet121,1361,high,365,1.3698630136986245
+"carrier, standard",overlapping,densenet121,1409,high,176,0.5681818181818232
+"carrier, standard",not overlapping,densenet121,1409,high,338,-1.47928994082841
+"carrier, standard",overlapping,densenet121,1451,high,183,-1.0928961748633892
+"carrier, standard",not overlapping,densenet121,1451,high,368,2.4456521739130377
+"carrier, standard",overlapping,densenet121,1499,high,170,1.17647058823529
+"carrier, standard",not overlapping,densenet121,1499,high,336,0.0
+"carrier, standard",overlapping,densenet121,1553,high,177,4.519774011299438
+"carrier, standard",not overlapping,densenet121,1553,high,324,4.320987654320985
+"carrier, standard",overlapping,densenet121,1103,low,236,1.6949152542372836
+"carrier, standard",not overlapping,densenet121,1103,low,325,2.4615384615384706
+"carrier, standard",overlapping,densenet121,1151,low,240,0.0
+"carrier, standard",not overlapping,densenet121,1151,low,320,4.6875
+"carrier, standard",overlapping,densenet121,1201,low,215,0.46511627906977715
+"carrier, standard",not overlapping,densenet121,1201,low,276,0.7246376811594235
+"carrier, standard",overlapping,densenet121,1249,low,235,0.42553191489361764
+"carrier, standard",not overlapping,densenet121,1249,low,342,2.631578947368418
+"carrier, standard",overlapping,densenet121,1301,low,230,1.304347826086949
+"carrier, standard",not overlapping,densenet121,1301,low,298,1.0067114093959662
+"carrier, standard",overlapping,densenet121,1361,low,231,1.7316017316017396
+"carrier, standard",not overlapping,densenet121,1361,low,322,4.6583850931677055
+"carrier, standard",overlapping,densenet121,1409,low,229,2.6200873362445365
+"carrier, standard",not overlapping,densenet121,1409,low,285,1.403508771929829
+"carrier, standard",overlapping,densenet121,1451,low,253,1.1857707509881465
+"carrier, standard",not overlapping,densenet121,1451,low,298,0.0
+"carrier, standard",overlapping,densenet121,1499,low,214,0.9345794392523366
+"carrier, standard",not overlapping,densenet121,1499,low,292,3.424657534246578
+"carrier, standard",overlapping,densenet121,1553,low,228,5.701754385964907
+"carrier, standard",not overlapping,densenet121,1553,low,273,4.395604395604402
+"carrier, standard",overlapping,resnet50,1103,high,184,-0.5434782608695676
+"carrier, standard",not overlapping,resnet50,1103,high,377,2.1220159151193574
+"carrier, standard",overlapping,resnet50,1151,high,168,2.3809523809523725
+"carrier, standard",not overlapping,resnet50,1151,high,392,1.7857142857142794
+"carrier, standard",overlapping,resnet50,1201,high,177,1.6949152542372947
+"carrier, standard",not overlapping,resnet50,1201,high,314,2.2292993630573243
+"carrier, standard",overlapping,resnet50,1249,high,197,3.0456852791878153
+"carrier, standard",not overlapping,resnet50,1249,high,380,0.5263157894736858
+"carrier, standard",overlapping,resnet50,1301,high,182,3.8461538461538436
+"carrier, standard",not overlapping,resnet50,1301,high,346,1.7341040462427793
+"carrier, standard",overlapping,resnet50,1361,high,188,4.255319148936176
+"carrier, standard",not overlapping,resnet50,1361,high,365,3.835616438356171
+"carrier, standard",overlapping,resnet50,1409,high,176,0.5681818181818232
+"carrier, standard",not overlapping,resnet50,1409,high,338,-0.295857988165682
+"carrier, standard",overlapping,resnet50,1451,high,183,2.732240437158473
+"carrier, standard",not overlapping,resnet50,1451,high,368,2.4456521739130377
+"carrier, standard",overlapping,resnet50,1499,high,170,0.0
+"carrier, standard",not overlapping,resnet50,1499,high,336,1.7857142857142794
+"carrier, standard",overlapping,resnet50,1553,high,177,6.779661016949157
+"carrier, standard",not overlapping,resnet50,1553,high,324,2.4691358024691357
+"carrier, standard",overlapping,resnet50,1103,low,236,3.8135593220338992
+"carrier, standard",not overlapping,resnet50,1103,low,325,1.2307692307692353
+"carrier, standard",overlapping,resnet50,1151,low,240,1.2499999999999956
+"carrier, standard",not overlapping,resnet50,1151,low,320,2.8125000000000067
+"carrier, standard",overlapping,resnet50,1201,low,215,1.3953488372092981
+"carrier, standard",not overlapping,resnet50,1201,low,276,1.8115942028985477
+"carrier, standard",overlapping,resnet50,1249,low,235,2.127659574468088
+"carrier, standard",not overlapping,resnet50,1249,low,342,2.046783625730997
+"carrier, standard",overlapping,resnet50,1301,low,230,0.43478260869564966
+"carrier, standard",not overlapping,resnet50,1301,low,298,-0.3355704697986517
+"carrier, standard",overlapping,resnet50,1361,low,231,2.164502164502169
+"carrier, standard",not overlapping,resnet50,1361,low,322,3.105590062111796
+"carrier, standard",overlapping,resnet50,1409,low,229,0.4366812227074135
+"carrier, standard",not overlapping,resnet50,1409,low,285,0.7017543859649145
+"carrier, standard",overlapping,resnet50,1451,low,253,1.1857707509881465
+"carrier, standard",not overlapping,resnet50,1451,low,298,4.026845637583887
+"carrier, standard",overlapping,resnet50,1499,low,214,1.869158878504673
+"carrier, standard",not overlapping,resnet50,1499,low,292,1.3698630136986356
+"carrier, standard",overlapping,resnet50,1553,low,228,2.631578947368418
+"carrier, standard",not overlapping,resnet50,1553,low,273,4.029304029304026
+"carrier, standard",overlapping,vit_b_16,1103,high,184,0.0
+"carrier, standard",not overlapping,vit_b_16,1103,high,377,-0.2652519893899141
+"carrier, standard",overlapping,vit_b_16,1151,high,168,1.7857142857142794
+"carrier, standard",not overlapping,vit_b_16,1151,high,392,1.5306122448979553
+"carrier, standard",overlapping,vit_b_16,1201,high,177,2.824858757062143
+"carrier, standard",not overlapping,vit_b_16,1201,high,314,3.5031847133757954
+"carrier, standard",overlapping,vit_b_16,1249,high,197,0.5076142131979711
+"carrier, standard",not overlapping,vit_b_16,1249,high,380,0.2631578947368429
+"carrier, standard",overlapping,vit_b_16,1301,high,182,1.6483516483516425
+"carrier, standard",not overlapping,vit_b_16,1301,high,346,-2.3121387283236983
+"carrier, standard",overlapping,vit_b_16,1361,high,188,-5.85106382978724
+"carrier, standard",not overlapping,vit_b_16,1361,high,365,-10.136986301369866
+"carrier, standard",overlapping,vit_b_16,1409,high,176,-5.113636363636365
+"carrier, standard",not overlapping,vit_b_16,1409,high,338,-9.171597633136097
+"carrier, standard",overlapping,vit_b_16,1451,high,183,-1.6393442622950727
+"carrier, standard",not overlapping,vit_b_16,1451,high,368,2.717391304347827
+"carrier, standard",overlapping,vit_b_16,1499,high,170,7.647058823529418
+"carrier, standard",not overlapping,vit_b_16,1499,high,336,6.845238095238093
+"carrier, standard",overlapping,vit_b_16,1553,high,177,4.519774011299438
+"carrier, standard",not overlapping,vit_b_16,1553,high,324,0.6172839506172867
+"carrier, standard",overlapping,vit_b_16,1103,low,236,-1.2711864406779627
+"carrier, standard",not overlapping,vit_b_16,1103,low,325,0.9230769230769154
+"carrier, standard",overlapping,vit_b_16,1151,low,240,-1.2499999999999956
+"carrier, standard",not overlapping,vit_b_16,1151,low,320,1.2500000000000067
+"carrier, standard",overlapping,vit_b_16,1201,low,215,2.3255813953488413
+"carrier, standard",not overlapping,vit_b_16,1201,low,276,1.0869565217391242
+"carrier, standard",overlapping,vit_b_16,1249,low,235,0.42553191489361764
+"carrier, standard",not overlapping,vit_b_16,1249,low,342,-0.5847953216374324
+"carrier, standard",overlapping,vit_b_16,1301,low,230,1.304347826086949
+"carrier, standard",not overlapping,vit_b_16,1301,low,298,2.0134228187919545
+"carrier, standard",overlapping,vit_b_16,1361,low,231,-0.43290043290042934
+"carrier, standard",not overlapping,vit_b_16,1361,low,322,4.34782608695653
+"carrier, standard",overlapping,vit_b_16,1409,low,229,-2.183406113537112
+"carrier, standard",not overlapping,vit_b_16,1409,low,285,-5.263157894736836
+"carrier, standard",overlapping,vit_b_16,1451,low,253,-1.5810276679841917
+"carrier, standard",not overlapping,vit_b_16,1451,low,298,4.697986577181212
+"carrier, standard",overlapping,vit_b_16,1499,low,214,-1.4018691588784993
+"carrier, standard",not overlapping,vit_b_16,1499,low,292,-0.3424657534246589
+"carrier, standard",overlapping,vit_b_16,1553,low,228,3.508771929824561
+"carrier, standard",not overlapping,vit_b_16,1553,low,273,0.73260073260073

@@ -1,3 +1,21 @@
 Public cervical cytology benchmarks release many cell crops cut from far fewer microscope
-fields, and are usually split at the crop level. [Abstract to be finalised from the
-registered Study 2 results.]
+fields or slide images, and are usually split at the crop level, so test cells share their
+acquisition with training cells. A first study showed that this structure is pervasive and that
+the shared parent is recognisable, but six per-architecture tests could not show that it inflates
+accuracy. In a second, preregistered study (1,341 models) we test the question once, with a
+mixed model sized by simulation: across twelve architectures and twenty new seeds, crop-level
+splitting raised SIPaKMeD accuracy by \HoneEst\ percentage points (95\% CI \HoneBootLo--\HoneBootHi),
+so parent-level splitting reveals \SipErrorRatio\ times the error rate. On CRIC, whose slide
+images hold many cells of several classes, the inflation was \HtwoEst\ points. A factorial
+that holds crop and field counts fixed shows that the inflation is leakage (\HthreeEst\ points)
+and not the extra training diversity crop-level splits bring (diversity effect \DivEst\ points). Eight further registered
+experiments (1,580 runs) locate the leaked signal by elimination. It needs no background and,
+in an exploratory split, does not depend on shared pixels; it is not a slide-level label prior; and it is not carried by
+linearly decodable field identity: erasing or adversarially suppressing that identity cut probe
+recoverability by up to \RecoveryCutMax\% without moving the gap. It is instead tied to how a
+field renders its cells: matching a test cell's colour statistics to an unseen field removed
+most of it, although colour augmentation during training did not prevent it. Grad-CAM maps of
+leaking and non-leaking models were indistinguishable. Neither probes, saliency maps, nor
+augmentation can certify an evaluation; parent-disjoint splits can. We release the provenance
+maps, splits, run records, and a risk calculator that predicts a benchmark's exposure from its
+crop-to-parent table.
