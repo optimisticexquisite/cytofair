@@ -1,0 +1,272 @@
+\part{Study 2 Results}
+
+\chapter{Overview of the registered outcome}
+\label{r:ch:s2-overview}
+
+All \RecStudyTwoRuns\ registered runs completed between \RecStudyTwoStart\ and \RecStudyTwoEnd~IST. None failed,
+needed a retry, or diverged; every run was trained from the registration commit; every result matched its registered
+split hash; and the collector reported no missing, duplicated, or mismatched task. The registered analysis
+(\artifact{analysis/study2/run_all.sh}) ran once, on 19 October at 12:56.
+
+\begin{longtable}{lp{0.42\textwidth}rrl}
+\caption{The five registered Study 2 tests (H5 in pp of gap per pp of recoverability).}\label{r:tab:s2-verdicts}\\
+\toprule
+& Question & Estimate & Adjusted $p$ & Verdict \\
+\midrule
+\endfirsthead
+\bottomrule
+\endfoot
+H1 & SIPaKMeD P1 $-$ P2 accuracy (primary, tested alone) & \HoneEst & \HoneP & \supported \\
+H2 & CRIC P1 $-$ P2 accuracy & \HtwoEst & \HtwoPholm & \supported \\
+H3 & Leakage at matched diversity (2C) & \HthreeEst & \HthreePholm & \supported \\
+H4 & Own-context route through backgrounds (2B) & \HfourEst & \HfourPholm & \notsupported \\
+H5 & Gap versus suppressed recoverability (2A) & \HfiveEst & \HfivePholm & \notsupported \\
+\end{longtable}
+
+Gate~A (H1 supported) means the inflation is reported as certified. Gate~B was ``murky'': H3 was supported but H4 was
+not and H5 was not supported (one of two architectures failed its manipulation check). That is the result that motivated
+Amendment~8.
+
+\chapter{H1: crop-level splitting inflates SIPaKMeD accuracy}
+\label{r:ch:h1}
+
+\section{The registered test}
+
+Mean test accuracy was \SipPOneAcc\% under P1 and \SipPTwoAcc\% under P2. The registered residual check flagged heavy
+tails (residual skewness \RecHoneSkew, excess kurtosis \RecHoneKurt, Shapiro--Wilk $p$ \RecHoneShapiro), so, as registered,
+the two-way cluster bootstrap is the primary inference: \HoneEst~pp (95\% interval \HoneBootLo--\HoneBootHi, bootstrap
+$p$ \HoneBootP). Every sensitivity analysis agrees (Table~\ref{r:tab:sensitivity}): the mixed model gives the same
+estimate with Satterthwaite $df=\HoneDf$ and $p$ \HoneKRp\ under Kenward--Roger, the seed-level sign-flip test gives $p$
+\HoneSignFlipP, and the binomial mixed model a log odds ratio of \HoneGlmmLogOR\ ($p$ \HoneGlmmP).
+
+\input{diagrams/h1_decision}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{h1.pdf}
+\caption{P1 $-$ P2 (left) and P2 $-$ P3 (right) per architecture (mean and 95\% $t$ interval over 20 seeds) with the
+registered pooled estimates.}
+\label{r:fig:h1}
+\end{figure}
+
+\input{generated/protocol_sensitivity}
+
+\section{Consistency}
+
+All \HonePositiveArchs\ architectures scored higher under P1 (\HoneArchMin--\HoneArchMax~pp) and \HoneArchCIPositive\ of
+them individually had intervals excluding zero. At the seed level the picture is noisier but one-sided
+(Figure~\ref{r:fig:seed-heatmap}). The parent-level error rate is \SipErrorRatio\ times the crop-level one. Macro-F1
+(\HoneFoneEst~pp) and balanced accuracy (\HoneBaccEst~pp) moved by the same amount.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{phase1_points.pdf}
+\caption{Every Phase~1 run and the per-protocol mean over 20 seeds, by architecture.}
+\label{r:fig:phase1-points}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{seed_heatmap.pdf}
+\caption{P1 $-$ P2 accuracy for every architecture and seed (diverging scale, zero in grey).}
+\label{r:fig:seed-heatmap}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{cross_study.pdf}
+\caption{The six Study~1 architectures: Study~1's five-seed estimates and Study~2's twenty-seed estimates of P1 $-$ P2.
+Study~2's intervals are narrower and all exclude zero.}
+\label{r:fig:cross-study}
+\end{figure}
+
+\section{P2 versus P3, rankings, and the ordering gate}
+
+Merging near-duplicate-linked parents on top of parent-level splitting changed nothing (P2 $-$ P3 \PtwoPthreeEst~pp,
+\PtwoPthreeLo\ to \PtwoPthreeHi, $p=\PtwoPthreeP$). The registered P3 $\leq$ P2 $\leq$ P1 ordering passed for
+\RecOrderingPassed\ of twelve architectures, as expected when two protocols are equivalent and the order between them is
+decided by noise. The architecture ranking was largely preserved between P1 and P2 (Kendall $\tau=\KendallTau$,
+\KendallLo--\KendallHi; \ReorderedPairs\ pairs reordered).
+
+\section{Crop-level evidence}
+
+Within crops that were test crops under both protocols in different seeds (\MoneCrops\ crops), accuracy was \MoneEst~pp
+higher under P1 (\MoneLo--\MoneHi; M1). Within P1, a crop sharing source pixels with a training crop was more often
+correct (log odds \MtwoOverlapLogOdds, $p$ \MtwoOverlapP), as was a crop with more training siblings (log odds
+\MtwoSiblingsLogOdds\ per log sibling, $p=\MtwoSiblingsP$), adjusting for class and the crop's difficulty under P2 (M2).
+
+\section{Training behaviour}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{training_curves.pdf}
+\caption{Mean test accuracy per epoch under P1, P2, and P3 (20 seeds each). The P1 advantage appears within the first
+few epochs and persists to the final-epoch endpoint.}
+\label{r:fig:training-curves}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{loss_curves.pdf}
+\caption{Mean training loss per epoch (log scale). Training is indistinguishable across protocols; the difference is in
+what the test set contains, not in how training proceeds.}
+\label{r:fig:loss-curves}
+\end{figure}
+
+\section{Calibration and errors}
+
+Pooled over runs, the 15-bin expected calibration error was \RecEceOne\% under P1, \RecEceTwo\% under P2, and
+\RecEceThree\% under P3, and the negative log-likelihood \RecNllOne, \RecNllTwo, and \RecNllThree\ nats: crop-level
+splits flatter calibration as well as accuracy.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{calibration.pdf}
+\caption{Calibration error and negative log-likelihood by architecture and protocol (mean and 95\% $t$ interval).}
+\label{r:fig:calibration}
+\end{figure}
+
+\input{generated/phase1_summary}
+
+\chapter{H2: the CRIC inflation is an order of magnitude larger}
+\label{r:ch:h2}
+
+CRIC accuracy fell from \CricPOneAcc\% under crop-level splitting to \CricPTwoAcc\% under slide-level splitting:
+H2 $=$ \HtwoEst~pp (\HtwoLo--\HtwoHi; Holm $p$ \HtwoPholm). The error rate rose \CricErrorRatio-fold. Because the classes
+are imbalanced, balanced accuracy fell further, from \CricPOneBacc\% to \CricPTwoBacc\% (\CricBaccEst~pp), and macro-F1 by
+\CricFoneEst~pp. The size-matched P1-prime gave the same inflation (\CricPrimeEst~pp), so it is not a training-size
+effect.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{cric.pdf}
+\caption{CRIC P1 $-$ P2 per architecture, the registered estimate, and the SIPaKMeD estimate for scale.}
+\label{r:fig:cric}
+\end{figure}
+
+The loss is concentrated in the abnormal classes (Figure~\ref{r:fig:cric-recall}). Recall for ASC-H, LSIL, and HSIL falls
+by tens of points when slides are held out, while the majority NILM class barely moves; the crop-level split had been
+rewarding the recognition of slides whose abnormal cells were already seen.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{cric_recall.pdf}
+\caption{CRIC per-class recall under P1 and P2, pooled over all runs, with the mean number of test cells per class.}
+\label{r:fig:cric-recall}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{confusion.pdf}
+\caption{Row-normalised confusion matrices pooled over runs. SIPaKMeD errors barely change between protocols; CRIC's
+abnormal classes collapse toward NILM and toward each other under slide-level splitting.}
+\label{r:fig:confusion}
+\end{figure}
+
+\input{generated/cric_summary}
+
+\chapter{H3: the inflation is leakage, not training diversity}
+\label{r:ch:h3}
+
+With crop count, field count, and allocation rule held equal, adding the test fields' sibling crops to training raised
+accuracy on the common test set by \HthreeEst~pp (\HthreeLo--\HthreeHi; Holm $p=\HthreePholm$). Every architecture showed
+it at both diversity levels (Figure~\ref{r:fig:factorial-cells}). Increasing the number of distinct training fields from
+504 to 720 without leakage did nothing (\DivEst~pp, \DivLo\ to \DivHi), and the leak effect did not depend on diversity
+(interaction \InteractionEst~pp, $p=\InteractionP$). The registered approximate decomposition assigns the Phase~1 gap
+entirely to leakage (diversity component \DecompDiv~pp).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{factorial.pdf}
+\caption{Left: leak minus clean accuracy per architecture and diversity level, and the H3 estimate. Right: high minus
+low diversity within clean cells.}
+\label{r:fig:factorial}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{factorial_cells.pdf}
+\caption{All four 2C cell means per architecture (10 seeds each).}
+\label{r:fig:factorial-cells}
+\end{figure}
+
+The diversity manipulation did change what the training sets contain. In the embedding space of a retrained parent-probe
+encoder (which identified held-out fields at \RecEncoderAcc\% against \RecEncoderChance\% chance), the mean distance between
+field centroids was \RecDivCleanHigh\ for 720-field and \RecDivCleanLow\ for 504-field clean training sets, and
+\RecDivPOne\ (P1, \RecDivParentsPOne\ fields) against \RecDivPTwo\ (P2, \RecDivParentsPTwo\ fields) for the natural splits.
+More diverse training sets were measurably more diverse; that diversity simply did not improve accuracy.
+
+\chapter{H4: background transplants do not isolate the route}
+\label{r:ch:h4}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{transplant.pdf}
+\caption{Left: accuracy of leak and clean models on composites of the common test set. Right: the per-run own-context
+route and the registered H4 contrast.}
+\label{r:fig:transplant}
+\end{figure}
+
+Compositing a cell onto its own inpainted background cost nothing, so seam and inpainting artifacts were negligible.
+Leak models were \LeakOriginalEst~pp more accurate than clean models on unmodified cells and kept most of that advantage
+when the background was replaced: \TransplantLeakSibling~pp on sibling backgrounds, \TransplantLeakUnseen~pp on backgrounds
+from unseen fields of the same class, and \TransplantLeakOther~pp on other-class backgrounds. H4, the leak-minus-clean
+difference of the own-context route, was \HfourEst~pp (\HfourLo\ to \HfourHi; Holm $p=\HfourPholm$): not supported. Its
+point estimate would assign \RouteShare\% of the inflation to the background.
+
+Two observations qualify the design. Sibling backgrounds helped even clean models, which had never seen those fields, by
+\TransplantCleanHarmony~pp, presumably because a background from the cell's own field matches its stain; that effect is
+common to both arms but inflates the variance of the contrast. And backgrounds do carry class information: an other-class
+background moved \DonorShiftEst~pp of probability toward its class (\DonorShiftLo--\DonorShiftHi, secondary). Restricting H4
+to recipients whose background covers at least 30\% of the crop gave \HfourBgEst~pp (\HfourBgLo\ to \HfourBgHi).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{transplant_arch.pdf}
+\caption{Transplant-condition accuracy of leak and clean models per architecture.}
+\label{r:fig:transplant-arch}
+\end{figure}
+
+\input{generated/factorial_summary}
+
+\chapter{H5: gradient reversal was evaded}
+\label{r:ch:h5}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{grl.pdf}
+\caption{The gradient-reversal sweep: probe recoverability, the P1 $-$ P2 gap, and their relation (ConvNeXt-T, which
+failed its manipulation check, hollow).}
+\label{r:fig:grl}
+\end{figure}
+
+For ConvNeXt-T the adversary was evaded: as the reversal strength grew, an independent linear probe identified the field
+\emph{better} (\GrlConvRzero\% at $\lambda=0$, \GrlConvRstar\% at $\lambda=3$), while the adversary's own training accuracy
+fell toward chance (Figure~\ref{r:fig:grl-full}). The encoder learned features its two-layer adversary could not read but a
+standardised linear probe could, the failure mode described for adversarial removal in language
+models~\citep{elazar2018adversarial}. ConvNeXt-T therefore failed the registered manipulation check and was excluded. For
+ResNet-50, recoverability fell from \GrlResRzero\% to \GrlResRstar\% and the mean gap fell from \GrlResGapZero~pp to
+between \GrlResGapMin\ and \GrlResGapMax~pp at every $\lambda>0$, with P2 accuracy within 1~pp. The registered slope was
+positive but not significant (\HfiveEst\ pp per pp, \HfiveLo\ to \HfiveHi; Holm $p=\HfivePholm$). Amendment~8's linear
+adversary later showed the ResNet-50 gap does not fall when recoverability is suppressed on fresh seeds (Part~VI), so this
+drop was most likely noise.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{grl_full.pdf}
+\caption{The full 2A sweep per architecture: test accuracy, independent-probe recoverability, and the adversary's own
+within-class training accuracy at the final epoch.}
+\label{r:fig:grl-full}
+\end{figure}
+
+\input{generated/grl_summary}
+
+\chapter{What Study 2 established}
+\label{r:ch:s2-established}
+
+\begin{workedbox}{Study 2 in four sentences}
+Crop-level splitting inflates accuracy, by \HoneEst~pp on SIPaKMeD across twelve architectures and by \HtwoEst~pp on CRIC.
+The inflation is leakage: at matched size and diversity, the test fields' siblings alone add \HthreeEst~pp, and diversity
+alone adds nothing. The size of the inflation follows the dataset's structure, as the closed forms predict. How models
+use the leak was not settled: the background route was small and uncertain, and the adversary was evaded.
+\end{workedbox}

@@ -1,0 +1,181 @@
+\part{Appendices}
+\appendix
+
+\chapter*{About the appendices}
+\addcontentsline{toc}{chapter}{About the appendices}
+Appendices A--K are the Study~1 appendices, carried over verbatim. The remaining appendices hold the complete ledgers of
+every Study~2 and Amendment~8 run, the variance components of every registered model, the commit chronology, the
+registration hashes, the preregistration documents verbatim, and a reproduction cookbook.
+
+\input{study1/app01_complete_sipakmed_classifier_run_ledger}
+\input{study1/app02_complete_parent_probe_run_ledger}
+\input{study1/app03_complete_cx22_model_run_ledger}
+\input{study1/app04_owner_data_files_and_integrity_hashes}
+\input{study1/app05_released_split_hashes}
+\input{study1/app06_git_decision_chronology}
+\input{study1/app07_exact_command_cookbook}
+\input{study1/app08_artifact_index_and_evidence_status}
+\input{study1/app09_complete_derived_result_ledgers}
+\input{study1/app10_excluded_attempt_ledger}
+\input{study1/app11_reading_guide_for_future_maintainers}
+
+
+\chapter{Study 2 run ledgers}
+\label{r:app:ledgers}
+Every registered Study~2 run, with its metrics in percent, wall time in minutes, and the GPU it ran on.
+
+\input{generated/ledger_phase1}
+\input{generated/ledger_cric}
+\input{generated/ledger_factorial}
+\input{generated/ledger_grl}
+
+\chapter{Amendment 8 run ledgers}
+\label{r:app:ledgers-a8}
+
+\input{generated/ledger_carrier}
+\input{generated/ledger_linadv}
+\input{generated/ledger_normalization}
+\input{generated/ledger_leace}
+\input{generated/ledger_ablation}
+\input{generated/ledger_smoke}
+
+\chapter{Variance components of every registered model}
+\label{r:app:varcomp}
+
+\input{generated/variance_components}
+
+\chapter{Complete commit chronology}
+\label{r:app:git}
+
+\input{generated/git_chronology}
+
+\chapter{Registration hashes}
+\label{r:app:hashes}
+
+SHA-256 hashes of every file and cache fixed by the Study~2 registration and by Amendments~7, 8, and~9, as recorded in
+\artifact{reports/study2/registration_hashes.txt}.
+
+\lstinputlisting[style=plain]{generated/registration_hashes.txt}
+
+\chapter{The Study 2 preregistration, verbatim}
+\label{r:app:prereg}
+
+\lstinputlisting[style=plain]{generated/PREREGISTRATION_STUDY2.md}
+
+\chapter{Amendments 8 and 9, verbatim}
+\label{r:app:a8}
+
+\lstinputlisting[style=plain]{generated/PREREGISTRATION_STUDY2_AMENDMENT8.md}
+
+\chapter{Phase 0 checklist, Cx22 literature check, and excluded attempts}
+\label{r:app:phase0}
+
+\section{Phase 0 checklist}
+\lstinputlisting[style=plain]{generated/phase0_arxiv_checklist.md}
+\section{Cx22 literature check}
+\lstinputlisting[style=plain]{generated/cx22_literature_check.md}
+\section{Excluded attempts (Study 2 smoke tests)}
+\lstinputlisting[style=plain]{generated/excluded_attempts.md}
+
+\chapter{Reproduction cookbook}
+\label{r:app:cookbook}
+
+\section{Environment}
+Python 3.13 with the locked dependencies (\texttt{uv sync --extra dev}); PyTorch 2.9.0 with CUDA 12.8 on the GPU host;
+R 4.4 with lme4 2.0 and lmerTest 3.2 for the mixed models. Software versions recorded by every run are in
+Table~\ref{r:tab:software}.
+
+\section{Study 2}
+\begin{lstlisting}[style=cyto,language=bash]
+uv run cytofair study2-design                        # regenerate every registered split (hash-identical)
+scripts/study2/node_prepare.sh ROOT PYTHON CRIC_DIR    # crop caches and transplant caches on the GPU host
+python scripts/study2/build_tasks.py --root ROOT --repository REPO --python PYTHON --seeds 20
+python scripts/study2/launch_matrix.py splits/study2/tasks/*.jsonl \
+    --gpus 0,3,4,5 --logs ROOT/runs/logs --status ROOT/runs/status.json
+analysis/study2/run_all.sh ROOT PYTHON RSCRIPT       # registered analysis; fails closed
+python scripts/study2/paper_numbers.py               # manuscript numbers and tables
+python scripts/study2/figures_results.py             # Study 2 figures
+\end{lstlisting}
+
+\section{Amendment 8}
+\begin{lstlisting}[style=cyto,language=bash]
+uv run cytofair followup-design                      # fresh-seed 2C designs and ablation plans
+uv run cytofair build-carrier-caches --cache-dir ROOT/cache --cache-name sipakmed --output ROOT/cache
+python scripts/study2/build_followup_tasks.py --root ROOT --repository REPO \
+    --study2-runs ROOT/runs --python PYTHON
+python scripts/study2/launch_matrix.py splits/study2/followup/tasks/*.jsonl \
+    --gpus 4,5,6,7 --logs ROOT/runs/followup/logs --status ROOT/runs/followup/status.json
+analysis/study2/followup/run_followup.sh ROOT PYTHON RSCRIPT
+python analysis/study2/followup/exploratory_overlap.py --study2-runs ROOT/runs \
+    --followup-runs ROOT/runs/followup --output results/study2/followup/exploratory/overlap.json
+python scripts/study2/figures_followup.py            # follow-up figures
+\end{lstlisting}
+
+\section{This record}
+\begin{lstlisting}[style=cyto,language=bash]
+python record/scripts/split_study1.py                # Study 1 chapters from monograph/main.tex
+python record/scripts/export_run_records.py RECORD_DATA results/study2/run_records
+python record/scripts/make_record_tables.py          # tables and record macros
+python record/scripts/make_record_figures.py         # record figures
+record/build.sh                                      # full record and standalone part PDFs
+\end{lstlisting}
+
+\chapter{Where everything is}
+\label{r:app:inventory}
+
+{\small
+\begin{longtable}{p{0.42\textwidth}p{0.52\textwidth}}
+\caption{Key files and directories.}\label{r:tab:inventory}\\
+\toprule
+Path & Content \\
+\midrule
+\endfirsthead
+\toprule
+Path & Content \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\artifact{PREREGISTRATION.md} & Study~1 plan and Amendments 1--6 \\
+\artifact{PREREGISTRATION_STUDY2.md} & Study~2 plan, Amendments 7--9 pointers \\
+\artifact{PREREGISTRATION_STUDY2_AMENDMENT8.md} & Amendments 8 and 9 in full \\
+\artifact{provenance/} & crop-to-parent maps for the four datasets \\
+\artifact{splits/study2/} & registered Study~2 splits, designs, plans, tasks, manifests \\
+\artifact{splits/study2/followup/} & Amendment~8 designs, ablation plans, tasks, manifests \\
+\artifact{src/cytofair/train_study2.py} & the Study~2 trainer \\
+\artifact{src/cytofair/gpu_augment.py} & GPU-resident augmentation \\
+\artifact{src/cytofair/image_cache.py} & packed, hashed crop caches \\
+\artifact{src/cytofair/factorial.py}, \artifact{transplant.py} & 2C designs and 2B composites \\
+\artifact{src/cytofair/carriers.py}, \artifact{followup_eval.py} & Amendment~8 transforms, LEACE, Grad-CAM, device probe \\
+\artifact{src/cytofair/risk.py} & structural closed forms (\texttt{risk-report}) \\
+\artifact{scripts/study2/} & task builders, scheduler, figures, numbers, archiving \\
+\artifact{analysis/study2/} & registered Study~2 analysis (R and Python) \\
+\artifact{analysis/study2/followup/} & registered Amendment~8 analysis, exploratory overlap \\
+\artifact{results/study2/analysis/} & Study~2 registered outputs \\
+\artifact{results/study2/followup/} & Amendment~8 registered and exploratory outputs \\
+\artifact{results/study2/run_records/} & exported records of every run \\
+\artifact{reports/study2/} & registration hashes, Phase~0, literature check, excluded attempts \\
+\artifact{paper/v2/} & the single-column manuscript \\
+\artifact{monograph/} & the Study~1 record source \\
+\artifact{record/} & this record \\
+\texttt{\textasciitilde/cytofair\_study2\_archive} (GPU host) & 121~GB archive of every run artifact \\
+\end{longtable}
+}
+
+\chapter{Glossary}
+\label{r:app:glossary}
+
+\begin{description}[leftmargin=2em,style=nextline]
+\item[Parent] The acquisition unit a crop was cut from: a SIPaKMeD cluster field, a Cx22 (CCEDD) source image, or a CRIC slide image.
+\item[P1, P1$'$, P2, P3] Crop-level, size-matched crop-level, parent-disjoint, and component-disjoint splits.
+\item[Straddle] A parent with crops on both sides of a split.
+\item[Leak and clean cells] 2C training sets that do or do not contain the test fields' sibling crops, at matched size and diversity.
+\item[Recoverability $R$] Within-class field-identification accuracy of a linear probe on frozen features.
+\item[Regime] The manipulation levels whose mean P2 accuracy stays within 1~pp of baseline.
+\item[Manipulation check] At least a quarter of the above-floor recoverability removed at the strongest in-regime level.
+\item[Holm family] A set of tests whose $p$-values are adjusted together by Holm's step-down procedure.
+\item[LEACE] Least-squares concept erasure: a linear projection after which no linear function of the features covaries with the concept.
+\item[GRL] Gradient-reversal layer: identity in the forward pass, negated and scaled gradient in the backward pass.
+\item[HED jitter] Random scaling and shifting of stain channels in optical-density space.
+\item[Reinhard transfer] Matching an image's LAB mean and standard deviation to target values.
+\end{description}

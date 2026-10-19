@@ -1,0 +1,21 @@
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[node distance=5mm and 7mm]
+\node[box=28mm] (pending) {Pending\\\footnotesize sorted by priority, file order};
+\node[box=28mm, right=of pending] (guard) {Guards\\\footnotesize free disk $\geq$ 40 GB, GPU memory, slot units};
+\node[box=28mm, right=of guard] (running) {Running\\\footnotesize one GPU per training task, two per evaluation task};
+\node[done=28mm, below=of running] (done) {Completed\\\footnotesize result JSON + artifacts exist};
+\node[gold=28mm, left=of done] (retry) {Retry once\\\footnotesize same seed, split, code};
+\node[bad=28mm, left=of retry] (fail) {Failed\\\footnotesize recorded; analysis fails closed};
+\draw[flow] (pending) -- (guard); \draw[flow] (guard) -- (running);
+\draw[flow] (running) -- node[note, right]{rc 0 and valid} (done);
+\draw[flow] (running) -- node[note, above, sloped]{error} (retry);
+\draw[flow] (retry) -- node[note, above]{second error} (fail);
+\draw[flow] (retry.north) to[bend left=20] (pending.south east);
+\end{tikzpicture}
+\end{adjustbox}
+\caption{The resumable scheduler (\texttt{scripts/\allowbreak study2/\allowbreak launch\_matrix.py}). A task whose valid result already exists is
+skipped on restart, so the controller can be relaunched after any interruption without duplicating a run.}
+\label{r:fig:launcher}
+\end{figure}

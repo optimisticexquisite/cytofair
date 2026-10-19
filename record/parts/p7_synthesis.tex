@@ -1,0 +1,253 @@
+\part{Synthesis}
+
+\chapter{What the project established, refuted, and left open}
+\label{r:ch:synthesis}
+
+\section{Claims and their strength}
+
+{\small
+\begin{longtable}{p{0.30\textwidth}p{0.17\textwidth}p{0.45\textwidth}}
+\caption{Every substantive claim of the project and how strongly the evidence supports it.}\label{r:tab:claims}\\
+\toprule
+Claim & Strength & Evidence and boundary \\
+\midrule
+\endfirsthead
+\toprule
+Claim & Strength & Evidence and boundary \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Public cytology benchmarks hide a crop-to-parent hierarchy & established & Study~1: recovered and verified for four datasets; Herlev negative control at zero. \\
+Random crop splits share parents and pixels & established & 92.6\% (SIPaKMeD), 99.97\% (CRIC) of test cells with a training parent; \RecOverlapSip\% / \RecOverlapCric\% / \RecOverlapCx\% with shared pixels. \\
+The parent is recognisable & established & Study~1 probe 109$\times$ chance; Study~2 encoder \RecEncoderTimes$\times$ chance. \\
+Crop-level splitting inflates accuracy & established (registered, powered) & H1 +\HoneEst~pp, all twelve architectures; H2 +\HtwoEst~pp; five inference methods agree. \\
+The inflation is leakage, not diversity & established (registered, replicated) & H3 +\HthreeEst~pp, diversity \DivEst~pp; replicated on fresh seeds (+\HthreeRepEst~pp). \\
+Exposure follows structure & supported & CRIC, with 29 cells per slide and high class--slide dependence, inflates ten times more than SIPaKMeD; predicted by the closed forms. \\
+The leak needs no background & established (registered) & F3 +\FthreeEst~pp with every background masked; test-time removal leaves \RecBgKeep\%. \\
+The leak is tied to the field's colour rendering & supported (registered), qualified & F2 removes \RecStainRemove\% at test time; F4 shows colour jitter in training does not prevent it. \\
+A background context route carries the leak & not supported & H4 \HfourEst~pp (\HfourLo\ to \HfourHi). \\
+Models apply a slide-level label prior (CRIC) & refuted & F1 reversed (\FoneEst~pp); equal gains for discordant and concordant cells. \\
+The leak is memorised shared pixels & not supported (exploratory) & Equal advantage on non-overlapping crops. \\
+The inflation is carried by linearly decodable field identity & refuted within its scope & F5, F7, F8: recoverability cut \RecoveryCutMin--\RecoveryCutMax\%, gap flat (pooled slope \FeightEst, CI \FeightLo\ to \FeightHi). \\
+Saliency maps reveal the leak & not supported (descriptive) & Grad-CAM identical for leak and clean models. \\
+Stronger grouping (P3) is more conservative than P2 & not supported & P2 $-$ P3 \PtwoPthreeEst~pp; the ordering passes for \RecOrderingPassed\ of 12 architectures. \\
+\end{longtable}
+}
+
+\section{What we got out of it}
+
+\begin{workedbox}{Scientific results}
+A certified, powered estimate of how much crop-level splitting inflates two public cytology benchmarks; a causal
+separation of leakage from diversity; a mechanism narrowed by elimination; and a methodological warning that the
+standard audit tools (probes, saliency, augmentation) cannot detect or remove this kind of leakage.
+\end{workedbox}
+
+\begin{workedbox}{Reusable artifacts}
+Verified crop-to-parent maps for SIPaKMeD, Cx22, CRIC, and Herlev; registered P1/P1$'$/P2/P3 splits with hashes for 20
+seeds; the 2C factorial designs and transplant plans; a risk calculator (\texttt{cytofair risk-report}) that predicts a
+benchmark's exposure from its parent table; a deterministic GPU-resident training stack with complete per-run artifacts;
+a fail-closed scheduler and collectors; exported records of every run (\artifact{results/study2/run_records}); 121~GB of
+archived predictions, features, and weights for future analyses without retraining.
+\end{workedbox}
+
+\begin{workedbox}{Writing}
+A single-column manuscript (\artifact{paper/v2}, 17 pages, every number generated), the earlier ISBI draft, the Study~1
+record, and this lifecycle record.
+\end{workedbox}
+
+\chapter{What worked and what did not}
+\label{r:ch:worked}
+
+{\small
+\begin{longtable}{p{0.18\textwidth}p{0.38\textwidth}p{0.36\textwidth}}
+\caption{What worked and what did not, by area.}\label{r:tab:worked}\\
+\toprule
+Area & Worked & Did not work, or cost more than expected \\
+\midrule
+\endfirsthead
+\toprule
+Area & Worked & Did not work, or cost more than expected \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Question design & Separating structure, availability, consequence, and mechanism kept every claim at its true strength. & Study~1 asked the consequence question six times and could not answer it. \\
+Statistics & One crossed mixed model with a split random effect, sized by simulation; registered sensitivity analyses that all agreed; the assumption trigger worked as designed. & Per-architecture testing in Study~1; Satterthwaite $df$ for H3 is only 3 with four architectures, so its interval is wide. \\
+Causal designs & The 2C factorial cleanly separated leakage from diversity; evaluation-only follow-ups on saved models were cheap and decisive. & The 2B transplant contrast was noisy (sibling backgrounds help even clean models); the 2A MLP adversary was evaded by ConvNeXt-T. \\
+Mechanism & Elimination with several independent manipulations gave a coherent picture. & No single test identifies the carrier positively; F2 and F4 pull in different directions. \\
+Engineering & GPU-resident augmentation (exact torchvision port); packed hashed caches; bitwise determinism; complete per-run artifacts; zero failed tasks in 2,921. & The four-core CPU quota had to be discovered the hard way; the slow network home forced a strict storage discipline. \\
+Governance & Register, smoke-test on non-contrast splits, dry-run, collect fail-closed, amend with dates; every deviation recorded. & A dry run that bypassed one pipeline stage let a labelling bug through to the first real analysis (Amendment~9). Registrations are local commits, not yet externally timestamped. \\
+Operations & Detached controllers, status files, sequential offloading with verification, clean vacating of node-local storage. & Several shell and remote-wait mistakes (self-matching process searches, hung SSH sessions) cost time but no data. \\
+\end{longtable}
+}
+
+\section{Demotivations, and why they mattered}
+
+Four results were disappointing at the time. Study~1's six tests failed to survive correction, which looked like a null;
+Study~2 showed it was underpowered. H4 and H5 failed to isolate a mechanism; Amendment~8 showed why (the leak is neither
+in the background nor in a linearly readable code). F1 went the opposite way from the prediction; that reversal is itself
+evidence against a slide-level label prior. And the ConvNeXt-T adversary was evaded; that failure is a concrete example
+of why decodability and use must be measured separately. Each setback narrowed the explanation instead of ending it, and
+none was hidden.
+
+\section{Lessons}
+
+\begin{enumerate}[leftmargin=1.8em]
+\item Ask a pooled question once, with the dependence structure in the model (the shared test set per seed is a random
+effect, not twelve independent tests).
+\item Keep every per-sample artifact. Half of Amendment~8 cost no training because Study~2 kept logits, features, and
+weights.
+\item Measure manipulations independently of the mechanism they target: the gradient-reversal adversary's own accuracy
+fell while an independent probe's rose.
+\item Dry runs must pass through every stage of the real pipeline.
+\item On shared hosts, discover the real resource limits (CPU quota, writable disks, network storage behaviour) before
+designing the execution.
+\end{enumerate}
+
+\chapter{Decision log}
+\label{r:ch:decisions}
+
+Every design or execution decision that shaped a result, with the reason it was taken and the alternative it displaced.
+
+{\small
+\begin{longtable}{p{0.22\textwidth}p{0.40\textwidth}p{0.30\textwidth}}
+\caption{Decisions and their reasons.}\label{r:tab:decisions}\\
+\toprule
+Decision & Reason & Alternative not taken \\
+\midrule
+\endfirsthead
+\toprule
+Decision & Reason & Alternative not taken \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\multicolumn{3}{l}{\textbf{Study 2 statistics}} \\
+Add a split random effect to H1 & Twelve architectures share each seed's test set; without it the model treats twelve evaluations of one test set as independent. & The roadmap's formula without it. \\
+Twenty seeds & Smallest count meeting the registered power rule (0.90 at pilot variances, 0.75 at 1.5$\times$). & 15 seeds (failed the inflated criterion); 25--30 (more compute for little power). \\
+Twelve architectures & Breadth across CNNs, hierarchical transformers, plain ViTs, and a self-supervised model, so the effect is not tied to one family. & The six Study~1 models only. \\
+Bootstrap primary when residuals are heavy-tailed & Registered before data; protects the primary test from non-normal seed-level noise. & Always the Satterthwaite $t$-test. \\
+H2--H5 in one Holm family; H1 alone & H1 is the question; the mechanism tests are a family of related but separate claims. & One family of five (would have penalised the primary). \\
+\multicolumn{3}{l}{\textbf{Study 2 designs}} \\
+220 crops per class in 2C & Largest budget feasible for every registered seed and 100/100 unrelated seeds; 240 failed for seed 307. & 240 or 260 crops. \\
+Common test set across all four 2C cells & Every cell is scored on the same crops, so differences are training effects only. & Separate test sets per cell. \\
+Diversity estimated within clean cells only & The low-diversity leak cell gives each test crop more siblings, so the interaction confounds dose with diversity. & A full 2$\times$2 interpretation. \\
+Sibling background as the 2B control & Isolates the cell's own acquisition context from class-typical context. & Only unseen-field backgrounds. \\
+Class-conditional parent adversary & Suppressing parent identity must never require removing class information. & An unconditional 424-way adversary. \\
+CRIC as $100\times100$ windows & CRIC releases nucleus coordinates on slide images, not crops; fixed windows are the simplest faithful crops. & Variable-size crops from annotations. \\
+\multicolumn{3}{l}{\textbf{Execution}} \\
+GPU-resident augmentation & Four-core CPU quota starved data loaders; an exact port keeps the registered recipe. & PIL augmentation in DataLoader workers. \\
+One training job per GPU & GPUs were saturated by one job; two jobs shared throughput without speed-up. & Two jobs per GPU. \\
+Math attention kernel only & Fused attention kernels have non-deterministic backward passes. & Faster fused kernels. \\
+Float16 checkpoints & Halves storage of about 117~GB of weights; re-evaluation reproduces 418/480 models exactly, the rest within three crops. & Float32 checkpoints. \\
+Amendment 7 before any 2A run & Deterministic divergence would otherwise have failed the whole arm. & Handling divergence after seeing it. \\
+Registered analysis run on the GPU host & Run records point at node-local artifacts; moving gigabytes to a workstation was slower than computing in place. & Pulling all artifacts to the workstation. \\
+\multicolumn{3}{l}{\textbf{Amendment 8}} \\
+A separately registered follow-up & Study~2's mechanism tests were inconclusive, and saved artifacts made decisive tests cheap; registering first keeps them confirmatory for new questions. & Unregistered exploration, or re-testing H4/H5 with more seeds. \\
+Reuse saved models where possible & F2 and F5 needed no training; three arms cost 7~GPU-hours in total. & Retraining for every arm. \\
+Fresh seeds for retraining arms & New data for new questions; no reuse of Study~2 mechanism seeds. & Reusing the mechanism seeds. \\
+Probe-matched linear adversary & ConvNeXt-T had evaded the MLP adversary; a standardised linear head cannot hide identity from a linear probe while leaving it readable. & Re-running the MLP adversary. \\
+LEACE ranks up to 256 & The smallest feature dimension is 384 (DINOv2 ViT-S); 256 removes most within-class parent structure in every backbone. & Full-rank erasure (exceeds some feature dimensions). \\
+HED-strong colour augmentation & A published, strong, stain-shaped perturbation. & Hue/saturation jitter only. \\
+One device probe for every arm & Recoverability must be measured identically across manipulations; agreement with sklearn verified ($r=\ProbeAgreement$). & Mixing probe implementations. \\
+Pixel-overlap split labelled exploratory & Added after the registered results to test a specific alternative explanation. & Presenting it as confirmatory. \\
+\multicolumn{3}{l}{\textbf{Close-out}} \\
+Offload checkpoints during the follow-up matrix & 52~GB of new checkpoints against a 71~GB margin; verified copies before deletion. & Pausing the matrix on the disk guard. \\
+Recommend ISBI framing around audit tools & The registered evidence is strong; the novel take-home for an imaging audience is that probes and saliency cannot detect this leakage. & Framing around ``leakage exists''. \\
+\end{longtable}
+}
+
+\chapter{Validity, recommendations, and next steps}
+\label{r:ch:validity}
+
+\section{Threats to validity}
+
+\paragraph{Parents are not patients.} SIPaKMeD fields, Cx22 source images, and CRIC slide images are the deepest released
+units. Several can come from one patient, so parent-disjoint evaluation is necessary but may not be sufficient for
+clinical independence; every inflation estimate is a lower bound on what patient-level grouping would remove.
+
+\paragraph{One recipe.} Every model used one fixed fine-tuning recipe. Stronger augmentation, longer training, or other
+optimisers could change the size of the inflation and the models' reliance on acquisition context.
+
+\paragraph{Smaller training sets in the factorial.} Matching crop and field counts required 220 crops per class (1,100 in
+total against 3,239 in Phase~1); the 2C, 2B, and carrier effects are measured on smaller training sets than the headline
+contrast, and the decomposition that transfers them is approximate.
+
+\paragraph{Imperfect interventions.} Foreground masks are threshold rules; inpainting leaves smoothed backgrounds; Reinhard
+transfer matches only first and second moments; erasure and adversaries act on pooled features and linear structure.
+
+\paragraph{Post-results follow-up.} Amendment~8 was motivated by Study~2's results. Its hypotheses and analyses were fixed
+before any follow-up run, but they are follow-up questions; the pixel-overlap split was added afterwards and is
+exploratory.
+
+\paragraph{CRIC crops.} The CRIC cells are windows cut by this project around published nucleus coordinates, not an
+official crop release, so absolute CRIC accuracies are not directly comparable with published numbers.
+
+\paragraph{External verification.} The registration commits have not yet been pushed or deposited; until they are, their
+dates rest on the repository and on the commit hashes recorded inside every run.
+
+\paragraph{No clinical claim.} The project audits research benchmarks; it does not estimate screening sensitivity,
+specificity, prevalence-calibrated performance, or effects on readers.
+
+\section{Recommendations}
+\label{r:ch:recommendations}
+
+\begin{enumerate}[leftmargin=1.8em]
+\item \textbf{Release the hierarchy.} Every observation should carry its acquisition parent (field, source image, or slide),
+a patient or specimen identifier where permitted, and, if audited, a duplicate-component identifier.
+\item \textbf{Split at the deepest released unit and publish the split}, with its hash.
+\item \textbf{Report both units}: observation and parent counts per split, and the fraction of test observations with a
+training sibling.
+\item \textbf{Check the structure before training} with the closed forms (\texttt{cytofair risk-report}).
+\item \textbf{Treat one question as one test}, with a mixed model that treats architectures and splits as random effects,
+sized by simulation.
+\item \textbf{Do not certify a split with a probe, a saliency map, or an augmentation.} Leakage inflated accuracy with field
+identity erased from the features, with identical Grad-CAM maps, with backgrounds removed, and with strong colour
+augmentation.
+\item \textbf{Keep the evidence}: per-sample predictions, final weights, and the exact split for every run.
+\end{enumerate}
+
+\section{Publication options and open decisions}
+\label{r:ch:publication}
+
+\subsection{Venues}
+\label{r:sec:publication}
+
+\paragraph{ISBI 2027.} Four pages including figures and tables (references may use a paid fifth page); deadline Monday 26
+October 2026, 23:59 US Eastern; single-blind; arXiv preprints allowed; a ``Compliance with Ethical Standards'' section and a
+disclosure of AI-generated content in the acknowledgments are required; presentation in person in Lausanne. The evidence is
+stronger than typical for the venue. The risks are perceived novelty (patient-level splitting is textbook advice) and the
+page limit. The recommended framing is ``how much crop-level splitting inflates public cytology benchmarks, and why the
+usual audit tools cannot see it'': H1--H3 as the result, one figure (per-architecture SIPaKMeD with CRIC), one table of all
+thirteen registered tests, and a paragraph on F2, F3, and the probe and Grad-CAM findings. Everything else waits for the
+journal version.
+
+\paragraph{Journal version.} The full manuscript (\artifact{paper/v2}) with Study~2 and Amendment~8. Check the journal's
+policy on extended conference papers if ISBI is pursued first; ISBI only forbids simultaneous submission of a substantially
+similar paper to another conference or workshop.
+
+\paragraph{Preprint.} Allowed by ISBI; it would also give the registrations a public timestamp once the repository is pushed.
+
+\subsection{Decisions only the authors can make}
+
+\begin{itemize}[leftmargin=1.6em]
+\item Push the \texttt{study2} branch (and the Cx22 commits) to the public repository, and deposit the preregistrations with
+a third party (for example OSF) for an external timestamp.
+\item Choose a software licence; confirm redistribution terms for derived artifacts (SIPaKMeD, CCEDD).
+\item Co-author approval of every posted or submitted version; fill the e-mail and repository placeholders.
+\item Whether to submit to ISBI 2027, and who presents in person.
+\item The AI-use disclosure wording: much of the Study~2 code, analysis, manuscript text, and this record was drafted with
+an AI assistant under the authors' direction.
+\item Whether to open Phase~3 (other imaging domains) and the direct test of the F2--F4 tension.
+\end{itemize}
+
+\subsection{Future work}
+
+\begin{itemize}[leftmargin=1.6em]
+\item Apply test-time stain transfer to the colour-augmented carrier models to resolve the F2--F4 tension directly.
+\item Non-linear and spatial (pre-pooling) erasure of field identity.
+\item Patient-level grouping where a dataset's provenance allows it.
+\item Other recipes (stronger augmentation, longer schedules, stain normalisation as standard practice).
+\item Other domains where crops share acquisition units (the pre-specified fish-imagery V2).
+\end{itemize}

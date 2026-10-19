@@ -1,0 +1,17 @@
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[node distance=4mm and 5mm]
+\node[box=27mm] (local) {Node-local outputs\\\footnotesize /tmp, fast disk};
+\node[box=27mm, right=of local] (rsync) {rsync to NFS home\\\footnotesize 20 MB/s, one stream};
+\node[box=27mm, right=of rsync] (verify) {Verify\\\footnotesize every size; seeded re-hash sample};
+\node[done=27mm, right=of verify] (free) {Free local copy\\\footnotesize only after verification};
+\node[gold=27mm, below=of rsync] (hold) {Hold while needed\\\footnotesize Phase 1 and 2C checkpoints until LEACE / ablations finish};
+\draw[flow] (local) -- (rsync); \draw[flow] (rsync) -- (verify); \draw[flow] (verify) -- (free);
+\draw[flow, dashed] (local) |- (hold); \draw[flow, dashed] (hold) -| (verify);
+\end{tikzpicture}
+\end{adjustbox}
+\caption{Offloading and archiving. The network home is slow and can stall, so copies are single, bandwidth-limited
+streams; nothing node-local is deleted until its archived copy has been verified.}
+\label{r:fig:archive}
+\end{figure}

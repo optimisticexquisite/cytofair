@@ -1,0 +1,28 @@
+{\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{longtable}{llp{4.6cm}rr}
+\caption{The twelve Study 2 backbones: penultimate feature dimension, ImageNet weights, and mean Phase 1 training and total minutes per run.}\label{r:tab:archs}\\
+\toprule
+Architecture & Dim & Weights & Train min & Total min \\
+\midrule
+\endfirsthead
+\toprule
+Architecture & Dim & Weights & Train min & Total min \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+ResNet-18 & 512 & ResNet18\_\allowbreak{}Weights.\allowbreak{}IMAGENET1K\_\allowbreak{}V1 & 0.85 & 0.87 \\
+ResNet-50 & 2048 & ResNet50\_\allowbreak{}Weights.\allowbreak{}IMAGENET1K\_\allowbreak{}V2 & 2.60 & 2.64 \\
+DenseNet-121 & 1024 & DenseNet121\_\allowbreak{}Weights.\allowbreak{}IMAGENET1K\_\allowbreak{}V1 & 3.25 & 3.29 \\
+EfficientNet-B0 & 1280 & EfficientNet\_\allowbreak{}B0\_\allowbreak{}Weights.\allowbreak{}IMAGENET1K\_\allowbreak{}V1 & 1.78 & 1.80 \\
+MobileNet-V2 & 1280 & MobileNet\_\allowbreak{}V2\_\allowbreak{}Weights.\allowbreak{}IMAGENET1K\_\allowbreak{}V2 & 1.45 & 1.48 \\
+ViT-B/16 & 768 & ViT\_\allowbreak{}B\_\allowbreak{}16\_\allowbreak{}Weights.\allowbreak{}IMAGENET1K\_\allowbreak{}V1 & 9.09 & 9.17 \\
+ConvNeXt-T & 768 & ConvNeXt\_\allowbreak{}Tiny\_\allowbreak{}Weights.\allowbreak{}IMAGENET1K\_\allowbreak{}V1 & 5.15 & 5.21 \\
+Swin-T & 768 & Swin\_\allowbreak{}T\_\allowbreak{}Weights.\allowbreak{}IMAGENET1K\_\allowbreak{}V1 & 4.61 & 4.66 \\
+RegNetY-1.6GF & 888 & RegNet\_\allowbreak{}Y\_\allowbreak{}1\_\allowbreak{}6GF\_\allowbreak{}Weights.\allowbreak{}IMAGENET1K\_\allowbreak{}V2 & 2.47 & 2.50 \\
+EfficientNetV2-S & 1280 & EfficientNet\_\allowbreak{}V2\_\allowbreak{}S\_\allowbreak{}Weights.\allowbreak{}IMAGENET1K\_\allowbreak{}V1 & 3.46 & 3.50 \\
+MaxViT-T & 512 & MaxVit\_\allowbreak{}T\_\allowbreak{}Weights.\allowbreak{}IMAGENET1K\_\allowbreak{}V1 & 7.76 & 7.86 \\
+DINOv2 ViT-S/14 & 384 & timm:vit\_\allowbreak{}small\_\allowbreak{}patch14\_\allowbreak{}dinov2.\allowbreak{}lvd142m & 4.08 & 4.13 \\
+\end{longtable}
+}

@@ -1,0 +1,47 @@
+\part{Study 1: The Original Audit (August--September 2026)}
+
+\chapter*{Reading Part II in context}
+\addcontentsline{toc}{chapter}{Reading Part II in context}
+
+Part~II is the Study~1 record exactly as it was compiled on 13 September 2026 from evidence frozen on 7 September. It is
+reproduced verbatim so that the original claims, their strength, and their stated limitations remain on the record
+unchanged. Three things happened afterwards that a reader of Part~II should keep in mind.
+
+\begin{keybox}{What changed after Study 1}
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{The inflation question was re-asked and answered.} Study~1's six per-architecture tests could not certify an
+accuracy inflation. Study~2 asked the question once, with a crossed mixed model sized by simulation and twenty new seeds,
+and found \HoneEst~pp on SIPaKMeD (all twelve architectures positive) and \HtwoEst~pp on CRIC (Part~V). The six Study~1
+architectures, re-run with fresh seeds, all moved in the same direction (Figure~\ref{r:fig:cross-study}).
+\item \textbf{The ordering failure stands.} Study~1 registered that P3 $\leq$ P2 $\leq$ P1 and found it failed for four of
+six architectures. Study~2's P2 $-$ P3 contrast was \PtwoPthreeEst~pp ($p=\PtwoPthreeP$): merging near-duplicate-linked
+parents on top of parent-level splitting changes nothing, so the ordering failure reflects noise between two equivalent
+protocols, not a defect of P3.
+\item \textbf{Availability is not use.} Study~1 showed the parent fingerprint is learnable. Amendment~8 showed that the
+fingerprint a probe can decode can be almost entirely removed without touching the inflation (Part~VI). Study~1's
+warning that availability does not prove use was correct, and the distinction turned out to matter.
+\end{itemize}
+\end{keybox}
+
+Where Part~II says that per-sample predictions and checkpoints were not retained, that applied to Study~1; every
+Study~2 and Amendment~8 run kept per-crop logits, final weights, and probe-split features.
+
+\input{study1/ch00_status_scope}
+\input{study1/ch01_executive_overview}
+\input{study1/ch02_motivation_and_problem_formulation}
+\input{study1/ch03_preregistration_and_analysis_governance}
+\input{study1/ch04_datasets_and_the_hidden_hierarchy}
+\input{study1/ch05_system_architecture_and_fail_closed_phil}
+\input{study1/ch06_exact_provenance_recovery}
+\input{study1/ch07_split_protocols_and_structural_leakage}
+\input{study1/ch08_literal_overlap_and_conservative_duplica}
+\input{study1/ch09_the_parent_identity_mechanism_probe}
+\input{study1/ch10_sipakmed_classification_rescore}
+\input{study1/ch11_cx22_segmentation_rescore}
+\input{study1/ch12_statistical_analysis_in_full}
+\input{study1/ch13_execution_lifecycle_failures_and_demotiv}
+\input{study1/ch14_verification_against_the_acceptance_cont}
+\input{study1/ch15_interpretation_limitations_and_practical}
+\input{study1/ch16_reproduction_and_release_engineering}
+\input{study1/ch17_reusable_outputs_and_future_work}
+\input{study1/ch18_conclusion}

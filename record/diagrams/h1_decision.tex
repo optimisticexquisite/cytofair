@@ -1,0 +1,21 @@
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[node distance=5mm and 7mm]
+\node[box=30mm] (fit) {Fit H1 model\\\footnotesize REML, bobyqa};
+\node[gold=30mm, right=of fit] (conv) {Converged?\\\footnotesize singular accepted};
+\node[box=30mm, right=of conv] (simp) {Simplify\\\footnotesize uncorrelated slope, then no seed intercept};
+\node[gold=30mm, below=of conv] (assume) {Residual $|$skew$|>1$ or excess kurtosis $>3$?};
+\node[done=30mm, left=of assume] (lmm) {Primary: Satterthwaite $t$-test};
+\node[done=30mm, right=of assume] (boot) {Primary: two-way cluster bootstrap};
+\node[box=95mm, below=6mm of assume] (sens) {Always reported: Kenward--Roger, binomial GLMM, seed sign-flip, bootstrap, per-architecture differences};
+\draw[flow] (fit) -- (conv); \draw[flow] (conv) -- node[note, above]{no} (simp); \draw[flow] (simp.north) to[bend right=25] (fit.north);
+\draw[flow] (conv) -- node[note, right]{yes} (assume); \draw[flow] (assume) -- node[note, above]{no} (lmm);
+\draw[flow] (assume) -- node[note, above]{yes} (boot); \draw[flow] (assume) -- (sens);
+\node[note, below=1mm of boot, text width=34mm] {Study 2: skew \RecHoneSkew, kurtosis \RecHoneKurt\ $\Rightarrow$ bootstrap};
+\end{tikzpicture}
+\end{adjustbox}
+\caption{The registered H1 decision path. The residual check fired, so the cluster bootstrap became the primary inference
+exactly as registered; every other method gave the same answer.}
+\label{r:fig:h1-decision}
+\end{figure}

@@ -1,0 +1,6 @@
+% Carried over verbatim from monograph/main.tex (Study 1 record, 13 Sep 2026).
+\chapter{Reading guide for future maintainers}\label{s1:ch:app11_reading_guide_for_future_maintainers}
+
+Start with the acceptance contract, not the paper prose. If a gate fails, follow its evidence path into the structured output. Regenerate a summary rather than editing a number. If a library upgrade changes a split, do not overwrite the published CSV: create a new version and preserve the previous hash. If new data supply patient IDs, introduce a stronger protocol rather than relabeling source-disjoint as patient-disjoint. If a model is rerun, retain its per-sample predictions and checkpoint so confusion matrices and qualitative panels become reproducible first-class artifacts.
+
+The simplest invariant is also the most important: an observation may be the tensor consumed by a network, but it is not automatically the independent unit represented by the test set.

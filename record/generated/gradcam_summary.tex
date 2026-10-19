@@ -1,0 +1,22 @@
+{\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{longtable}{llrrr}
+\caption{Grad-CAM (descriptive): share of positive attribution outside the cell mask and background pixel share (percent, 20 runs each), and the median Spearman correlation with a random-head map.}\label{r:tab:gradcam}\\
+\toprule
+Architecture & Models & Attribution outside & Background pixels & Random-head $\rho$ \\
+\midrule
+\endfirsthead
+\toprule
+Architecture & Models & Attribution outside & Background pixels & Random-head $\rho$ \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+ResNet-50 & leak & 13.9\,$\pm$\,1.0 & 34.6\,$\pm$\,0.5 & 0.085 \\
+ & clean & 13.9\,$\pm$\,0.9 & 34.6\,$\pm$\,0.5 & 0.115 \\
+DenseNet-121 & leak & 26.7\,$\pm$\,0.8 & 34.6\,$\pm$\,0.5 & 0.044 \\
+ & clean & 26.7\,$\pm$\,0.8 & 34.6\,$\pm$\,0.5 & 0.057 \\
+ConvNeXt-T & leak & 24.6\,$\pm$\,1.8 & 34.6\,$\pm$\,0.5 & 0.077 \\
+ & clean & 25.0\,$\pm$\,2.2 & 34.6\,$\pm$\,0.5 & 0.076 \\
+\end{longtable}
+}

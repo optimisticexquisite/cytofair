@@ -1,0 +1,47 @@
+\documentclass[11pt,oneside]{report}
+\input{preamble}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{0.8cm}
+{\color{CytoBlue}\rule{\textwidth}{2.2pt}}\\[1.0cm]
+{\Huge\bfseries\color{CytoInk} Do We Train on Test Cells?\\[0.35cm]}
+{\LARGE\color{CytoBlue} The Complete CytoFair Lifecycle Record\\[0.45cm]}
+{\large Study 1, the scaling roadmap, the preregistered Study 2, Amendments 6--9, and the follow-up experiments:\\
+motivations, designs, engineering, every result, what worked, what did not, and what we got out of it}\par
+\vspace{0.9cm}
+\includegraphics[width=0.92\textwidth]{hierarchy_and_leakage.png}
+\vfill
+{\Large\bfseries Snehasish Ghosh\textsuperscript{1}, Soham Mitra\textsuperscript{2}, Nibaran Das\textsuperscript{2}}\\[0.3cm]
+{\normalsize
+\textsuperscript{1}Indian Institute of Science, Bengaluru, India\quad
+\textsuperscript{2}Jadavpur University, Kolkata, India}
+\vfill
+{\large Evidence through 20 October 2026 (Asia/Kolkata)\\[0.15cm]
+\normalsize \RecAllModels\ trained models, 640 evaluation-only runs, \RecCommits\ commits, two registered studies}\\[0.5cm]
+{\color{CytoBlue}\rule{\textwidth}{2.2pt}}
+\end{titlepage}
+
+\pagenumbering{roman}
+\include{parts/p0_front}
+\tableofcontents
+\listoffigures
+\listoftables
+\clearpage
+\pagenumbering{arabic}
+
+\include{parts/p1_overview}
+\include{parts/p2_study1}
+\include{parts/p3_design}
+\include{parts/p4_engineering}
+\include{parts/p5_results}
+\include{parts/p6_followup}
+\include{parts/p7_synthesis}
+\include{parts/p8_appendices}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

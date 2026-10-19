@@ -1,0 +1,46 @@
+% Carried over verbatim from monograph/main.tex (Study 1 record, 13 Sep 2026).
+\chapter{Statistical analysis in full}\label{s1:ch:ch12_statistical_analysis_in_full}
+
+\section{The experimental unit is the seed-paired run}
+
+Every reported neural summary uses the five fixed seeds 17, 29, 43, 71, and 101 and gives the arithmetic mean with sample standard deviation ($n-1$ denominator). The protocol contrast is paired by seed. This pairing removes seed-to-seed variation that affects both arms and prohibits a favorable run in one protocol from being compared with an unrelated run in another.
+
+For values $m_s$ over $S=5$ seeds,
+\begin{equation}
+\bar m=\frac{1}{S}\sum_{s=1}^{S}m_s,\qquad
+s_m=\sqrt{\frac{1}{S-1}\sum_{s=1}^{S}(m_s-\bar m)^2}.
+\end{equation}
+A summary is suppressed if fewer than five seeds are present. This is enforced in code rather than remembered during table writing.
+
+\section{Test-selection rule}
+
+The preregistered rule first applies Shapiro--Wilk~\cite{shapiro1965normality} to the five paired differences. If $p\geq0.05$, a two-sided paired $t$-test is emitted; otherwise a two-sided Wilcoxon signed-rank test~\cite{wilcoxon1945rank} is emitted. The effect is Cohen's $d_z$ for a $t$-test and rank-biserial correlation for Wilcoxon. All-zero differences are descriptive; a constant nonzero difference has an infinite standardized effect by definition and is flagged explicitly.
+
+With only five observations, normality screening has little power and neither test can create information that is not present. The rule is retained because it was specified before results, but conclusions emphasize effect direction, variability, and corrected evidence rather than treating the test label as a guarantee.
+
+\section{Bootstrap effect intervals}
+
+Ten thousand deterministic bootstrap replicates resample the vector of paired differences with replacement. Each replicate recomputes the relevant effect-size estimator. The interval is the 2.5th and 97.5th percentiles of finite estimates. A SHA-256-derived bootstrap seed from the dataset/model/protocol key makes intervals repeatable without coupling them to the training seed.
+
+These are intervals for the standardized effect, not raw mean-score intervals. Because $n=5$, they can be wide or asymmetric and can contain values much larger than the point estimate. That apparent awkwardness is a correct display of limited information.
+
+\section{Multiplicity families}
+
+Benjamini--Hochberg~\cite{benjamini1995fdr} is applied once to the exact supplied family:
+\begin{itemize}
+  \item SIPaKMeD classification: all six \protocol{P1}$-$\protocol{P2} and six \protocol{P1$'$}$-$\protocol{P2} tests in the registered joint family;
+  \item Cx22 semantic: five \protocol{P1}$-$\protocol{P2} and five \protocol{P1$'$}$-$\protocol{P2} tests;
+  \item Cx22 instance: two \protocol{P1}$-$\protocol{P2} and two \protocol{P1$'$}$-$\protocol{P2} tests.
+\end{itemize}
+Secondary \protocol{P2}$-$\protocol{P3} tests and ranking stability are clearly labeled secondary/unadjusted and cannot substitute for a failed primary family. For ordered raw values $p_{(1)}\leq\cdots\leq p_{(M)}$, BH computes monotone adjusted values based on
+\begin{equation}
+q_{(i)}=\min_{j\geq i}\left(1,\frac{M}{j}p_{(j)}\right).
+\end{equation}
+
+\section{Structural sampling error}
+
+The expected parent-straddle probability for a parent of size $k$ and 80/20 crop assignment is exact: $1-0.8^k-0.2^k$. Dataset-level analytic expectations average this quantity over recovered parents. Monte Carlo means and SDs over the same five fixed seeds check the split implementation, while 10,000 additional simulations form the broad analytic envelope recorded in the structural table. Herlev is a stronger software test than a confidence interval: because every parent has $k=1$, both the analytic and observed straddle fractions must be exactly zero.
+
+\section{Why a non-significant result is not ``no effect''}
+
+A BH-adjusted $q>0.05$ says that the current five-seed family does not meet its declared evidential threshold. It does not prove a zero effect. Conversely, six same-sign classifier means do not license six independent significance claims. The report keeps both facts visible: the direction is consistent, and the adjusted confirmatory evidence is insufficient.

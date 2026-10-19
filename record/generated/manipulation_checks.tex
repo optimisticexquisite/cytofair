@@ -1,0 +1,37 @@
+{\scriptsize
+\setlength{\tabcolsep}{3.5pt}
+\begin{longtable}{llp{3.2cm}rrrrl}
+\caption{Regimes and manipulation checks of every dose-response arm: levels whose mean P2 accuracy stays within 1 pp of baseline, the strongest such level, recoverability at baseline and there (percent), the class-only floor, and the check (at least a quarter of the above-floor $R$ removed).}\label{r:tab:checks}\\
+\toprule
+Arm & Architecture & Levels in regime & Strongest & $R_0$ & $R^*$ & Floor & Check \\
+\midrule
+\endfirsthead
+\toprule
+Arm & Architecture & Levels in regime & Strongest & $R_0$ & $R^*$ & Floor & Check \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+H5 GRL & ResNet-50 & 0, 0.01, 0.03, 0.1, 0.3, 1, 3 & 3 & 24.7 & 17.6 & 1.2 & \pass \\
+ & ConvNeXt-T & 0, 0.01, 0.03, 0.1, 0.3, 1, 3 & 3 & 29.5 & 55.1 & 1.2 & \fail \\
+F5 LEACE & ResNet-18 & 0, 4, 16, 64, 256 & 256 & 23.2 & 2.1 & 1.2 & \pass \\
+ & ResNet-50 & 0, 4, 16, 64, 256 & 256 & 24.7 & 10.4 & 1.2 & \pass \\
+ & DenseNet-121 & 0, 4, 16, 64, 256 & 256 & 29.4 & 4.1 & 1.2 & \pass \\
+ & EfficientNet-B0 & 0, 4, 16, 64, 256 & 256 & 22.5 & 5.5 & 1.2 & \pass \\
+ & MobileNet-V2 & 0, 4, 16, 64, 256 & 256 & 20.8 & 4.2 & 1.2 & \pass \\
+ & ViT-B/16 & 0, 4, 16, 64, 256 & 256 & 29.1 & 6.2 & 1.2 & \pass \\
+ & ConvNeXt-T & 0, 4, 16, 64, 256 & 256 & 29.5 & 5.2 & 1.2 & \pass \\
+ & Swin-T & 0, 4, 16, 64, 256 & 256 & 28.9 & 6.6 & 1.2 & \pass \\
+ & RegNetY-1.6GF & 0, 4, 16, 64, 256 & 256 & 21.1 & 3.4 & 1.2 & \pass \\
+ & EfficientNetV2-S & 0, 4, 16, 64, 256 & 256 & 19.9 & 3.9 & 1.2 & \pass \\
+ & MaxViT-T & 0, 4, 16, 64, 256 & 256 & 22.1 & 3.9 & 1.2 & \pass \\
+ & DINOv2 ViT-S/14 & 0, 4, 16, 64, 256 & 256 & 30.5 & 9.5 & 1.2 & \pass \\
+F6 normalisation & ResNet-50 & 0, 0.5 & 0.5 & 24.8 & 21.5 & 1.2 & \fail \\
+ & DenseNet-121 & 0, 0.5 & 0.5 & 29.4 & 28.4 & 1.2 & \fail \\
+ & EfficientNet-B0 & 0, 0.5 & 0.5 & 22.4 & 21.1 & 1.2 & \fail \\
+ & ConvNeXt-T & 0 & 0 & 29.3 & 29.3 & 1.2 & \fail \\
+F7 linear adv. & ResNet-50 & 0, 0.1, 0.3 & 0.3 & 24.8 & 8.5 & 1.2 & \pass \\
+ & DenseNet-121 & 0, 0.1, 0.3 & 0.3 & 29.4 & 18.1 & 1.2 & \pass \\
+ & ConvNeXt-T & 0, 0.1, 0.3, 1 & 1 & 29.9 & 17.0 & 1.2 & \pass \\
+\end{longtable}
+}

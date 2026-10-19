@@ -1,0 +1,46 @@
+% Carried over verbatim from monograph/main.tex (Study 1 record, 13 Sep 2026).
+\chapter{Execution lifecycle, failures, and demotivations}\label{s1:ch:ch13_execution_lifecycle_failures_and_demotiv}
+
+\section{Run inventory}
+
+\begin{table}[H]
+\centering
+\caption{Frozen neural-run inventory and summed run time.}
+\label{s1:tab:inventory}
+\begin{tabular}{lrrr}
+\toprule
+Experiment & Cells & Retained complete & Summed hours \\
+\midrule
+SIPaKMeD classification & 120 & 120 & 8.48 \\
+SIPaKMeD parent probe & 30 & 30 & 5.75 \\
+Cx22 semantic segmentation & 125 & 125 & 253.33 \\
+Cx22 instance segmentation & 50 & 50 & 646.76 \\
+\midrule
+Total & 325 & 325 & 914.31 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The total is the sum of recorded per-run elapsed seconds. It is intentionally not converted into ``GPU-days'' without qualification: host I/O stalls and overlapping runs mean elapsed seconds include more than active kernel time, while three concurrent GPUs mean the sum exceeds calendar duration.
+
+\section{The first classification matrix was invalid}
+
+An early classifier attempt used scikit-learn 1.7.2. The resulting \protocol{P2} split counts disagreed across cells, violating the requirement that every architecture see the same seed-specific observations. Twelve JSON files from that attempt were excluded in full. The environment was pinned to scikit-learn 1.9.0, the expected split hashes and counts were made acceptance checks, and the entire 120-cell matrix restarted. Three additional one-epoch files were smoke tests and were never mixed into the result family.
+
+This failure changed the engineering standard: a result is not accepted merely because training finished. Dataset name, architecture, protocol, seed, train/test counts, library versions, provenance hash, split hash, Git SHA, GPU field, metric finiteness, and history length must all match the matrix contract.
+
+\section{MAnet numerical failure}
+
+MAnet attention matrix multiplications overflowed under FP16 late in training. Two attempts failed non-finitely at epochs 23 and 24 for the first MAnet cell. The tempting choices---use the last finite epoch, lower the learning rate only for that cell, or replace seed 17---would each change the estimand after seeing its behavior. The accepted response was broader: freeze an amendment, run every MAnet cell in FP32, restart from the same seeds, and keep the failures in the record.
+
+\section{The host bottleneck}
+
+The remote machine had three available RTX A6000 GPUs but a separate storage/host bottleneck. Heavy concurrent decoding and checkpoint writes could make all GPUs appear slow and could destabilize the SSH session. Launchers therefore queried memory usage and utilization, admitted no more than three idle devices, used atomic result writes, and kept resumable checkpoints. The instance-segmentation redesign reduced expensive network I/O and moved exact matching work to the GPU.
+
+\begin{decisionbox}{What did not work}
+The project did not produce a universal multiplicity-corrected classifier inflation result, did not validate the preregistered classification ordering, did not retain prediction-level classifier outputs for a confusion matrix, and has not yet demonstrated a raw-download-to-Table-1 run on a machine that has never seen the project. Each limitation is part of the result, not a cosmetic omission.
+\end{decisionbox}
+
+\section{Research stop and evidence freeze}
+
+After the publication verdict, exploration stopped. No architecture was added to chase significance; no seed was replaced; no endpoint was changed; no new confusion matrix was generated. The long-form report reconstructs plots only from frozen aggregates and epoch histories. Images used to explain Otsu/Telea and Cx22 label decoding are implementation demonstrations from locally available released data and are labeled as such.

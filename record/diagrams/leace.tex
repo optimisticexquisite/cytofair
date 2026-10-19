@@ -1,0 +1,20 @@
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[node distance=4mm and 5mm]
+\node[box=24mm] (ckpt) {Saved Phase 1 checkpoint\\\footnotesize hash-verified};
+\node[box=24mm, right=of ckpt] (feat) {Features of all 4,049 crops\\\footnotesize eval transform};
+\node[box=26mm, right=of feat] (white) {Whiten with $W=\Sigma^{-1/2}$\\\footnotesize training crops only};
+\node[box=28mm, right=of white] (scatter) {Within-class between-parent scatter $S$; top-$r$ eigvecs of $WSW$};
+\node[box=28mm, below=of scatter] (erase) {$x' = x - (x-\mu)\,W U_r U_r^\top W^{-1}$};
+\node[box=24mm, left=of erase] (refit) {Refit linear class head\\\footnotesize logistic, C = 1};
+\node[box=24mm, left=of refit] (acc) {Test accuracy\\\footnotesize P1 and P2 models};
+\node[box=24mm, left=of acc] (probe) {Recoverability $R$\\\footnotesize probe split, same eraser};
+\draw[flow] (ckpt) -- (feat); \draw[flow] (feat) -- (white); \draw[flow] (white) -- (scatter); \draw[flow] (scatter) -- (erase);
+\draw[flow] (erase) -- (refit); \draw[flow] (refit) -- (acc); \draw[flow] (acc) -- (probe);
+\end{tikzpicture}
+\end{adjustbox}
+\caption{Rank-limited LEACE erasure (F5). At full rank the projection is LEACE for the within-class parent indicator:
+no linear function of the erased features covaries with it on the fitting data. Ranks 0, 4, 16, 64, and 256 give the dose.}
+\label{r:fig:leace}
+\end{figure}

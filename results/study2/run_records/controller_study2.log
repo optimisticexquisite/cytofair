@@ -1,0 +1,2683 @@
+started fingerprint:resnet18_probe_seed17 gpu=0 attempt=1
+started phase1:sipakmed_resnet18_p1_seed137 gpu=3 attempt=1
+started phase1:sipakmed_resnet18_p2_seed137 gpu=4 attempt=1
+started phase1:sipakmed_resnet18_p3_seed137 gpu=5 attempt=1
+finished fingerprint:resnet18_probe_seed17
+started phase1:sipakmed_resnet50_p1_seed137 gpu=0 attempt=1
+finished phase1:sipakmed_resnet18_p1_seed137
+started phase1:sipakmed_resnet50_p2_seed137 gpu=3 attempt=1
+finished phase1:sipakmed_resnet18_p2_seed137
+finished phase1:sipakmed_resnet18_p3_seed137
+started phase1:sipakmed_resnet50_p3_seed137 gpu=4 attempt=1
+started phase1:sipakmed_densenet121_p1_seed137 gpu=5 attempt=1
+finished phase1:sipakmed_resnet50_p1_seed137
+started phase1:sipakmed_densenet121_p2_seed137 gpu=0 attempt=1
+finished phase1:sipakmed_resnet50_p2_seed137
+started phase1:sipakmed_densenet121_p3_seed137 gpu=3 attempt=1
+finished phase1:sipakmed_resnet50_p3_seed137
+started phase1:sipakmed_efficientnet_b0_p1_seed137 gpu=4 attempt=1
+finished phase1:sipakmed_densenet121_p1_seed137
+started phase1:sipakmed_efficientnet_b0_p2_seed137 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p1_seed137
+started phase1:sipakmed_efficientnet_b0_p3_seed137 gpu=4 attempt=1
+finished phase1:sipakmed_densenet121_p2_seed137
+finished phase1:sipakmed_efficientnet_b0_p2_seed137
+started phase1:sipakmed_mobilenet_v2_p1_seed137 gpu=0 attempt=1
+started phase1:sipakmed_mobilenet_v2_p2_seed137 gpu=5 attempt=1
+finished phase1:sipakmed_densenet121_p3_seed137
+started phase1:sipakmed_mobilenet_v2_p3_seed137 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p3_seed137
+started phase1:sipakmed_vit_b_16_p1_seed137 gpu=4 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p1_seed137
+finished phase1:sipakmed_mobilenet_v2_p2_seed137
+started phase1:sipakmed_vit_b_16_p2_seed137 gpu=0 attempt=1
+started phase1:sipakmed_vit_b_16_p3_seed137 gpu=5 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p3_seed137
+started phase1:sipakmed_convnext_tiny_p1_seed137 gpu=3 attempt=1
+finished phase1:sipakmed_convnext_tiny_p1_seed137
+started phase1:sipakmed_convnext_tiny_p2_seed137 gpu=3 attempt=1
+finished phase1:sipakmed_vit_b_16_p1_seed137
+started phase1:sipakmed_convnext_tiny_p3_seed137 gpu=4 attempt=1
+finished phase1:sipakmed_vit_b_16_p2_seed137
+finished phase1:sipakmed_vit_b_16_p3_seed137
+started phase1:sipakmed_swin_t_p1_seed137 gpu=0 attempt=1
+started phase1:sipakmed_swin_t_p2_seed137 gpu=5 attempt=1
+finished phase1:sipakmed_convnext_tiny_p2_seed137
+started phase1:sipakmed_swin_t_p3_seed137 gpu=3 attempt=1
+finished phase1:sipakmed_swin_t_p1_seed137
+finished phase1:sipakmed_swin_t_p2_seed137
+started phase1:sipakmed_regnet_y_1_6gf_p1_seed137 gpu=0 attempt=1
+started phase1:sipakmed_regnet_y_1_6gf_p2_seed137 gpu=5 attempt=1
+finished phase1:sipakmed_convnext_tiny_p3_seed137
+started phase1:sipakmed_regnet_y_1_6gf_p3_seed137 gpu=4 attempt=1
+finished phase1:sipakmed_swin_t_p3_seed137
+started phase1:sipakmed_efficientnet_v2_s_p1_seed137 gpu=3 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p1_seed137
+finished phase1:sipakmed_regnet_y_1_6gf_p2_seed137
+started phase1:sipakmed_efficientnet_v2_s_p2_seed137 gpu=0 attempt=1
+started phase1:sipakmed_efficientnet_v2_s_p3_seed137 gpu=5 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p3_seed137
+started phase1:sipakmed_maxvit_t_p1_seed137 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p1_seed137
+started phase1:sipakmed_maxvit_t_p2_seed137 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p2_seed137
+finished phase1:sipakmed_efficientnet_v2_s_p3_seed137
+started phase1:sipakmed_maxvit_t_p3_seed137 gpu=0 attempt=1
+started phase1:sipakmed_dinov2_vits14_p1_seed137 gpu=5 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p1_seed137
+started phase1:sipakmed_dinov2_vits14_p2_seed137 gpu=5 attempt=1
+finished phase1:sipakmed_maxvit_t_p1_seed137
+started phase1:sipakmed_dinov2_vits14_p3_seed137 gpu=4 attempt=1
+finished phase1:sipakmed_maxvit_t_p2_seed137
+started phase1:sipakmed_resnet18_p1_seed173 gpu=3 attempt=1
+finished phase1:sipakmed_maxvit_t_p3_seed137
+started phase1:sipakmed_resnet18_p2_seed173 gpu=0 attempt=1
+finished phase1:sipakmed_resnet18_p1_seed173
+started phase1:sipakmed_resnet18_p3_seed173 gpu=3 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p2_seed137
+started phase1:sipakmed_resnet50_p1_seed173 gpu=5 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p3_seed137
+started phase1:sipakmed_resnet50_p2_seed173 gpu=4 attempt=1
+finished phase1:sipakmed_resnet18_p2_seed173
+started phase1:sipakmed_resnet50_p3_seed173 gpu=0 attempt=1
+finished phase1:sipakmed_resnet18_p3_seed173
+started phase1:sipakmed_densenet121_p1_seed173 gpu=3 attempt=1
+finished phase1:sipakmed_resnet50_p1_seed173
+started phase1:sipakmed_densenet121_p2_seed173 gpu=5 attempt=1
+finished phase1:sipakmed_resnet50_p2_seed173
+started phase1:sipakmed_densenet121_p3_seed173 gpu=4 attempt=1
+finished phase1:sipakmed_resnet50_p3_seed173
+started phase1:sipakmed_efficientnet_b0_p1_seed173 gpu=0 attempt=1
+finished phase1:sipakmed_densenet121_p1_seed173
+started phase1:sipakmed_efficientnet_b0_p2_seed173 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p1_seed173
+started phase1:sipakmed_efficientnet_b0_p3_seed173 gpu=0 attempt=1
+finished phase1:sipakmed_densenet121_p2_seed173
+finished phase1:sipakmed_efficientnet_b0_p2_seed173
+started phase1:sipakmed_mobilenet_v2_p1_seed173 gpu=3 attempt=1
+started phase1:sipakmed_mobilenet_v2_p2_seed173 gpu=5 attempt=1
+finished phase1:sipakmed_densenet121_p3_seed173
+started phase1:sipakmed_mobilenet_v2_p3_seed173 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p3_seed173
+started phase1:sipakmed_vit_b_16_p1_seed173 gpu=0 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p1_seed173
+finished phase1:sipakmed_mobilenet_v2_p2_seed173
+started phase1:sipakmed_vit_b_16_p2_seed173 gpu=3 attempt=1
+started phase1:sipakmed_vit_b_16_p3_seed173 gpu=5 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p3_seed173
+started phase1:sipakmed_convnext_tiny_p1_seed173 gpu=4 attempt=1
+finished phase1:sipakmed_convnext_tiny_p1_seed173
+started phase1:sipakmed_convnext_tiny_p2_seed173 gpu=4 attempt=1
+finished phase1:sipakmed_vit_b_16_p1_seed173
+started phase1:sipakmed_convnext_tiny_p3_seed173 gpu=0 attempt=1
+finished phase1:sipakmed_vit_b_16_p2_seed173
+finished phase1:sipakmed_vit_b_16_p3_seed173
+started phase1:sipakmed_swin_t_p1_seed173 gpu=3 attempt=1
+started phase1:sipakmed_swin_t_p2_seed173 gpu=5 attempt=1
+finished phase1:sipakmed_convnext_tiny_p2_seed173
+started phase1:sipakmed_swin_t_p3_seed173 gpu=4 attempt=1
+finished phase1:sipakmed_convnext_tiny_p3_seed173
+started phase1:sipakmed_regnet_y_1_6gf_p1_seed173 gpu=0 attempt=1
+finished phase1:sipakmed_swin_t_p1_seed173
+finished phase1:sipakmed_swin_t_p2_seed173
+started phase1:sipakmed_regnet_y_1_6gf_p2_seed173 gpu=3 attempt=1
+started phase1:sipakmed_regnet_y_1_6gf_p3_seed173 gpu=5 attempt=1
+finished phase1:sipakmed_swin_t_p3_seed173
+started phase1:sipakmed_efficientnet_v2_s_p1_seed173 gpu=4 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p1_seed173
+started phase1:sipakmed_efficientnet_v2_s_p2_seed173 gpu=0 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p2_seed173
+finished phase1:sipakmed_regnet_y_1_6gf_p3_seed173
+started phase1:sipakmed_efficientnet_v2_s_p3_seed173 gpu=3 attempt=1
+started phase1:sipakmed_maxvit_t_p1_seed173 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p1_seed173
+started phase1:sipakmed_maxvit_t_p2_seed173 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p2_seed173
+started phase1:sipakmed_maxvit_t_p3_seed173 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p3_seed173
+started phase1:sipakmed_dinov2_vits14_p1_seed173 gpu=3 attempt=1
+finished phase1:sipakmed_maxvit_t_p1_seed173
+finished phase1:sipakmed_dinov2_vits14_p1_seed173
+started phase1:sipakmed_dinov2_vits14_p2_seed173 gpu=3 attempt=1
+started phase1:sipakmed_dinov2_vits14_p3_seed173 gpu=5 attempt=1
+finished phase1:sipakmed_maxvit_t_p2_seed173
+started phase1:sipakmed_resnet18_p1_seed211 gpu=4 attempt=1
+finished phase1:sipakmed_maxvit_t_p3_seed173
+started phase1:sipakmed_resnet18_p2_seed211 gpu=0 attempt=1
+finished phase1:sipakmed_resnet18_p1_seed211
+started phase1:sipakmed_resnet18_p3_seed211 gpu=4 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p2_seed173
+finished phase1:sipakmed_dinov2_vits14_p3_seed173
+finished phase1:sipakmed_resnet18_p2_seed211
+started phase1:sipakmed_resnet50_p1_seed211 gpu=0 attempt=1
+started phase1:sipakmed_resnet50_p2_seed211 gpu=3 attempt=1
+started phase1:sipakmed_resnet50_p3_seed211 gpu=5 attempt=1
+finished phase1:sipakmed_resnet18_p3_seed211
+started phase1:sipakmed_densenet121_p1_seed211 gpu=4 attempt=1
+finished phase1:sipakmed_resnet50_p1_seed211
+finished phase1:sipakmed_resnet50_p2_seed211
+finished phase1:sipakmed_resnet50_p3_seed211
+started phase1:sipakmed_densenet121_p2_seed211 gpu=0 attempt=1
+started phase1:sipakmed_densenet121_p3_seed211 gpu=3 attempt=1
+started phase1:sipakmed_efficientnet_b0_p1_seed211 gpu=5 attempt=1
+finished phase1:sipakmed_densenet121_p1_seed211
+started phase1:sipakmed_efficientnet_b0_p2_seed211 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p1_seed211
+started phase1:sipakmed_efficientnet_b0_p3_seed211 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p2_seed211
+started phase1:sipakmed_mobilenet_v2_p1_seed211 gpu=4 attempt=1
+finished phase1:sipakmed_densenet121_p2_seed211
+started phase1:sipakmed_mobilenet_v2_p2_seed211 gpu=0 attempt=1
+finished phase1:sipakmed_densenet121_p3_seed211
+started phase1:sipakmed_mobilenet_v2_p3_seed211 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p3_seed211
+started phase1:sipakmed_vit_b_16_p1_seed211 gpu=5 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p1_seed211
+started phase1:sipakmed_vit_b_16_p2_seed211 gpu=4 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p2_seed211
+started phase1:sipakmed_vit_b_16_p3_seed211 gpu=0 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p3_seed211
+started phase1:sipakmed_convnext_tiny_p1_seed211 gpu=3 attempt=1
+finished phase1:sipakmed_convnext_tiny_p1_seed211
+started phase1:sipakmed_convnext_tiny_p2_seed211 gpu=3 attempt=1
+finished phase1:sipakmed_vit_b_16_p1_seed211
+started phase1:sipakmed_convnext_tiny_p3_seed211 gpu=5 attempt=1
+finished phase1:sipakmed_vit_b_16_p2_seed211
+started phase1:sipakmed_swin_t_p1_seed211 gpu=4 attempt=1
+finished phase1:sipakmed_vit_b_16_p3_seed211
+started phase1:sipakmed_swin_t_p2_seed211 gpu=0 attempt=1
+finished phase1:sipakmed_convnext_tiny_p2_seed211
+started phase1:sipakmed_swin_t_p3_seed211 gpu=3 attempt=1
+finished phase1:sipakmed_convnext_tiny_p3_seed211
+started phase1:sipakmed_regnet_y_1_6gf_p1_seed211 gpu=5 attempt=1
+finished phase1:sipakmed_swin_t_p1_seed211
+started phase1:sipakmed_regnet_y_1_6gf_p2_seed211 gpu=4 attempt=1
+finished phase1:sipakmed_swin_t_p2_seed211
+started phase1:sipakmed_regnet_y_1_6gf_p3_seed211 gpu=0 attempt=1
+finished phase1:sipakmed_swin_t_p3_seed211
+started phase1:sipakmed_efficientnet_v2_s_p1_seed211 gpu=3 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p1_seed211
+started phase1:sipakmed_efficientnet_v2_s_p2_seed211 gpu=5 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p2_seed211
+started phase1:sipakmed_efficientnet_v2_s_p3_seed211 gpu=4 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p3_seed211
+started phase1:sipakmed_maxvit_t_p1_seed211 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p1_seed211
+started phase1:sipakmed_maxvit_t_p2_seed211 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p2_seed211
+started phase1:sipakmed_maxvit_t_p3_seed211 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p3_seed211
+started phase1:sipakmed_dinov2_vits14_p1_seed211 gpu=4 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p1_seed211
+started phase1:sipakmed_dinov2_vits14_p2_seed211 gpu=4 attempt=1
+finished phase1:sipakmed_maxvit_t_p1_seed211
+started phase1:sipakmed_dinov2_vits14_p3_seed211 gpu=0 attempt=1
+finished phase1:sipakmed_maxvit_t_p2_seed211
+started phase1:sipakmed_resnet18_p1_seed257 gpu=3 attempt=1
+finished phase1:sipakmed_maxvit_t_p3_seed211
+started phase1:sipakmed_resnet18_p2_seed257 gpu=5 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p2_seed211
+finished phase1:sipakmed_resnet18_p1_seed257
+started phase1:sipakmed_resnet18_p3_seed257 gpu=3 attempt=1
+started phase1:sipakmed_resnet50_p1_seed257 gpu=4 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p3_seed211
+finished phase1:sipakmed_resnet18_p2_seed257
+started phase1:sipakmed_resnet50_p2_seed257 gpu=0 attempt=1
+started phase1:sipakmed_resnet50_p3_seed257 gpu=5 attempt=1
+finished phase1:sipakmed_resnet18_p3_seed257
+started phase1:sipakmed_densenet121_p1_seed257 gpu=3 attempt=1
+finished phase1:sipakmed_resnet50_p1_seed257
+started phase1:sipakmed_densenet121_p2_seed257 gpu=4 attempt=1
+finished phase1:sipakmed_resnet50_p2_seed257
+finished phase1:sipakmed_resnet50_p3_seed257
+started phase1:sipakmed_densenet121_p3_seed257 gpu=0 attempt=1
+started phase1:sipakmed_efficientnet_b0_p1_seed257 gpu=5 attempt=1
+finished phase1:sipakmed_densenet121_p1_seed257
+started phase1:sipakmed_efficientnet_b0_p2_seed257 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p1_seed257
+started phase1:sipakmed_efficientnet_b0_p3_seed257 gpu=5 attempt=1
+finished phase1:sipakmed_densenet121_p2_seed257
+finished phase1:sipakmed_efficientnet_b0_p2_seed257
+started phase1:sipakmed_mobilenet_v2_p1_seed257 gpu=3 attempt=1
+started phase1:sipakmed_mobilenet_v2_p2_seed257 gpu=4 attempt=1
+finished phase1:sipakmed_densenet121_p3_seed257
+started phase1:sipakmed_mobilenet_v2_p3_seed257 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p3_seed257
+started phase1:sipakmed_vit_b_16_p1_seed257 gpu=5 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p1_seed257
+finished phase1:sipakmed_mobilenet_v2_p2_seed257
+started phase1:sipakmed_vit_b_16_p2_seed257 gpu=3 attempt=1
+started phase1:sipakmed_vit_b_16_p3_seed257 gpu=4 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p3_seed257
+started phase1:sipakmed_convnext_tiny_p1_seed257 gpu=0 attempt=1
+finished phase1:sipakmed_convnext_tiny_p1_seed257
+started phase1:sipakmed_convnext_tiny_p2_seed257 gpu=0 attempt=1
+finished phase1:sipakmed_vit_b_16_p1_seed257
+started phase1:sipakmed_convnext_tiny_p3_seed257 gpu=5 attempt=1
+finished phase1:sipakmed_vit_b_16_p2_seed257
+finished phase1:sipakmed_vit_b_16_p3_seed257
+started phase1:sipakmed_swin_t_p1_seed257 gpu=3 attempt=1
+started phase1:sipakmed_swin_t_p2_seed257 gpu=4 attempt=1
+finished phase1:sipakmed_convnext_tiny_p2_seed257
+started phase1:sipakmed_swin_t_p3_seed257 gpu=0 attempt=1
+finished phase1:sipakmed_convnext_tiny_p3_seed257
+started phase1:sipakmed_regnet_y_1_6gf_p1_seed257 gpu=5 attempt=1
+finished phase1:sipakmed_swin_t_p1_seed257
+finished phase1:sipakmed_swin_t_p2_seed257
+started phase1:sipakmed_regnet_y_1_6gf_p2_seed257 gpu=3 attempt=1
+started phase1:sipakmed_regnet_y_1_6gf_p3_seed257 gpu=4 attempt=1
+finished phase1:sipakmed_swin_t_p3_seed257
+started phase1:sipakmed_efficientnet_v2_s_p1_seed257 gpu=0 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p1_seed257
+started phase1:sipakmed_efficientnet_v2_s_p2_seed257 gpu=5 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p2_seed257
+finished phase1:sipakmed_regnet_y_1_6gf_p3_seed257
+started phase1:sipakmed_efficientnet_v2_s_p3_seed257 gpu=3 attempt=1
+started phase1:sipakmed_maxvit_t_p1_seed257 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p1_seed257
+started phase1:sipakmed_maxvit_t_p2_seed257 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p2_seed257
+started phase1:sipakmed_maxvit_t_p3_seed257 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p3_seed257
+started phase1:sipakmed_dinov2_vits14_p1_seed257 gpu=3 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p1_seed257
+started phase1:sipakmed_dinov2_vits14_p2_seed257 gpu=3 attempt=1
+finished phase1:sipakmed_maxvit_t_p1_seed257
+started phase1:sipakmed_dinov2_vits14_p3_seed257 gpu=4 attempt=1
+finished phase1:sipakmed_maxvit_t_p2_seed257
+started phase1:sipakmed_resnet18_p1_seed307 gpu=0 attempt=1
+finished phase1:sipakmed_maxvit_t_p3_seed257
+started phase1:sipakmed_resnet18_p2_seed307 gpu=5 attempt=1
+finished phase1:sipakmed_resnet18_p1_seed307
+started phase1:sipakmed_resnet18_p3_seed307 gpu=0 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p2_seed257
+finished phase1:sipakmed_resnet18_p2_seed307
+started phase1:sipakmed_resnet50_p1_seed307 gpu=3 attempt=1
+started phase1:sipakmed_resnet50_p2_seed307 gpu=5 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p3_seed257
+started phase1:sipakmed_resnet50_p3_seed307 gpu=4 attempt=1
+finished phase1:sipakmed_resnet18_p3_seed307
+started phase1:sipakmed_densenet121_p1_seed307 gpu=0 attempt=1
+finished phase1:sipakmed_resnet50_p1_seed307
+finished phase1:sipakmed_resnet50_p2_seed307
+started phase1:sipakmed_densenet121_p2_seed307 gpu=3 attempt=1
+started phase1:sipakmed_densenet121_p3_seed307 gpu=5 attempt=1
+finished phase1:sipakmed_resnet50_p3_seed307
+started phase1:sipakmed_efficientnet_b0_p1_seed307 gpu=4 attempt=1
+finished phase1:sipakmed_densenet121_p1_seed307
+started phase1:sipakmed_efficientnet_b0_p2_seed307 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p1_seed307
+started phase1:sipakmed_efficientnet_b0_p3_seed307 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p2_seed307
+started phase1:sipakmed_mobilenet_v2_p1_seed307 gpu=0 attempt=1
+finished phase1:sipakmed_densenet121_p2_seed307
+started phase1:sipakmed_mobilenet_v2_p2_seed307 gpu=3 attempt=1
+finished phase1:sipakmed_densenet121_p3_seed307
+started phase1:sipakmed_mobilenet_v2_p3_seed307 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p3_seed307
+started phase1:sipakmed_vit_b_16_p1_seed307 gpu=4 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p1_seed307
+started phase1:sipakmed_vit_b_16_p2_seed307 gpu=0 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p2_seed307
+started phase1:sipakmed_vit_b_16_p3_seed307 gpu=3 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p3_seed307
+started phase1:sipakmed_convnext_tiny_p1_seed307 gpu=5 attempt=1
+finished phase1:sipakmed_convnext_tiny_p1_seed307
+started phase1:sipakmed_convnext_tiny_p2_seed307 gpu=5 attempt=1
+finished phase1:sipakmed_vit_b_16_p1_seed307
+started phase1:sipakmed_convnext_tiny_p3_seed307 gpu=4 attempt=1
+finished phase1:sipakmed_vit_b_16_p2_seed307
+started phase1:sipakmed_swin_t_p1_seed307 gpu=0 attempt=1
+finished phase1:sipakmed_vit_b_16_p3_seed307
+started phase1:sipakmed_swin_t_p2_seed307 gpu=3 attempt=1
+finished phase1:sipakmed_convnext_tiny_p2_seed307
+started phase1:sipakmed_swin_t_p3_seed307 gpu=5 attempt=1
+finished phase1:sipakmed_swin_t_p1_seed307
+started phase1:sipakmed_regnet_y_1_6gf_p1_seed307 gpu=0 attempt=1
+finished phase1:sipakmed_convnext_tiny_p3_seed307
+started phase1:sipakmed_regnet_y_1_6gf_p2_seed307 gpu=4 attempt=1
+finished phase1:sipakmed_swin_t_p2_seed307
+started phase1:sipakmed_regnet_y_1_6gf_p3_seed307 gpu=3 attempt=1
+finished phase1:sipakmed_swin_t_p3_seed307
+started phase1:sipakmed_efficientnet_v2_s_p1_seed307 gpu=5 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p1_seed307
+started phase1:sipakmed_efficientnet_v2_s_p2_seed307 gpu=0 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p2_seed307
+started phase1:sipakmed_efficientnet_v2_s_p3_seed307 gpu=4 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p3_seed307
+started phase1:sipakmed_maxvit_t_p1_seed307 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p1_seed307
+started phase1:sipakmed_maxvit_t_p2_seed307 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p2_seed307
+started phase1:sipakmed_maxvit_t_p3_seed307 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p3_seed307
+started phase1:sipakmed_dinov2_vits14_p1_seed307 gpu=4 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p1_seed307
+started phase1:sipakmed_dinov2_vits14_p2_seed307 gpu=4 attempt=1
+finished phase1:sipakmed_maxvit_t_p1_seed307
+started phase1:sipakmed_dinov2_vits14_p3_seed307 gpu=3 attempt=1
+finished phase1:sipakmed_maxvit_t_p2_seed307
+started phase1:sipakmed_resnet18_p1_seed349 gpu=5 attempt=1
+finished phase1:sipakmed_maxvit_t_p3_seed307
+started phase1:sipakmed_resnet18_p2_seed349 gpu=0 attempt=1
+finished phase1:sipakmed_resnet18_p1_seed349
+started phase1:sipakmed_resnet18_p3_seed349 gpu=5 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p2_seed307
+started phase1:sipakmed_resnet50_p1_seed349 gpu=4 attempt=1
+finished phase1:sipakmed_resnet18_p2_seed349
+started phase1:sipakmed_resnet50_p2_seed349 gpu=0 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p3_seed307
+started phase1:sipakmed_resnet50_p3_seed349 gpu=3 attempt=1
+finished phase1:sipakmed_resnet18_p3_seed349
+started phase1:sipakmed_densenet121_p1_seed349 gpu=5 attempt=1
+finished phase1:sipakmed_resnet50_p1_seed349
+started phase1:sipakmed_densenet121_p2_seed349 gpu=4 attempt=1
+finished phase1:sipakmed_resnet50_p2_seed349
+started phase1:sipakmed_densenet121_p3_seed349 gpu=0 attempt=1
+finished phase1:sipakmed_resnet50_p3_seed349
+started phase1:sipakmed_efficientnet_b0_p1_seed349 gpu=3 attempt=1
+finished phase1:sipakmed_densenet121_p1_seed349
+started phase1:sipakmed_efficientnet_b0_p2_seed349 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p1_seed349
+started phase1:sipakmed_efficientnet_b0_p3_seed349 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p2_seed349
+started phase1:sipakmed_mobilenet_v2_p1_seed349 gpu=5 attempt=1
+finished phase1:sipakmed_densenet121_p2_seed349
+finished phase1:sipakmed_densenet121_p3_seed349
+started phase1:sipakmed_mobilenet_v2_p2_seed349 gpu=0 attempt=1
+started phase1:sipakmed_mobilenet_v2_p3_seed349 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p3_seed349
+started phase1:sipakmed_vit_b_16_p1_seed349 gpu=3 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p1_seed349
+started phase1:sipakmed_vit_b_16_p2_seed349 gpu=5 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p2_seed349
+finished phase1:sipakmed_mobilenet_v2_p3_seed349
+started phase1:sipakmed_vit_b_16_p3_seed349 gpu=0 attempt=1
+started phase1:sipakmed_convnext_tiny_p1_seed349 gpu=4 attempt=1
+finished phase1:sipakmed_convnext_tiny_p1_seed349
+started phase1:sipakmed_convnext_tiny_p2_seed349 gpu=4 attempt=1
+finished phase1:sipakmed_vit_b_16_p1_seed349
+started phase1:sipakmed_convnext_tiny_p3_seed349 gpu=3 attempt=1
+finished phase1:sipakmed_vit_b_16_p2_seed349
+finished phase1:sipakmed_vit_b_16_p3_seed349
+started phase1:sipakmed_swin_t_p1_seed349 gpu=0 attempt=1
+started phase1:sipakmed_swin_t_p2_seed349 gpu=5 attempt=1
+finished phase1:sipakmed_convnext_tiny_p2_seed349
+started phase1:sipakmed_swin_t_p3_seed349 gpu=4 attempt=1
+finished phase1:sipakmed_convnext_tiny_p3_seed349
+started phase1:sipakmed_regnet_y_1_6gf_p1_seed349 gpu=3 attempt=1
+finished phase1:sipakmed_swin_t_p1_seed349
+finished phase1:sipakmed_swin_t_p2_seed349
+started phase1:sipakmed_regnet_y_1_6gf_p2_seed349 gpu=0 attempt=1
+started phase1:sipakmed_regnet_y_1_6gf_p3_seed349 gpu=5 attempt=1
+finished phase1:sipakmed_swin_t_p3_seed349
+started phase1:sipakmed_efficientnet_v2_s_p1_seed349 gpu=4 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p1_seed349
+started phase1:sipakmed_efficientnet_v2_s_p2_seed349 gpu=3 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p2_seed349
+finished phase1:sipakmed_regnet_y_1_6gf_p3_seed349
+started phase1:sipakmed_efficientnet_v2_s_p3_seed349 gpu=0 attempt=1
+started phase1:sipakmed_maxvit_t_p1_seed349 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p1_seed349
+started phase1:sipakmed_maxvit_t_p2_seed349 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p2_seed349
+started phase1:sipakmed_maxvit_t_p3_seed349 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p3_seed349
+started phase1:sipakmed_dinov2_vits14_p1_seed349 gpu=0 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p1_seed349
+started phase1:sipakmed_dinov2_vits14_p2_seed349 gpu=0 attempt=1
+finished phase1:sipakmed_maxvit_t_p1_seed349
+started phase1:sipakmed_dinov2_vits14_p3_seed349 gpu=5 attempt=1
+finished phase1:sipakmed_maxvit_t_p2_seed349
+started phase1:sipakmed_resnet18_p1_seed401 gpu=4 attempt=1
+finished phase1:sipakmed_maxvit_t_p3_seed349
+started phase1:sipakmed_resnet18_p2_seed401 gpu=3 attempt=1
+finished phase1:sipakmed_resnet18_p1_seed401
+started phase1:sipakmed_resnet18_p3_seed401 gpu=4 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p2_seed349
+started phase1:sipakmed_resnet50_p1_seed401 gpu=0 attempt=1
+finished phase1:sipakmed_resnet18_p2_seed401
+started phase1:sipakmed_resnet50_p2_seed401 gpu=3 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p3_seed349
+started phase1:sipakmed_resnet50_p3_seed401 gpu=5 attempt=1
+finished phase1:sipakmed_resnet18_p3_seed401
+started phase1:sipakmed_densenet121_p1_seed401 gpu=4 attempt=1
+finished phase1:sipakmed_resnet50_p1_seed401
+started phase1:sipakmed_densenet121_p2_seed401 gpu=0 attempt=1
+finished phase1:sipakmed_resnet50_p2_seed401
+started phase1:sipakmed_densenet121_p3_seed401 gpu=3 attempt=1
+finished phase1:sipakmed_resnet50_p3_seed401
+started phase1:sipakmed_efficientnet_b0_p1_seed401 gpu=5 attempt=1
+finished phase1:sipakmed_densenet121_p1_seed401
+started phase1:sipakmed_efficientnet_b0_p2_seed401 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p1_seed401
+started phase1:sipakmed_efficientnet_b0_p3_seed401 gpu=5 attempt=1
+finished phase1:sipakmed_densenet121_p2_seed401
+finished phase1:sipakmed_efficientnet_b0_p2_seed401
+started phase1:sipakmed_mobilenet_v2_p1_seed401 gpu=0 attempt=1
+started phase1:sipakmed_mobilenet_v2_p2_seed401 gpu=4 attempt=1
+finished phase1:sipakmed_densenet121_p3_seed401
+started phase1:sipakmed_mobilenet_v2_p3_seed401 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p3_seed401
+started phase1:sipakmed_vit_b_16_p1_seed401 gpu=5 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p1_seed401
+finished phase1:sipakmed_mobilenet_v2_p2_seed401
+started phase1:sipakmed_vit_b_16_p2_seed401 gpu=0 attempt=1
+started phase1:sipakmed_vit_b_16_p3_seed401 gpu=4 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p3_seed401
+started phase1:sipakmed_convnext_tiny_p1_seed401 gpu=3 attempt=1
+finished phase1:sipakmed_convnext_tiny_p1_seed401
+started phase1:sipakmed_convnext_tiny_p2_seed401 gpu=3 attempt=1
+finished phase1:sipakmed_vit_b_16_p1_seed401
+started phase1:sipakmed_convnext_tiny_p3_seed401 gpu=5 attempt=1
+finished phase1:sipakmed_vit_b_16_p2_seed401
+started phase1:sipakmed_swin_t_p1_seed401 gpu=0 attempt=1
+finished phase1:sipakmed_vit_b_16_p3_seed401
+started phase1:sipakmed_swin_t_p2_seed401 gpu=4 attempt=1
+finished phase1:sipakmed_convnext_tiny_p2_seed401
+started phase1:sipakmed_swin_t_p3_seed401 gpu=3 attempt=1
+finished phase1:sipakmed_convnext_tiny_p3_seed401
+finished phase1:sipakmed_swin_t_p1_seed401
+started phase1:sipakmed_regnet_y_1_6gf_p1_seed401 gpu=0 attempt=1
+started phase1:sipakmed_regnet_y_1_6gf_p2_seed401 gpu=5 attempt=1
+finished phase1:sipakmed_swin_t_p2_seed401
+started phase1:sipakmed_regnet_y_1_6gf_p3_seed401 gpu=4 attempt=1
+finished phase1:sipakmed_swin_t_p3_seed401
+started phase1:sipakmed_efficientnet_v2_s_p1_seed401 gpu=3 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p1_seed401
+finished phase1:sipakmed_regnet_y_1_6gf_p2_seed401
+started phase1:sipakmed_efficientnet_v2_s_p2_seed401 gpu=0 attempt=1
+started phase1:sipakmed_efficientnet_v2_s_p3_seed401 gpu=5 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p3_seed401
+started phase1:sipakmed_maxvit_t_p1_seed401 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p1_seed401
+started phase1:sipakmed_maxvit_t_p2_seed401 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p2_seed401
+finished phase1:sipakmed_efficientnet_v2_s_p3_seed401
+started phase1:sipakmed_maxvit_t_p3_seed401 gpu=0 attempt=1
+started phase1:sipakmed_dinov2_vits14_p1_seed401 gpu=5 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p1_seed401
+started phase1:sipakmed_dinov2_vits14_p2_seed401 gpu=5 attempt=1
+finished phase1:sipakmed_maxvit_t_p1_seed401
+started phase1:sipakmed_dinov2_vits14_p3_seed401 gpu=4 attempt=1
+finished phase1:sipakmed_maxvit_t_p2_seed401
+started phase1:sipakmed_resnet18_p1_seed457 gpu=3 attempt=1
+finished phase1:sipakmed_maxvit_t_p3_seed401
+started phase1:sipakmed_resnet18_p2_seed457 gpu=0 attempt=1
+finished phase1:sipakmed_resnet18_p1_seed457
+started phase1:sipakmed_resnet18_p3_seed457 gpu=3 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p2_seed401
+started phase1:sipakmed_resnet50_p1_seed457 gpu=5 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p3_seed401
+started phase1:sipakmed_resnet50_p2_seed457 gpu=4 attempt=1
+finished phase1:sipakmed_resnet18_p2_seed457
+started phase1:sipakmed_resnet50_p3_seed457 gpu=0 attempt=1
+finished phase1:sipakmed_resnet18_p3_seed457
+started phase1:sipakmed_densenet121_p1_seed457 gpu=3 attempt=1
+finished phase1:sipakmed_resnet50_p1_seed457
+started phase1:sipakmed_densenet121_p2_seed457 gpu=5 attempt=1
+finished phase1:sipakmed_resnet50_p2_seed457
+started phase1:sipakmed_densenet121_p3_seed457 gpu=4 attempt=1
+finished phase1:sipakmed_resnet50_p3_seed457
+started phase1:sipakmed_efficientnet_b0_p1_seed457 gpu=0 attempt=1
+finished phase1:sipakmed_densenet121_p1_seed457
+started phase1:sipakmed_efficientnet_b0_p2_seed457 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p1_seed457
+started phase1:sipakmed_efficientnet_b0_p3_seed457 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p2_seed457
+started phase1:sipakmed_mobilenet_v2_p1_seed457 gpu=3 attempt=1
+finished phase1:sipakmed_densenet121_p2_seed457
+started phase1:sipakmed_mobilenet_v2_p2_seed457 gpu=5 attempt=1
+finished phase1:sipakmed_densenet121_p3_seed457
+started phase1:sipakmed_mobilenet_v2_p3_seed457 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p3_seed457
+started phase1:sipakmed_vit_b_16_p1_seed457 gpu=0 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p1_seed457
+started phase1:sipakmed_vit_b_16_p2_seed457 gpu=3 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p2_seed457
+started phase1:sipakmed_vit_b_16_p3_seed457 gpu=5 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p3_seed457
+started phase1:sipakmed_convnext_tiny_p1_seed457 gpu=4 attempt=1
+finished phase1:sipakmed_convnext_tiny_p1_seed457
+started phase1:sipakmed_convnext_tiny_p2_seed457 gpu=4 attempt=1
+finished phase1:sipakmed_vit_b_16_p1_seed457
+started phase1:sipakmed_convnext_tiny_p3_seed457 gpu=0 attempt=1
+finished phase1:sipakmed_vit_b_16_p2_seed457
+started phase1:sipakmed_swin_t_p1_seed457 gpu=3 attempt=1
+finished phase1:sipakmed_vit_b_16_p3_seed457
+started phase1:sipakmed_swin_t_p2_seed457 gpu=5 attempt=1
+finished phase1:sipakmed_convnext_tiny_p2_seed457
+started phase1:sipakmed_swin_t_p3_seed457 gpu=4 attempt=1
+finished phase1:sipakmed_convnext_tiny_p3_seed457
+started phase1:sipakmed_regnet_y_1_6gf_p1_seed457 gpu=0 attempt=1
+finished phase1:sipakmed_swin_t_p1_seed457
+started phase1:sipakmed_regnet_y_1_6gf_p2_seed457 gpu=3 attempt=1
+finished phase1:sipakmed_swin_t_p2_seed457
+started phase1:sipakmed_regnet_y_1_6gf_p3_seed457 gpu=5 attempt=1
+finished phase1:sipakmed_swin_t_p3_seed457
+started phase1:sipakmed_efficientnet_v2_s_p1_seed457 gpu=4 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p1_seed457
+started phase1:sipakmed_efficientnet_v2_s_p2_seed457 gpu=0 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p2_seed457
+started phase1:sipakmed_efficientnet_v2_s_p3_seed457 gpu=3 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p3_seed457
+started phase1:sipakmed_maxvit_t_p1_seed457 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p1_seed457
+started phase1:sipakmed_maxvit_t_p2_seed457 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p2_seed457
+started phase1:sipakmed_maxvit_t_p3_seed457 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p3_seed457
+started phase1:sipakmed_dinov2_vits14_p1_seed457 gpu=3 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p1_seed457
+started phase1:sipakmed_dinov2_vits14_p2_seed457 gpu=3 attempt=1
+finished phase1:sipakmed_maxvit_t_p1_seed457
+started phase1:sipakmed_dinov2_vits14_p3_seed457 gpu=5 attempt=1
+finished phase1:sipakmed_maxvit_t_p2_seed457
+started phase1:sipakmed_resnet18_p1_seed503 gpu=4 attempt=1
+finished phase1:sipakmed_maxvit_t_p3_seed457
+started phase1:sipakmed_resnet18_p2_seed503 gpu=0 attempt=1
+finished phase1:sipakmed_resnet18_p1_seed503
+started phase1:sipakmed_resnet18_p3_seed503 gpu=4 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p2_seed457
+started phase1:sipakmed_resnet50_p1_seed503 gpu=3 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p3_seed457
+finished phase1:sipakmed_resnet18_p2_seed503
+started phase1:sipakmed_resnet50_p2_seed503 gpu=0 attempt=1
+started phase1:sipakmed_resnet50_p3_seed503 gpu=5 attempt=1
+finished phase1:sipakmed_resnet18_p3_seed503
+started phase1:sipakmed_densenet121_p1_seed503 gpu=4 attempt=1
+finished phase1:sipakmed_resnet50_p1_seed503
+started phase1:sipakmed_densenet121_p2_seed503 gpu=3 attempt=1
+finished phase1:sipakmed_resnet50_p2_seed503
+finished phase1:sipakmed_resnet50_p3_seed503
+started phase1:sipakmed_densenet121_p3_seed503 gpu=0 attempt=1
+started phase1:sipakmed_efficientnet_b0_p1_seed503 gpu=5 attempt=1
+finished phase1:sipakmed_densenet121_p1_seed503
+started phase1:sipakmed_efficientnet_b0_p2_seed503 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p1_seed503
+started phase1:sipakmed_efficientnet_b0_p3_seed503 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p2_seed503
+started phase1:sipakmed_mobilenet_v2_p1_seed503 gpu=4 attempt=1
+finished phase1:sipakmed_densenet121_p2_seed503
+started phase1:sipakmed_mobilenet_v2_p2_seed503 gpu=3 attempt=1
+finished phase1:sipakmed_densenet121_p3_seed503
+started phase1:sipakmed_mobilenet_v2_p3_seed503 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p3_seed503
+started phase1:sipakmed_vit_b_16_p1_seed503 gpu=5 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p1_seed503
+started phase1:sipakmed_vit_b_16_p2_seed503 gpu=4 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p2_seed503
+started phase1:sipakmed_vit_b_16_p3_seed503 gpu=3 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p3_seed503
+started phase1:sipakmed_convnext_tiny_p1_seed503 gpu=0 attempt=1
+finished phase1:sipakmed_convnext_tiny_p1_seed503
+started phase1:sipakmed_convnext_tiny_p2_seed503 gpu=0 attempt=1
+finished phase1:sipakmed_vit_b_16_p1_seed503
+started phase1:sipakmed_convnext_tiny_p3_seed503 gpu=5 attempt=1
+finished phase1:sipakmed_vit_b_16_p2_seed503
+started phase1:sipakmed_swin_t_p1_seed503 gpu=4 attempt=1
+finished phase1:sipakmed_vit_b_16_p3_seed503
+started phase1:sipakmed_swin_t_p2_seed503 gpu=3 attempt=1
+finished phase1:sipakmed_convnext_tiny_p2_seed503
+started phase1:sipakmed_swin_t_p3_seed503 gpu=0 attempt=1
+finished phase1:sipakmed_convnext_tiny_p3_seed503
+started phase1:sipakmed_regnet_y_1_6gf_p1_seed503 gpu=5 attempt=1
+finished phase1:sipakmed_swin_t_p1_seed503
+started phase1:sipakmed_regnet_y_1_6gf_p2_seed503 gpu=4 attempt=1
+finished phase1:sipakmed_swin_t_p2_seed503
+started phase1:sipakmed_regnet_y_1_6gf_p3_seed503 gpu=3 attempt=1
+finished phase1:sipakmed_swin_t_p3_seed503
+started phase1:sipakmed_efficientnet_v2_s_p1_seed503 gpu=0 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p1_seed503
+started phase1:sipakmed_efficientnet_v2_s_p2_seed503 gpu=5 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p2_seed503
+started phase1:sipakmed_efficientnet_v2_s_p3_seed503 gpu=4 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p3_seed503
+started phase1:sipakmed_maxvit_t_p1_seed503 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p1_seed503
+started phase1:sipakmed_maxvit_t_p2_seed503 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p2_seed503
+started phase1:sipakmed_maxvit_t_p3_seed503 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p3_seed503
+started phase1:sipakmed_dinov2_vits14_p1_seed503 gpu=4 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p1_seed503
+started phase1:sipakmed_dinov2_vits14_p2_seed503 gpu=4 attempt=1
+finished phase1:sipakmed_maxvit_t_p1_seed503
+started phase1:sipakmed_dinov2_vits14_p3_seed503 gpu=3 attempt=1
+finished phase1:sipakmed_maxvit_t_p2_seed503
+started phase1:sipakmed_resnet18_p1_seed557 gpu=0 attempt=1
+finished phase1:sipakmed_maxvit_t_p3_seed503
+started phase1:sipakmed_resnet18_p2_seed557 gpu=5 attempt=1
+finished phase1:sipakmed_resnet18_p1_seed557
+started phase1:sipakmed_resnet18_p3_seed557 gpu=0 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p2_seed503
+started phase1:sipakmed_resnet50_p1_seed557 gpu=4 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p3_seed503
+finished phase1:sipakmed_resnet18_p2_seed557
+started phase1:sipakmed_resnet50_p2_seed557 gpu=3 attempt=1
+started phase1:sipakmed_resnet50_p3_seed557 gpu=5 attempt=1
+finished phase1:sipakmed_resnet18_p3_seed557
+started phase1:sipakmed_densenet121_p1_seed557 gpu=0 attempt=1
+finished phase1:sipakmed_resnet50_p1_seed557
+started phase1:sipakmed_densenet121_p2_seed557 gpu=4 attempt=1
+finished phase1:sipakmed_resnet50_p2_seed557
+finished phase1:sipakmed_resnet50_p3_seed557
+started phase1:sipakmed_densenet121_p3_seed557 gpu=3 attempt=1
+started phase1:sipakmed_efficientnet_b0_p1_seed557 gpu=5 attempt=1
+finished phase1:sipakmed_densenet121_p1_seed557
+started phase1:sipakmed_efficientnet_b0_p2_seed557 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p1_seed557
+started phase1:sipakmed_efficientnet_b0_p3_seed557 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p2_seed557
+started phase1:sipakmed_mobilenet_v2_p1_seed557 gpu=0 attempt=1
+finished phase1:sipakmed_densenet121_p2_seed557
+started phase1:sipakmed_mobilenet_v2_p2_seed557 gpu=4 attempt=1
+finished phase1:sipakmed_densenet121_p3_seed557
+started phase1:sipakmed_mobilenet_v2_p3_seed557 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p3_seed557
+started phase1:sipakmed_vit_b_16_p1_seed557 gpu=5 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p1_seed557
+started phase1:sipakmed_vit_b_16_p2_seed557 gpu=0 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p2_seed557
+started phase1:sipakmed_vit_b_16_p3_seed557 gpu=4 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p3_seed557
+started phase1:sipakmed_convnext_tiny_p1_seed557 gpu=3 attempt=1
+finished phase1:sipakmed_convnext_tiny_p1_seed557
+started phase1:sipakmed_convnext_tiny_p2_seed557 gpu=3 attempt=1
+finished phase1:sipakmed_vit_b_16_p1_seed557
+started phase1:sipakmed_convnext_tiny_p3_seed557 gpu=5 attempt=1
+finished phase1:sipakmed_vit_b_16_p2_seed557
+started phase1:sipakmed_swin_t_p1_seed557 gpu=0 attempt=1
+finished phase1:sipakmed_vit_b_16_p3_seed557
+started phase1:sipakmed_swin_t_p2_seed557 gpu=4 attempt=1
+finished phase1:sipakmed_convnext_tiny_p2_seed557
+started phase1:sipakmed_swin_t_p3_seed557 gpu=3 attempt=1
+finished phase1:sipakmed_swin_t_p1_seed557
+started phase1:sipakmed_regnet_y_1_6gf_p1_seed557 gpu=0 attempt=1
+finished phase1:sipakmed_convnext_tiny_p3_seed557
+started phase1:sipakmed_regnet_y_1_6gf_p2_seed557 gpu=5 attempt=1
+finished phase1:sipakmed_swin_t_p2_seed557
+started phase1:sipakmed_regnet_y_1_6gf_p3_seed557 gpu=4 attempt=1
+finished phase1:sipakmed_swin_t_p3_seed557
+started phase1:sipakmed_efficientnet_v2_s_p1_seed557 gpu=3 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p1_seed557
+started phase1:sipakmed_efficientnet_v2_s_p2_seed557 gpu=0 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p2_seed557
+started phase1:sipakmed_efficientnet_v2_s_p3_seed557 gpu=5 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p3_seed557
+started phase1:sipakmed_maxvit_t_p1_seed557 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p1_seed557
+started phase1:sipakmed_maxvit_t_p2_seed557 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p2_seed557
+started phase1:sipakmed_maxvit_t_p3_seed557 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p3_seed557
+started phase1:sipakmed_dinov2_vits14_p1_seed557 gpu=5 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p1_seed557
+started phase1:sipakmed_dinov2_vits14_p2_seed557 gpu=5 attempt=1
+finished phase1:sipakmed_maxvit_t_p1_seed557
+started phase1:sipakmed_dinov2_vits14_p3_seed557 gpu=4 attempt=1
+finished phase1:sipakmed_maxvit_t_p2_seed557
+started phase1:sipakmed_resnet18_p1_seed601 gpu=3 attempt=1
+finished phase1:sipakmed_maxvit_t_p3_seed557
+started phase1:sipakmed_resnet18_p2_seed601 gpu=0 attempt=1
+finished phase1:sipakmed_resnet18_p1_seed601
+started phase1:sipakmed_resnet18_p3_seed601 gpu=3 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p2_seed557
+started phase1:sipakmed_resnet50_p1_seed601 gpu=5 attempt=1
+finished phase1:sipakmed_resnet18_p2_seed601
+started phase1:sipakmed_resnet50_p2_seed601 gpu=0 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p3_seed557
+started phase1:sipakmed_resnet50_p3_seed601 gpu=4 attempt=1
+finished phase1:sipakmed_resnet18_p3_seed601
+started phase1:sipakmed_densenet121_p1_seed601 gpu=3 attempt=1
+finished phase1:sipakmed_resnet50_p1_seed601
+started phase1:sipakmed_densenet121_p2_seed601 gpu=5 attempt=1
+finished phase1:sipakmed_resnet50_p2_seed601
+started phase1:sipakmed_densenet121_p3_seed601 gpu=0 attempt=1
+finished phase1:sipakmed_resnet50_p3_seed601
+started phase1:sipakmed_efficientnet_b0_p1_seed601 gpu=4 attempt=1
+finished phase1:sipakmed_densenet121_p1_seed601
+started phase1:sipakmed_efficientnet_b0_p2_seed601 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p1_seed601
+started phase1:sipakmed_efficientnet_b0_p3_seed601 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p2_seed601
+started phase1:sipakmed_mobilenet_v2_p1_seed601 gpu=3 attempt=1
+finished phase1:sipakmed_densenet121_p2_seed601
+started phase1:sipakmed_mobilenet_v2_p2_seed601 gpu=5 attempt=1
+finished phase1:sipakmed_densenet121_p3_seed601
+started phase1:sipakmed_mobilenet_v2_p3_seed601 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p3_seed601
+started phase1:sipakmed_vit_b_16_p1_seed601 gpu=4 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p1_seed601
+started phase1:sipakmed_vit_b_16_p2_seed601 gpu=3 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p2_seed601
+started phase1:sipakmed_vit_b_16_p3_seed601 gpu=5 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p3_seed601
+started phase1:sipakmed_convnext_tiny_p1_seed601 gpu=0 attempt=1
+finished phase1:sipakmed_convnext_tiny_p1_seed601
+started phase1:sipakmed_convnext_tiny_p2_seed601 gpu=0 attempt=1
+finished phase1:sipakmed_vit_b_16_p1_seed601
+started phase1:sipakmed_convnext_tiny_p3_seed601 gpu=4 attempt=1
+finished phase1:sipakmed_vit_b_16_p2_seed601
+started phase1:sipakmed_swin_t_p1_seed601 gpu=3 attempt=1
+finished phase1:sipakmed_vit_b_16_p3_seed601
+started phase1:sipakmed_swin_t_p2_seed601 gpu=5 attempt=1
+finished phase1:sipakmed_convnext_tiny_p2_seed601
+started phase1:sipakmed_swin_t_p3_seed601 gpu=0 attempt=1
+finished phase1:sipakmed_swin_t_p1_seed601
+started phase1:sipakmed_regnet_y_1_6gf_p1_seed601 gpu=3 attempt=1
+finished phase1:sipakmed_convnext_tiny_p3_seed601
+finished phase1:sipakmed_swin_t_p2_seed601
+started phase1:sipakmed_regnet_y_1_6gf_p2_seed601 gpu=4 attempt=1
+started phase1:sipakmed_regnet_y_1_6gf_p3_seed601 gpu=5 attempt=1
+finished phase1:sipakmed_swin_t_p3_seed601
+started phase1:sipakmed_efficientnet_v2_s_p1_seed601 gpu=0 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p1_seed601
+started phase1:sipakmed_efficientnet_v2_s_p2_seed601 gpu=3 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p2_seed601
+finished phase1:sipakmed_regnet_y_1_6gf_p3_seed601
+started phase1:sipakmed_efficientnet_v2_s_p3_seed601 gpu=4 attempt=1
+started phase1:sipakmed_maxvit_t_p1_seed601 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p1_seed601
+started phase1:sipakmed_maxvit_t_p2_seed601 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p2_seed601
+started phase1:sipakmed_maxvit_t_p3_seed601 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p3_seed601
+started phase1:sipakmed_dinov2_vits14_p1_seed601 gpu=4 attempt=1
+finished phase1:sipakmed_maxvit_t_p1_seed601
+finished phase1:sipakmed_dinov2_vits14_p1_seed601
+started phase1:sipakmed_dinov2_vits14_p2_seed601 gpu=4 attempt=1
+started phase1:sipakmed_dinov2_vits14_p3_seed601 gpu=5 attempt=1
+finished phase1:sipakmed_maxvit_t_p2_seed601
+started phase1:sipakmed_resnet18_p1_seed653 gpu=0 attempt=1
+finished phase1:sipakmed_maxvit_t_p3_seed601
+started phase1:sipakmed_resnet18_p2_seed653 gpu=3 attempt=1
+finished phase1:sipakmed_resnet18_p1_seed653
+started phase1:sipakmed_resnet18_p3_seed653 gpu=0 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p2_seed601
+finished phase1:sipakmed_dinov2_vits14_p3_seed601
+started phase1:sipakmed_resnet50_p1_seed653 gpu=4 attempt=1
+started phase1:sipakmed_resnet50_p2_seed653 gpu=5 attempt=1
+finished phase1:sipakmed_resnet18_p2_seed653
+started phase1:sipakmed_resnet50_p3_seed653 gpu=3 attempt=1
+finished phase1:sipakmed_resnet18_p3_seed653
+started phase1:sipakmed_densenet121_p1_seed653 gpu=0 attempt=1
+finished phase1:sipakmed_resnet50_p1_seed653
+finished phase1:sipakmed_resnet50_p2_seed653
+started phase1:sipakmed_densenet121_p2_seed653 gpu=4 attempt=1
+started phase1:sipakmed_densenet121_p3_seed653 gpu=5 attempt=1
+finished phase1:sipakmed_resnet50_p3_seed653
+started phase1:sipakmed_efficientnet_b0_p1_seed653 gpu=3 attempt=1
+finished phase1:sipakmed_densenet121_p1_seed653
+started phase1:sipakmed_efficientnet_b0_p2_seed653 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p1_seed653
+started phase1:sipakmed_efficientnet_b0_p3_seed653 gpu=3 attempt=1
+finished phase1:sipakmed_densenet121_p2_seed653
+finished phase1:sipakmed_efficientnet_b0_p2_seed653
+started phase1:sipakmed_mobilenet_v2_p1_seed653 gpu=0 attempt=1
+started phase1:sipakmed_mobilenet_v2_p2_seed653 gpu=4 attempt=1
+finished phase1:sipakmed_densenet121_p3_seed653
+started phase1:sipakmed_mobilenet_v2_p3_seed653 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p3_seed653
+started phase1:sipakmed_vit_b_16_p1_seed653 gpu=3 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p1_seed653
+finished phase1:sipakmed_mobilenet_v2_p2_seed653
+started phase1:sipakmed_vit_b_16_p2_seed653 gpu=0 attempt=1
+started phase1:sipakmed_vit_b_16_p3_seed653 gpu=4 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p3_seed653
+started phase1:sipakmed_convnext_tiny_p1_seed653 gpu=5 attempt=1
+finished phase1:sipakmed_convnext_tiny_p1_seed653
+started phase1:sipakmed_convnext_tiny_p2_seed653 gpu=5 attempt=1
+finished phase1:sipakmed_vit_b_16_p1_seed653
+started phase1:sipakmed_convnext_tiny_p3_seed653 gpu=3 attempt=1
+finished phase1:sipakmed_vit_b_16_p2_seed653
+finished phase1:sipakmed_vit_b_16_p3_seed653
+started phase1:sipakmed_swin_t_p1_seed653 gpu=0 attempt=1
+started phase1:sipakmed_swin_t_p2_seed653 gpu=4 attempt=1
+finished phase1:sipakmed_convnext_tiny_p2_seed653
+started phase1:sipakmed_swin_t_p3_seed653 gpu=5 attempt=1
+finished phase1:sipakmed_convnext_tiny_p3_seed653
+started phase1:sipakmed_regnet_y_1_6gf_p1_seed653 gpu=3 attempt=1
+finished phase1:sipakmed_swin_t_p1_seed653
+finished phase1:sipakmed_swin_t_p2_seed653
+started phase1:sipakmed_regnet_y_1_6gf_p2_seed653 gpu=0 attempt=1
+started phase1:sipakmed_regnet_y_1_6gf_p3_seed653 gpu=4 attempt=1
+finished phase1:sipakmed_swin_t_p3_seed653
+started phase1:sipakmed_efficientnet_v2_s_p1_seed653 gpu=5 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p1_seed653
+started phase1:sipakmed_efficientnet_v2_s_p2_seed653 gpu=3 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p2_seed653
+finished phase1:sipakmed_regnet_y_1_6gf_p3_seed653
+started phase1:sipakmed_efficientnet_v2_s_p3_seed653 gpu=0 attempt=1
+started phase1:sipakmed_maxvit_t_p1_seed653 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p1_seed653
+started phase1:sipakmed_maxvit_t_p2_seed653 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p2_seed653
+started phase1:sipakmed_maxvit_t_p3_seed653 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p3_seed653
+started phase1:sipakmed_dinov2_vits14_p1_seed653 gpu=0 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p1_seed653
+started phase1:sipakmed_dinov2_vits14_p2_seed653 gpu=0 attempt=1
+finished phase1:sipakmed_maxvit_t_p1_seed653
+started phase1:sipakmed_dinov2_vits14_p3_seed653 gpu=4 attempt=1
+finished phase1:sipakmed_maxvit_t_p2_seed653
+finished phase1:sipakmed_maxvit_t_p3_seed653
+started phase1:sipakmed_resnet18_p1_seed701 gpu=3 attempt=1
+started phase1:sipakmed_resnet18_p2_seed701 gpu=5 attempt=1
+finished phase1:sipakmed_resnet18_p1_seed701
+finished phase1:sipakmed_resnet18_p2_seed701
+started phase1:sipakmed_resnet18_p3_seed701 gpu=3 attempt=1
+started phase1:sipakmed_resnet50_p1_seed701 gpu=5 attempt=1
+finished phase1:sipakmed_resnet18_p3_seed701
+started phase1:sipakmed_resnet50_p2_seed701 gpu=3 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p2_seed653
+finished phase1:sipakmed_dinov2_vits14_p3_seed653
+finished phase1:sipakmed_resnet50_p1_seed701
+started phase1:sipakmed_resnet50_p3_seed701 gpu=0 attempt=1
+started phase1:sipakmed_densenet121_p1_seed701 gpu=4 attempt=1
+started phase1:sipakmed_densenet121_p2_seed701 gpu=5 attempt=1
+finished phase1:sipakmed_resnet50_p2_seed701
+started phase1:sipakmed_densenet121_p3_seed701 gpu=3 attempt=1
+finished phase1:sipakmed_resnet50_p3_seed701
+started phase1:sipakmed_efficientnet_b0_p1_seed701 gpu=0 attempt=1
+finished phase1:sipakmed_densenet121_p1_seed701
+finished phase1:sipakmed_densenet121_p2_seed701
+started phase1:sipakmed_efficientnet_b0_p2_seed701 gpu=4 attempt=1
+started phase1:sipakmed_efficientnet_b0_p3_seed701 gpu=5 attempt=1
+finished phase1:sipakmed_densenet121_p3_seed701
+started phase1:sipakmed_mobilenet_v2_p1_seed701 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p1_seed701
+started phase1:sipakmed_mobilenet_v2_p2_seed701 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p2_seed701
+finished phase1:sipakmed_efficientnet_b0_p3_seed701
+started phase1:sipakmed_mobilenet_v2_p3_seed701 gpu=4 attempt=1
+started phase1:sipakmed_vit_b_16_p1_seed701 gpu=5 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p1_seed701
+started phase1:sipakmed_vit_b_16_p2_seed701 gpu=3 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p2_seed701
+started phase1:sipakmed_vit_b_16_p3_seed701 gpu=0 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p3_seed701
+started phase1:sipakmed_convnext_tiny_p1_seed701 gpu=4 attempt=1
+finished phase1:sipakmed_convnext_tiny_p1_seed701
+started phase1:sipakmed_convnext_tiny_p2_seed701 gpu=4 attempt=1
+finished phase1:sipakmed_vit_b_16_p1_seed701
+started phase1:sipakmed_convnext_tiny_p3_seed701 gpu=5 attempt=1
+finished phase1:sipakmed_vit_b_16_p2_seed701
+started phase1:sipakmed_swin_t_p1_seed701 gpu=3 attempt=1
+finished phase1:sipakmed_vit_b_16_p3_seed701
+started phase1:sipakmed_swin_t_p2_seed701 gpu=0 attempt=1
+finished phase1:sipakmed_convnext_tiny_p2_seed701
+started phase1:sipakmed_swin_t_p3_seed701 gpu=4 attempt=1
+finished phase1:sipakmed_convnext_tiny_p3_seed701
+started phase1:sipakmed_regnet_y_1_6gf_p1_seed701 gpu=5 attempt=1
+finished phase1:sipakmed_swin_t_p1_seed701
+started phase1:sipakmed_regnet_y_1_6gf_p2_seed701 gpu=3 attempt=1
+finished phase1:sipakmed_swin_t_p2_seed701
+started phase1:sipakmed_regnet_y_1_6gf_p3_seed701 gpu=0 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p1_seed701
+started phase1:sipakmed_efficientnet_v2_s_p1_seed701 gpu=5 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p2_seed701
+started phase1:sipakmed_efficientnet_v2_s_p2_seed701 gpu=3 attempt=1
+finished phase1:sipakmed_swin_t_p3_seed701
+finished phase1:sipakmed_regnet_y_1_6gf_p3_seed701
+started phase1:sipakmed_efficientnet_v2_s_p3_seed701 gpu=0 attempt=1
+started phase1:sipakmed_maxvit_t_p1_seed701 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p1_seed701
+started phase1:sipakmed_maxvit_t_p2_seed701 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p2_seed701
+started phase1:sipakmed_maxvit_t_p3_seed701 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p3_seed701
+started phase1:sipakmed_dinov2_vits14_p1_seed701 gpu=0 attempt=1
+finished phase1:sipakmed_maxvit_t_p1_seed701
+started phase1:sipakmed_dinov2_vits14_p2_seed701 gpu=4 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p1_seed701
+started phase1:sipakmed_dinov2_vits14_p3_seed701 gpu=0 attempt=1
+finished phase1:sipakmed_maxvit_t_p2_seed701
+started phase1:sipakmed_resnet18_p1_seed751 gpu=5 attempt=1
+finished phase1:sipakmed_maxvit_t_p3_seed701
+started phase1:sipakmed_resnet18_p2_seed751 gpu=3 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p2_seed701
+started phase1:sipakmed_resnet18_p3_seed751 gpu=4 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p3_seed701
+finished phase1:sipakmed_resnet18_p1_seed751
+started phase1:sipakmed_resnet50_p1_seed751 gpu=0 attempt=1
+started phase1:sipakmed_resnet50_p2_seed751 gpu=5 attempt=1
+finished phase1:sipakmed_resnet18_p2_seed751
+started phase1:sipakmed_resnet50_p3_seed751 gpu=3 attempt=1
+finished phase1:sipakmed_resnet18_p3_seed751
+started phase1:sipakmed_densenet121_p1_seed751 gpu=4 attempt=1
+finished phase1:sipakmed_resnet50_p1_seed751
+finished phase1:sipakmed_resnet50_p2_seed751
+started phase1:sipakmed_densenet121_p2_seed751 gpu=0 attempt=1
+started phase1:sipakmed_densenet121_p3_seed751 gpu=5 attempt=1
+finished phase1:sipakmed_resnet50_p3_seed751
+started phase1:sipakmed_efficientnet_b0_p1_seed751 gpu=3 attempt=1
+finished phase1:sipakmed_densenet121_p1_seed751
+started phase1:sipakmed_efficientnet_b0_p2_seed751 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p1_seed751
+started phase1:sipakmed_efficientnet_b0_p3_seed751 gpu=3 attempt=1
+finished phase1:sipakmed_densenet121_p2_seed751
+finished phase1:sipakmed_densenet121_p3_seed751
+started phase1:sipakmed_mobilenet_v2_p1_seed751 gpu=0 attempt=1
+started phase1:sipakmed_mobilenet_v2_p2_seed751 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p2_seed751
+started phase1:sipakmed_mobilenet_v2_p3_seed751 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p3_seed751
+started phase1:sipakmed_vit_b_16_p1_seed751 gpu=3 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p1_seed751
+finished phase1:sipakmed_mobilenet_v2_p2_seed751
+started phase1:sipakmed_vit_b_16_p2_seed751 gpu=0 attempt=1
+started phase1:sipakmed_vit_b_16_p3_seed751 gpu=5 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p3_seed751
+started phase1:sipakmed_convnext_tiny_p1_seed751 gpu=4 attempt=1
+finished phase1:sipakmed_convnext_tiny_p1_seed751
+started phase1:sipakmed_convnext_tiny_p2_seed751 gpu=4 attempt=1
+finished phase1:sipakmed_vit_b_16_p1_seed751
+started phase1:sipakmed_convnext_tiny_p3_seed751 gpu=3 attempt=1
+finished phase1:sipakmed_vit_b_16_p2_seed751
+finished phase1:sipakmed_vit_b_16_p3_seed751
+started phase1:sipakmed_swin_t_p1_seed751 gpu=0 attempt=1
+started phase1:sipakmed_swin_t_p2_seed751 gpu=5 attempt=1
+finished phase1:sipakmed_convnext_tiny_p2_seed751
+started phase1:sipakmed_swin_t_p3_seed751 gpu=4 attempt=1
+finished phase1:sipakmed_convnext_tiny_p3_seed751
+finished phase1:sipakmed_swin_t_p1_seed751
+finished phase1:sipakmed_swin_t_p2_seed751
+started phase1:sipakmed_regnet_y_1_6gf_p1_seed751 gpu=0 attempt=1
+started phase1:sipakmed_regnet_y_1_6gf_p2_seed751 gpu=3 attempt=1
+started phase1:sipakmed_regnet_y_1_6gf_p3_seed751 gpu=5 attempt=1
+finished phase1:sipakmed_swin_t_p3_seed751
+started phase1:sipakmed_efficientnet_v2_s_p1_seed751 gpu=4 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p1_seed751
+finished phase1:sipakmed_regnet_y_1_6gf_p3_seed751
+started phase1:sipakmed_efficientnet_v2_s_p2_seed751 gpu=0 attempt=1
+started phase1:sipakmed_efficientnet_v2_s_p3_seed751 gpu=5 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p2_seed751
+started phase1:sipakmed_maxvit_t_p1_seed751 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p1_seed751
+started phase1:sipakmed_maxvit_t_p2_seed751 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p2_seed751
+finished phase1:sipakmed_efficientnet_v2_s_p3_seed751
+started phase1:sipakmed_maxvit_t_p3_seed751 gpu=0 attempt=1
+started phase1:sipakmed_dinov2_vits14_p1_seed751 gpu=5 attempt=1
+finished phase1:sipakmed_maxvit_t_p1_seed751
+started phase1:sipakmed_dinov2_vits14_p2_seed751 gpu=3 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p1_seed751
+started phase1:sipakmed_dinov2_vits14_p3_seed751 gpu=5 attempt=1
+finished phase1:sipakmed_maxvit_t_p2_seed751
+started phase1:sipakmed_resnet18_p1_seed809 gpu=4 attempt=1
+finished phase1:sipakmed_maxvit_t_p3_seed751
+started phase1:sipakmed_resnet18_p2_seed809 gpu=0 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p2_seed751
+finished phase1:sipakmed_resnet18_p1_seed809
+started phase1:sipakmed_resnet18_p3_seed809 gpu=3 attempt=1
+started phase1:sipakmed_resnet50_p1_seed809 gpu=4 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p3_seed751
+started phase1:sipakmed_resnet50_p2_seed809 gpu=5 attempt=1
+finished phase1:sipakmed_resnet18_p2_seed809
+started phase1:sipakmed_resnet50_p3_seed809 gpu=0 attempt=1
+finished phase1:sipakmed_resnet18_p3_seed809
+started phase1:sipakmed_densenet121_p1_seed809 gpu=3 attempt=1
+finished phase1:sipakmed_resnet50_p1_seed809
+started phase1:sipakmed_densenet121_p2_seed809 gpu=4 attempt=1
+finished phase1:sipakmed_resnet50_p2_seed809
+started phase1:sipakmed_densenet121_p3_seed809 gpu=5 attempt=1
+finished phase1:sipakmed_resnet50_p3_seed809
+started phase1:sipakmed_efficientnet_b0_p1_seed809 gpu=0 attempt=1
+finished phase1:sipakmed_densenet121_p1_seed809
+started phase1:sipakmed_efficientnet_b0_p2_seed809 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p1_seed809
+started phase1:sipakmed_efficientnet_b0_p3_seed809 gpu=0 attempt=1
+finished phase1:sipakmed_densenet121_p2_seed809
+started phase1:sipakmed_mobilenet_v2_p1_seed809 gpu=4 attempt=1
+finished phase1:sipakmed_densenet121_p3_seed809
+finished phase1:sipakmed_efficientnet_b0_p2_seed809
+started phase1:sipakmed_mobilenet_v2_p2_seed809 gpu=3 attempt=1
+started phase1:sipakmed_mobilenet_v2_p3_seed809 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p3_seed809
+started phase1:sipakmed_vit_b_16_p1_seed809 gpu=0 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p1_seed809
+started phase1:sipakmed_vit_b_16_p2_seed809 gpu=4 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p2_seed809
+finished phase1:sipakmed_mobilenet_v2_p3_seed809
+started phase1:sipakmed_vit_b_16_p3_seed809 gpu=3 attempt=1
+started phase1:sipakmed_convnext_tiny_p1_seed809 gpu=5 attempt=1
+finished phase1:sipakmed_convnext_tiny_p1_seed809
+started phase1:sipakmed_convnext_tiny_p2_seed809 gpu=5 attempt=1
+finished phase1:sipakmed_vit_b_16_p1_seed809
+started phase1:sipakmed_convnext_tiny_p3_seed809 gpu=0 attempt=1
+finished phase1:sipakmed_vit_b_16_p2_seed809
+started phase1:sipakmed_swin_t_p1_seed809 gpu=4 attempt=1
+finished phase1:sipakmed_vit_b_16_p3_seed809
+started phase1:sipakmed_swin_t_p2_seed809 gpu=3 attempt=1
+finished phase1:sipakmed_convnext_tiny_p2_seed809
+started phase1:sipakmed_swin_t_p3_seed809 gpu=5 attempt=1
+finished phase1:sipakmed_swin_t_p1_seed809
+started phase1:sipakmed_regnet_y_1_6gf_p1_seed809 gpu=4 attempt=1
+finished phase1:sipakmed_convnext_tiny_p3_seed809
+finished phase1:sipakmed_swin_t_p2_seed809
+started phase1:sipakmed_regnet_y_1_6gf_p2_seed809 gpu=0 attempt=1
+started phase1:sipakmed_regnet_y_1_6gf_p3_seed809 gpu=3 attempt=1
+finished phase1:sipakmed_swin_t_p3_seed809
+started phase1:sipakmed_efficientnet_v2_s_p1_seed809 gpu=5 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p1_seed809
+started phase1:sipakmed_efficientnet_v2_s_p2_seed809 gpu=4 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p2_seed809
+started phase1:sipakmed_efficientnet_v2_s_p3_seed809 gpu=0 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p3_seed809
+started phase1:sipakmed_maxvit_t_p1_seed809 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p1_seed809
+started phase1:sipakmed_maxvit_t_p2_seed809 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p2_seed809
+started phase1:sipakmed_maxvit_t_p3_seed809 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p3_seed809
+started phase1:sipakmed_dinov2_vits14_p1_seed809 gpu=0 attempt=1
+finished phase1:sipakmed_maxvit_t_p1_seed809
+started phase1:sipakmed_dinov2_vits14_p2_seed809 gpu=3 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p1_seed809
+started phase1:sipakmed_dinov2_vits14_p3_seed809 gpu=0 attempt=1
+finished phase1:sipakmed_maxvit_t_p2_seed809
+started phase1:sipakmed_resnet18_p1_seed853 gpu=5 attempt=1
+finished phase1:sipakmed_maxvit_t_p3_seed809
+started phase1:sipakmed_resnet18_p2_seed853 gpu=4 attempt=1
+finished phase1:sipakmed_resnet18_p1_seed853
+started phase1:sipakmed_resnet18_p3_seed853 gpu=5 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p2_seed809
+started phase1:sipakmed_resnet50_p1_seed853 gpu=3 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p3_seed809
+finished phase1:sipakmed_resnet18_p2_seed853
+started phase1:sipakmed_resnet50_p2_seed853 gpu=0 attempt=1
+started phase1:sipakmed_resnet50_p3_seed853 gpu=4 attempt=1
+finished phase1:sipakmed_resnet18_p3_seed853
+started phase1:sipakmed_densenet121_p1_seed853 gpu=5 attempt=1
+finished phase1:sipakmed_resnet50_p1_seed853
+started phase1:sipakmed_densenet121_p2_seed853 gpu=3 attempt=1
+finished phase1:sipakmed_resnet50_p2_seed853
+finished phase1:sipakmed_resnet50_p3_seed853
+started phase1:sipakmed_densenet121_p3_seed853 gpu=0 attempt=1
+started phase1:sipakmed_efficientnet_b0_p1_seed853 gpu=4 attempt=1
+finished phase1:sipakmed_densenet121_p1_seed853
+started phase1:sipakmed_efficientnet_b0_p2_seed853 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p1_seed853
+started phase1:sipakmed_efficientnet_b0_p3_seed853 gpu=4 attempt=1
+finished phase1:sipakmed_densenet121_p2_seed853
+started phase1:sipakmed_mobilenet_v2_p1_seed853 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p2_seed853
+started phase1:sipakmed_mobilenet_v2_p2_seed853 gpu=5 attempt=1
+finished phase1:sipakmed_densenet121_p3_seed853
+started phase1:sipakmed_mobilenet_v2_p3_seed853 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p3_seed853
+started phase1:sipakmed_vit_b_16_p1_seed853 gpu=4 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p1_seed853
+started phase1:sipakmed_vit_b_16_p2_seed853 gpu=3 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p2_seed853
+started phase1:sipakmed_vit_b_16_p3_seed853 gpu=5 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p3_seed853
+started phase1:sipakmed_convnext_tiny_p1_seed853 gpu=0 attempt=1
+finished phase1:sipakmed_convnext_tiny_p1_seed853
+started phase1:sipakmed_convnext_tiny_p2_seed853 gpu=0 attempt=1
+finished phase1:sipakmed_vit_b_16_p1_seed853
+started phase1:sipakmed_convnext_tiny_p3_seed853 gpu=4 attempt=1
+finished phase1:sipakmed_vit_b_16_p2_seed853
+started phase1:sipakmed_swin_t_p1_seed853 gpu=3 attempt=1
+finished phase1:sipakmed_vit_b_16_p3_seed853
+started phase1:sipakmed_swin_t_p2_seed853 gpu=5 attempt=1
+finished phase1:sipakmed_convnext_tiny_p2_seed853
+started phase1:sipakmed_swin_t_p3_seed853 gpu=0 attempt=1
+finished phase1:sipakmed_swin_t_p1_seed853
+finished phase1:sipakmed_swin_t_p2_seed853
+started phase1:sipakmed_regnet_y_1_6gf_p1_seed853 gpu=3 attempt=1
+started phase1:sipakmed_regnet_y_1_6gf_p2_seed853 gpu=5 attempt=1
+finished phase1:sipakmed_convnext_tiny_p3_seed853
+started phase1:sipakmed_regnet_y_1_6gf_p3_seed853 gpu=4 attempt=1
+finished phase1:sipakmed_swin_t_p3_seed853
+started phase1:sipakmed_efficientnet_v2_s_p1_seed853 gpu=0 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p1_seed853
+finished phase1:sipakmed_regnet_y_1_6gf_p2_seed853
+started phase1:sipakmed_efficientnet_v2_s_p2_seed853 gpu=3 attempt=1
+started phase1:sipakmed_efficientnet_v2_s_p3_seed853 gpu=5 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p3_seed853
+started phase1:sipakmed_maxvit_t_p1_seed853 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p1_seed853
+started phase1:sipakmed_maxvit_t_p2_seed853 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p2_seed853
+started phase1:sipakmed_maxvit_t_p3_seed853 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p3_seed853
+started phase1:sipakmed_dinov2_vits14_p1_seed853 gpu=5 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p1_seed853
+started phase1:sipakmed_dinov2_vits14_p2_seed853 gpu=5 attempt=1
+finished phase1:sipakmed_maxvit_t_p1_seed853
+started phase1:sipakmed_dinov2_vits14_p3_seed853 gpu=4 attempt=1
+finished phase1:sipakmed_maxvit_t_p2_seed853
+started phase1:sipakmed_resnet18_p1_seed907 gpu=0 attempt=1
+finished phase1:sipakmed_maxvit_t_p3_seed853
+started phase1:sipakmed_resnet18_p2_seed907 gpu=3 attempt=1
+finished phase1:sipakmed_resnet18_p1_seed907
+started phase1:sipakmed_resnet18_p3_seed907 gpu=0 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p2_seed853
+started phase1:sipakmed_resnet50_p1_seed907 gpu=5 attempt=1
+finished phase1:sipakmed_resnet18_p2_seed907
+started phase1:sipakmed_resnet50_p2_seed907 gpu=3 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p3_seed853
+started phase1:sipakmed_resnet50_p3_seed907 gpu=4 attempt=1
+finished phase1:sipakmed_resnet18_p3_seed907
+started phase1:sipakmed_densenet121_p1_seed907 gpu=0 attempt=1
+finished phase1:sipakmed_resnet50_p1_seed907
+started phase1:sipakmed_densenet121_p2_seed907 gpu=5 attempt=1
+finished phase1:sipakmed_resnet50_p2_seed907
+started phase1:sipakmed_densenet121_p3_seed907 gpu=3 attempt=1
+finished phase1:sipakmed_resnet50_p3_seed907
+started phase1:sipakmed_efficientnet_b0_p1_seed907 gpu=4 attempt=1
+finished phase1:sipakmed_densenet121_p1_seed907
+started phase1:sipakmed_efficientnet_b0_p2_seed907 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p1_seed907
+started phase1:sipakmed_efficientnet_b0_p3_seed907 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p2_seed907
+started phase1:sipakmed_mobilenet_v2_p1_seed907 gpu=0 attempt=1
+finished phase1:sipakmed_densenet121_p2_seed907
+started phase1:sipakmed_mobilenet_v2_p2_seed907 gpu=5 attempt=1
+finished phase1:sipakmed_densenet121_p3_seed907
+started phase1:sipakmed_mobilenet_v2_p3_seed907 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p3_seed907
+started phase1:sipakmed_vit_b_16_p1_seed907 gpu=4 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p1_seed907
+started phase1:sipakmed_vit_b_16_p2_seed907 gpu=0 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p2_seed907
+started phase1:sipakmed_vit_b_16_p3_seed907 gpu=5 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p3_seed907
+started phase1:sipakmed_convnext_tiny_p1_seed907 gpu=3 attempt=1
+finished phase1:sipakmed_convnext_tiny_p1_seed907
+started phase1:sipakmed_convnext_tiny_p2_seed907 gpu=3 attempt=1
+finished phase1:sipakmed_vit_b_16_p1_seed907
+started phase1:sipakmed_convnext_tiny_p3_seed907 gpu=4 attempt=1
+finished phase1:sipakmed_vit_b_16_p2_seed907
+started phase1:sipakmed_swin_t_p1_seed907 gpu=0 attempt=1
+finished phase1:sipakmed_vit_b_16_p3_seed907
+started phase1:sipakmed_swin_t_p2_seed907 gpu=5 attempt=1
+finished phase1:sipakmed_convnext_tiny_p2_seed907
+started phase1:sipakmed_swin_t_p3_seed907 gpu=3 attempt=1
+finished phase1:sipakmed_swin_t_p1_seed907
+started phase1:sipakmed_regnet_y_1_6gf_p1_seed907 gpu=0 attempt=1
+finished phase1:sipakmed_convnext_tiny_p3_seed907
+started phase1:sipakmed_regnet_y_1_6gf_p2_seed907 gpu=4 attempt=1
+finished phase1:sipakmed_swin_t_p2_seed907
+started phase1:sipakmed_regnet_y_1_6gf_p3_seed907 gpu=5 attempt=1
+finished phase1:sipakmed_swin_t_p3_seed907
+started phase1:sipakmed_efficientnet_v2_s_p1_seed907 gpu=3 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p1_seed907
+started phase1:sipakmed_efficientnet_v2_s_p2_seed907 gpu=0 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p2_seed907
+started phase1:sipakmed_efficientnet_v2_s_p3_seed907 gpu=4 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p3_seed907
+started phase1:sipakmed_maxvit_t_p1_seed907 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p1_seed907
+started phase1:sipakmed_maxvit_t_p2_seed907 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p2_seed907
+started phase1:sipakmed_maxvit_t_p3_seed907 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p3_seed907
+started phase1:sipakmed_dinov2_vits14_p1_seed907 gpu=4 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p1_seed907
+started phase1:sipakmed_dinov2_vits14_p2_seed907 gpu=4 attempt=1
+finished phase1:sipakmed_maxvit_t_p1_seed907
+started phase1:sipakmed_dinov2_vits14_p3_seed907 gpu=5 attempt=1
+finished phase1:sipakmed_maxvit_t_p2_seed907
+started phase1:sipakmed_resnet18_p1_seed953 gpu=3 attempt=1
+finished phase1:sipakmed_maxvit_t_p3_seed907
+started phase1:sipakmed_resnet18_p2_seed953 gpu=0 attempt=1
+finished phase1:sipakmed_resnet18_p1_seed953
+started phase1:sipakmed_resnet18_p3_seed953 gpu=3 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p2_seed907
+finished phase1:sipakmed_resnet18_p2_seed953
+started phase1:sipakmed_resnet50_p1_seed953 gpu=0 attempt=1
+started phase1:sipakmed_resnet50_p2_seed953 gpu=4 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p3_seed907
+started phase1:sipakmed_resnet50_p3_seed953 gpu=5 attempt=1
+finished phase1:sipakmed_resnet18_p3_seed953
+started phase1:sipakmed_densenet121_p1_seed953 gpu=3 attempt=1
+finished phase1:sipakmed_resnet50_p1_seed953
+finished phase1:sipakmed_resnet50_p2_seed953
+started phase1:sipakmed_densenet121_p2_seed953 gpu=0 attempt=1
+started phase1:sipakmed_densenet121_p3_seed953 gpu=4 attempt=1
+finished phase1:sipakmed_resnet50_p3_seed953
+started phase1:sipakmed_efficientnet_b0_p1_seed953 gpu=5 attempt=1
+finished phase1:sipakmed_densenet121_p1_seed953
+started phase1:sipakmed_efficientnet_b0_p2_seed953 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p1_seed953
+started phase1:sipakmed_efficientnet_b0_p3_seed953 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p2_seed953
+started phase1:sipakmed_mobilenet_v2_p1_seed953 gpu=3 attempt=1
+finished phase1:sipakmed_densenet121_p2_seed953
+finished phase1:sipakmed_densenet121_p3_seed953
+started phase1:sipakmed_mobilenet_v2_p2_seed953 gpu=0 attempt=1
+started phase1:sipakmed_mobilenet_v2_p3_seed953 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p3_seed953
+started phase1:sipakmed_vit_b_16_p1_seed953 gpu=5 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p1_seed953
+started phase1:sipakmed_vit_b_16_p2_seed953 gpu=3 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p2_seed953
+finished phase1:sipakmed_mobilenet_v2_p3_seed953
+started phase1:sipakmed_vit_b_16_p3_seed953 gpu=0 attempt=1
+started phase1:sipakmed_convnext_tiny_p1_seed953 gpu=4 attempt=1
+finished phase1:sipakmed_convnext_tiny_p1_seed953
+started phase1:sipakmed_convnext_tiny_p2_seed953 gpu=4 attempt=1
+finished phase1:sipakmed_vit_b_16_p1_seed953
+started phase1:sipakmed_convnext_tiny_p3_seed953 gpu=5 attempt=1
+finished phase1:sipakmed_vit_b_16_p2_seed953
+started phase1:sipakmed_swin_t_p1_seed953 gpu=3 attempt=1
+finished phase1:sipakmed_vit_b_16_p3_seed953
+started phase1:sipakmed_swin_t_p2_seed953 gpu=0 attempt=1
+finished phase1:sipakmed_convnext_tiny_p2_seed953
+started phase1:sipakmed_swin_t_p3_seed953 gpu=4 attempt=1
+finished phase1:sipakmed_convnext_tiny_p3_seed953
+finished phase1:sipakmed_swin_t_p1_seed953
+started phase1:sipakmed_regnet_y_1_6gf_p1_seed953 gpu=3 attempt=1
+started phase1:sipakmed_regnet_y_1_6gf_p2_seed953 gpu=5 attempt=1
+finished phase1:sipakmed_swin_t_p2_seed953
+started phase1:sipakmed_regnet_y_1_6gf_p3_seed953 gpu=0 attempt=1
+finished phase1:sipakmed_swin_t_p3_seed953
+started phase1:sipakmed_efficientnet_v2_s_p1_seed953 gpu=4 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p1_seed953
+finished phase1:sipakmed_regnet_y_1_6gf_p2_seed953
+finished phase1:sipakmed_regnet_y_1_6gf_p3_seed953
+started phase1:sipakmed_efficientnet_v2_s_p2_seed953 gpu=0 attempt=1
+started phase1:sipakmed_efficientnet_v2_s_p3_seed953 gpu=3 attempt=1
+started phase1:sipakmed_maxvit_t_p1_seed953 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p1_seed953
+started phase1:sipakmed_maxvit_t_p2_seed953 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p2_seed953
+started phase1:sipakmed_maxvit_t_p3_seed953 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p3_seed953
+started phase1:sipakmed_dinov2_vits14_p1_seed953 gpu=3 attempt=1
+finished phase1:sipakmed_maxvit_t_p1_seed953
+finished phase1:sipakmed_dinov2_vits14_p1_seed953
+started phase1:sipakmed_dinov2_vits14_p2_seed953 gpu=3 attempt=1
+started phase1:sipakmed_dinov2_vits14_p3_seed953 gpu=5 attempt=1
+finished phase1:sipakmed_maxvit_t_p2_seed953
+started phase1:sipakmed_resnet18_p1_seed1009 gpu=4 attempt=1
+finished phase1:sipakmed_maxvit_t_p3_seed953
+finished phase1:sipakmed_resnet18_p1_seed1009
+started phase1:sipakmed_resnet18_p2_seed1009 gpu=0 attempt=1
+started phase1:sipakmed_resnet18_p3_seed1009 gpu=4 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p2_seed953
+started phase1:sipakmed_resnet50_p1_seed1009 gpu=3 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p3_seed953
+started phase1:sipakmed_resnet50_p2_seed1009 gpu=5 attempt=1
+finished phase1:sipakmed_resnet18_p2_seed1009
+finished phase1:sipakmed_resnet18_p3_seed1009
+started phase1:sipakmed_resnet50_p3_seed1009 gpu=0 attempt=1
+started phase1:sipakmed_densenet121_p1_seed1009 gpu=4 attempt=1
+finished phase1:sipakmed_resnet50_p1_seed1009
+started phase1:sipakmed_densenet121_p2_seed1009 gpu=3 attempt=1
+finished phase1:sipakmed_resnet50_p2_seed1009
+started phase1:sipakmed_densenet121_p3_seed1009 gpu=5 attempt=1
+finished phase1:sipakmed_resnet50_p3_seed1009
+started phase1:sipakmed_efficientnet_b0_p1_seed1009 gpu=0 attempt=1
+finished phase1:sipakmed_densenet121_p1_seed1009
+started phase1:sipakmed_efficientnet_b0_p2_seed1009 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p1_seed1009
+started phase1:sipakmed_efficientnet_b0_p3_seed1009 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p2_seed1009
+started phase1:sipakmed_mobilenet_v2_p1_seed1009 gpu=4 attempt=1
+finished phase1:sipakmed_densenet121_p2_seed1009
+started phase1:sipakmed_mobilenet_v2_p2_seed1009 gpu=3 attempt=1
+finished phase1:sipakmed_densenet121_p3_seed1009
+started phase1:sipakmed_mobilenet_v2_p3_seed1009 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p3_seed1009
+started phase1:sipakmed_vit_b_16_p1_seed1009 gpu=0 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p1_seed1009
+started phase1:sipakmed_vit_b_16_p2_seed1009 gpu=4 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p2_seed1009
+started phase1:sipakmed_vit_b_16_p3_seed1009 gpu=3 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p3_seed1009
+started phase1:sipakmed_convnext_tiny_p1_seed1009 gpu=5 attempt=1
+finished phase1:sipakmed_convnext_tiny_p1_seed1009
+started phase1:sipakmed_convnext_tiny_p2_seed1009 gpu=5 attempt=1
+finished phase1:sipakmed_vit_b_16_p1_seed1009
+started phase1:sipakmed_convnext_tiny_p3_seed1009 gpu=0 attempt=1
+finished phase1:sipakmed_vit_b_16_p2_seed1009
+started phase1:sipakmed_swin_t_p1_seed1009 gpu=4 attempt=1
+finished phase1:sipakmed_vit_b_16_p3_seed1009
+started phase1:sipakmed_swin_t_p2_seed1009 gpu=3 attempt=1
+finished phase1:sipakmed_convnext_tiny_p2_seed1009
+started phase1:sipakmed_swin_t_p3_seed1009 gpu=5 attempt=1
+finished phase1:sipakmed_convnext_tiny_p3_seed1009
+finished phase1:sipakmed_swin_t_p1_seed1009
+started phase1:sipakmed_regnet_y_1_6gf_p1_seed1009 gpu=0 attempt=1
+started phase1:sipakmed_regnet_y_1_6gf_p2_seed1009 gpu=4 attempt=1
+finished phase1:sipakmed_swin_t_p2_seed1009
+started phase1:sipakmed_regnet_y_1_6gf_p3_seed1009 gpu=3 attempt=1
+finished phase1:sipakmed_swin_t_p3_seed1009
+started phase1:sipakmed_efficientnet_v2_s_p1_seed1009 gpu=5 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p1_seed1009
+started phase1:sipakmed_efficientnet_v2_s_p2_seed1009 gpu=0 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p2_seed1009
+finished phase1:sipakmed_regnet_y_1_6gf_p3_seed1009
+started phase1:sipakmed_efficientnet_v2_s_p3_seed1009 gpu=3 attempt=1
+started phase1:sipakmed_maxvit_t_p1_seed1009 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p1_seed1009
+started phase1:sipakmed_maxvit_t_p2_seed1009 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p2_seed1009
+started phase1:sipakmed_maxvit_t_p3_seed1009 gpu=0 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p3_seed1009
+started phase1:sipakmed_dinov2_vits14_p1_seed1009 gpu=3 attempt=1
+finished phase1:sipakmed_maxvit_t_p1_seed1009
+finished phase1:sipakmed_dinov2_vits14_p1_seed1009
+started phase1:sipakmed_dinov2_vits14_p2_seed1009 gpu=3 attempt=1
+started phase1:sipakmed_dinov2_vits14_p3_seed1009 gpu=4 attempt=1
+finished phase1:sipakmed_maxvit_t_p2_seed1009
+started phase1:sipakmed_resnet18_p1_seed1051 gpu=5 attempt=1
+finished phase1:sipakmed_maxvit_t_p3_seed1009
+started phase1:sipakmed_resnet18_p2_seed1051 gpu=0 attempt=1
+finished phase1:sipakmed_resnet18_p1_seed1051
+started phase1:sipakmed_resnet18_p3_seed1051 gpu=5 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p2_seed1009
+finished phase1:sipakmed_resnet18_p2_seed1051
+started phase1:sipakmed_resnet50_p1_seed1051 gpu=0 attempt=1
+started phase1:sipakmed_resnet50_p2_seed1051 gpu=3 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p3_seed1009
+started phase1:sipakmed_resnet50_p3_seed1051 gpu=4 attempt=1
+finished phase1:sipakmed_resnet18_p3_seed1051
+started phase1:sipakmed_densenet121_p1_seed1051 gpu=5 attempt=1
+finished phase1:sipakmed_resnet50_p1_seed1051
+started phase1:sipakmed_densenet121_p2_seed1051 gpu=0 attempt=1
+finished phase1:sipakmed_resnet50_p2_seed1051
+started phase1:sipakmed_densenet121_p3_seed1051 gpu=3 attempt=1
+finished phase1:sipakmed_resnet50_p3_seed1051
+started phase1:sipakmed_efficientnet_b0_p1_seed1051 gpu=4 attempt=1
+finished phase1:sipakmed_densenet121_p1_seed1051
+started phase1:sipakmed_efficientnet_b0_p2_seed1051 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p1_seed1051
+started phase1:sipakmed_efficientnet_b0_p3_seed1051 gpu=4 attempt=1
+finished phase1:sipakmed_densenet121_p2_seed1051
+finished phase1:sipakmed_efficientnet_b0_p2_seed1051
+started phase1:sipakmed_mobilenet_v2_p1_seed1051 gpu=0 attempt=1
+started phase1:sipakmed_mobilenet_v2_p2_seed1051 gpu=5 attempt=1
+finished phase1:sipakmed_densenet121_p3_seed1051
+started phase1:sipakmed_mobilenet_v2_p3_seed1051 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_b0_p3_seed1051
+started phase1:sipakmed_vit_b_16_p1_seed1051 gpu=4 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p1_seed1051
+started phase1:sipakmed_vit_b_16_p2_seed1051 gpu=0 attempt=1
+finished phase1:sipakmed_mobilenet_v2_p2_seed1051
+finished phase1:sipakmed_mobilenet_v2_p3_seed1051
+started phase1:sipakmed_vit_b_16_p3_seed1051 gpu=3 attempt=1
+started phase1:sipakmed_convnext_tiny_p1_seed1051 gpu=5 attempt=1
+finished phase1:sipakmed_convnext_tiny_p1_seed1051
+started phase1:sipakmed_convnext_tiny_p2_seed1051 gpu=5 attempt=1
+finished phase1:sipakmed_vit_b_16_p1_seed1051
+started phase1:sipakmed_convnext_tiny_p3_seed1051 gpu=4 attempt=1
+finished phase1:sipakmed_vit_b_16_p2_seed1051
+started phase1:sipakmed_swin_t_p1_seed1051 gpu=0 attempt=1
+finished phase1:sipakmed_vit_b_16_p3_seed1051
+started phase1:sipakmed_swin_t_p2_seed1051 gpu=3 attempt=1
+finished phase1:sipakmed_convnext_tiny_p2_seed1051
+started phase1:sipakmed_swin_t_p3_seed1051 gpu=5 attempt=1
+finished phase1:sipakmed_convnext_tiny_p3_seed1051
+started phase1:sipakmed_regnet_y_1_6gf_p1_seed1051 gpu=4 attempt=1
+finished phase1:sipakmed_swin_t_p1_seed1051
+started phase1:sipakmed_regnet_y_1_6gf_p2_seed1051 gpu=0 attempt=1
+finished phase1:sipakmed_swin_t_p2_seed1051
+started phase1:sipakmed_regnet_y_1_6gf_p3_seed1051 gpu=3 attempt=1
+finished phase1:sipakmed_swin_t_p3_seed1051
+started phase1:sipakmed_efficientnet_v2_s_p1_seed1051 gpu=5 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p1_seed1051
+started phase1:sipakmed_efficientnet_v2_s_p2_seed1051 gpu=4 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p2_seed1051
+started phase1:sipakmed_efficientnet_v2_s_p3_seed1051 gpu=0 attempt=1
+finished phase1:sipakmed_regnet_y_1_6gf_p3_seed1051
+started phase1:sipakmed_maxvit_t_p1_seed1051 gpu=3 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p1_seed1051
+started phase1:sipakmed_maxvit_t_p2_seed1051 gpu=5 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p2_seed1051
+started phase1:sipakmed_maxvit_t_p3_seed1051 gpu=4 attempt=1
+finished phase1:sipakmed_efficientnet_v2_s_p3_seed1051
+started phase1:sipakmed_dinov2_vits14_p1_seed1051 gpu=0 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p1_seed1051
+started phase1:sipakmed_dinov2_vits14_p2_seed1051 gpu=0 attempt=1
+finished phase1:sipakmed_maxvit_t_p1_seed1051
+started phase1:sipakmed_dinov2_vits14_p3_seed1051 gpu=3 attempt=1
+finished phase1:sipakmed_maxvit_t_p2_seed1051
+started factorial:sipakmed_resnet50_leak_high_seed137 gpu=5 attempt=1
+finished phase1:sipakmed_maxvit_t_p3_seed1051
+started factorial:sipakmed_resnet50_clean_high_seed137 gpu=4 attempt=1
+finished factorial:sipakmed_resnet50_leak_high_seed137
+started factorial:sipakmed_resnet50_leak_low_seed137 gpu=5 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p2_seed1051
+started factorial:sipakmed_resnet50_clean_low_seed137 gpu=0 attempt=1
+finished phase1:sipakmed_dinov2_vits14_p3_seed1051
+started factorial:sipakmed_densenet121_leak_high_seed137 gpu=3 attempt=1
+finished factorial:sipakmed_resnet50_clean_high_seed137
+started factorial:sipakmed_densenet121_clean_high_seed137 gpu=4 attempt=1
+finished factorial:sipakmed_resnet50_leak_low_seed137
+started factorial:sipakmed_densenet121_leak_low_seed137 gpu=5 attempt=1
+finished factorial:sipakmed_resnet50_clean_low_seed137
+started factorial:sipakmed_densenet121_clean_low_seed137 gpu=0 attempt=1
+finished factorial:sipakmed_densenet121_leak_high_seed137
+started factorial:sipakmed_convnext_tiny_leak_high_seed137 gpu=3 attempt=1
+finished factorial:sipakmed_densenet121_clean_high_seed137
+started factorial:sipakmed_convnext_tiny_clean_high_seed137 gpu=4 attempt=1
+finished factorial:sipakmed_densenet121_leak_low_seed137
+started factorial:sipakmed_convnext_tiny_leak_low_seed137 gpu=5 attempt=1
+finished factorial:sipakmed_densenet121_clean_low_seed137
+started factorial:sipakmed_convnext_tiny_clean_low_seed137 gpu=0 attempt=1
+finished factorial:sipakmed_convnext_tiny_leak_high_seed137
+started factorial:sipakmed_vit_b_16_leak_high_seed137 gpu=3 attempt=1
+finished factorial:sipakmed_convnext_tiny_clean_high_seed137
+started factorial:sipakmed_vit_b_16_clean_high_seed137 gpu=4 attempt=1
+finished factorial:sipakmed_convnext_tiny_leak_low_seed137
+started factorial:sipakmed_vit_b_16_leak_low_seed137 gpu=5 attempt=1
+finished factorial:sipakmed_convnext_tiny_clean_low_seed137
+started factorial:sipakmed_vit_b_16_clean_low_seed137 gpu=0 attempt=1
+finished factorial:sipakmed_vit_b_16_leak_high_seed137
+started factorial:sipakmed_resnet50_leak_high_seed173 gpu=3 attempt=1
+finished factorial:sipakmed_vit_b_16_clean_high_seed137
+started factorial:sipakmed_resnet50_clean_high_seed173 gpu=4 attempt=1
+finished factorial:sipakmed_vit_b_16_leak_low_seed137
+started factorial:sipakmed_resnet50_leak_low_seed173 gpu=5 attempt=1
+finished factorial:sipakmed_vit_b_16_clean_low_seed137
+started factorial:sipakmed_resnet50_clean_low_seed173 gpu=0 attempt=1
+finished factorial:sipakmed_resnet50_leak_high_seed173
+started factorial:sipakmed_densenet121_leak_high_seed173 gpu=3 attempt=1
+finished factorial:sipakmed_resnet50_clean_high_seed173
+started factorial:sipakmed_densenet121_clean_high_seed173 gpu=4 attempt=1
+finished factorial:sipakmed_resnet50_leak_low_seed173
+started factorial:sipakmed_densenet121_leak_low_seed173 gpu=5 attempt=1
+finished factorial:sipakmed_resnet50_clean_low_seed173
+started factorial:sipakmed_densenet121_clean_low_seed173 gpu=0 attempt=1
+finished factorial:sipakmed_densenet121_leak_high_seed173
+started factorial:sipakmed_convnext_tiny_leak_high_seed173 gpu=3 attempt=1
+finished factorial:sipakmed_densenet121_clean_high_seed173
+started factorial:sipakmed_convnext_tiny_clean_high_seed173 gpu=4 attempt=1
+finished factorial:sipakmed_densenet121_leak_low_seed173
+started factorial:sipakmed_convnext_tiny_leak_low_seed173 gpu=5 attempt=1
+finished factorial:sipakmed_densenet121_clean_low_seed173
+started factorial:sipakmed_convnext_tiny_clean_low_seed173 gpu=0 attempt=1
+finished factorial:sipakmed_convnext_tiny_leak_high_seed173
+started factorial:sipakmed_vit_b_16_leak_high_seed173 gpu=3 attempt=1
+finished factorial:sipakmed_convnext_tiny_clean_high_seed173
+started factorial:sipakmed_vit_b_16_clean_high_seed173 gpu=4 attempt=1
+finished factorial:sipakmed_convnext_tiny_leak_low_seed173
+started factorial:sipakmed_vit_b_16_leak_low_seed173 gpu=5 attempt=1
+finished factorial:sipakmed_convnext_tiny_clean_low_seed173
+started factorial:sipakmed_vit_b_16_clean_low_seed173 gpu=0 attempt=1
+finished factorial:sipakmed_vit_b_16_leak_high_seed173
+started factorial:sipakmed_resnet50_leak_high_seed211 gpu=3 attempt=1
+finished factorial:sipakmed_vit_b_16_clean_high_seed173
+started factorial:sipakmed_resnet50_clean_high_seed211 gpu=4 attempt=1
+finished factorial:sipakmed_vit_b_16_leak_low_seed173
+started factorial:sipakmed_resnet50_leak_low_seed211 gpu=5 attempt=1
+finished factorial:sipakmed_vit_b_16_clean_low_seed173
+finished factorial:sipakmed_resnet50_leak_high_seed211
+started factorial:sipakmed_resnet50_clean_low_seed211 gpu=0 attempt=1
+started factorial:sipakmed_densenet121_leak_high_seed211 gpu=3 attempt=1
+finished factorial:sipakmed_resnet50_clean_high_seed211
+started factorial:sipakmed_densenet121_clean_high_seed211 gpu=4 attempt=1
+finished factorial:sipakmed_resnet50_leak_low_seed211
+started factorial:sipakmed_densenet121_leak_low_seed211 gpu=5 attempt=1
+finished factorial:sipakmed_resnet50_clean_low_seed211
+started factorial:sipakmed_densenet121_clean_low_seed211 gpu=0 attempt=1
+finished factorial:sipakmed_densenet121_leak_high_seed211
+started factorial:sipakmed_convnext_tiny_leak_high_seed211 gpu=3 attempt=1
+finished factorial:sipakmed_densenet121_clean_high_seed211
+started factorial:sipakmed_convnext_tiny_clean_high_seed211 gpu=4 attempt=1
+finished factorial:sipakmed_densenet121_leak_low_seed211
+started factorial:sipakmed_convnext_tiny_leak_low_seed211 gpu=5 attempt=1
+finished factorial:sipakmed_densenet121_clean_low_seed211
+started factorial:sipakmed_convnext_tiny_clean_low_seed211 gpu=0 attempt=1
+finished factorial:sipakmed_convnext_tiny_leak_high_seed211
+started factorial:sipakmed_vit_b_16_leak_high_seed211 gpu=3 attempt=1
+finished factorial:sipakmed_convnext_tiny_clean_high_seed211
+started factorial:sipakmed_vit_b_16_clean_high_seed211 gpu=4 attempt=1
+finished factorial:sipakmed_convnext_tiny_leak_low_seed211
+started factorial:sipakmed_vit_b_16_leak_low_seed211 gpu=5 attempt=1
+finished factorial:sipakmed_convnext_tiny_clean_low_seed211
+started factorial:sipakmed_vit_b_16_clean_low_seed211 gpu=0 attempt=1
+finished factorial:sipakmed_vit_b_16_leak_high_seed211
+started factorial:sipakmed_resnet50_leak_high_seed257 gpu=3 attempt=1
+finished factorial:sipakmed_vit_b_16_clean_high_seed211
+started factorial:sipakmed_resnet50_clean_high_seed257 gpu=4 attempt=1
+finished factorial:sipakmed_vit_b_16_leak_low_seed211
+started factorial:sipakmed_resnet50_leak_low_seed257 gpu=5 attempt=1
+finished factorial:sipakmed_resnet50_leak_high_seed257
+started factorial:sipakmed_resnet50_clean_low_seed257 gpu=3 attempt=1
+finished factorial:sipakmed_vit_b_16_clean_low_seed211
+started factorial:sipakmed_densenet121_leak_high_seed257 gpu=0 attempt=1
+finished factorial:sipakmed_resnet50_clean_high_seed257
+started factorial:sipakmed_densenet121_clean_high_seed257 gpu=4 attempt=1
+finished factorial:sipakmed_resnet50_leak_low_seed257
+started factorial:sipakmed_densenet121_leak_low_seed257 gpu=5 attempt=1
+finished factorial:sipakmed_resnet50_clean_low_seed257
+started factorial:sipakmed_densenet121_clean_low_seed257 gpu=3 attempt=1
+finished factorial:sipakmed_densenet121_leak_high_seed257
+started factorial:sipakmed_convnext_tiny_leak_high_seed257 gpu=0 attempt=1
+finished factorial:sipakmed_densenet121_clean_high_seed257
+started factorial:sipakmed_convnext_tiny_clean_high_seed257 gpu=4 attempt=1
+finished factorial:sipakmed_densenet121_leak_low_seed257
+started factorial:sipakmed_convnext_tiny_leak_low_seed257 gpu=5 attempt=1
+finished factorial:sipakmed_densenet121_clean_low_seed257
+started factorial:sipakmed_convnext_tiny_clean_low_seed257 gpu=3 attempt=1
+finished factorial:sipakmed_convnext_tiny_leak_high_seed257
+started factorial:sipakmed_vit_b_16_leak_high_seed257 gpu=0 attempt=1
+finished factorial:sipakmed_convnext_tiny_clean_high_seed257
+started factorial:sipakmed_vit_b_16_clean_high_seed257 gpu=4 attempt=1
+finished factorial:sipakmed_convnext_tiny_leak_low_seed257
+started factorial:sipakmed_vit_b_16_leak_low_seed257 gpu=5 attempt=1
+finished factorial:sipakmed_convnext_tiny_clean_low_seed257
+started factorial:sipakmed_vit_b_16_clean_low_seed257 gpu=3 attempt=1
+finished factorial:sipakmed_vit_b_16_leak_high_seed257
+started factorial:sipakmed_resnet50_leak_high_seed307 gpu=0 attempt=1
+finished factorial:sipakmed_vit_b_16_clean_high_seed257
+started factorial:sipakmed_resnet50_clean_high_seed307 gpu=4 attempt=1
+finished factorial:sipakmed_vit_b_16_leak_low_seed257
+started factorial:sipakmed_resnet50_leak_low_seed307 gpu=5 attempt=1
+finished factorial:sipakmed_vit_b_16_clean_low_seed257
+started factorial:sipakmed_resnet50_clean_low_seed307 gpu=3 attempt=1
+finished factorial:sipakmed_resnet50_leak_high_seed307
+started factorial:sipakmed_densenet121_leak_high_seed307 gpu=0 attempt=1
+finished factorial:sipakmed_resnet50_clean_high_seed307
+started factorial:sipakmed_densenet121_clean_high_seed307 gpu=4 attempt=1
+finished factorial:sipakmed_resnet50_leak_low_seed307
+started factorial:sipakmed_densenet121_leak_low_seed307 gpu=5 attempt=1
+finished factorial:sipakmed_resnet50_clean_low_seed307
+started factorial:sipakmed_densenet121_clean_low_seed307 gpu=3 attempt=1
+finished factorial:sipakmed_densenet121_leak_high_seed307
+started factorial:sipakmed_convnext_tiny_leak_high_seed307 gpu=0 attempt=1
+finished factorial:sipakmed_densenet121_clean_high_seed307
+started factorial:sipakmed_convnext_tiny_clean_high_seed307 gpu=4 attempt=1
+finished factorial:sipakmed_densenet121_leak_low_seed307
+started factorial:sipakmed_convnext_tiny_leak_low_seed307 gpu=5 attempt=1
+finished factorial:sipakmed_densenet121_clean_low_seed307
+started factorial:sipakmed_convnext_tiny_clean_low_seed307 gpu=3 attempt=1
+finished factorial:sipakmed_convnext_tiny_leak_high_seed307
+started factorial:sipakmed_vit_b_16_leak_high_seed307 gpu=0 attempt=1
+finished factorial:sipakmed_convnext_tiny_clean_high_seed307
+started factorial:sipakmed_vit_b_16_clean_high_seed307 gpu=4 attempt=1
+finished factorial:sipakmed_convnext_tiny_leak_low_seed307
+started factorial:sipakmed_vit_b_16_leak_low_seed307 gpu=5 attempt=1
+finished factorial:sipakmed_convnext_tiny_clean_low_seed307
+started factorial:sipakmed_vit_b_16_clean_low_seed307 gpu=3 attempt=1
+finished factorial:sipakmed_vit_b_16_leak_high_seed307
+started factorial:sipakmed_resnet50_leak_high_seed349 gpu=0 attempt=1
+finished factorial:sipakmed_vit_b_16_clean_high_seed307
+started factorial:sipakmed_resnet50_clean_high_seed349 gpu=4 attempt=1
+finished factorial:sipakmed_vit_b_16_leak_low_seed307
+started factorial:sipakmed_resnet50_leak_low_seed349 gpu=5 attempt=1
+finished factorial:sipakmed_vit_b_16_clean_low_seed307
+started factorial:sipakmed_resnet50_clean_low_seed349 gpu=3 attempt=1
+finished factorial:sipakmed_resnet50_leak_high_seed349
+started factorial:sipakmed_densenet121_leak_high_seed349 gpu=0 attempt=1
+finished factorial:sipakmed_resnet50_clean_high_seed349
+started factorial:sipakmed_densenet121_clean_high_seed349 gpu=4 attempt=1
+finished factorial:sipakmed_resnet50_leak_low_seed349
+started factorial:sipakmed_densenet121_leak_low_seed349 gpu=5 attempt=1
+finished factorial:sipakmed_resnet50_clean_low_seed349
+started factorial:sipakmed_densenet121_clean_low_seed349 gpu=3 attempt=1
+finished factorial:sipakmed_densenet121_leak_high_seed349
+started factorial:sipakmed_convnext_tiny_leak_high_seed349 gpu=0 attempt=1
+finished factorial:sipakmed_densenet121_clean_high_seed349
+started factorial:sipakmed_convnext_tiny_clean_high_seed349 gpu=4 attempt=1
+finished factorial:sipakmed_densenet121_leak_low_seed349
+started factorial:sipakmed_convnext_tiny_leak_low_seed349 gpu=5 attempt=1
+finished factorial:sipakmed_densenet121_clean_low_seed349
+started factorial:sipakmed_convnext_tiny_clean_low_seed349 gpu=3 attempt=1
+finished factorial:sipakmed_convnext_tiny_leak_high_seed349
+started factorial:sipakmed_vit_b_16_leak_high_seed349 gpu=0 attempt=1
+finished factorial:sipakmed_convnext_tiny_clean_high_seed349
+started factorial:sipakmed_vit_b_16_clean_high_seed349 gpu=4 attempt=1
+finished factorial:sipakmed_convnext_tiny_leak_low_seed349
+started factorial:sipakmed_vit_b_16_leak_low_seed349 gpu=5 attempt=1
+finished factorial:sipakmed_convnext_tiny_clean_low_seed349
+started factorial:sipakmed_vit_b_16_clean_low_seed349 gpu=3 attempt=1
+finished factorial:sipakmed_vit_b_16_leak_high_seed349
+started factorial:sipakmed_resnet50_leak_high_seed401 gpu=0 attempt=1
+finished factorial:sipakmed_vit_b_16_clean_high_seed349
+started factorial:sipakmed_resnet50_clean_high_seed401 gpu=4 attempt=1
+finished factorial:sipakmed_vit_b_16_leak_low_seed349
+started factorial:sipakmed_resnet50_leak_low_seed401 gpu=5 attempt=1
+finished factorial:sipakmed_vit_b_16_clean_low_seed349
+finished factorial:sipakmed_resnet50_leak_high_seed401
+started factorial:sipakmed_resnet50_clean_low_seed401 gpu=0 attempt=1
+started factorial:sipakmed_densenet121_leak_high_seed401 gpu=3 attempt=1
+finished factorial:sipakmed_resnet50_clean_high_seed401
+started factorial:sipakmed_densenet121_clean_high_seed401 gpu=4 attempt=1
+finished factorial:sipakmed_resnet50_leak_low_seed401
+started factorial:sipakmed_densenet121_leak_low_seed401 gpu=5 attempt=1
+finished factorial:sipakmed_resnet50_clean_low_seed401
+started factorial:sipakmed_densenet121_clean_low_seed401 gpu=0 attempt=1
+finished factorial:sipakmed_densenet121_leak_high_seed401
+started factorial:sipakmed_convnext_tiny_leak_high_seed401 gpu=3 attempt=1
+finished factorial:sipakmed_densenet121_clean_high_seed401
+started factorial:sipakmed_convnext_tiny_clean_high_seed401 gpu=4 attempt=1
+finished factorial:sipakmed_densenet121_leak_low_seed401
+started factorial:sipakmed_convnext_tiny_leak_low_seed401 gpu=5 attempt=1
+finished factorial:sipakmed_densenet121_clean_low_seed401
+started factorial:sipakmed_convnext_tiny_clean_low_seed401 gpu=0 attempt=1
+finished factorial:sipakmed_convnext_tiny_leak_high_seed401
+started factorial:sipakmed_vit_b_16_leak_high_seed401 gpu=3 attempt=1
+finished factorial:sipakmed_convnext_tiny_clean_high_seed401
+started factorial:sipakmed_vit_b_16_clean_high_seed401 gpu=4 attempt=1
+finished factorial:sipakmed_convnext_tiny_leak_low_seed401
+started factorial:sipakmed_vit_b_16_leak_low_seed401 gpu=5 attempt=1
+finished factorial:sipakmed_convnext_tiny_clean_low_seed401
+started factorial:sipakmed_vit_b_16_clean_low_seed401 gpu=0 attempt=1
+finished factorial:sipakmed_vit_b_16_leak_high_seed401
+started factorial:sipakmed_resnet50_leak_high_seed457 gpu=3 attempt=1
+finished factorial:sipakmed_vit_b_16_clean_high_seed401
+started factorial:sipakmed_resnet50_clean_high_seed457 gpu=4 attempt=1
+finished factorial:sipakmed_vit_b_16_leak_low_seed401
+started factorial:sipakmed_resnet50_leak_low_seed457 gpu=5 attempt=1
+finished factorial:sipakmed_vit_b_16_clean_low_seed401
+finished factorial:sipakmed_resnet50_leak_high_seed457
+started factorial:sipakmed_resnet50_clean_low_seed457 gpu=0 attempt=1
+started factorial:sipakmed_densenet121_leak_high_seed457 gpu=3 attempt=1
+finished factorial:sipakmed_resnet50_clean_high_seed457
+started factorial:sipakmed_densenet121_clean_high_seed457 gpu=4 attempt=1
+finished factorial:sipakmed_resnet50_leak_low_seed457
+started factorial:sipakmed_densenet121_leak_low_seed457 gpu=5 attempt=1
+finished factorial:sipakmed_resnet50_clean_low_seed457
+started factorial:sipakmed_densenet121_clean_low_seed457 gpu=0 attempt=1
+finished factorial:sipakmed_densenet121_leak_high_seed457
+started factorial:sipakmed_convnext_tiny_leak_high_seed457 gpu=3 attempt=1
+finished factorial:sipakmed_densenet121_clean_high_seed457
+started factorial:sipakmed_convnext_tiny_clean_high_seed457 gpu=4 attempt=1
+finished factorial:sipakmed_densenet121_leak_low_seed457
+started factorial:sipakmed_convnext_tiny_leak_low_seed457 gpu=5 attempt=1
+finished factorial:sipakmed_densenet121_clean_low_seed457
+started factorial:sipakmed_convnext_tiny_clean_low_seed457 gpu=0 attempt=1
+finished factorial:sipakmed_convnext_tiny_leak_high_seed457
+started factorial:sipakmed_vit_b_16_leak_high_seed457 gpu=3 attempt=1
+finished factorial:sipakmed_convnext_tiny_clean_high_seed457
+started factorial:sipakmed_vit_b_16_clean_high_seed457 gpu=4 attempt=1
+finished factorial:sipakmed_convnext_tiny_leak_low_seed457
+started factorial:sipakmed_vit_b_16_leak_low_seed457 gpu=5 attempt=1
+finished factorial:sipakmed_convnext_tiny_clean_low_seed457
+started factorial:sipakmed_vit_b_16_clean_low_seed457 gpu=0 attempt=1
+finished factorial:sipakmed_vit_b_16_leak_high_seed457
+started factorial:sipakmed_resnet50_leak_high_seed503 gpu=3 attempt=1
+finished factorial:sipakmed_vit_b_16_clean_high_seed457
+started factorial:sipakmed_resnet50_clean_high_seed503 gpu=4 attempt=1
+finished factorial:sipakmed_vit_b_16_leak_low_seed457
+started factorial:sipakmed_resnet50_leak_low_seed503 gpu=5 attempt=1
+finished factorial:sipakmed_resnet50_leak_high_seed503
+started factorial:sipakmed_resnet50_clean_low_seed503 gpu=3 attempt=1
+finished factorial:sipakmed_vit_b_16_clean_low_seed457
+started factorial:sipakmed_densenet121_leak_high_seed503 gpu=0 attempt=1
+finished factorial:sipakmed_resnet50_clean_high_seed503
+started factorial:sipakmed_densenet121_clean_high_seed503 gpu=4 attempt=1
+finished factorial:sipakmed_resnet50_leak_low_seed503
+started factorial:sipakmed_densenet121_leak_low_seed503 gpu=5 attempt=1
+finished factorial:sipakmed_resnet50_clean_low_seed503
+started factorial:sipakmed_densenet121_clean_low_seed503 gpu=3 attempt=1
+finished factorial:sipakmed_densenet121_leak_high_seed503
+started factorial:sipakmed_convnext_tiny_leak_high_seed503 gpu=0 attempt=1
+finished factorial:sipakmed_densenet121_clean_high_seed503
+started factorial:sipakmed_convnext_tiny_clean_high_seed503 gpu=4 attempt=1
+finished factorial:sipakmed_densenet121_leak_low_seed503
+started factorial:sipakmed_convnext_tiny_leak_low_seed503 gpu=5 attempt=1
+finished factorial:sipakmed_densenet121_clean_low_seed503
+started factorial:sipakmed_convnext_tiny_clean_low_seed503 gpu=3 attempt=1
+finished factorial:sipakmed_convnext_tiny_leak_high_seed503
+started factorial:sipakmed_vit_b_16_leak_high_seed503 gpu=0 attempt=1
+finished factorial:sipakmed_convnext_tiny_clean_high_seed503
+started factorial:sipakmed_vit_b_16_clean_high_seed503 gpu=4 attempt=1
+finished factorial:sipakmed_convnext_tiny_leak_low_seed503
+started factorial:sipakmed_vit_b_16_leak_low_seed503 gpu=5 attempt=1
+finished factorial:sipakmed_convnext_tiny_clean_low_seed503
+started factorial:sipakmed_vit_b_16_clean_low_seed503 gpu=3 attempt=1
+finished factorial:sipakmed_vit_b_16_leak_high_seed503
+started factorial:sipakmed_resnet50_leak_high_seed557 gpu=0 attempt=1
+finished factorial:sipakmed_vit_b_16_clean_high_seed503
+started factorial:sipakmed_resnet50_clean_high_seed557 gpu=4 attempt=1
+finished factorial:sipakmed_vit_b_16_leak_low_seed503
+started factorial:sipakmed_resnet50_leak_low_seed557 gpu=5 attempt=1
+finished factorial:sipakmed_vit_b_16_clean_low_seed503
+started factorial:sipakmed_resnet50_clean_low_seed557 gpu=3 attempt=1
+finished factorial:sipakmed_resnet50_leak_high_seed557
+started factorial:sipakmed_densenet121_leak_high_seed557 gpu=0 attempt=1
+finished factorial:sipakmed_resnet50_clean_high_seed557
+started factorial:sipakmed_densenet121_clean_high_seed557 gpu=4 attempt=1
+finished factorial:sipakmed_resnet50_leak_low_seed557
+started factorial:sipakmed_densenet121_leak_low_seed557 gpu=5 attempt=1
+finished factorial:sipakmed_resnet50_clean_low_seed557
+started factorial:sipakmed_densenet121_clean_low_seed557 gpu=3 attempt=1
+finished factorial:sipakmed_densenet121_leak_high_seed557
+started factorial:sipakmed_convnext_tiny_leak_high_seed557 gpu=0 attempt=1
+finished factorial:sipakmed_densenet121_clean_high_seed557
+started factorial:sipakmed_convnext_tiny_clean_high_seed557 gpu=4 attempt=1
+finished factorial:sipakmed_densenet121_leak_low_seed557
+started factorial:sipakmed_convnext_tiny_leak_low_seed557 gpu=5 attempt=1
+finished factorial:sipakmed_densenet121_clean_low_seed557
+started factorial:sipakmed_convnext_tiny_clean_low_seed557 gpu=3 attempt=1
+finished factorial:sipakmed_convnext_tiny_leak_high_seed557
+started factorial:sipakmed_vit_b_16_leak_high_seed557 gpu=0 attempt=1
+finished factorial:sipakmed_convnext_tiny_clean_high_seed557
+started factorial:sipakmed_vit_b_16_clean_high_seed557 gpu=4 attempt=1
+finished factorial:sipakmed_convnext_tiny_leak_low_seed557
+started factorial:sipakmed_vit_b_16_leak_low_seed557 gpu=5 attempt=1
+finished factorial:sipakmed_convnext_tiny_clean_low_seed557
+started factorial:sipakmed_vit_b_16_clean_low_seed557 gpu=3 attempt=1
+finished factorial:sipakmed_vit_b_16_leak_high_seed557
+started grl:sipakmed_resnet50_p1_seed137_lambda0 gpu=0 attempt=1
+finished factorial:sipakmed_vit_b_16_clean_high_seed557
+started grl:sipakmed_resnet50_p2_seed137_lambda0 gpu=4 attempt=1
+finished factorial:sipakmed_vit_b_16_leak_low_seed557
+started grl:sipakmed_resnet50_p1_seed137_lambda0.01 gpu=5 attempt=1
+finished factorial:sipakmed_vit_b_16_clean_low_seed557
+started grl:sipakmed_resnet50_p2_seed137_lambda0.01 gpu=3 attempt=1
+finished grl:sipakmed_resnet50_p1_seed137_lambda0
+started grl:sipakmed_resnet50_p1_seed137_lambda0.03 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed137_lambda0
+started grl:sipakmed_resnet50_p2_seed137_lambda0.03 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed137_lambda0.01
+started grl:sipakmed_resnet50_p1_seed137_lambda0.1 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed137_lambda0.01
+started grl:sipakmed_resnet50_p2_seed137_lambda0.1 gpu=3 attempt=1
+finished grl:sipakmed_resnet50_p1_seed137_lambda0.03
+started grl:sipakmed_resnet50_p1_seed137_lambda0.3 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed137_lambda0.03
+started grl:sipakmed_resnet50_p2_seed137_lambda0.3 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed137_lambda0.1
+started grl:sipakmed_resnet50_p1_seed137_lambda1 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed137_lambda0.1
+started grl:sipakmed_resnet50_p2_seed137_lambda1 gpu=3 attempt=1
+finished grl:sipakmed_resnet50_p1_seed137_lambda0.3
+started grl:sipakmed_resnet50_p1_seed137_lambda3 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed137_lambda0.3
+started grl:sipakmed_resnet50_p2_seed137_lambda3 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed137_lambda1
+started grl:sipakmed_convnext_tiny_p1_seed137_lambda0 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed137_lambda1
+started grl:sipakmed_convnext_tiny_p2_seed137_lambda0 gpu=3 attempt=1
+finished grl:sipakmed_resnet50_p1_seed137_lambda3
+started grl:sipakmed_convnext_tiny_p1_seed137_lambda0.01 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed137_lambda3
+started grl:sipakmed_convnext_tiny_p2_seed137_lambda0.01 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed137_lambda0
+started grl:sipakmed_convnext_tiny_p1_seed137_lambda0.03 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed137_lambda0
+started grl:sipakmed_convnext_tiny_p2_seed137_lambda0.03 gpu=3 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed137_lambda0.01
+started grl:sipakmed_convnext_tiny_p1_seed137_lambda0.1 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed137_lambda0.01
+started grl:sipakmed_convnext_tiny_p2_seed137_lambda0.1 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed137_lambda0.03
+started grl:sipakmed_convnext_tiny_p1_seed137_lambda0.3 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed137_lambda0.03
+started grl:sipakmed_convnext_tiny_p2_seed137_lambda0.3 gpu=3 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed137_lambda0.1
+started grl:sipakmed_convnext_tiny_p1_seed137_lambda1 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed137_lambda0.1
+started grl:sipakmed_convnext_tiny_p2_seed137_lambda1 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed137_lambda0.3
+started grl:sipakmed_convnext_tiny_p1_seed137_lambda3 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed137_lambda0.3
+started grl:sipakmed_convnext_tiny_p2_seed137_lambda3 gpu=3 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed137_lambda1
+started grl:sipakmed_resnet50_p1_seed173_lambda0 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed137_lambda1
+started grl:sipakmed_resnet50_p2_seed173_lambda0 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed173_lambda0
+started grl:sipakmed_resnet50_p1_seed173_lambda0.01 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed137_lambda3
+started grl:sipakmed_resnet50_p2_seed173_lambda0.01 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed137_lambda3
+finished grl:sipakmed_resnet50_p2_seed173_lambda0
+started grl:sipakmed_resnet50_p1_seed173_lambda0.03 gpu=3 attempt=1
+started grl:sipakmed_resnet50_p2_seed173_lambda0.03 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed173_lambda0.01
+started grl:sipakmed_resnet50_p1_seed173_lambda0.1 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed173_lambda0.01
+started grl:sipakmed_resnet50_p2_seed173_lambda0.1 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p1_seed173_lambda0.03
+finished grl:sipakmed_resnet50_p2_seed173_lambda0.03
+started grl:sipakmed_resnet50_p1_seed173_lambda0.3 gpu=3 attempt=1
+started grl:sipakmed_resnet50_p2_seed173_lambda0.3 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed173_lambda0.1
+started grl:sipakmed_resnet50_p1_seed173_lambda1 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed173_lambda0.1
+finished grl:sipakmed_resnet50_p1_seed173_lambda0.3
+started grl:sipakmed_resnet50_p2_seed173_lambda1 gpu=3 attempt=1
+started grl:sipakmed_resnet50_p1_seed173_lambda3 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed173_lambda0.3
+started grl:sipakmed_resnet50_p2_seed173_lambda3 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed173_lambda1
+started grl:sipakmed_convnext_tiny_p1_seed173_lambda0 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed173_lambda1
+finished grl:sipakmed_resnet50_p1_seed173_lambda3
+started grl:sipakmed_convnext_tiny_p2_seed173_lambda0 gpu=3 attempt=1
+started grl:sipakmed_convnext_tiny_p1_seed173_lambda0.01 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed173_lambda3
+started grl:sipakmed_convnext_tiny_p2_seed173_lambda0.01 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed173_lambda0
+started grl:sipakmed_convnext_tiny_p1_seed173_lambda0.03 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed173_lambda0
+finished grl:sipakmed_convnext_tiny_p1_seed173_lambda0.01
+started grl:sipakmed_convnext_tiny_p2_seed173_lambda0.03 gpu=3 attempt=1
+started grl:sipakmed_convnext_tiny_p1_seed173_lambda0.1 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed173_lambda0.01
+started grl:sipakmed_convnext_tiny_p2_seed173_lambda0.1 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed173_lambda0.03
+started grl:sipakmed_convnext_tiny_p1_seed173_lambda0.3 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed173_lambda0.03
+finished grl:sipakmed_convnext_tiny_p1_seed173_lambda0.1
+started grl:sipakmed_convnext_tiny_p2_seed173_lambda0.3 gpu=3 attempt=1
+started grl:sipakmed_convnext_tiny_p1_seed173_lambda1 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed173_lambda0.1
+started grl:sipakmed_convnext_tiny_p2_seed173_lambda1 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed173_lambda0.3
+started grl:sipakmed_convnext_tiny_p1_seed173_lambda3 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed173_lambda0.3
+finished grl:sipakmed_convnext_tiny_p1_seed173_lambda1
+started grl:sipakmed_convnext_tiny_p2_seed173_lambda3 gpu=3 attempt=1
+started grl:sipakmed_resnet50_p1_seed211_lambda0 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed173_lambda1
+started grl:sipakmed_resnet50_p2_seed211_lambda0 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed211_lambda0
+started grl:sipakmed_resnet50_p1_seed211_lambda0.01 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed211_lambda0
+started grl:sipakmed_resnet50_p2_seed211_lambda0.01 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed173_lambda3
+started grl:sipakmed_resnet50_p1_seed211_lambda0.03 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed173_lambda3
+started grl:sipakmed_resnet50_p2_seed211_lambda0.03 gpu=3 attempt=1
+finished grl:sipakmed_resnet50_p1_seed211_lambda0.01
+started grl:sipakmed_resnet50_p1_seed211_lambda0.1 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed211_lambda0.01
+started grl:sipakmed_resnet50_p2_seed211_lambda0.1 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed211_lambda0.03
+started grl:sipakmed_resnet50_p1_seed211_lambda0.3 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed211_lambda0.03
+started grl:sipakmed_resnet50_p2_seed211_lambda0.3 gpu=3 attempt=1
+finished grl:sipakmed_resnet50_p1_seed211_lambda0.1
+started grl:sipakmed_resnet50_p1_seed211_lambda1 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed211_lambda0.1
+started grl:sipakmed_resnet50_p2_seed211_lambda1 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed211_lambda0.3
+started grl:sipakmed_resnet50_p1_seed211_lambda3 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed211_lambda0.3
+started grl:sipakmed_resnet50_p2_seed211_lambda3 gpu=3 attempt=1
+finished grl:sipakmed_resnet50_p1_seed211_lambda1
+started grl:sipakmed_convnext_tiny_p1_seed211_lambda0 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed211_lambda1
+started grl:sipakmed_convnext_tiny_p2_seed211_lambda0 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed211_lambda3
+started grl:sipakmed_convnext_tiny_p1_seed211_lambda0.01 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed211_lambda3
+started grl:sipakmed_convnext_tiny_p2_seed211_lambda0.01 gpu=3 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed211_lambda0
+started grl:sipakmed_convnext_tiny_p1_seed211_lambda0.03 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed211_lambda0
+started grl:sipakmed_convnext_tiny_p2_seed211_lambda0.03 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed211_lambda0.01
+started grl:sipakmed_convnext_tiny_p1_seed211_lambda0.1 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed211_lambda0.01
+started grl:sipakmed_convnext_tiny_p2_seed211_lambda0.1 gpu=3 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed211_lambda0.03
+started grl:sipakmed_convnext_tiny_p1_seed211_lambda0.3 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed211_lambda0.03
+started grl:sipakmed_convnext_tiny_p2_seed211_lambda0.3 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed211_lambda0.1
+started grl:sipakmed_convnext_tiny_p1_seed211_lambda1 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed211_lambda0.1
+started grl:sipakmed_convnext_tiny_p2_seed211_lambda1 gpu=3 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed211_lambda0.3
+started grl:sipakmed_convnext_tiny_p1_seed211_lambda3 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed211_lambda0.3
+started grl:sipakmed_convnext_tiny_p2_seed211_lambda3 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed211_lambda1
+started grl:sipakmed_resnet50_p1_seed257_lambda0 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed211_lambda1
+started grl:sipakmed_resnet50_p2_seed257_lambda0 gpu=3 attempt=1
+finished grl:sipakmed_resnet50_p1_seed257_lambda0
+started grl:sipakmed_resnet50_p1_seed257_lambda0.01 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed211_lambda3
+finished grl:sipakmed_resnet50_p2_seed257_lambda0
+started grl:sipakmed_resnet50_p2_seed257_lambda0.01 gpu=3 attempt=1
+started grl:sipakmed_resnet50_p1_seed257_lambda0.03 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed211_lambda3
+started grl:sipakmed_resnet50_p2_seed257_lambda0.03 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed257_lambda0.01
+started grl:sipakmed_resnet50_p1_seed257_lambda0.1 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed257_lambda0.01
+finished grl:sipakmed_resnet50_p1_seed257_lambda0.03
+started grl:sipakmed_resnet50_p2_seed257_lambda0.1 gpu=3 attempt=1
+started grl:sipakmed_resnet50_p1_seed257_lambda0.3 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed257_lambda0.03
+started grl:sipakmed_resnet50_p2_seed257_lambda0.3 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed257_lambda0.1
+started grl:sipakmed_resnet50_p1_seed257_lambda1 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed257_lambda0.1
+finished grl:sipakmed_resnet50_p1_seed257_lambda0.3
+started grl:sipakmed_resnet50_p2_seed257_lambda1 gpu=3 attempt=1
+started grl:sipakmed_resnet50_p1_seed257_lambda3 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed257_lambda0.3
+started grl:sipakmed_resnet50_p2_seed257_lambda3 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed257_lambda1
+started grl:sipakmed_convnext_tiny_p1_seed257_lambda0 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed257_lambda1
+finished grl:sipakmed_resnet50_p1_seed257_lambda3
+started grl:sipakmed_convnext_tiny_p2_seed257_lambda0 gpu=3 attempt=1
+started grl:sipakmed_convnext_tiny_p1_seed257_lambda0.01 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed257_lambda3
+started grl:sipakmed_convnext_tiny_p2_seed257_lambda0.01 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed257_lambda0
+started grl:sipakmed_convnext_tiny_p1_seed257_lambda0.03 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed257_lambda0
+finished grl:sipakmed_convnext_tiny_p1_seed257_lambda0.01
+started grl:sipakmed_convnext_tiny_p2_seed257_lambda0.03 gpu=3 attempt=1
+started grl:sipakmed_convnext_tiny_p1_seed257_lambda0.1 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed257_lambda0.01
+started grl:sipakmed_convnext_tiny_p2_seed257_lambda0.1 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed257_lambda0.03
+started grl:sipakmed_convnext_tiny_p1_seed257_lambda0.3 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed257_lambda0.03
+finished grl:sipakmed_convnext_tiny_p1_seed257_lambda0.1
+started grl:sipakmed_convnext_tiny_p2_seed257_lambda0.3 gpu=3 attempt=1
+started grl:sipakmed_convnext_tiny_p1_seed257_lambda1 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed257_lambda0.1
+started grl:sipakmed_convnext_tiny_p2_seed257_lambda1 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed257_lambda0.3
+started grl:sipakmed_convnext_tiny_p1_seed257_lambda3 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed257_lambda0.3
+finished grl:sipakmed_convnext_tiny_p1_seed257_lambda1
+started grl:sipakmed_convnext_tiny_p2_seed257_lambda3 gpu=3 attempt=1
+started grl:sipakmed_resnet50_p1_seed307_lambda0 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed257_lambda1
+started grl:sipakmed_resnet50_p2_seed307_lambda0 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed307_lambda0
+started grl:sipakmed_resnet50_p1_seed307_lambda0.01 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed307_lambda0
+started grl:sipakmed_resnet50_p2_seed307_lambda0.01 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed257_lambda3
+started grl:sipakmed_resnet50_p1_seed307_lambda0.03 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed257_lambda3
+started grl:sipakmed_resnet50_p2_seed307_lambda0.03 gpu=3 attempt=1
+finished grl:sipakmed_resnet50_p1_seed307_lambda0.01
+started grl:sipakmed_resnet50_p1_seed307_lambda0.1 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed307_lambda0.01
+started grl:sipakmed_resnet50_p2_seed307_lambda0.1 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed307_lambda0.03
+started grl:sipakmed_resnet50_p1_seed307_lambda0.3 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed307_lambda0.03
+started grl:sipakmed_resnet50_p2_seed307_lambda0.3 gpu=3 attempt=1
+finished grl:sipakmed_resnet50_p1_seed307_lambda0.1
+started grl:sipakmed_resnet50_p1_seed307_lambda1 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed307_lambda0.1
+started grl:sipakmed_resnet50_p2_seed307_lambda1 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed307_lambda0.3
+started grl:sipakmed_resnet50_p1_seed307_lambda3 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed307_lambda0.3
+started grl:sipakmed_resnet50_p2_seed307_lambda3 gpu=3 attempt=1
+finished grl:sipakmed_resnet50_p1_seed307_lambda1
+started grl:sipakmed_convnext_tiny_p1_seed307_lambda0 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed307_lambda1
+started grl:sipakmed_convnext_tiny_p2_seed307_lambda0 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed307_lambda3
+started grl:sipakmed_convnext_tiny_p1_seed307_lambda0.01 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed307_lambda3
+started grl:sipakmed_convnext_tiny_p2_seed307_lambda0.01 gpu=3 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed307_lambda0
+started grl:sipakmed_convnext_tiny_p1_seed307_lambda0.03 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed307_lambda0
+started grl:sipakmed_convnext_tiny_p2_seed307_lambda0.03 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed307_lambda0.01
+started grl:sipakmed_convnext_tiny_p1_seed307_lambda0.1 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed307_lambda0.01
+started grl:sipakmed_convnext_tiny_p2_seed307_lambda0.1 gpu=3 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed307_lambda0.03
+started grl:sipakmed_convnext_tiny_p1_seed307_lambda0.3 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed307_lambda0.03
+started grl:sipakmed_convnext_tiny_p2_seed307_lambda0.3 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed307_lambda0.1
+started grl:sipakmed_convnext_tiny_p1_seed307_lambda1 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed307_lambda0.1
+started grl:sipakmed_convnext_tiny_p2_seed307_lambda1 gpu=3 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed307_lambda0.3
+started grl:sipakmed_convnext_tiny_p1_seed307_lambda3 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed307_lambda0.3
+started grl:sipakmed_convnext_tiny_p2_seed307_lambda3 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed307_lambda1
+started grl:sipakmed_resnet50_p1_seed349_lambda0 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed307_lambda1
+started grl:sipakmed_resnet50_p2_seed349_lambda0 gpu=3 attempt=1
+finished grl:sipakmed_resnet50_p1_seed349_lambda0
+started grl:sipakmed_resnet50_p1_seed349_lambda0.01 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed307_lambda3
+finished grl:sipakmed_resnet50_p2_seed349_lambda0
+started grl:sipakmed_resnet50_p2_seed349_lambda0.01 gpu=3 attempt=1
+started grl:sipakmed_resnet50_p1_seed349_lambda0.03 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed307_lambda3
+started grl:sipakmed_resnet50_p2_seed349_lambda0.03 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed349_lambda0.01
+started grl:sipakmed_resnet50_p1_seed349_lambda0.1 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed349_lambda0.01
+finished grl:sipakmed_resnet50_p1_seed349_lambda0.03
+started grl:sipakmed_resnet50_p2_seed349_lambda0.1 gpu=3 attempt=1
+started grl:sipakmed_resnet50_p1_seed349_lambda0.3 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed349_lambda0.03
+started grl:sipakmed_resnet50_p2_seed349_lambda0.3 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed349_lambda0.1
+started grl:sipakmed_resnet50_p1_seed349_lambda1 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed349_lambda0.1
+finished grl:sipakmed_resnet50_p1_seed349_lambda0.3
+started grl:sipakmed_resnet50_p2_seed349_lambda1 gpu=3 attempt=1
+started grl:sipakmed_resnet50_p1_seed349_lambda3 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed349_lambda0.3
+started grl:sipakmed_resnet50_p2_seed349_lambda3 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed349_lambda1
+started grl:sipakmed_convnext_tiny_p1_seed349_lambda0 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed349_lambda1
+finished grl:sipakmed_resnet50_p1_seed349_lambda3
+started grl:sipakmed_convnext_tiny_p2_seed349_lambda0 gpu=3 attempt=1
+started grl:sipakmed_convnext_tiny_p1_seed349_lambda0.01 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed349_lambda3
+started grl:sipakmed_convnext_tiny_p2_seed349_lambda0.01 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed349_lambda0
+started grl:sipakmed_convnext_tiny_p1_seed349_lambda0.03 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed349_lambda0
+finished grl:sipakmed_convnext_tiny_p1_seed349_lambda0.01
+started grl:sipakmed_convnext_tiny_p2_seed349_lambda0.03 gpu=3 attempt=1
+started grl:sipakmed_convnext_tiny_p1_seed349_lambda0.1 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed349_lambda0.01
+started grl:sipakmed_convnext_tiny_p2_seed349_lambda0.1 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed349_lambda0.03
+started grl:sipakmed_convnext_tiny_p1_seed349_lambda0.3 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed349_lambda0.03
+finished grl:sipakmed_convnext_tiny_p1_seed349_lambda0.1
+started grl:sipakmed_convnext_tiny_p2_seed349_lambda0.3 gpu=3 attempt=1
+started grl:sipakmed_convnext_tiny_p1_seed349_lambda1 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed349_lambda0.1
+started grl:sipakmed_convnext_tiny_p2_seed349_lambda1 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed349_lambda0.3
+started grl:sipakmed_convnext_tiny_p1_seed349_lambda3 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed349_lambda0.3
+finished grl:sipakmed_convnext_tiny_p1_seed349_lambda1
+started grl:sipakmed_convnext_tiny_p2_seed349_lambda3 gpu=3 attempt=1
+started grl:sipakmed_resnet50_p1_seed401_lambda0 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed349_lambda1
+started grl:sipakmed_resnet50_p2_seed401_lambda0 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed401_lambda0
+started grl:sipakmed_resnet50_p1_seed401_lambda0.01 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed401_lambda0
+started grl:sipakmed_resnet50_p2_seed401_lambda0.01 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed349_lambda3
+started grl:sipakmed_resnet50_p1_seed401_lambda0.03 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed349_lambda3
+started grl:sipakmed_resnet50_p2_seed401_lambda0.03 gpu=3 attempt=1
+finished grl:sipakmed_resnet50_p1_seed401_lambda0.01
+started grl:sipakmed_resnet50_p1_seed401_lambda0.1 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed401_lambda0.01
+started grl:sipakmed_resnet50_p2_seed401_lambda0.1 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed401_lambda0.03
+started grl:sipakmed_resnet50_p1_seed401_lambda0.3 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed401_lambda0.03
+started grl:sipakmed_resnet50_p2_seed401_lambda0.3 gpu=3 attempt=1
+finished grl:sipakmed_resnet50_p1_seed401_lambda0.1
+started grl:sipakmed_resnet50_p1_seed401_lambda1 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed401_lambda0.1
+started grl:sipakmed_resnet50_p2_seed401_lambda1 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed401_lambda0.3
+started grl:sipakmed_resnet50_p1_seed401_lambda3 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed401_lambda0.3
+started grl:sipakmed_resnet50_p2_seed401_lambda3 gpu=3 attempt=1
+finished grl:sipakmed_resnet50_p1_seed401_lambda1
+started grl:sipakmed_convnext_tiny_p1_seed401_lambda0 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed401_lambda1
+started grl:sipakmed_convnext_tiny_p2_seed401_lambda0 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed401_lambda3
+started grl:sipakmed_convnext_tiny_p1_seed401_lambda0.01 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed401_lambda3
+started grl:sipakmed_convnext_tiny_p2_seed401_lambda0.01 gpu=3 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed401_lambda0
+started grl:sipakmed_convnext_tiny_p1_seed401_lambda0.03 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed401_lambda0
+started grl:sipakmed_convnext_tiny_p2_seed401_lambda0.03 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed401_lambda0.01
+started grl:sipakmed_convnext_tiny_p1_seed401_lambda0.1 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed401_lambda0.01
+started grl:sipakmed_convnext_tiny_p2_seed401_lambda0.1 gpu=3 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed401_lambda0.03
+started grl:sipakmed_convnext_tiny_p1_seed401_lambda0.3 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed401_lambda0.03
+started grl:sipakmed_convnext_tiny_p2_seed401_lambda0.3 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed401_lambda0.1
+started grl:sipakmed_convnext_tiny_p1_seed401_lambda1 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed401_lambda0.1
+started grl:sipakmed_convnext_tiny_p2_seed401_lambda1 gpu=3 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed401_lambda0.3
+started grl:sipakmed_convnext_tiny_p1_seed401_lambda3 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed401_lambda0.3
+started grl:sipakmed_convnext_tiny_p2_seed401_lambda3 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed401_lambda1
+started grl:sipakmed_resnet50_p1_seed457_lambda0 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed401_lambda1
+started grl:sipakmed_resnet50_p2_seed457_lambda0 gpu=3 attempt=1
+finished grl:sipakmed_resnet50_p1_seed457_lambda0
+started grl:sipakmed_resnet50_p1_seed457_lambda0.01 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed401_lambda3
+finished grl:sipakmed_resnet50_p2_seed457_lambda0
+started grl:sipakmed_resnet50_p2_seed457_lambda0.01 gpu=3 attempt=1
+started grl:sipakmed_resnet50_p1_seed457_lambda0.03 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed401_lambda3
+started grl:sipakmed_resnet50_p2_seed457_lambda0.03 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed457_lambda0.01
+started grl:sipakmed_resnet50_p1_seed457_lambda0.1 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed457_lambda0.01
+finished grl:sipakmed_resnet50_p1_seed457_lambda0.03
+started grl:sipakmed_resnet50_p2_seed457_lambda0.1 gpu=3 attempt=1
+started grl:sipakmed_resnet50_p1_seed457_lambda0.3 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed457_lambda0.03
+started grl:sipakmed_resnet50_p2_seed457_lambda0.3 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed457_lambda0.1
+started grl:sipakmed_resnet50_p1_seed457_lambda1 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed457_lambda0.1
+finished grl:sipakmed_resnet50_p1_seed457_lambda0.3
+started grl:sipakmed_resnet50_p2_seed457_lambda1 gpu=3 attempt=1
+started grl:sipakmed_resnet50_p1_seed457_lambda3 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed457_lambda0.3
+started grl:sipakmed_resnet50_p2_seed457_lambda3 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed457_lambda1
+started grl:sipakmed_convnext_tiny_p1_seed457_lambda0 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed457_lambda1
+finished grl:sipakmed_resnet50_p1_seed457_lambda3
+started grl:sipakmed_convnext_tiny_p2_seed457_lambda0 gpu=3 attempt=1
+started grl:sipakmed_convnext_tiny_p1_seed457_lambda0.01 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed457_lambda3
+started grl:sipakmed_convnext_tiny_p2_seed457_lambda0.01 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed457_lambda0
+started grl:sipakmed_convnext_tiny_p1_seed457_lambda0.03 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed457_lambda0
+finished grl:sipakmed_convnext_tiny_p1_seed457_lambda0.01
+started grl:sipakmed_convnext_tiny_p2_seed457_lambda0.03 gpu=3 attempt=1
+started grl:sipakmed_convnext_tiny_p1_seed457_lambda0.1 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed457_lambda0.01
+started grl:sipakmed_convnext_tiny_p2_seed457_lambda0.1 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed457_lambda0.03
+started grl:sipakmed_convnext_tiny_p1_seed457_lambda0.3 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed457_lambda0.03
+finished grl:sipakmed_convnext_tiny_p1_seed457_lambda0.1
+started grl:sipakmed_convnext_tiny_p2_seed457_lambda0.3 gpu=3 attempt=1
+started grl:sipakmed_convnext_tiny_p1_seed457_lambda1 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed457_lambda0.1
+started grl:sipakmed_convnext_tiny_p2_seed457_lambda1 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed457_lambda0.3
+started grl:sipakmed_convnext_tiny_p1_seed457_lambda3 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed457_lambda0.3
+finished grl:sipakmed_convnext_tiny_p1_seed457_lambda1
+started grl:sipakmed_convnext_tiny_p2_seed457_lambda3 gpu=3 attempt=1
+started grl:sipakmed_resnet50_p1_seed503_lambda0 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed457_lambda1
+started grl:sipakmed_resnet50_p2_seed503_lambda0 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed503_lambda0
+started grl:sipakmed_resnet50_p1_seed503_lambda0.01 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed503_lambda0
+started grl:sipakmed_resnet50_p2_seed503_lambda0.01 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed457_lambda3
+started grl:sipakmed_resnet50_p1_seed503_lambda0.03 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed457_lambda3
+started grl:sipakmed_resnet50_p2_seed503_lambda0.03 gpu=3 attempt=1
+finished grl:sipakmed_resnet50_p1_seed503_lambda0.01
+started grl:sipakmed_resnet50_p1_seed503_lambda0.1 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed503_lambda0.01
+started grl:sipakmed_resnet50_p2_seed503_lambda0.1 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed503_lambda0.03
+started grl:sipakmed_resnet50_p1_seed503_lambda0.3 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed503_lambda0.03
+started grl:sipakmed_resnet50_p2_seed503_lambda0.3 gpu=3 attempt=1
+finished grl:sipakmed_resnet50_p1_seed503_lambda0.1
+started grl:sipakmed_resnet50_p1_seed503_lambda1 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed503_lambda0.1
+started grl:sipakmed_resnet50_p2_seed503_lambda1 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed503_lambda0.3
+started grl:sipakmed_resnet50_p1_seed503_lambda3 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed503_lambda0.3
+started grl:sipakmed_resnet50_p2_seed503_lambda3 gpu=3 attempt=1
+finished grl:sipakmed_resnet50_p1_seed503_lambda1
+started grl:sipakmed_convnext_tiny_p1_seed503_lambda0 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed503_lambda1
+started grl:sipakmed_convnext_tiny_p2_seed503_lambda0 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed503_lambda3
+started grl:sipakmed_convnext_tiny_p1_seed503_lambda0.01 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed503_lambda3
+started grl:sipakmed_convnext_tiny_p2_seed503_lambda0.01 gpu=3 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed503_lambda0
+started grl:sipakmed_convnext_tiny_p1_seed503_lambda0.03 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed503_lambda0
+started grl:sipakmed_convnext_tiny_p2_seed503_lambda0.03 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed503_lambda0.01
+started grl:sipakmed_convnext_tiny_p1_seed503_lambda0.1 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed503_lambda0.01
+started grl:sipakmed_convnext_tiny_p2_seed503_lambda0.1 gpu=3 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed503_lambda0.03
+started grl:sipakmed_convnext_tiny_p1_seed503_lambda0.3 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed503_lambda0.03
+started grl:sipakmed_convnext_tiny_p2_seed503_lambda0.3 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed503_lambda0.1
+started grl:sipakmed_convnext_tiny_p1_seed503_lambda1 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed503_lambda0.1
+started grl:sipakmed_convnext_tiny_p2_seed503_lambda1 gpu=3 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed503_lambda0.3
+started grl:sipakmed_convnext_tiny_p1_seed503_lambda3 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed503_lambda0.3
+started grl:sipakmed_convnext_tiny_p2_seed503_lambda3 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed503_lambda1
+started grl:sipakmed_resnet50_p1_seed557_lambda0 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed503_lambda1
+started grl:sipakmed_resnet50_p2_seed557_lambda0 gpu=3 attempt=1
+finished grl:sipakmed_resnet50_p1_seed557_lambda0
+started grl:sipakmed_resnet50_p1_seed557_lambda0.01 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed503_lambda3
+finished grl:sipakmed_resnet50_p2_seed557_lambda0
+started grl:sipakmed_resnet50_p2_seed557_lambda0.01 gpu=3 attempt=1
+started grl:sipakmed_resnet50_p1_seed557_lambda0.03 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed503_lambda3
+started grl:sipakmed_resnet50_p2_seed557_lambda0.03 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed557_lambda0.01
+started grl:sipakmed_resnet50_p1_seed557_lambda0.1 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed557_lambda0.01
+finished grl:sipakmed_resnet50_p1_seed557_lambda0.03
+started grl:sipakmed_resnet50_p2_seed557_lambda0.1 gpu=3 attempt=1
+started grl:sipakmed_resnet50_p1_seed557_lambda0.3 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed557_lambda0.03
+started grl:sipakmed_resnet50_p2_seed557_lambda0.3 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed557_lambda0.1
+started grl:sipakmed_resnet50_p1_seed557_lambda1 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed557_lambda0.1
+finished grl:sipakmed_resnet50_p1_seed557_lambda0.3
+started grl:sipakmed_resnet50_p2_seed557_lambda1 gpu=3 attempt=1
+started grl:sipakmed_resnet50_p1_seed557_lambda3 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed557_lambda0.3
+started grl:sipakmed_resnet50_p2_seed557_lambda3 gpu=4 attempt=1
+finished grl:sipakmed_resnet50_p1_seed557_lambda1
+started grl:sipakmed_convnext_tiny_p1_seed557_lambda0 gpu=0 attempt=1
+finished grl:sipakmed_resnet50_p2_seed557_lambda1
+finished grl:sipakmed_resnet50_p1_seed557_lambda3
+started grl:sipakmed_convnext_tiny_p2_seed557_lambda0 gpu=3 attempt=1
+started grl:sipakmed_convnext_tiny_p1_seed557_lambda0.01 gpu=5 attempt=1
+finished grl:sipakmed_resnet50_p2_seed557_lambda3
+started grl:sipakmed_convnext_tiny_p2_seed557_lambda0.01 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed557_lambda0
+started grl:sipakmed_convnext_tiny_p1_seed557_lambda0.03 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed557_lambda0
+finished grl:sipakmed_convnext_tiny_p1_seed557_lambda0.01
+started grl:sipakmed_convnext_tiny_p2_seed557_lambda0.03 gpu=3 attempt=1
+started grl:sipakmed_convnext_tiny_p1_seed557_lambda0.1 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed557_lambda0.01
+started grl:sipakmed_convnext_tiny_p2_seed557_lambda0.1 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed557_lambda0.03
+started grl:sipakmed_convnext_tiny_p1_seed557_lambda0.3 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed557_lambda0.03
+finished grl:sipakmed_convnext_tiny_p1_seed557_lambda0.1
+started grl:sipakmed_convnext_tiny_p2_seed557_lambda0.3 gpu=3 attempt=1
+started grl:sipakmed_convnext_tiny_p1_seed557_lambda1 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed557_lambda0.1
+started grl:sipakmed_convnext_tiny_p2_seed557_lambda1 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed557_lambda0.3
+started grl:sipakmed_convnext_tiny_p1_seed557_lambda3 gpu=0 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed557_lambda0.3
+finished grl:sipakmed_convnext_tiny_p1_seed557_lambda1
+started grl:sipakmed_convnext_tiny_p2_seed557_lambda3 gpu=3 attempt=1
+started cric:cric_resnet18_p1_seed137 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed557_lambda1
+started cric:cric_resnet18_p1_prime_seed137 gpu=4 attempt=1
+finished cric:cric_resnet18_p1_seed137
+started cric:cric_resnet18_p2_seed137 gpu=5 attempt=1
+finished cric:cric_resnet18_p1_prime_seed137
+started cric:cric_resnet50_p1_seed137 gpu=4 attempt=1
+finished grl:sipakmed_convnext_tiny_p1_seed557_lambda3
+started cric:cric_resnet50_p1_prime_seed137 gpu=0 attempt=1
+finished cric:cric_resnet18_p2_seed137
+started cric:cric_resnet50_p2_seed137 gpu=5 attempt=1
+finished grl:sipakmed_convnext_tiny_p2_seed557_lambda3
+started cric:cric_densenet121_p1_seed137 gpu=3 attempt=1
+finished cric:cric_resnet50_p1_seed137
+started cric:cric_densenet121_p1_prime_seed137 gpu=4 attempt=1
+finished cric:cric_resnet50_p1_prime_seed137
+started cric:cric_densenet121_p2_seed137 gpu=0 attempt=1
+finished cric:cric_resnet50_p2_seed137
+started cric:cric_efficientnet_b0_p1_seed137 gpu=5 attempt=1
+finished cric:cric_densenet121_p1_seed137
+started cric:cric_efficientnet_b0_p1_prime_seed137 gpu=3 attempt=1
+finished cric:cric_efficientnet_b0_p1_seed137
+started cric:cric_efficientnet_b0_p2_seed137 gpu=5 attempt=1
+finished cric:cric_efficientnet_b0_p1_prime_seed137
+started cric:cric_convnext_tiny_p1_seed137 gpu=3 attempt=1
+finished cric:cric_densenet121_p1_prime_seed137
+started cric:cric_convnext_tiny_p1_prime_seed137 gpu=4 attempt=1
+finished cric:cric_densenet121_p2_seed137
+started cric:cric_convnext_tiny_p2_seed137 gpu=0 attempt=1
+finished cric:cric_efficientnet_b0_p2_seed137
+started cric:cric_vit_b_16_p1_seed137 gpu=5 attempt=1
+finished cric:cric_convnext_tiny_p1_seed137
+started cric:cric_vit_b_16_p1_prime_seed137 gpu=3 attempt=1
+finished cric:cric_convnext_tiny_p1_prime_seed137
+started cric:cric_vit_b_16_p2_seed137 gpu=4 attempt=1
+finished cric:cric_convnext_tiny_p2_seed137
+started cric:cric_resnet18_p1_seed173 gpu=0 attempt=1
+finished cric:cric_resnet18_p1_seed173
+started cric:cric_resnet18_p1_prime_seed173 gpu=0 attempt=1
+finished cric:cric_resnet18_p1_prime_seed173
+started cric:cric_resnet18_p2_seed173 gpu=0 attempt=1
+finished cric:cric_resnet18_p2_seed173
+started cric:cric_resnet50_p1_seed173 gpu=0 attempt=1
+finished cric:cric_vit_b_16_p1_seed137
+started cric:cric_resnet50_p1_prime_seed173 gpu=5 attempt=1
+finished cric:cric_resnet50_p1_seed173
+started cric:cric_resnet50_p2_seed173 gpu=0 attempt=1
+finished cric:cric_resnet50_p1_prime_seed173
+started cric:cric_densenet121_p1_seed173 gpu=5 attempt=1
+finished cric:cric_resnet50_p2_seed173
+started cric:cric_densenet121_p1_prime_seed173 gpu=0 attempt=1
+finished cric:cric_vit_b_16_p1_prime_seed137
+started cric:cric_densenet121_p2_seed173 gpu=3 attempt=1
+finished cric:cric_vit_b_16_p2_seed137
+started cric:cric_efficientnet_b0_p1_seed173 gpu=4 attempt=1
+finished cric:cric_densenet121_p1_seed173
+started cric:cric_efficientnet_b0_p1_prime_seed173 gpu=5 attempt=1
+finished cric:cric_efficientnet_b0_p1_seed173
+started cric:cric_efficientnet_b0_p2_seed173 gpu=4 attempt=1
+finished cric:cric_densenet121_p1_prime_seed173
+started cric:cric_convnext_tiny_p1_seed173 gpu=0 attempt=1
+finished cric:cric_densenet121_p2_seed173
+started cric:cric_convnext_tiny_p1_prime_seed173 gpu=3 attempt=1
+finished cric:cric_efficientnet_b0_p1_prime_seed173
+started cric:cric_convnext_tiny_p2_seed173 gpu=5 attempt=1
+finished cric:cric_efficientnet_b0_p2_seed173
+started cric:cric_vit_b_16_p1_seed173 gpu=4 attempt=1
+finished cric:cric_convnext_tiny_p1_seed173
+started cric:cric_vit_b_16_p1_prime_seed173 gpu=0 attempt=1
+finished cric:cric_convnext_tiny_p1_prime_seed173
+started cric:cric_vit_b_16_p2_seed173 gpu=3 attempt=1
+finished cric:cric_convnext_tiny_p2_seed173
+started cric:cric_resnet18_p1_seed211 gpu=5 attempt=1
+finished cric:cric_resnet18_p1_seed211
+started cric:cric_resnet18_p1_prime_seed211 gpu=5 attempt=1
+finished cric:cric_resnet18_p1_prime_seed211
+started cric:cric_resnet18_p2_seed211 gpu=5 attempt=1
+finished cric:cric_resnet18_p2_seed211
+started cric:cric_resnet50_p1_seed211 gpu=5 attempt=1
+finished cric:cric_vit_b_16_p1_seed173
+started cric:cric_resnet50_p1_prime_seed211 gpu=4 attempt=1
+finished cric:cric_resnet50_p1_seed211
+started cric:cric_resnet50_p2_seed211 gpu=5 attempt=1
+finished cric:cric_resnet50_p1_prime_seed211
+started cric:cric_densenet121_p1_seed211 gpu=4 attempt=1
+finished cric:cric_vit_b_16_p1_prime_seed173
+started cric:cric_densenet121_p1_prime_seed211 gpu=0 attempt=1
+finished cric:cric_resnet50_p2_seed211
+started cric:cric_densenet121_p2_seed211 gpu=5 attempt=1
+finished cric:cric_vit_b_16_p2_seed173
+started cric:cric_efficientnet_b0_p1_seed211 gpu=3 attempt=1
+finished cric:cric_densenet121_p1_seed211
+started cric:cric_efficientnet_b0_p1_prime_seed211 gpu=4 attempt=1
+finished cric:cric_efficientnet_b0_p1_seed211
+started cric:cric_efficientnet_b0_p2_seed211 gpu=3 attempt=1
+finished cric:cric_densenet121_p1_prime_seed211
+started cric:cric_convnext_tiny_p1_seed211 gpu=0 attempt=1
+finished cric:cric_densenet121_p2_seed211
+started cric:cric_convnext_tiny_p1_prime_seed211 gpu=5 attempt=1
+finished cric:cric_efficientnet_b0_p1_prime_seed211
+started cric:cric_convnext_tiny_p2_seed211 gpu=4 attempt=1
+finished cric:cric_efficientnet_b0_p2_seed211
+started cric:cric_vit_b_16_p1_seed211 gpu=3 attempt=1
+finished cric:cric_convnext_tiny_p1_seed211
+started cric:cric_vit_b_16_p1_prime_seed211 gpu=0 attempt=1
+finished cric:cric_convnext_tiny_p1_prime_seed211
+started cric:cric_vit_b_16_p2_seed211 gpu=5 attempt=1
+finished cric:cric_convnext_tiny_p2_seed211
+started cric:cric_resnet18_p1_seed257 gpu=4 attempt=1
+finished cric:cric_resnet18_p1_seed257
+started cric:cric_resnet18_p1_prime_seed257 gpu=4 attempt=1
+finished cric:cric_resnet18_p1_prime_seed257
+started cric:cric_resnet18_p2_seed257 gpu=4 attempt=1
+finished cric:cric_resnet18_p2_seed257
+started cric:cric_resnet50_p1_seed257 gpu=4 attempt=1
+finished cric:cric_vit_b_16_p1_seed211
+started cric:cric_resnet50_p1_prime_seed257 gpu=3 attempt=1
+finished cric:cric_resnet50_p1_seed257
+started cric:cric_resnet50_p2_seed257 gpu=4 attempt=1
+finished cric:cric_resnet50_p1_prime_seed257
+started cric:cric_densenet121_p1_seed257 gpu=3 attempt=1
+finished cric:cric_resnet50_p2_seed257
+started cric:cric_densenet121_p1_prime_seed257 gpu=4 attempt=1
+finished cric:cric_vit_b_16_p1_prime_seed211
+started cric:cric_densenet121_p2_seed257 gpu=0 attempt=1
+finished cric:cric_vit_b_16_p2_seed211
+started cric:cric_efficientnet_b0_p1_seed257 gpu=5 attempt=1
+finished cric:cric_efficientnet_b0_p1_seed257
+started cric:cric_efficientnet_b0_p1_prime_seed257 gpu=5 attempt=1
+finished cric:cric_densenet121_p1_seed257
+started cric:cric_efficientnet_b0_p2_seed257 gpu=3 attempt=1
+finished cric:cric_densenet121_p1_prime_seed257
+started cric:cric_convnext_tiny_p1_seed257 gpu=4 attempt=1
+finished cric:cric_densenet121_p2_seed257
+started cric:cric_convnext_tiny_p1_prime_seed257 gpu=0 attempt=1
+finished cric:cric_efficientnet_b0_p1_prime_seed257
+started cric:cric_convnext_tiny_p2_seed257 gpu=5 attempt=1
+finished cric:cric_efficientnet_b0_p2_seed257
+started cric:cric_vit_b_16_p1_seed257 gpu=3 attempt=1
+finished cric:cric_convnext_tiny_p1_seed257
+started cric:cric_vit_b_16_p1_prime_seed257 gpu=4 attempt=1
+finished cric:cric_convnext_tiny_p1_prime_seed257
+started cric:cric_vit_b_16_p2_seed257 gpu=0 attempt=1
+finished cric:cric_convnext_tiny_p2_seed257
+started cric:cric_resnet18_p1_seed307 gpu=5 attempt=1
+finished cric:cric_resnet18_p1_seed307
+started cric:cric_resnet18_p1_prime_seed307 gpu=5 attempt=1
+finished cric:cric_resnet18_p1_prime_seed307
+started cric:cric_resnet18_p2_seed307 gpu=5 attempt=1
+finished cric:cric_resnet18_p2_seed307
+started cric:cric_resnet50_p1_seed307 gpu=5 attempt=1
+finished cric:cric_vit_b_16_p1_seed257
+started cric:cric_resnet50_p1_prime_seed307 gpu=3 attempt=1
+finished cric:cric_resnet50_p1_seed307
+started cric:cric_resnet50_p2_seed307 gpu=5 attempt=1
+finished cric:cric_resnet50_p1_prime_seed307
+started cric:cric_densenet121_p1_seed307 gpu=3 attempt=1
+finished cric:cric_resnet50_p2_seed307
+started cric:cric_densenet121_p1_prime_seed307 gpu=5 attempt=1
+finished cric:cric_vit_b_16_p1_prime_seed257
+started cric:cric_densenet121_p2_seed307 gpu=4 attempt=1
+finished cric:cric_vit_b_16_p2_seed257
+started cric:cric_efficientnet_b0_p1_seed307 gpu=0 attempt=1
+finished cric:cric_densenet121_p1_seed307
+started cric:cric_efficientnet_b0_p1_prime_seed307 gpu=3 attempt=1
+finished cric:cric_efficientnet_b0_p1_seed307
+started cric:cric_efficientnet_b0_p2_seed307 gpu=0 attempt=1
+finished cric:cric_densenet121_p1_prime_seed307
+started cric:cric_convnext_tiny_p1_seed307 gpu=5 attempt=1
+finished cric:cric_densenet121_p2_seed307
+started cric:cric_convnext_tiny_p1_prime_seed307 gpu=4 attempt=1
+finished cric:cric_efficientnet_b0_p1_prime_seed307
+started cric:cric_convnext_tiny_p2_seed307 gpu=3 attempt=1
+finished cric:cric_efficientnet_b0_p2_seed307
+started cric:cric_vit_b_16_p1_seed307 gpu=0 attempt=1
+finished cric:cric_convnext_tiny_p1_seed307
+started cric:cric_vit_b_16_p1_prime_seed307 gpu=5 attempt=1
+finished cric:cric_convnext_tiny_p1_prime_seed307
+started cric:cric_vit_b_16_p2_seed307 gpu=4 attempt=1
+finished cric:cric_convnext_tiny_p2_seed307
+started cric:cric_resnet18_p1_seed349 gpu=3 attempt=1
+finished cric:cric_resnet18_p1_seed349
+started cric:cric_resnet18_p1_prime_seed349 gpu=3 attempt=1
+finished cric:cric_resnet18_p1_prime_seed349
+started cric:cric_resnet18_p2_seed349 gpu=3 attempt=1
+finished cric:cric_resnet18_p2_seed349
+started cric:cric_resnet50_p1_seed349 gpu=3 attempt=1
+finished cric:cric_vit_b_16_p1_seed307
+started cric:cric_resnet50_p1_prime_seed349 gpu=0 attempt=1
+finished cric:cric_resnet50_p1_seed349
+started cric:cric_resnet50_p2_seed349 gpu=3 attempt=1
+finished cric:cric_resnet50_p1_prime_seed349
+started cric:cric_densenet121_p1_seed349 gpu=0 attempt=1
+finished cric:cric_resnet50_p2_seed349
+started cric:cric_densenet121_p1_prime_seed349 gpu=3 attempt=1
+finished cric:cric_vit_b_16_p1_prime_seed307
+started cric:cric_densenet121_p2_seed349 gpu=5 attempt=1
+finished cric:cric_vit_b_16_p2_seed307
+started cric:cric_efficientnet_b0_p1_seed349 gpu=4 attempt=1
+finished cric:cric_densenet121_p1_seed349
+started cric:cric_efficientnet_b0_p1_prime_seed349 gpu=0 attempt=1
+finished cric:cric_efficientnet_b0_p1_seed349
+started cric:cric_efficientnet_b0_p2_seed349 gpu=4 attempt=1
+finished cric:cric_densenet121_p1_prime_seed349
+started cric:cric_convnext_tiny_p1_seed349 gpu=3 attempt=1
+finished cric:cric_densenet121_p2_seed349
+started cric:cric_convnext_tiny_p1_prime_seed349 gpu=5 attempt=1
+finished cric:cric_efficientnet_b0_p1_prime_seed349
+started cric:cric_convnext_tiny_p2_seed349 gpu=0 attempt=1
+finished cric:cric_efficientnet_b0_p2_seed349
+started cric:cric_vit_b_16_p1_seed349 gpu=4 attempt=1
+finished cric:cric_convnext_tiny_p1_seed349
+started cric:cric_vit_b_16_p1_prime_seed349 gpu=3 attempt=1
+finished cric:cric_convnext_tiny_p1_prime_seed349
+started cric:cric_vit_b_16_p2_seed349 gpu=5 attempt=1
+finished cric:cric_convnext_tiny_p2_seed349
+started cric:cric_resnet18_p1_seed401 gpu=0 attempt=1
+finished cric:cric_resnet18_p1_seed401
+started cric:cric_resnet18_p1_prime_seed401 gpu=0 attempt=1
+finished cric:cric_resnet18_p1_prime_seed401
+started cric:cric_resnet18_p2_seed401 gpu=0 attempt=1
+finished cric:cric_resnet18_p2_seed401
+started cric:cric_resnet50_p1_seed401 gpu=0 attempt=1
+finished cric:cric_vit_b_16_p1_seed349
+started cric:cric_resnet50_p1_prime_seed401 gpu=4 attempt=1
+finished cric:cric_resnet50_p1_seed401
+started cric:cric_resnet50_p2_seed401 gpu=0 attempt=1
+finished cric:cric_resnet50_p1_prime_seed401
+started cric:cric_densenet121_p1_seed401 gpu=4 attempt=1
+finished cric:cric_resnet50_p2_seed401
+started cric:cric_densenet121_p1_prime_seed401 gpu=0 attempt=1
+finished cric:cric_vit_b_16_p1_prime_seed349
+started cric:cric_densenet121_p2_seed401 gpu=3 attempt=1
+finished cric:cric_vit_b_16_p2_seed349
+started cric:cric_efficientnet_b0_p1_seed401 gpu=5 attempt=1
+finished cric:cric_densenet121_p1_seed401
+started cric:cric_efficientnet_b0_p1_prime_seed401 gpu=4 attempt=1
+finished cric:cric_efficientnet_b0_p1_seed401
+started cric:cric_efficientnet_b0_p2_seed401 gpu=5 attempt=1
+finished cric:cric_densenet121_p1_prime_seed401
+started cric:cric_convnext_tiny_p1_seed401 gpu=0 attempt=1
+finished cric:cric_densenet121_p2_seed401
+started cric:cric_convnext_tiny_p1_prime_seed401 gpu=3 attempt=1
+finished cric:cric_efficientnet_b0_p1_prime_seed401
+started cric:cric_convnext_tiny_p2_seed401 gpu=4 attempt=1
+finished cric:cric_efficientnet_b0_p2_seed401
+started cric:cric_vit_b_16_p1_seed401 gpu=5 attempt=1
+finished cric:cric_convnext_tiny_p1_seed401
+started cric:cric_vit_b_16_p1_prime_seed401 gpu=0 attempt=1
+finished cric:cric_convnext_tiny_p1_prime_seed401
+started cric:cric_vit_b_16_p2_seed401 gpu=3 attempt=1
+finished cric:cric_convnext_tiny_p2_seed401
+started cric:cric_resnet18_p1_seed457 gpu=4 attempt=1
+finished cric:cric_resnet18_p1_seed457
+started cric:cric_resnet18_p1_prime_seed457 gpu=4 attempt=1
+finished cric:cric_resnet18_p1_prime_seed457
+started cric:cric_resnet18_p2_seed457 gpu=4 attempt=1
+finished cric:cric_resnet18_p2_seed457
+started cric:cric_resnet50_p1_seed457 gpu=4 attempt=1
+finished cric:cric_vit_b_16_p1_seed401
+started cric:cric_resnet50_p1_prime_seed457 gpu=5 attempt=1
+finished cric:cric_resnet50_p1_seed457
+started cric:cric_resnet50_p2_seed457 gpu=4 attempt=1
+finished cric:cric_resnet50_p1_prime_seed457
+started cric:cric_densenet121_p1_seed457 gpu=5 attempt=1
+finished cric:cric_vit_b_16_p1_prime_seed401
+started cric:cric_densenet121_p1_prime_seed457 gpu=0 attempt=1
+finished cric:cric_resnet50_p2_seed457
+started cric:cric_densenet121_p2_seed457 gpu=4 attempt=1
+finished cric:cric_vit_b_16_p2_seed401
+started cric:cric_efficientnet_b0_p1_seed457 gpu=3 attempt=1
+finished cric:cric_densenet121_p1_seed457
+started cric:cric_efficientnet_b0_p1_prime_seed457 gpu=5 attempt=1
+finished cric:cric_efficientnet_b0_p1_seed457
+started cric:cric_efficientnet_b0_p2_seed457 gpu=3 attempt=1
+finished cric:cric_densenet121_p1_prime_seed457
+started cric:cric_convnext_tiny_p1_seed457 gpu=0 attempt=1
+finished cric:cric_densenet121_p2_seed457
+started cric:cric_convnext_tiny_p1_prime_seed457 gpu=4 attempt=1
+finished cric:cric_efficientnet_b0_p1_prime_seed457
+started cric:cric_convnext_tiny_p2_seed457 gpu=5 attempt=1
+finished cric:cric_efficientnet_b0_p2_seed457
+started cric:cric_vit_b_16_p1_seed457 gpu=3 attempt=1
+finished cric:cric_convnext_tiny_p1_seed457
+started cric:cric_vit_b_16_p1_prime_seed457 gpu=0 attempt=1
+finished cric:cric_convnext_tiny_p1_prime_seed457
+started cric:cric_vit_b_16_p2_seed457 gpu=4 attempt=1
+finished cric:cric_convnext_tiny_p2_seed457
+started cric:cric_resnet18_p1_seed503 gpu=5 attempt=1
+finished cric:cric_resnet18_p1_seed503
+started cric:cric_resnet18_p1_prime_seed503 gpu=5 attempt=1
+finished cric:cric_resnet18_p1_prime_seed503
+started cric:cric_resnet18_p2_seed503 gpu=5 attempt=1
+finished cric:cric_resnet18_p2_seed503
+started cric:cric_resnet50_p1_seed503 gpu=5 attempt=1
+finished cric:cric_vit_b_16_p1_seed457
+started cric:cric_resnet50_p1_prime_seed503 gpu=3 attempt=1
+finished cric:cric_resnet50_p1_seed503
+started cric:cric_resnet50_p2_seed503 gpu=5 attempt=1
+finished cric:cric_resnet50_p1_prime_seed503
+started cric:cric_densenet121_p1_seed503 gpu=3 attempt=1
+finished cric:cric_resnet50_p2_seed503
+started cric:cric_densenet121_p1_prime_seed503 gpu=5 attempt=1
+finished cric:cric_vit_b_16_p1_prime_seed457
+started cric:cric_densenet121_p2_seed503 gpu=0 attempt=1
+finished cric:cric_vit_b_16_p2_seed457
+started cric:cric_efficientnet_b0_p1_seed503 gpu=4 attempt=1
+finished cric:cric_densenet121_p1_seed503
+started cric:cric_efficientnet_b0_p1_prime_seed503 gpu=3 attempt=1
+finished cric:cric_efficientnet_b0_p1_seed503
+started cric:cric_efficientnet_b0_p2_seed503 gpu=4 attempt=1
+finished cric:cric_densenet121_p1_prime_seed503
+started cric:cric_convnext_tiny_p1_seed503 gpu=5 attempt=1
+finished cric:cric_densenet121_p2_seed503
+started cric:cric_convnext_tiny_p1_prime_seed503 gpu=0 attempt=1
+finished cric:cric_efficientnet_b0_p1_prime_seed503
+started cric:cric_convnext_tiny_p2_seed503 gpu=3 attempt=1
+finished cric:cric_efficientnet_b0_p2_seed503
+started cric:cric_vit_b_16_p1_seed503 gpu=4 attempt=1
+finished cric:cric_convnext_tiny_p1_seed503
+started cric:cric_vit_b_16_p1_prime_seed503 gpu=5 attempt=1
+finished cric:cric_convnext_tiny_p1_prime_seed503
+started cric:cric_vit_b_16_p2_seed503 gpu=0 attempt=1
+finished cric:cric_convnext_tiny_p2_seed503
+started cric:cric_resnet18_p1_seed557 gpu=3 attempt=1
+finished cric:cric_resnet18_p1_seed557
+started cric:cric_resnet18_p1_prime_seed557 gpu=3 attempt=1
+finished cric:cric_resnet18_p1_prime_seed557
+started cric:cric_resnet18_p2_seed557 gpu=3 attempt=1
+finished cric:cric_resnet18_p2_seed557
+started cric:cric_resnet50_p1_seed557 gpu=3 attempt=1
+finished cric:cric_vit_b_16_p1_seed503
+started cric:cric_resnet50_p1_prime_seed557 gpu=4 attempt=1
+finished cric:cric_resnet50_p1_seed557
+started cric:cric_resnet50_p2_seed557 gpu=3 attempt=1
+finished cric:cric_resnet50_p1_prime_seed557
+started cric:cric_densenet121_p1_seed557 gpu=4 attempt=1
+finished cric:cric_resnet50_p2_seed557
+started cric:cric_densenet121_p1_prime_seed557 gpu=3 attempt=1
+finished cric:cric_vit_b_16_p1_prime_seed503
+started cric:cric_densenet121_p2_seed557 gpu=5 attempt=1
+finished cric:cric_vit_b_16_p2_seed503
+started cric:cric_efficientnet_b0_p1_seed557 gpu=0 attempt=1
+finished cric:cric_densenet121_p1_seed557
+started cric:cric_efficientnet_b0_p1_prime_seed557 gpu=4 attempt=1
+finished cric:cric_efficientnet_b0_p1_seed557
+started cric:cric_efficientnet_b0_p2_seed557 gpu=0 attempt=1
+finished cric:cric_densenet121_p1_prime_seed557
+started cric:cric_convnext_tiny_p1_seed557 gpu=3 attempt=1
+finished cric:cric_densenet121_p2_seed557
+started cric:cric_convnext_tiny_p1_prime_seed557 gpu=5 attempt=1
+finished cric:cric_efficientnet_b0_p1_prime_seed557
+started cric:cric_convnext_tiny_p2_seed557 gpu=4 attempt=1
+finished cric:cric_efficientnet_b0_p2_seed557
+started cric:cric_vit_b_16_p1_seed557 gpu=0 attempt=1
+finished cric:cric_convnext_tiny_p1_seed557
+started cric:cric_vit_b_16_p1_prime_seed557 gpu=3 attempt=1
+finished cric:cric_convnext_tiny_p1_prime_seed557
+started cric:cric_vit_b_16_p2_seed557 gpu=5 attempt=1
+finished cric:cric_convnext_tiny_p2_seed557
+finished cric:cric_vit_b_16_p1_seed557
+finished cric:cric_vit_b_16_p1_prime_seed557
+finished cric:cric_vit_b_16_p2_seed557
+matrix done: 1341/1341 complete, 0 failed

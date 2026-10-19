@@ -1,0 +1,40 @@
+{\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{longtable}{llrrr}
+\caption{Amendment 8 test-time carrier ablations on the Study 2 2C models: leak and clean accuracy (percent, 20 runs each) and the leak advantage (pp).}\label{r:tab:ablation}\\
+\toprule
+Architecture & Ablation & Leak models & Clean models & Leak $-$ clean \\
+\midrule
+\endfirsthead
+\toprule
+Architecture & Ablation & Leak models & Clean models & Leak $-$ clean \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+ResNet-50 & original & 96.45\,$\pm$\,0.94 & 94.77\,$\pm$\,1.33 & 1.69 \\
+ & grey & 60.41\,$\pm$\,5.61 & 59.56\,$\pm$\,7.27 & 0.84 \\
+ & stain\_transfer & 87.81\,$\pm$\,2.85 & 87.76\,$\pm$\,2.77 & 0.05 \\
+ & low\_pass & 58.11\,$\pm$\,11.63 & 54.46\,$\pm$\,11.17 & 3.65 \\
+ & illumination\_flat & 91.39\,$\pm$\,2.88 & 90.15\,$\pm$\,2.18 & 1.25 \\
+ & background\_grey & 90.10\,$\pm$\,2.57 & 89.36\,$\pm$\,1.84 & 0.74 \\
+DenseNet-121 & original & 96.94\,$\pm$\,0.78 & 94.73\,$\pm$\,1.50 & 2.21 \\
+ & grey & 61.76\,$\pm$\,6.30 & 58.05\,$\pm$\,8.26 & 3.71 \\
+ & stain\_transfer & 90.23\,$\pm$\,2.21 & 89.64\,$\pm$\,1.92 & 0.59 \\
+ & low\_pass & 76.26\,$\pm$\,6.79 & 71.09\,$\pm$\,5.97 & 5.17 \\
+ & illumination\_flat & 92.33\,$\pm$\,2.17 & 90.68\,$\pm$\,3.18 & 1.64 \\
+ & background\_grey & 83.98\,$\pm$\,3.72 & 82.27\,$\pm$\,5.20 & 1.71 \\
+ViT-B/16 & original & 96.01\,$\pm$\,1.15 & 94.08\,$\pm$\,2.01 & 1.93 \\
+ & grey & 55.54\,$\pm$\,5.12 & 58.42\,$\pm$\,7.25 & \textminus{}2.87 \\
+ & stain\_transfer & 89.97\,$\pm$\,2.40 & 89.40\,$\pm$\,3.25 & 0.57 \\
+ & low\_pass & 94.70\,$\pm$\,1.74 & 92.87\,$\pm$\,2.95 & 1.83 \\
+ & illumination\_flat & 89.90\,$\pm$\,2.63 & 88.56\,$\pm$\,3.56 & 1.34 \\
+ & background\_grey & 90.12\,$\pm$\,2.73 & 88.44\,$\pm$\,3.54 & 1.68 \\
+ConvNeXt-T & original & 96.14\,$\pm$\,1.38 & 95.08\,$\pm$\,1.49 & 1.06 \\
+ & grey & 65.94\,$\pm$\,5.38 & 63.77\,$\pm$\,5.85 & 2.16 \\
+ & stain\_transfer & 92.31\,$\pm$\,2.68 & 91.69\,$\pm$\,2.52 & 0.61 \\
+ & low\_pass & 83.55\,$\pm$\,7.47 & 83.76\,$\pm$\,6.82 & \textminus{}0.20 \\
+ & illumination\_flat & 93.20\,$\pm$\,1.62 & 92.21\,$\pm$\,1.87 & 0.98 \\
+ & background\_grey & 90.59\,$\pm$\,2.46 & 90.03\,$\pm$\,1.98 & 0.56 \\
+\end{longtable}
+}

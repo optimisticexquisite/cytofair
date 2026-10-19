@@ -1,0 +1,22 @@
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[node distance=4mm and 6mm]
+\node[box=22mm] (x) {Augmented crop};
+\node[box=24mm, right=of x] (bb) {Backbone\\\footnotesize ImageNet init};
+\node[box=22mm, right=of bb] (f) {Pooled features $z$};
+\node[box=24mm, above right=2mm and 6mm of f] (head) {Class head\\\footnotesize linear};
+\node[gold=24mm, below right=2mm and 6mm of f] (grl) {Gradient reversal\\\footnotesize $\times(-\lambda_t)$, DANN ramp};
+\node[box=28mm, right=of grl] (adv) {Parent head\\\footnotesize 2A: MLP 512\\\footnotesize A8: BN + linear, reset /5 ep};
+\node[box=26mm, right=of adv] (mask) {Mask to parents of the true class};
+\node[box=20mm, right=of head] (ce) {Class CE};
+\draw[flow] (x) -- (bb); \draw[flow] (bb) -- (f); \draw[flow] (f) |- (head); \draw[flow] (f) |- (grl);
+\draw[flow] (grl) -- (adv); \draw[flow] (adv) -- (mask); \draw[flow] (head) -- (ce);
+\end{tikzpicture}
+\end{adjustbox}
+\caption{The adversarial suppression arms. The parent adversary only competes among parents of the sample's own class,
+so suppressing it never requires removing class information. Study 2 (2A) used a two-layer MLP; Amendment 8 (F7) used a
+probe-matched head (per-feature standardisation and one linear layer, its own optimiser at $10^{-3}$, re-initialised every
+five epochs) so that features could not hide parent identity from it while leaving it readable by a linear probe.}
+\label{r:fig:adversary}
+\end{figure}

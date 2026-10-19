@@ -1,0 +1,68 @@
+\chapter*{About this record}
+\addcontentsline{toc}{chapter}{About this record}
+
+This is the complete record of the \cytofair{} project from its first registered commit on 22 August 2026 to
+the end of the follow-up experiments on 20 October 2026. It is deliberately exhaustive. It keeps the original
+Study~1 record intact as Part~II, and adds everything that happened afterwards: the review that turned Study~1's
+weaknesses into a scaling roadmap, the separately preregistered Study~2, the engineering needed to run \RecAllTasks
+GPU tasks on a shared host with a four-core CPU allowance, every registered result, the eight follow-up
+hypotheses of Amendment~8, the bugs and setbacks, and what the project established, refuted, and left open.
+
+\begin{keybox}{Evidence boundary}
+Every number in Parts~I and III--VIII is generated from committed outputs: the registered analysis files in
+\artifact{results/study2/analysis} and \artifact{results/study2/followup}, the exported run records in
+\artifact{results/study2/run_records}, the power simulation, the provenance maps, and the git history. The
+generators are \artifact{scripts/study2/paper_numbers.py}, \artifact{record/scripts/make_record_tables.py}, and
+\artifact{record/scripts/make_record_figures.py}; no result is typed by hand. Part~II is the Study~1 record of 13
+September 2026, carried over verbatim (labels prefixed so they cannot collide), and its numbers come from the Study~1
+result files as they stood then.
+\end{keybox}
+
+\begin{warningbox}{What ``preregistered'' means here}
+Study~2 and Amendment~8 were registered as commits in version control before any model whose result they govern was
+trained, and the registration commit's hash is recorded inside every run record. That is strong internal evidence, but
+the commits have not yet been pushed or deposited with a third party, so an outside reader cannot yet verify their
+dates independently. Amendment~8 was written after Study~2's results were known and is reported as a registered
+follow-up, not as part of Study~2.
+\end{warningbox}
+
+\section*{How the record is organised}
+
+\begin{description}[leftmargin=2.2em,style=nextline]
+\item[Part I, the lifecycle at a glance] One chapter with the whole story: timeline, every registered test and its
+verdict, the hypothesis map, and the answers to ``what did we get out of it?''.
+\item[Part II, Study 1] The frozen Study~1 record: motivation, provenance recovery, structural leakage, literal overlap,
+the parent-identity probe, the SIPaKMeD and Cx22 rescoring, statistics, execution failures, verification, and release.
+\item[Part III, from Study 1 to Study 2] The roadmap and our response to each item, Phase~0 checks, the Study~2
+preregistration, power analysis, every design (splits, factorial, transplants, adversary, CRIC), the structural closed
+forms, and the post hoc reanalysis of Study~1.
+\item[Part IV, engineering and execution] The host, its constraints, the GPU-resident input path, determinism, the
+trainer's artifact schema, the scheduler, failure handling, smoke tests, the execution timeline, compute, archiving,
+and the complete log of errors and fixes.
+\item[Part V, Study 2 results] H1 to H5 with every sensitivity analysis and secondary analysis, training curves,
+calibration, confusion matrices, and per-architecture detail.
+\item[Part VI, Amendment 8] The follow-up question, the eight registered hypotheses, their designs, the preparer bug
+(Amendment~9), every result, and the mechanism by elimination.
+\item[Part VII, synthesis] What was established, refuted, and left open; what worked and what did not; lessons;
+threats to validity; recommendations; publication options; decisions only the authors can make.
+\item[Part VIII, appendices] The Study~1 appendices, complete run ledgers for every Study~2 and follow-up run, variance
+components, power grid, risk report, the full commit chronology, registration hashes, and a reproduction cookbook.
+\end{description}
+
+\section*{Reading paths}
+
+\begin{itemize}[leftmargin=1.6em]
+\item \emph{Ten minutes:} Part~I.
+\item \emph{The science:} Part~I, Chapter~\ref{r:ch:roadmap}, Part~V, Part~VI, Chapter~\ref{r:ch:synthesis}.
+\item \emph{Reproducing or extending the work:} Part~IV, Appendix~\ref{r:app:cookbook}, and the ledgers.
+\item \emph{Writing a paper from it:} Chapter~\ref{r:ch:synthesis} (claims and their strength) and
+Section~\ref{r:sec:publication}.
+\end{itemize}
+
+\section*{Conventions}
+
+P1 is a stratified crop-level 80:20 split; P1-prime (P1$'$) a size-matched control; P2 a parent-disjoint split (field,
+source image, or slide); P3 a parent-disjoint split after merging near-duplicate-linked parents. ``pp'' means percentage
+points. Unless stated otherwise, intervals are 95\%, times are Asia/Kolkata (IST), and ``supported'' means a registered
+test passed its registered criterion (adjusted $p<0.05$ with the predicted sign). In figures, crop-level (leaky) series
+are orange, parent-level blue, and component-level aqua; leak models are orange and clean models blue.

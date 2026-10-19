@@ -1,0 +1,22 @@
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[node distance=4mm and 6mm]
+\node[box=34mm] (cric) {\textbf{F1} CRIC slide context\\\footnotesize saved predictions, CPU only};
+\node[box=34mm, right=of cric] (abl) {\textbf{F2} test-time ablations + Grad-CAM\\\footnotesize 160 saved 2C models};
+\node[gold=34mm, right=of abl] (car) {\textbf{F3, F4} carrier factorial\\\footnotesize 480 new runs, fresh seeds};
+\node[box=34mm, below=8mm of cric] (leace) {\textbf{F5} LEACE erasure\\\footnotesize 480 saved Phase 1 models};
+\node[gold=34mm, right=of leace] (norm) {\textbf{F6} stain normalisation\\\footnotesize 160 new runs};
+\node[gold=34mm, right=of norm] (lin) {\textbf{F7} linear adversary\\\footnotesize 300 new runs};
+\node[done=110mm, below=8mm of norm] (pool) {\textbf{F8} pooled dose-response of the gap on recoverability over the in-regime levels of F5, F6, F7};
+\draw[flow] (leace.south) -- (leace.south |- pool.north);
+\draw[flow] (norm.south) -- (pool.north);
+\draw[flow] (lin.south) -- (lin.south |- pool.north);
+\node[note, above=1mm of abl] {where the leak lives};
+\node[note, above=1mm of norm] {does the gap track the fingerprint?};
+\end{tikzpicture}
+\end{adjustbox}
+\caption{The eight Amendment~8 hypotheses. Blue arms reuse saved Study~2 artifacts (no retraining); gold arms train new
+models on seeds no earlier arm used; F8 pools the three dose-response arms.}
+\label{r:fig:followup-arms}
+\end{figure}

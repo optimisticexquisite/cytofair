@@ -1,0 +1,21 @@
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[node distance=2.5mm and 6mm]
+\node[box=38mm] (q) {Where does the leaked advantage live?};
+\node[bad=40mm, below left=6mm and -8mm of q] (bg) {Background context\\\footnotesize H4 null; F3 survives masking; test-time removal keeps \RecBgKeep\%};
+\node[bad=40mm, below=of bg] (pix) {Literally shared pixels\\\footnotesize exploratory: equal for non-overlapping crops};
+\node[bad=40mm, below=of pix] (prior) {Slide-level label prior\\\footnotesize F1 reversed; equal gain when discordant};
+\node[bad=40mm, below=of prior] (code) {Linear field-identity code\\\footnotesize F5, F7, F8: $R$ cut up to \RecoveryCutMax\%, gap flat};
+\node[bad=40mm, below=of code] (sal) {Visible to saliency\\\footnotesize Grad-CAM identical for leak and clean};
+\node[done=40mm, below right=6mm and -8mm of q] (colour) {Tied to the field's colour rendering\\\footnotesize F2: stain transfer removes \RecStainRemove\%};
+\node[gold=40mm, below=of colour] (aug) {Not prevented by colour jitter\\\footnotesize F4 null};
+\node[box=40mm, below=8mm of aug] (account) {Account: class evidence calibrated to each seen field's appearance};
+\draw[flow] (q) -- (bg); \draw[flow] (q) -- (colour);
+\draw[flow] (colour) -- (aug); \draw[flow] (aug) -- (account);
+\end{tikzpicture}
+\end{adjustbox}
+\caption{The mechanism by elimination. Red: candidate carriers ruled out; green: the one intervention that removed most
+of the advantage; gold: the qualification that keeps the account modest.}
+\label{r:fig:elimination}
+\end{figure}

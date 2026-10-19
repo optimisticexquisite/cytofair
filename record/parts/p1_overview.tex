@@ -1,0 +1,108 @@
+\part{The Lifecycle at a Glance}
+
+\chapter{The whole project on a few pages}
+\label{r:ch:overview}
+
+\section{The question}
+
+Public cervical cytology benchmarks are released as cell crops, and most crops are cut from far fewer microscope
+fields or slide images. When a benchmark is split at the crop level, crops from one field land on both sides of the
+train--test boundary. Files are disjoint, but the test set shares stain, illumination, focus, background, and sometimes
+literal pixels with training. The project asked three questions in order: \emph{is the structure there}, \emph{is the
+shared parent recognisable}, and \emph{does it inflate reported performance}; and then a fourth: \emph{how do models use
+it}.
+
+\section{What happened, in order}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{timeline.pdf}
+\caption{The lifecycle. Top: commits per day across the project. Bottom: Study~2 and Amendment~8 hour by hour; every
+span is measured from run records or commits.}
+\label{r:fig:timeline}
+\end{figure}
+
+\input{diagrams/lifecycle_flow}
+
+\begin{enumerate}[leftmargin=1.8em]
+\item \textbf{Study 1 (22 August -- 13 September 2026).} The crop-to-parent hierarchy of four public datasets was
+recovered with independent, fail-closed branches; random crop splitting placed a training parent behind 92.6\% of
+SIPaKMeD and 99.97\% of CRIC test cells; more than half of SIPaKMeD test crops shared source pixels with a training
+crop; a 424-way parent probe reached 109 times chance. Classifiers scored higher under crop-level splits for all six
+architectures and all seven Cx22 segmentation models, but none of the per-architecture tests survived the registered
+Benjamini--Hochberg correction. Part~II is that record.
+\item \textbf{The roadmap (October 2026).} A review identified four weaknesses: one question asked six times, availability
+not distinguished from use, leakage confounded with training diversity, and only one rescored benchmark. It proposed a
+single mixed-model test sized by simulation, causal arms, more architectures and seeds, preregistration, and keeping
+every per-sample artifact (Chapter~\ref{r:ch:roadmap}).
+\item \textbf{Study 2 (18--19 October).} Registered at commit \texttt{\RegistrationCommit} (\RegistrationTime), before any
+Study~2 model was trained: one primary test (H1) and a Holm family of four mechanism tests (H2--H5), \RecStudyTwoRuns\
+runs over \RecStudyTwoWall\ hours on four GPUs. H1, H2, and H3 were supported; H4 and H5 were not.
+\item \textbf{Amendment 8 (19--20 October).} Eight new hypotheses about \emph{how} the leak is used, registered at
+\texttt{\FollowupCommit} (\FollowupTime) after the Study~2 analysis and before any follow-up run: \RecFollowTasks\ tasks
+over \RecFollowWall\ hours. F2 and F3 were supported; F1 went the opposite way; F4--F8 were null.
+\item \textbf{Amendment 9 (20 October, 01:25).} A labelling bug in the follow-up preparer halted the analysis before it
+produced output; fixed and recorded before any affected estimate was seen.
+\item \textbf{Close-out.} Manuscript (\artifact{paper/v2}), this record, 121~GB of outputs archived and verified on the
+network home, and the node-local disk vacated.
+\end{enumerate}
+
+\section{Every registered test}
+
+\input{generated/all_tests}
+
+\input{diagrams/hypothesis_map}
+
+\section{What we got out of it}
+
+\begin{workedbox}{Established}
+\begin{itemize}[leftmargin=1.4em]
+\item Crop-level splitting inflates accuracy on SIPaKMeD by \HoneEst~pp (95\% CI \HoneBootLo--\HoneBootHi; all
+twelve architectures positive) and on CRIC by \HtwoEst~pp; the parent-level error rate is \SipErrorRatio\ and
+\CricErrorRatio\ times the crop-level one.
+\item The inflation is leakage, not the extra training diversity crop-level splits bring: at matched crop and field
+counts the leak effect is \HthreeEst~pp and the diversity effect \DivEst~pp; the leak effect replicated on fresh seeds
+(\HthreeRepEst~pp).
+\item The leak needs no background (F3: \FthreeEst~pp with every background masked) and is tied to the field's colour
+rendering at test time (F2: stain transfer cuts it from \LeakUnderOriginal\ to \LeakUnderStain~pp).
+\item Neither a linearly decodable field code nor Grad-CAM-visible attention carries it: erasing or adversarially
+suppressing field identity cut probe recoverability by up to \RecoveryCutMax\% without moving the gap, and Grad-CAM maps
+of leak and clean models were indistinguishable.
+\end{itemize}
+\end{workedbox}
+
+\begin{warningbox}{Not supported, reversed, or open}
+\begin{itemize}[leftmargin=1.4em]
+\item H4 (a background context route) and H5 (the gap tracks gradient-reversal suppression) were not supported; the
+ConvNeXt-T adversary was evaded.
+\item F1 reversed: CRIC models were \emph{not} pulled toward the slide's majority label.
+\item F4: strong colour augmentation did not prevent leakage, which qualifies F2.
+\item Parents are not patients; one training recipe was used throughout; Study~2's registrations still need an external
+timestamp.
+\end{itemize}
+\end{warningbox}
+
+\begin{decisionbox}{The practical message}
+Probes, saliency maps, background removal, and colour augmentation cannot certify that an evaluation is free of
+hierarchical leakage. Only a split at the deepest released parent unit removes it, and the closed forms of
+Chapter~\ref{r:ch:structure} predict which benchmarks are exposed before any model is trained.
+\end{decisionbox}
+
+\section{Numbers at a glance}
+
+\begin{longtable}{p{0.55\textwidth}p{0.38\textwidth}}
+\toprule
+Quantity & Value \\
+\midrule
+Trained models (Study 1, Study 2, Amendment 8) & \RecAllModels\ (325 + \RecStudyTwoRuns\ + \RecFollowTrainRuns) \\
+Evaluation-only runs on saved models (Amendment 8) & \RecFollowEvalRuns \\
+Training epochs logged (Study 2 and Amendment 8) & \RecEpochs \\
+GPU-hours, Study 2 / Amendment 8 & \RecGpuHoursStudyTwo\ / \RecGpuHoursFollow \\
+Study 2 matrix wall clock & \RecStudyTwoWall\ h (\RecStudyTwoStart\ to \RecStudyTwoEnd) \\
+Amendment 8 matrix wall clock & \RecFollowWall\ h (\RecFollowStart\ to \RecFollowEnd) \\
+Failed tasks, retries, diverged runs & 0, 0, 0 \\
+Smoke tests before registration & \RecSmokeRuns \\
+Commits & \RecCommits \\
+Registered confirmatory tests & 1 primary + 4 (Holm) + 8 (Holm) \\
+\bottomrule
+\end{longtable}

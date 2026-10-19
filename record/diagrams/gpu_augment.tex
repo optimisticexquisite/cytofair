@@ -1,0 +1,21 @@
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[node distance=4mm and 4mm]
+\node[box=25mm] (cache) {Packed cache\\\footnotesize uint8, one memmap};
+\node[box=25mm, right=of cache] (gpu) {GPU-resident crops\\\footnotesize uploaded once per run};
+\node[box=25mm, right=of gpu] (params) {RRC parameters\\\footnotesize CPU generator, exact torchvision port};
+\node[box=25mm, right=of params] (crop) {Crop, antialiased resize, flips};
+\node[gold=25mm, below=of crop] (color) {Optional HED + BC jitter\\\footnotesize Amendment 8 colour arm};
+\node[box=25mm, left=of color] (norm) {ImageNet normalise};
+\node[box=25mm, left=of norm] (model) {Backbone + head\\\footnotesize deterministic kernels};
+\node[box=25mm, left=of model] (out) {Logits, features, weights};
+\draw[flow] (cache) -- (gpu); \draw[flow] (gpu) -- (params); \draw[flow] (params) -- (crop);
+\draw[flow] (crop) -- (color); \draw[flow] (color) -- (norm); \draw[flow] (norm) -- (model); \draw[flow] (model) -- (out);
+\end{tikzpicture}
+\end{adjustbox}
+\caption{The GPU-resident training input path. The host allowed four CPU cores per user, which made per-image PIL
+augmentation in data-loader workers the bottleneck; moving the registered augmentation onto the GPU removed it
+while sampling exactly the same crop geometry as torchvision for the same random stream.}
+\label{r:fig:gpu-augment}
+\end{figure}

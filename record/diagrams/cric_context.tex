@@ -1,0 +1,23 @@
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[node distance=4mm and 6mm, cell/.style={circle,draw=CytoInk!60,minimum size=5mm,inner sep=0pt,font=\scriptsize}]
+\node[draw=CytoBlue, rounded corners, minimum width=52mm, minimum height=26mm, label={[font=\small]above:One CRIC slide image}] (slide) {};
+\node[cell, fill=SerBlue!35] at ($(slide.center)+(-18mm,6mm)$) {N};
+\node[cell, fill=SerBlue!35] at ($(slide.center)+(-8mm,7mm)$) {N};
+\node[cell, fill=SerBlue!35] at ($(slide.center)+(3mm,6mm)$) {N};
+\node[cell, fill=SerBlue!35] at ($(slide.center)+(14mm,7mm)$) {N};
+\node[cell, fill=SerBlue!35] at ($(slide.center)+(-14mm,-5mm)$) {N};
+\node[cell, fill=SerBlue!35] at ($(slide.center)+(-3mm,-6mm)$) {N};
+\node[cell, fill=SerOrange!45, very thick] (target) at ($(slide.center)+(10mm,-6mm)$) {L};
+\node[box=46mm, right=10mm of slide] (def) {Context class of the orange cell = majority of the \emph{other} cells = N.\\
+Its own class L $\neq$ N: a \textbf{discordant} cell.};
+\node[box=46mm, below=4mm of def] (test) {F1: $p$(N) for this cell under P1 (slide in training) minus under P2 (slide unseen); predicted $>0$.};
+\node[done=46mm, below=4mm of test] (res) {Observed: \FoneEst~pp, the opposite sign.};
+\draw[flow] (target) -- (def); \draw[flow] (def) -- (test); \draw[flow] (test) -- (res);
+\end{tikzpicture}
+\end{adjustbox}
+\caption{How F1 defines a discordant cell. A slide-level label prior would pull discordant cells toward their slide's
+majority class when the slide was seen in training; the models did the opposite.}
+\label{r:fig:cric-context-diagram}
+\end{figure}

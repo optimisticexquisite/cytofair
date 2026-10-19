@@ -1,0 +1,33 @@
+% Carried over verbatim from monograph/main.tex (Study 1 record, 13 Sep 2026).
+\chapter{Interpretation, limitations, and practical guidance}\label{s1:ch:ch15_interpretation_limitations_and_practical}
+
+\section{What the evidence supports}
+
+The source hierarchy is real and recoverable. Random crop splitting predictably separates siblings. In SIPaKMeD it can also put overlapping source pixels into training and test. Parent identity is learnable even after large parts of the apparent cell signal are removed. Parent- and component-disjoint protocols eliminate the directly measured sharing. These conclusions follow from deterministic identities, geometry, and controls, not from a single favorable neural score.
+
+The downstream effect is subtler. Every tested \protocol{P1}$-$\protocol{P2} mean is positive, including six classifiers and seven segmentation models, but the Cx22 semantic differences are often tiny and none of the task-specific confirmatory families survives BH correction. The evidence supports changing split construction because independence is a design requirement, not because a guaranteed score penalty has been estimated.
+
+\section{Two hard visual structures in Cx22}
+
+The most persistent semantic error source is the nucleus channel. Nuclei occupy fewer pixels, so boundary uncertainty has a larger Dice penalty; pale nuclei and overlaps further reduce contrast. The second hard structure is touching cytoplasm instances. A union mask can remain visually plausible while an instance model merges two touching cells; maximum matching then assigns a good overlap to one target and zero or low overlap to the other. These explanations correspond to the actual label geometry in Figure~\ref{s1:fig:cx22-labels} and the channel results in Figure~\ref{s1:fig:cx22-channels}.
+
+\section{Real limitations}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Dataset hierarchy stops at the released identifier.} SIPaKMeD fields and Cx22/CRIC sources are not guaranteed to be patient IDs. Parent-disjoint is therefore necessary but may not be sufficient for clinical independence.
+  \item \textbf{Five seeds leave broad uncertainty.} The complete matrix is large in GPU hours but small in inferential replication. Shapiro screening and bootstrap effects are fragile at $n=5$.
+  \item \textbf{No clinical validation.} The study audits public research benchmarks; it does not estimate screening sensitivity, specificity, prevalence calibration, reader impact, or deployment safety.
+  \item \textbf{Hardware and host constraint.} Execution occurred on one login node with at most three A6000 GPUs and an unstable I/O bottleneck. Wall times are not portable performance claims.
+  \item \textbf{Probe transformations are not surgical interventions.} Grayscale, normalization, inpainting, and high-pass filtering each alter multiple cues. They localize signal classes but do not identify a unique causal artifact.
+  \item \textbf{Near-duplicate grouping is conservative and calibrated synthetically.} It found no exact cross-parent duplicates and validated candidate detection on 3 positive/100 negative synthetic examples, but it is not a proof that every biological near-duplicate was linked.
+  \item \textbf{Prediction-level artifacts were not retained.} Post-hoc classifier confusion matrices and qualitative prediction panels cannot be reconstructed without new inference.
+  \item \textbf{Reproduction remains pending on a virgin host.} Dependency or URL drift may still be exposed by that final test.
+\end{enumerate}
+
+\section{Recommended evaluation rule}
+
+For any crop-derived cytology dataset, publish at least four fields for every released observation: a stable observation ID, an acquisition/source parent ID, a patient/specimen ID when ethically and legally possible, and a duplicate-component ID if cross-parent duplication was audited. Construct folds at the highest available independent level and publish the exact fold manifest. Report sample counts at both observation and parent levels. Never compare methods under nominally identical dataset names unless the split identifiers also match.
+
+\section{What to say in a paper}
+
+The defensible headline is: ``Random crop-level evaluation in public cervical cytology can place sibling and even pixel-overlapping crops across train and test; source-disjoint manifests remove this non-independence.'' A stronger sentence---``all published scores are inflated''---is not supported. No individual prior paper needs to be named as deficient; the target is a reusable benchmark practice.

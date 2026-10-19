@@ -1,0 +1,21 @@
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[node distance=3mm and 4mm]
+\node[box=22mm] (orig) {Original test cell};
+\node[box=22mm, right=of orig] (mask) {Foreground mask\\\footnotesize Otsu (S, Y) + close};
+\node[box=22mm, right=of mask] (inp) {Donor background\\\footnotesize Telea inpainting};
+\node[box=22mm, right=of inp] (comp) {Feathered composite\\\footnotesize $\sigma=2$ px};
+\node[box=21mm, below=7mm of orig] (self) {\textbf{self}\\own background};
+\node[box=21mm, right=of self] (sib) {\textbf{sibling}\\same field};
+\node[box=21mm, right=of sib] (same) {\textbf{unseen same}\\unseen field, same class};
+\node[box=21mm, right=of same] (other) {\textbf{unseen other}\\unseen fields, other classes};
+\draw[flow] (orig) -- (mask); \draw[flow] (mask) -- (inp); \draw[flow] (inp) -- (comp);
+\draw[decorate,decoration={brace,amplitude=4pt,mirror}] (self.south west) -- (other.south east)
+  node[midway, below=5pt, note] {route = acc(sibling) $-$ acc(unseen same); H4 = leak $-$ clean difference of the route};
+\end{tikzpicture}
+\end{adjustbox}
+\caption{The 2B counterfactual background transplants. The \emph{self} condition measures seam and inpainting artifacts;
+every contrast compares conditions that share them.}
+\label{r:fig:transplant-diagram}
+\end{figure}

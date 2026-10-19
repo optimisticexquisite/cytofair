@@ -1,0 +1,17 @@
+% Carried over verbatim from monograph/main.tex (Study 1 record, 13 Sep 2026).
+\chapter{Study 1 record: status, scope, and abstract}\label{s1:ch:ch00_status_scope}
+
+
+This is the long-form technical record of the \cytofair{} project. It is intentionally broader than the six-page conference paper. It explains why the project was started, how every analysis was designed, how the code represents the data, what was measured, what worked, what failed, what was changed during execution, what remains unverified, and what artifacts can be reused. The report is written from the repository state and frozen result files; it does not add a new experiment.
+
+\begin{keybox}{Evidence boundary}
+The quantitative claims in this document come from committed CSV, JSON, Parquet, source, and report artifacts in the repository. The experiment inventory contains 120 SIPaKMeD classification runs, 30 parent-identity probe runs, and 175 Cx22 segmentation runs: 325 completed neural-network runs in total. Structural analyses are additional deterministic or Monte Carlo computations, not neural runs. No post-hoc classifier confusion matrix or qualitative model prediction is invented, because the frozen classifier JSON files retain aggregate metrics and epoch histories but not per-sample predictions or checkpoints.
+\end{keybox}
+
+\begin{warningbox}{How to interpret ``leakage'' in this report}
+Structural non-independence, literal pixel overlap, and a learnable parent fingerprint are demonstrated. These facts establish that a shortcut is available. They do \emph{not} prove that every cervical-classification model causally uses that shortcut, and the multiplicity-corrected classifier contrasts do not establish a universal accuracy-inflation effect. This distinction is maintained throughout the report.
+\end{warningbox}
+
+\begin{keybox}{Abstract of the Study 1 record (13 September 2026)}
+Cervical-cell datasets are frequently released as crops, even when several crops came from one microscopic field or source image. A random crop split can therefore place sibling crops in both training and test sets, making file-level disjointness look like biological or acquisition-level independence. CytoFair recovers the hidden crop-to-parent hierarchy, validates it with fail-closed checks, measures structural and literal overlap, constructs parent- and component-disjoint splits, probes whether source identity remains learnable after transformations, and re-scores classification and segmentation models under matched protocols. The audit recovered all 4,049 SIPaKMeD crops, 1,320 Cx22 regions, 11,534 CRIC cells, and 917 Herlev cells. Under random splitting, 92.62\% of SIPaKMeD test crops, 85.23\% of Cx22 test regions, and 99.97\% of CRIC test cells had a parent in training, whereas Herlev correctly remained at zero. More than half of SIPaKMeD test crops shared literal source pixels with a training crop. A 424-way parent probe reached 25.73\% accuracy against 0.2358\% chance. All six SIPaKMeD classifier P1--P2 point estimates and all seven Cx22 segmentation estimates were positive, but no confirmatory contrast survived its preregistered Benjamini--Hochberg family. The project therefore supports a strong benchmark-construction conclusion---evaluate at the independent parent unit---while retaining a narrower and appropriately uncertain model-performance conclusion.
+\end{keybox}

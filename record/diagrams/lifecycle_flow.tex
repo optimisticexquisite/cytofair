@@ -1,0 +1,30 @@
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[node distance=5mm and 6mm]
+\node[done=30mm] (s1reg) {Study 1 registered\\\footnotesize 22 Aug 2026};
+\node[done=30mm, right=of s1reg] (s1run) {Provenance, structure,\\probe, 325 models};
+\node[gold=30mm, right=of s1run] (s1res) {Inflation not certified\\\footnotesize 6 tests, none survive BH};
+\node[box=30mm, below=of s1res] (rec) {Study 1 record\\\footnotesize frozen 7--13 Sep};
+\node[box=30mm, left=of rec] (road) {Scaling roadmap\\\footnotesize review of weaknesses};
+\node[box=30mm, left=of road] (p0) {Phase 0 checks\\\footnotesize clone, licence, Cx22 lit.};
+\node[done=30mm, below=of p0] (s2reg) {Study 2 registered\\\footnotesize 18 Oct 05:07};
+\node[gold=30mm, right=of s2reg] (a7) {Amendment 7\\\footnotesize failure handling};
+\node[done=30mm, right=of a7] (s2run) {1,341 runs\\\footnotesize 27 h on 4 GPUs};
+\node[done=30mm, below=of s2run] (s2res) {H1, H2, H3 supported\\H4, H5 not};
+\node[done=30mm, left=of s2res] (a8) {Amendment 8 registered\\\footnotesize 19 Oct 14:02};
+\node[done=30mm, left=of a8] (frun) {1,580 follow-up tasks\\\footnotesize 13 h on 4 GPUs};
+\node[bad=30mm, below=of frun] (a9) {Amendment 9\\\footnotesize preparer bug, no output};
+\node[done=30mm, right=of a9] (fres) {F2, F3 supported\\F1, F4--F8 not};
+\node[box=30mm, right=of fres] (paper) {Manuscript, record,\\archive, vacate};
+\draw[flow] (s1reg) -- (s1run); \draw[flow] (s1run) -- (s1res); \draw[flow] (s1res) -- (rec);
+\draw[flow] (rec) -- (road); \draw[flow] (road) -- (p0); \draw[flow] (p0) -- (s2reg);
+\draw[flow] (s2reg) -- (a7); \draw[flow] (a7) -- (s2run); \draw[flow] (s2run) -- (s2res);
+\draw[flow] (s2res) -- (a8); \draw[flow] (a8) -- (frun); \draw[flow] (frun) -- (a9);
+\draw[flow] (a9) -- (fres); \draw[flow] (fres) -- (paper);
+\end{tikzpicture}
+\end{adjustbox}
+\caption{The whole lifecycle as a sequence of registered decisions (green), amendments and setbacks (gold, red),
+and reviews (blue). Every arrow is a commit in the repository; Appendix~\ref{r:app:git} lists all of them.}
+\label{r:fig:lifecycle-flow}
+\end{figure}

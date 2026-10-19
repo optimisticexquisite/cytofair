@@ -1,0 +1,28 @@
+{\scriptsize
+\setlength{\tabcolsep}{3.5pt}
+\begin{longtable}{llrrrrr}
+\caption{Amendment 8 carrier factorial (fresh seeds, 10 per cell): accuracy per cell (percent) and the leak effect (pp).}\label{r:tab:carrier}\\
+\toprule
+Architecture & Condition & Leak high & Clean high & Leak low & Clean low & Leak effect \\
+\midrule
+\endfirsthead
+\toprule
+Architecture & Condition & Leak high & Clean high & Leak low & Clean low & Leak effect \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+ResNet-50 & standard & 96.06\,$\pm$\,1.42 & 93.99\,$\pm$\,2.08 & 96.40\,$\pm$\,0.79 & 94.48\,$\pm$\,1.52 & 2.00 \\
+ & masked & 95.46\,$\pm$\,1.19 & 93.42\,$\pm$\,1.26 & 95.69\,$\pm$\,1.36 & 93.87\,$\pm$\,1.37 & 1.92 \\
+ & colour & 95.62\,$\pm$\,1.29 & 93.79\,$\pm$\,1.29 & 95.84\,$\pm$\,1.04 & 94.10\,$\pm$\,1.45 & 1.78 \\
+DenseNet-121 & standard & 96.33\,$\pm$\,1.16 & 95.14\,$\pm$\,1.63 & 97.01\,$\pm$\,0.66 & 94.85\,$\pm$\,1.50 & 1.68 \\
+ & masked & 95.59\,$\pm$\,1.32 & 94.21\,$\pm$\,1.00 & 96.19\,$\pm$\,0.87 & 93.99\,$\pm$\,1.84 & 1.79 \\
+ & colour & 96.20\,$\pm$\,1.01 & 94.47\,$\pm$\,1.48 & 96.45\,$\pm$\,0.58 & 94.54\,$\pm$\,1.68 & 1.82 \\
+ViT-B/16 & standard & 93.40\,$\pm$\,3.70 & 93.60\,$\pm$\,1.77 & 94.97\,$\pm$\,1.74 & 94.49\,$\pm$\,1.32 & 0.14 \\
+ & masked & 94.92\,$\pm$\,2.21 & 92.95\,$\pm$\,1.97 & 94.91\,$\pm$\,1.13 & 92.74\,$\pm$\,1.56 & 2.07 \\
+ & colour & 95.05\,$\pm$\,1.68 & 93.53\,$\pm$\,1.27 & 95.04\,$\pm$\,1.67 & 93.51\,$\pm$\,1.20 & 1.53 \\
+ConvNeXt-T & standard & 96.56\,$\pm$\,0.95 & 95.05\,$\pm$\,1.23 & 96.66\,$\pm$\,0.67 & 94.00\,$\pm$\,2.32 & 2.08 \\
+ & masked & 94.80\,$\pm$\,1.73 & 93.15\,$\pm$\,2.00 & 95.29\,$\pm$\,1.47 & 93.61\,$\pm$\,1.74 & 1.66 \\
+ & colour & 95.30\,$\pm$\,1.77 & 94.24\,$\pm$\,1.95 & 95.77\,$\pm$\,1.51 & 93.44\,$\pm$\,2.68 & 1.69 \\
+\end{longtable}
+}

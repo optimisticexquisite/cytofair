@@ -1,0 +1,142 @@
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces The lifecycle. Top: commits per day across the project. Bottom: Study\nobreakspace {}2 and Amendment\nobreakspace {}8 hour by hour; every span is measured from run records or commits.\relax }}{3}{figure.caption.5}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces The whole lifecycle as a sequence of registered decisions (green), amendments and setbacks (gold, red), and reviews (blue). Every arrow is a commit in the repository; Appendix\nobreakspace {}\ref {r:app:git} lists all of them.\relax }}{3}{figure.caption.6}%
+\contentsline {figure}{\numberline {1.3}{\ignorespaces The four claims the project separates, and the evidence each received. Study 1 established the first two; Study 2 the third; Amendment 8 narrowed the fourth.\relax }}{5}{figure.caption.7}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces The project lifecycle. Blue events register decisions, green events record completed evidence, gold events document execution-driven amendments, red records a numerical failure, and purple marks this report.\relax }}{12}{figure.caption.9}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces The hidden hierarchy and the central failure mode. Several file-disjoint crops can share a parent field, source-specific nuisance factors, or literal source pixels.\relax }}{14}{figure.caption.10}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Dataset scale and mean parent multiplicity. The log-scale left panel prevents CRIC's 11,534 observations from visually erasing the smaller datasets.\relax }}{17}{figure.caption.12}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Complete parent-size distributions recovered from the Parquet maps. High multiplicity drives the probability that random crop splitting places a parent in both arms.\relax }}{18}{figure.caption.13}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces One released Cx22 Pair target decoded from the MATLAB-v7.3 structures. Cytoplasm and nucleus unions define two non-exclusive semantic channels; individual cytoplasm masks define the instance task. The CCEDD RGB source is not redistributed in this report.\relax }}{19}{figure.caption.15}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Reproducibility architecture. Deterministic provenance and split artifacts gate the stochastic GPU experiments, and every final result carries the hashes needed to reconnect it to its inputs.\relax }}{21}{figure.caption.16}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Branch-B diagnostics. The minimum winning NCC is 0.999969. The 0.02 runner-up-margin rule is intentionally only a diagnostic: 3,195 crops pass it and 854 do not, yet all rows agree with Branch A and all boxes remain contained.\relax }}{23}{figure.caption.17}%
+\contentsline {figure}{\numberline {8.2}{\ignorespaces A real recovered-coordinate example for the parent with the largest crop count. Only rectangle geometry is displayed; source pixels are not redistributed. Overlapping rectangles make literal source-pixel sharing possible.\relax }}{24}{figure.caption.18}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {9.1}{\ignorespaces The four protocols. P1 asks what common crop splitting shares. P1-prime holds its test set but matches the P2 training count. P2 groups exact parents. P3 groups whole near-duplicate-linked parent components.\relax }}{26}{figure.caption.20}%
+\contentsline {figure}{\numberline {9.2}{\ignorespaces The analytic mechanism. A one-crop parent cannot straddle; a high-multiplicity parent almost certainly straddles under independent 80:20 crop allocation.\relax }}{27}{figure.caption.21}%
+\contentsline {figure}{\numberline {9.3}{\ignorespaces Analytic and observed leakage. P2 and P3 are omitted from the bars because both are exactly zero on all four datasets.\relax }}{28}{figure.caption.23}%
+\contentsline {figure}{\numberline {9.4}{\ignorespaces Seed-level structural results. Reporting the spread prevents one convenient split from defining the claim.\relax }}{28}{figure.caption.24}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {10.1}{\ignorespaces Literal overlap for every P1 seed. The larger test-crop fraction answers a different question from the pair fraction: whether each test crop has at least one overlapping training sibling.\relax }}{30}{figure.caption.25}%
+\contentsline {figure}{\numberline {10.2}{\ignorespaces Near-duplicate sensitivity audit. The thresholded candidates are used conservatively for grouping; they are not treated as ground-truth duplicate annotations.\relax }}{31}{figure.caption.26}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {11.1}{\ignorespaces Every preprocessing stage shown on an actual local Herlev cell. This is an implementation demonstration, not a probe result image: the reported parent-identification experiment used SIPaKMeD crops. Panels D--G make Otsu thresholding, mask combination, and morphological closing visible before Telea inpainting.\relax }}{34}{figure.caption.27}%
+\contentsline {figure}{\numberline {11.2}{\ignorespaces All prespecified image conditions remain far above chance. Error bars are sample SD across five seeds.\relax }}{35}{figure.caption.29}%
+\contentsline {figure}{\numberline {11.3}{\ignorespaces Probe learning curves reconstructed from every retained epoch history. The RGB signal rises smoothly across seeds; shuffled labels remain near chance.\relax }}{35}{figure.caption.30}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {12.1}{\ignorespaces All frozen SIPaKMeD accuracy observations. Lines connect the same architecture across protocols; points show individual seeds and bars show the mean.\relax }}{39}{figure.caption.33}%
+\contentsline {figure}{\numberline {12.2}{\ignorespaces Paired \textsf {P1}$-$\textsf {P2} effects. Every mean favors the crop-level split, but none survives its preregistered multiplicity correction. The vertical line at zero marks no protocol effect.\relax }}{40}{figure.caption.35}%
+\contentsline {figure}{\numberline {12.3}{\ignorespaces Seed-level paired differences. This figure exposes the small effective sample size and the architecture-specific variability that an aggregate table can hide.\relax }}{40}{figure.caption.36}%
+\contentsline {figure}{\numberline {12.4}{\ignorespaces The registered ordering check. Cell values are the protocol means; the title records the gate outcome. Four of six architectures fail \textsf {P3}$\leq $\textsf {P2}$\leq $\textsf {P1}, so the acceptance contract correctly records one failed gate.\relax }}{41}{figure.caption.37}%
+\contentsline {figure}{\numberline {12.5}{\ignorespaces Classifier wall-clock summaries from the retained run JSON files. These are same-system measurements and should not be compared to timings reported on unrelated hardware.\relax }}{42}{figure.caption.38}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {13.1}{\ignorespaces Cx22 semantic macro-Dice by architecture and protocol. The official arm is visually separated because it is not a same-observation contrast.\relax }}{45}{figure.caption.41}%
+\contentsline {figure}{\numberline {13.2}{\ignorespaces Channel-level Dice makes the central difficulty visible: nuclei are consistently harder than cytoplasm. This is the segmentation analogue of a confusion-matrix diagnostic and uses retained aggregate channel measurements, not invented pixel predictions.\relax }}{46}{figure.caption.42}%
+\contentsline {figure}{\numberline {13.3}{\ignorespaces Cx22 matched-instance Dice. Both Mask R-CNN variants follow the complete registered \textsf {P3}$\leq $\textsf {P2}$\leq $\textsf {P1} ordering.\relax }}{47}{figure.caption.44}%
+\contentsline {figure}{\numberline {13.4}{\ignorespaces Cx22 paired contrast overview. Positive values favor the crop-level protocol. The plot separates point-estimate consistency from multiplicity-adjusted evidence.\relax }}{48}{figure.caption.46}%
+\contentsline {figure}{\numberline {13.5}{\ignorespaces Cx22 run-time distribution. Instance segmentation dominates the computational cost and has a long tail; the plot makes the operational bottleneck explicit.\relax }}{49}{figure.caption.47}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {16.1}{\ignorespaces Machine-readable acceptance status: 13 gates pass, one fails, and three remain pending. A pending release gate is not painted green simply because the numerical experiments are complete.\relax }}{54}{figure.caption.49}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {18.1}{\ignorespaces The intended clean-clone path. Each boundary writes an auditable artifact and performs validation before the next stage begins.\relax }}{58}{figure.caption.50}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {22.1}{\ignorespaces The governance loop used for Study 2 (Amendment 6), Amendment 7, Amendment 8, and Amendment 9. The registration commit fixes the analysis code, split manifests, task files, and cache hashes before any model whose result it governs is trained.\relax }}{67}{figure.caption.52}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {23.1}{\ignorespaces Simulated power of the H1 model for a 0.8-pp effect (1,000 simulations per design).\relax }}{69}{figure.caption.53}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {24.1}{\ignorespaces The registered Study 2 run matrix. P1-prime equals P1 byte for byte on every SIPaKMeD seed (P2 always has exactly 810 test crops), so it needed no separate SIPaKMeD runs.\relax }}{71}{figure.caption.54}%
+\contentsline {figure}{\numberline {24.2}{\ignorespaces The 2C factorial for one seed: one common test set; leak cells add the evaluation fields' sibling crops, clean cells use other fields; within a diversity level crop and field counts are identical, and low-diversity field sets are nested in high-diversity ones.\relax }}{72}{figure.caption.55}%
+\contentsline {figure}{\numberline {24.3}{\ignorespaces The 2B counterfactual background transplants. The \emph {self} condition measures seam and inpainting artifacts; every contrast compares conditions that share them.\relax }}{73}{figure.caption.56}%
+\contentsline {figure}{\numberline {24.4}{\ignorespaces The adversarial suppression arms. The parent adversary only competes among parents of the sample's own class, so suppressing it never requires removing class information. Study 2 (2A) used a two-layer MLP; Amendment 8 (F7) used a probe-matched head (per-feature standardisation and one linear layer, its own optimiser at $10^{-3}$, re-initialised every five epochs) so that features could not hide parent identity from it while leaving it readable by a linear probe.\relax }}{73}{figure.caption.57}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {25.1}{\ignorespaces Closed-form structural exposure of the four datasets to a random 80:20 crop split.\relax }}{74}{figure.caption.58}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {26.1}{\ignorespaces The GPU-resident training input path. The host allowed four CPU cores per user, which made per-image PIL augmentation in data-loader workers the bottleneck; moving the registered augmentation onto the GPU removed it while sampling exactly the same crop geometry as torchvision for the same random stream.\relax }}{78}{figure.caption.59}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {27.1}{\ignorespaces The resumable scheduler (\texttt {scripts/\allowbreak study2/\allowbreak launch\_matrix.py}). A task whose valid result already exists is skipped on restart, so the controller can be relaunched after any interruption without duplicating a run.\relax }}{80}{figure.caption.60}%
+\contentsline {figure}{\numberline {27.2}{\ignorespaces Every run of both matrices on its GPU, from the start and end times in the run records (evaluation tasks from the controller log). The arms ran in priority order; white gaps are launch overhead.\relax }}{81}{figure.caption.61}%
+\contentsline {figure}{\numberline {27.3}{\ignorespaces Left: wall time of each Phase\nobreakspace {}1 run by architecture (dots) and its median (ring). Right: GPU-hours by arm.\relax }}{82}{figure.caption.62}%
+\contentsline {figure}{\numberline {27.4}{\ignorespaces Offloading and archiving. The network home is slow and can stall, so copies are single, bandwidth-limited streams; nothing node-local is deleted until its archived copy has been verified.\relax }}{83}{figure.caption.63}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {30.1}{\ignorespaces The registered H1 decision path. The residual check fired, so the cluster bootstrap became the primary inference exactly as registered; every other method gave the same answer.\relax }}{88}{figure.caption.64}%
+\contentsline {figure}{\numberline {30.2}{\ignorespaces P1 $-$ P2 (left) and P2 $-$ P3 (right) per architecture (mean and 95\% $t$ interval over 20 seeds) with the registered pooled estimates.\relax }}{89}{figure.caption.65}%
+\contentsline {figure}{\numberline {30.3}{\ignorespaces Every Phase\nobreakspace {}1 run and the per-protocol mean over 20 seeds, by architecture.\relax }}{90}{figure.caption.66}%
+\contentsline {figure}{\numberline {30.4}{\ignorespaces P1 $-$ P2 accuracy for every architecture and seed (diverging scale, zero in grey).\relax }}{90}{figure.caption.67}%
+\contentsline {figure}{\numberline {30.5}{\ignorespaces The six Study\nobreakspace {}1 architectures: Study\nobreakspace {}1's five-seed estimates and Study\nobreakspace {}2's twenty-seed estimates of P1 $-$ P2. Study\nobreakspace {}2's intervals are narrower and all exclude zero.\relax }}{91}{figure.caption.68}%
+\contentsline {figure}{\numberline {30.6}{\ignorespaces Mean test accuracy per epoch under P1, P2, and P3 (20 seeds each). The P1 advantage appears within the first few epochs and persists to the final-epoch endpoint.\relax }}{92}{figure.caption.69}%
+\contentsline {figure}{\numberline {30.7}{\ignorespaces Mean training loss per epoch (log scale). Training is indistinguishable across protocols; the difference is in what the test set contains, not in how training proceeds.\relax }}{93}{figure.caption.70}%
+\contentsline {figure}{\numberline {30.8}{\ignorespaces Calibration error and negative log-likelihood by architecture and protocol (mean and 95\% $t$ interval).\relax }}{94}{figure.caption.71}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {31.1}{\ignorespaces CRIC P1 $-$ P2 per architecture, the registered estimate, and the SIPaKMeD estimate for scale.\relax }}{96}{figure.caption.72}%
+\contentsline {figure}{\numberline {31.2}{\ignorespaces CRIC per-class recall under P1 and P2, pooled over all runs, with the mean number of test cells per class.\relax }}{97}{figure.caption.73}%
+\contentsline {figure}{\numberline {31.3}{\ignorespaces Row-normalised confusion matrices pooled over runs. SIPaKMeD errors barely change between protocols; CRIC's abnormal classes collapse toward NILM and toward each other under slide-level splitting.\relax }}{97}{figure.caption.74}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {32.1}{\ignorespaces Left: leak minus clean accuracy per architecture and diversity level, and the H3 estimate. Right: high minus low diversity within clean cells.\relax }}{99}{figure.caption.75}%
+\contentsline {figure}{\numberline {32.2}{\ignorespaces All four 2C cell means per architecture (10 seeds each).\relax }}{100}{figure.caption.76}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {33.1}{\ignorespaces Left: accuracy of leak and clean models on composites of the common test set. Right: the per-run own-context route and the registered H4 contrast.\relax }}{101}{figure.caption.77}%
+\contentsline {figure}{\numberline {33.2}{\ignorespaces Transplant-condition accuracy of leak and clean models per architecture.\relax }}{102}{figure.caption.78}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {34.1}{\ignorespaces The gradient-reversal sweep: probe recoverability, the P1 $-$ P2 gap, and their relation (ConvNeXt-T, which failed its manipulation check, hollow).\relax }}{103}{figure.caption.79}%
+\contentsline {figure}{\numberline {34.2}{\ignorespaces The full 2A sweep per architecture: test accuracy, independent-probe recoverability, and the adversary's own within-class training accuracy at the final epoch.\relax }}{104}{figure.caption.80}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {36.1}{\ignorespaces The eight Amendment\nobreakspace {}8 hypotheses. Blue arms reuse saved Study\nobreakspace {}2 artifacts (no retraining); gold arms train new models on seeds no earlier arm used; F8 pools the three dose-response arms.\relax }}{107}{figure.caption.81}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {37.1}{\ignorespaces How F1 defines a discordant cell. A slide-level label prior would pull discordant cells toward their slide's majority class when the slide was seen in training; the models did the opposite.\relax }}{108}{figure.caption.82}%
+\contentsline {figure}{\numberline {37.2}{\ignorespaces Rank-limited LEACE erasure (F5). At full rank the projection is LEACE for the within-class parent indicator: no linear function of the erased features covaries with it on the fitting data. Ranks 0, 4, 16, 64, and 256 give the dose.\relax }}{109}{figure.caption.83}%
+\contentsline {figure}{\numberline {37.3}{\ignorespaces Within-class recoverability from the registered sklearn probe and the device probe used for F5--F8, on the 280 Study\nobreakspace {}2 adversarial runs.\relax }}{110}{figure.caption.84}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {39.1}{\ignorespaces Left: the leak advantage under each test-time ablation (F2 highlighted). Middle: the leak effect under each training condition on fresh seeds (F3, F4). Right: CRIC within-cell accuracy gains by concordance, and the context-class probability for discordant cells (F1).\relax }}{113}{figure.caption.85}%
+\contentsline {figure}{\numberline {39.2}{\ignorespaces The carrier factorial per architecture.\relax }}{113}{figure.caption.86}%
+\contentsline {figure}{\numberline {39.3}{\ignorespaces Accuracy of leak and clean 2C models under each test-time ablation, per architecture.\relax }}{114}{figure.caption.87}%
+\contentsline {figure}{\numberline {39.4}{\ignorespaces Exploratory: the leak advantage on test crops that do or do not share source pixels with a training sibling.\relax }}{115}{figure.caption.88}%
+\contentsline {figure}{\numberline {39.5}{\ignorespaces F1 per architecture, and the within-cell accuracy gain for concordant and discordant cells.\relax }}{116}{figure.caption.89}%
+\contentsline {figure}{\numberline {39.6}{\ignorespaces The P1 $-$ P2 gap against recoverability along three manipulations (grey: architectures; colour: pooled over architectures that passed the manipulation check, at levels they share; registered in-regime levels only).\relax }}{116}{figure.caption.90}%
+\contentsline {figure}{\numberline {39.7}{\ignorespaces LEACE per architecture (grey) and pooled (blue): recoverability, gap, and P2 accuracy change by erasure rank.\relax }}{117}{figure.caption.91}%
+\contentsline {figure}{\numberline {39.8}{\ignorespaces The full linear-adversary sweep per architecture, including the degenerate strengths ($\lambda =1$ for ResNet-50 and DenseNet-121, $\lambda =3$ for all) where P2 accuracy collapses and which the regime rule excludes.\relax }}{117}{figure.caption.92}%
+\contentsline {figure}{\numberline {39.9}{\ignorespaces The stain-normalisation sweep per architecture: accuracy falls for both protocols, recoverability falls only modestly.\relax }}{118}{figure.caption.93}%
+\contentsline {figure}{\numberline {39.10}{\ignorespaces Left: per-run Grad-CAM attribution outside the cell for leak and clean models (bar: background pixel share). Right: agreement of each run's maps with random-head maps.\relax }}{121}{figure.caption.94}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {40.1}{\ignorespaces The mechanism by elimination. Red: candidate carriers ruled out; green: the one intervention that removed most of the advantage; gold: the qualification that keeps the account modest.\relax }}{122}{figure.caption.95}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

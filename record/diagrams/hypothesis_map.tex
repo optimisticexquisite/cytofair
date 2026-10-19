@@ -1,0 +1,24 @@
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[node distance=3mm and 5mm, every node/.style={font=\small}]
+\node[box=34mm] (c1) {\textbf{Structural non-independence}\\test cells share a parent};
+\node[box=34mm, below=8mm of c1] (c2) {\textbf{Shortcut availability}\\the parent is recognisable};
+\node[box=34mm, below=8mm of c2] (c3) {\textbf{Consequence}\\scores are inflated};
+\node[box=34mm, below=8mm of c3] (c4) {\textbf{Mechanism}\\how the leak is used};
+\node[done=48mm, right=10mm of c1] (t1) {Study 1: 92.6\% (SIPaKMeD), 99.97\% (CRIC) test cells with a training parent; Herlev 0\%};
+\node[done=48mm, right=10mm of c2] (t2) {Study 1: 424-way probe 109$\times$ chance; 79$\times$ with the cell inpainted away};
+\node[done=48mm, right=10mm of c3] (t3) {Study 2: H1 +\HoneEst~pp, H2 +\HtwoEst~pp, H3 +\HthreeEst~pp (leakage, not diversity), replicated};
+\node[gold=48mm, right=10mm of c4] (t4) {H4, H5 not supported; A8: F2, F3 supported, F1 reversed, F4--F8 null};
+\node[note, right=4mm of t1, text width=26mm] {established};
+\node[note, right=4mm of t2, text width=26mm] {established};
+\node[note, right=4mm of t3, text width=26mm] {established};
+\node[note, right=4mm of t4, text width=26mm] {narrowed by elimination};
+\foreach \a/\b in {c1/t1,c2/t2,c3/t3,c4/t4} \draw[flow] (\a) -- (\b);
+\draw[flow] (c1) -- (c2); \draw[flow] (c2) -- (c3); \draw[flow] (c3) -- (c4);
+\end{tikzpicture}
+\end{adjustbox}
+\caption{The four claims the project separates, and the evidence each received. Study 1 established the first two;
+Study 2 the third; Amendment 8 narrowed the fourth.}
+\label{r:fig:hypothesis-map}
+\end{figure}

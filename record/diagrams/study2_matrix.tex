@@ -1,0 +1,16 @@
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[node distance=3mm and 4mm]
+\node[box=34mm] (p1) {\textbf{Phase 1} (H1)\\12 archs $\times$ 20 seeds $\times$ P1, P2, P3\\= 720 runs};
+\node[box=34mm, right=of p1] (fc) {\textbf{2C / 2B} (H3, H4)\\4 archs $\times$ 10 seeds $\times$ 4 cells\\= 160 runs + composites};
+\node[box=34mm, right=of fc] (gr) {\textbf{2A} (H5)\\2 archs $\times$ 10 seeds $\times$ 7 $\lambda$ $\times$ P1, P2\\= 280 runs};
+\node[box=34mm, below=of fc] (cr) {\textbf{CRIC} (H2)\\6 archs $\times$ 10 seeds $\times$ P1, P1$'$, P2\\= 180 runs};
+\node[box=34mm, left=of cr] (fp) {\textbf{Fingerprint encoder}\\1 run (secondary)};
+\node[done=34mm, right=of cr] (tot) {\textbf{1,341 runs}\\one registration commit};
+\end{tikzpicture}
+\end{adjustbox}
+\caption{The registered Study 2 run matrix. P1-prime equals P1 byte for byte on every SIPaKMeD seed (P2 always has
+exactly 810 test crops), so it needed no separate SIPaKMeD runs.}
+\label{r:fig:study2-matrix}
+\end{figure}

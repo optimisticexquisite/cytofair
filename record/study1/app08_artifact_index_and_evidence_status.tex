@@ -1,0 +1,30 @@
+% Carried over verbatim from monograph/main.tex (Study 1 record, 13 Sep 2026).
+\chapter{Artifact index and evidence status}\label{s1:ch:app08_artifact_index_and_evidence_status}
+
+\begin{longtable}{p{0.29\textwidth}p{0.20\textwidth}p{0.43\textwidth}}
+\caption{Principal repository artifacts.}
+\label{s1:tab:artifacts}\\
+\toprule
+Artifact & Status & Purpose \\
+\midrule
+\endfirsthead
+\toprule
+Artifact & Status & Purpose \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\artifact{PREREGISTRATION.md} & Frozen plan & Endpoints, seeds, protocols, exclusions, corrections, amendments. \\
+\artifact{data_sources.json} & Versioned & Owner URLs, filenames, sizes, hashes, and terms notes. \\
+\artifact{provenance/*.parquet} & Complete derived maps & Observation-to-parent identities, match diagnostics, boxes, hashes, and P3 components. \\
+\artifact{splits/*.csv} & Versioned interface & Exact per-seed assignments joined by crop ID. \\
+\artifact{results/classification/*.json} & 120 accepted & Classifier metrics, environment, split hash, and history. \\
+\artifact{results/probe/*.json} & 30 accepted & Mechanism probe metrics, chance, environment, and history. \\
+\artifact{results/cx22_segmentation/*.json} & 175 accepted & Semantic/instance metrics, manifests, runtime, and history. \\
+\artifact{results/attempts/} & Excluded, retained & Twelve incompatible split-library runs and three smoke tests. \\
+\artifact{reports/generated/acceptance_contract.*} & Current & Machine-readable PASS/FAIL/PENDING gates. \\
+\artifact{scripts/reproduce_table1.sh} & Implemented & GPU-free raw-download-to-structural-table workflow. \\
+\artifact{scripts/verify_clean_clone.sh} & Implemented, unattested & Non-local clone wrapper and optional virgin-host attestation. \\
+\artifact{reports/lab_paper_self_audit.md} & Pending & Nine-record title/protocol crosswalk requiring source-paper checks. \\
+\artifact{reports/figure1_reader_test.md} & Pending & Independent reader protocol and blank response record. \\
+\end{longtable}

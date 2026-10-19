@@ -1,0 +1,38 @@
+% Carried over verbatim from monograph/main.tex (Study 1 record, 13 Sep 2026).
+\chapter{Preregistration and analysis governance}\label{s1:ch:ch03_preregistration_and_analysis_governance}
+
+\section{Why the plan was committed first}
+
+The original preregistration was committed at 04:54:10 IST on 22 August 2026 (commit \artifact{67e8ded}). The first result commit was recorded at 13:22:42 IST that day (commit \artifact{1c2da7f}). The plan therefore predates the committed results. This matters because a five-seed matrix contains many possible comparisons; fixing endpoints, seeds, exclusions, and multiplicity families before seeing scores reduces analyst degrees of freedom.
+
+The fixed confirmatory seeds were $17,29,43,71,101$. Five additional robustness seeds were named but were not needed for the reported confirmatory summaries and were not substituted for any unfavorable seed. Every protocol-architecture cell had to contain at least five valid paired runs before inferential output could be emitted.
+
+\section{Registered endpoints}
+
+The structural endpoints were (i) fraction of parents straddling train and test and (ii) fraction of test observations whose parent appears in training. The mechanistic endpoint was 424-way parent-identification accuracy. The SIPaKMeD model endpoint was test accuracy; macro-F1 and balanced accuracy were concordance metrics. For Cx22 semantic segmentation, the primary endpoint was mean per-image cytoplasm/nucleus Dice. For Cx22 instance segmentation, the primary endpoint was per-image mean ground-truth-instance Dice after maximum-weight matching, with unmatched targets assigned zero.
+
+\section{Amendments: what changed and why}
+
+\begin{longtable}{p{0.10\textwidth}p{0.16\textwidth}p{0.26\textwidth}p{0.34\textwidth}}
+\caption{Registered amendments and their evidential status.}\label{s1:tab:amendments}\\
+\toprule
+Date & Amendment & Trigger & Why it did not select a favorable result \\
+\midrule
+\endfirsthead
+\toprule
+Date & Amendment & Trigger & Why it did not select a favorable result \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+22 Aug & SIPaKMeD class order & The integrity gate exposed a transcription swap between Metaplastic and Dyskeratotic. & Corrected before any SIPaKMeD result; numeric target vector 126/108/238/271/223 did not change. \\
+24 Aug & Cx22 segmentation extension & Structural Cx22 results motivated a separately scoped model rescore. & Registered before any Cx22 model was trained; official split retained as descriptive control. \\
+24 Aug & FP16 execution & Full FP32 preflight left three A6000s under-used and made one U-Net epoch exceed 4.5 minutes. & Changed numerical execution before an epoch emitted a result; models, splits, seeds, endpoints, and epoch count stayed fixed. \\
+28 Aug & MAnet in FP32 & The first MAnet P1 seed-17 attempts produced non-finite losses at epochs 23 and 24. & No completed MAnet result existed. All MAnet cells restarted from their fixed seeds rather than selecting a pre-divergence checkpoint. \\
+28 Aug & Deterministic CUDA workspace & Startup warnings showed deterministic matrix multiplication required \artifact{CUBLAS_WORKSPACE_CONFIG=:4096:8}. & Frozen before a corrected MAnet or instance epoch existed; applied to all remaining cells. \\
+6 Sep & Instance runtime correction & Evaluation every epoch, CPU mask matching, and frequent network checkpoint writes caused severe under-utilization. & The registered endpoint was final epoch. Intermediate test inference was removed, exact binary intersections moved to GPU, and recovery checkpoints became five-epoch; final computation stayed identical. \\
+\end{longtable}
+
+\begin{decisionbox}{A useful demotivation}
+The project began with the possibility of a large, architecture-general accuracy correction. The statistics did not support that broad claim. Instead of hiding this, the project narrowed its claim: the benchmark hierarchy is demonstrably non-independent, the source signal is demonstrably learnable, and parent grouping removes the measured sharing. The size of downstream score inflation remains model- and task-dependent.
+\end{decisionbox}

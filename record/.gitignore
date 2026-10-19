@@ -1,0 +1,11 @@
+*.aux
+*.log
+*.bbl
+*.blg
+*.toc
+*.lof
+*.lot
+*.out
+*.xdv
+sub_*.tex
+main.pdf

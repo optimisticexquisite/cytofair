@@ -1,0 +1,77 @@
+{
+  "task": "parent_fingerprint_encoder",
+  "seed": 17,
+  "n_parents": 424,
+  "chance": 0.0023584905660377358,
+  "test_accuracy": 0.24056603773584906,
+  "history": [
+    {
+      "epoch": 1,
+      "test_accuracy": 0.007075471698113208
+    },
+    {
+      "epoch": 2,
+      "test_accuracy": 0.020047169811320754
+    },
+    {
+      "epoch": 3,
+      "test_accuracy": 0.045990566037735846
+    },
+    {
+      "epoch": 4,
+      "test_accuracy": 0.0695754716981132
+    },
+    {
+      "epoch": 5,
+      "test_accuracy": 0.09905660377358491
+    },
+    {
+      "epoch": 6,
+      "test_accuracy": 0.1214622641509434
+    },
+    {
+      "epoch": 7,
+      "test_accuracy": 0.12853773584905662
+    },
+    {
+      "epoch": 8,
+      "test_accuracy": 0.15683962264150944
+    },
+    {
+      "epoch": 9,
+      "test_accuracy": 0.18867924528301888
+    },
+    {
+      "epoch": 10,
+      "test_accuracy": 0.2099056603773585
+    },
+    {
+      "epoch": 11,
+      "test_accuracy": 0.21226415094339623
+    },
+    {
+      "epoch": 12,
+      "test_accuracy": 0.22995283018867924
+    },
+    {
+      "epoch": 13,
+      "test_accuracy": 0.22995283018867924
+    },
+    {
+      "epoch": 14,
+      "test_accuracy": 0.24882075471698112
+    },
+    {
+      "epoch": 15,
+      "test_accuracy": 0.24056603773584906
+    }
+  ],
+  "embedding_path": "/tmp/rchethan1_cytofair/runs/fingerprint/fingerprint_embeddings.npz",
+  "embedding_sha256": "36ebb930d4661ddc31e64ef5bf4e5556dd055e5e652f88dbbf2fa7f9c6b6b148",
+  "checkpoint_path": "/tmp/rchethan1_cytofair/runs/fingerprint/fingerprint_encoder.pt",
+  "checkpoint_sha256": "ed359adefd0dc343fedf2dbddcc95072b2228f0d97f0f8ba167792fedd0f1d22",
+  "cache_pixels_sha256": "d5bbaf57f176cf6cdf838a3b4773e2d5fb8c7bf019570344fa6a8b7dcd30c748",
+  "git_sha": "a62e8e75b456e01dec89c88a835d1f82ecfb60dd",
+  "completed_at_utc": "2026-10-17T23:37:49.535518+00:00",
+  "elapsed_seconds": 13.828644037246704
+}

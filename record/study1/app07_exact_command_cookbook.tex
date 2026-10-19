@@ -1,0 +1,75 @@
+% Carried over verbatim from monograph/main.tex (Study 1 record, 13 Sep 2026).
+\chapter{Exact command cookbook}\label{s1:ch:app07_exact_command_cookbook}
+
+\section{Local checks}
+
+\begin{lstlisting}[style=cyto,language=bash]
+uv sync --extra dev
+uv run pytest
+uv run ruff check .
+uv run cytofair --help
+\end{lstlisting}
+
+\section{Recover and verify structural evidence}
+
+\begin{lstlisting}[style=cyto,language=bash]
+uv run cytofair recover-sipakmed data/extracted/sipakmed --workers 3
+uv run cytofair recover-cx22 data/extracted/cx22 \
+  --image-root data/extracted/ccedd/png
+uv run cytofair recover-cric data/raw/cric/classifications.csv
+uv run cytofair recover-herlev data/extracted/herlev
+
+uv run cytofair audit-duplicates \
+  provenance/sipakmed_parent_map.parquet \
+  --hashes results/duplicates/sipakmed_hashes.parquet \
+  --pairs results/duplicates/sipakmed_near_duplicate_pairs.csv \
+  --output provenance/sipakmed_parent_map_p3.parquet
+
+uv run cytofair make-splits \
+  provenance/sipakmed_parent_map_p3.parquet \
+  --dataset SIPaKMeD --output splits/generated
+
+uv run cytofair pixel-overlap \
+  provenance/sipakmed_branch_b.parquet --dataset SIPaKMeD
+\end{lstlisting}
+
+\section{Launch the probe and classifier matrices}
+
+\begin{lstlisting}[style=cyto,language=bash]
+python scripts/launch_probe_matrix.py \
+  provenance/sipakmed_parent_map_p3.parquet results/probe \
+  --max-gpus 3 \
+  --modes rgb grayscale stain_normalized background_only highpass
+
+python scripts/launch_classification_matrix.py \
+  --dataset-map SIPaKMeD=provenance/sipakmed_parent_map_p3.parquet \
+  --output results/classification --max-gpus 3 \
+  --architectures resnet18 resnet50 densenet121 \
+    efficientnet_b0 mobilenet_v2 vit_b_16 \
+  --protocols P1 P1-prime P2 P3
+\end{lstlisting}
+
+\section{Materialize and launch Cx22}
+
+\begin{lstlisting}[style=cyto,language=bash]
+cytofair materialize-cx22 provenance/cx22_parent_map.parquet \
+  --labels /path/to/extracted/cx22 \
+  --assets /path/to/cx22_assets \
+  --output provenance/cx22_model_map.parquet
+
+cytofair audit-duplicates provenance/cx22_model_map.parquet \
+  --hashes results/cx22_duplicates/hashes.parquet \
+  --pairs results/cx22_duplicates/pairs.csv \
+  --output provenance/cx22_model_map_p3.parquet
+
+cytofair cache-cx22 provenance/cx22_model_map_p3.parquet \
+  --cache /path/to/cx22_assets/cache256 \
+  --output provenance/cx22_cached_model_map_p3.parquet
+
+nohup python scripts/launch_cx22_segmentation_matrix.py \
+  --map provenance/cx22_cached_model_map_p3.parquet \
+  --output results/cx22_segmentation --max-gpus 3 \
+  > results/cx22_segmentation/controller.log 2>&1 < /dev/null &
+
+python scripts/check_cx22_segmentation.py results/cx22_segmentation
+\end{lstlisting}

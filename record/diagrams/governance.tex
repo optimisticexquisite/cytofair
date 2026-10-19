@@ -1,0 +1,24 @@
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[node distance=4mm and 4mm]
+\node[box=24mm] (code) {Implement and unit-test};
+\node[box=24mm, right=of code] (dry) {Synthetic dry run\\\footnotesize planted effects};
+\node[box=24mm, right=of dry] (smoke) {Smoke tests\\\footnotesize crop-level only};
+\node[done=24mm, right=of smoke] (reg) {Register\\\footnotesize commit + hashes};
+\node[box=24mm, right=of reg] (run) {Run matrix\\\footnotesize frozen checkout};
+\node[box=24mm, below=of run] (collect) {Collect\\\footnotesize every task or fail};
+\node[box=24mm, left=of collect] (analyse) {Registered analysis\\\footnotesize once per arm};
+\node[gold=24mm, left=of analyse] (amend) {Dated amendment\\\footnotesize if anything changes};
+\node[box=24mm, left=of amend] (report) {Report all results\\\footnotesize incl. negatives};
+\node[note, below=of report, text width=60mm] {Deviations found later are reported as such;\\ registered files are never edited silently.};
+\draw[flow] (code) -- (dry); \draw[flow] (dry) -- (smoke); \draw[flow] (smoke) -- (reg);
+\draw[flow] (reg) -- (run); \draw[flow] (run) -- (collect); \draw[flow] (collect) -- (analyse);
+\draw[flow] (analyse) -- (report); \draw[flow, dashed] (analyse) -- (amend); \draw[flow, dashed] (amend) -- (report);
+\end{tikzpicture}
+\end{adjustbox}
+\caption{The governance loop used for Study 2 (Amendment 6), Amendment 7, Amendment 8, and Amendment 9. The
+registration commit fixes the analysis code, split manifests, task files, and cache hashes before any model whose
+result it governs is trained.}
+\label{r:fig:governance}
+\end{figure}

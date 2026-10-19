@@ -1,0 +1,76 @@
+{\scriptsize
+\setlength{\tabcolsep}{3.5pt}
+\begin{longtable}{llrr}
+\caption{Variance components (REML) of every registered mixed model. Correlations of random intercepts and slopes are listed as `corr.'.}\label{r:tab:varcomp}\\
+\toprule
+Model & Component & Variance & SD / corr. \\
+\midrule
+\endfirsthead
+\toprule
+Model & Component & Variance & SD / corr. \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+H1 & split: (Intercept) & 0.2271 & 0.477 \\
+ & seed: (Intercept) & 0.0000 & 0.000 \\
+ & architecture: (Intercept) & 1.2769 & 1.130 \\
+ & architecture: x & 0.0104 & 0.102 \\
+ & architecture: (Intercept) $\times$ x & -- & \textminus{}1.000 (corr.) \\
+ & Residual: residual & 0.5915 & 0.769 \\
+P2 $-$ P3 & split: (Intercept) & 0.4033 & 0.635 \\
+ & seed: (Intercept) & 0.1955 & 0.442 \\
+ & architecture: (Intercept) & 2.0081 & 1.417 \\
+ & architecture: x & 0.2253 & 0.475 \\
+ & architecture: (Intercept) $\times$ x & -- & \textminus{}1.000 (corr.) \\
+ & Residual: residual & 0.6948 & 0.834 \\
+H2 & split: (Intercept) & 0.6662 & 0.816 \\
+ & seed: (Intercept) & 0.0295 & 0.172 \\
+ & architecture: (Intercept) & 0.2783 & 0.528 \\
+ & architecture: x & 0.0220 & 0.148 \\
+ & architecture: (Intercept) $\times$ x & -- & \textminus{}0.639 (corr.) \\
+ & Residual: residual & 0.7960 & 0.892 \\
+H3 & training\_set: (Intercept) & 0.0000 & 0.000 \\
+ & seed: (Intercept) & 0.4778 & 0.691 \\
+ & architecture: (Intercept) & 0.0776 & 0.279 \\
+ & architecture: leak & 0.0963 & 0.310 \\
+ & architecture: (Intercept) $\times$ leak & -- & 0.001 (corr.) \\
+ & Residual: residual & 1.4223 & 1.193 \\
+H4 & training\_set: (Intercept) & 0.1932 & 0.440 \\
+ & seed: (Intercept) & 0.7472 & 0.864 \\
+ & architecture: (Intercept) & 0.1369 & 0.370 \\
+ & architecture: leak & 0.1412 & 0.376 \\
+ & architecture: (Intercept) $\times$ leak & -- & 1.000 (corr.) \\
+ & Residual: residual & 1.6183 & 1.272 \\
+H5 & seed: (Intercept) & 1.0619 & 1.031 \\
+ & Residual: residual & 0.6736 & 0.821 \\
+F2 & run: (Intercept) & 0.0000 & 0.000 \\
+ & training\_set: (Intercept) & 0.0000 & 0.000 \\
+ & seed: (Intercept) & 0.7919 & 0.890 \\
+ & architecture: (Intercept) & 0.7394 & 0.860 \\
+ & architecture: leak & 0.0004 & 0.021 \\
+ & architecture: (Intercept) $\times$ leak & -- & \textminus{}1.000 (corr.) \\
+ & Residual: residual & 4.0889 & 2.022 \\
+F3 & training\_set: (Intercept) & 0.1245 & 0.353 \\
+ & seed: (Intercept) & 0.9803 & 0.990 \\
+ & architecture: (Intercept) & 0.2018 & 0.449 \\
+ & architecture: leak & 0.0042 & 0.065 \\
+ & architecture: (Intercept) $\times$ leak & -- & \textminus{}1.000 (corr.) \\
+ & Residual: residual & 1.2390 & 1.113 \\
+F4 & training\_set: (Intercept) & 0.2028 & 0.450 \\
+ & seed: (Intercept) & 0.7043 & 0.839 \\
+ & architecture: (Intercept) & 0.3280 & 0.573 \\
+ & architecture: leak & 0.1868 & 0.432 \\
+ & architecture: (Intercept) $\times$ leak & -- & 1.000 (corr.) \\
+ & Residual: residual & 1.7444 & 1.321 \\
+F5 & seed: (Intercept) & 0.0000 & 0.000 \\
+ & architecture: (Intercept) & 0.0017 & 0.042 \\
+ & Residual: residual & 0.3183 & 0.564 \\
+F6 & seed: (Intercept) & 0.3559 & 0.597 \\
+ & Residual: residual & 0.9056 & 0.952 \\
+F7 & seed: (Intercept) & 0.2447 & 0.495 \\
+ & Residual: residual & 1.4134 & 1.189 \\
+F8 & block: (Intercept) & 0.4937 & 0.703 \\
+ & Residual: residual & 0.4997 & 0.707 \\
+\end{longtable}
+}

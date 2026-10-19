@@ -1,0 +1,143 @@
+% Shared preamble for the CytoFair lifecycle record and every standalone sub-document.
+% Styling follows the Study 1 record (monograph/main.tex) so Part II reads unchanged.
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[a4paper,margin=23mm,headheight=15pt]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{booktabs,longtable,tabularx,array,multirow,makecell}
+\usepackage{float}
+\usepackage{caption,subcaption}
+\usepackage{pdflscape}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,shapes.geometric,shapes.misc,calc,backgrounds,decorations.pathreplacing}
+\usepackage[most]{tcolorbox}
+\usepackage{xurl}
+\usepackage{seqsplit}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\definecolor{CytoBlue}{HTML}{176B87}
+\definecolor{CytoTeal}{HTML}{218C74}
+\definecolor{CytoRed}{HTML}{C4455A}
+\definecolor{CytoGold}{HTML}{D99A2B}
+\definecolor{CytoPurple}{HTML}{735DA5}
+\definecolor{CytoInk}{HTML}{24323D}
+\definecolor{CytoPale}{HTML}{EEF4F7}
+% Data-figure palette (scripts/study2/figstyle.py), used in diagrams for identity.
+\definecolor{SerBlue}{HTML}{2A78D6}
+\definecolor{SerOrange}{HTML}{EB6834}
+\definecolor{SerAqua}{HTML}{1BAF7A}
+\definecolor{SerGray}{HTML}{A9A8A2}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=CytoBlue,
+  citecolor=CytoTeal,
+  urlcolor=CytoPurple,
+  pdftitle={CytoFair: Complete Lifecycle Record},
+  pdfauthor={Snehasish Ghosh, Soham Mitra, Nibaran Das}
+}
+
+\titleformat{\part}[display]
+  {\normalfont\Huge\bfseries\color{CytoInk}\centering}
+  {\color{CytoBlue}\LARGE PART \thepart}
+  {1.2ex}
+  {\titlerule[1.6pt]\vspace{1.2ex}}
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\color{CytoInk}}
+  {\filleft\color{CytoBlue}\fontsize{42}{45}\selectfont\thechapter}
+  {0.3ex}
+  {\titlerule[1.2pt]\vspace{1ex}\filright}
+\titleformat{\section}{\Large\bfseries\color{CytoInk}}{\thesection}{0.65em}{}
+\titleformat{\subsection}{\large\bfseries\color{CytoBlue}}{\thesubsection}{0.65em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{CytoTeal}}{\thesubsubsection}{0.65em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{CytoInk}CytoFair: Complete Lifecycle Record}
+\fancyhead[R]{\small\color{CytoBlue}\nouppercase{\leftmark}}
+\fancyfoot[C]{\color{CytoInk}\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setcounter{tocdepth}{1}
+\setcounter{secnumdepth}{3}
+
+\newtcolorbox{keybox}[1]{
+  enhanced,breakable,colback=CytoPale,colframe=CytoBlue,
+  title={#1},fonttitle=\bfseries,boxrule=0.8pt,arc=1.5mm,
+  left=2mm,right=2mm,top=1.5mm,bottom=1.5mm
+}
+\newtcolorbox{warningbox}[1]{
+  enhanced,breakable,colback=CytoRed!5,colframe=CytoRed,
+  title={#1},fonttitle=\bfseries,boxrule=0.8pt,arc=1.5mm,
+  left=2mm,right=2mm,top=1.5mm,bottom=1.5mm
+}
+\newtcolorbox{decisionbox}[1]{
+  enhanced,breakable,colback=CytoGold!8,colframe=CytoGold!85!black,
+  title={#1},fonttitle=\bfseries,boxrule=0.8pt,arc=1.5mm,
+  left=2mm,right=2mm,top=1.5mm,bottom=1.5mm
+}
+\newtcolorbox{workedbox}[1]{
+  enhanced,breakable,colback=CytoTeal!6,colframe=CytoTeal,
+  title={#1},fonttitle=\bfseries,boxrule=0.8pt,arc=1.5mm,
+  left=2mm,right=2mm,top=1.5mm,bottom=1.5mm
+}
+\newcommand{\protocol}[1]{\textsf{#1}}
+\newcommand{\cytofair}{\textsc{CytoFair}}
+\newcommand{\pass}{\textcolor{CytoTeal}{\textbf{PASS}}}
+\newcommand{\fail}{\textcolor{CytoRed}{\textbf{FAIL}}}
+\newcommand{\pending}{\textcolor{CytoGold!80!black}{\textbf{PENDING}}}
+\newcommand{\supported}{\textcolor{CytoTeal}{\textbf{supported}}}
+\newcommand{\notsupported}{\textcolor{CytoRed}{\textbf{not supported}}}
+\newcommand{\meanpm}[2]{#1\,$\pm$\,#2}
+\newcommand{\artifact}[1]{\path{#1}}
+\graphicspath{{assets/study1/}{figures/}}
+
+\lstdefinestyle{cyto}{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{CytoBlue}\bfseries,
+  commentstyle=\color{CytoTeal},
+  stringstyle=\color{CytoPurple},
+  backgroundcolor=\color{CytoPale},
+  frame=single,rulecolor=\color{CytoBlue!45},
+  breaklines=true,showstringspaces=false,
+  numbers=left,numberstyle=\tiny\color{CytoInk!55},
+  xleftmargin=1.7em,framexleftmargin=1.4em
+}
+\lstdefinestyle{plain}{
+  basicstyle=\ttfamily\scriptsize,
+  backgroundcolor=\color{CytoPale},
+  frame=single,rulecolor=\color{CytoBlue!45},
+  breaklines=true,showstringspaces=false,columns=fullflexible
+}
+
+% TikZ styles for process diagrams.
+\tikzset{
+  box/.style={draw=CytoBlue,fill=CytoPale,rounded corners=2pt,align=center,font=\small,inner sep=4pt,
+              minimum height=8mm,text width=#1},
+  box/.default=28mm,
+  done/.style={draw=CytoTeal,fill=CytoTeal!10,rounded corners=2pt,align=center,font=\small,inner sep=4pt,
+               minimum height=8mm,text width=#1},
+  done/.default=28mm,
+  bad/.style={draw=CytoRed,fill=CytoRed!8,rounded corners=2pt,align=center,font=\small,inner sep=4pt,
+              minimum height=8mm,text width=#1},
+  bad/.default=28mm,
+  gold/.style={draw=CytoGold!85!black,fill=CytoGold!12,rounded corners=2pt,align=center,font=\small,inner sep=4pt,
+               minimum height=8mm,text width=#1},
+  gold/.default=28mm,
+  flow/.style={-{Stealth[length=2.2mm]},thick,color=CytoInk!70},
+  note/.style={font=\scriptsize\itshape,color=CytoInk!75,align=center},
+}
+
+\input{generated/numbers.tex}
+\input{generated/record_numbers.tex}

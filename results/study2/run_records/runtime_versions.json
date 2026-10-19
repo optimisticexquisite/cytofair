@@ -1,0 +1,21 @@
+{
+  "('2.9.0+cu128', '12.8', None)": {
+    "host": "node1",
+    "python_version": "3.13.9",
+    "platform": "Linux-4.18.0-372.9.1.el8.x86_64-x86_64-with-glibc2.28",
+    "numpy_version": "2.5.2",
+    "pandas_version": "3.0.5",
+    "scipy_version": "1.18.1",
+    "scikit_learn_version": "1.9.0",
+    "pillow_version": "12.3.0",
+    "opencv_version": "5.0.0",
+    "torch_version": "2.9.0+cu128",
+    "torchvision_version": "0.24.0+cu128",
+    "cuda_version": "12.8",
+    "cudnn_version": 91002,
+    "cuda_device": "NVIDIA RTX A6000",
+    "input_provenance_sha256": "809b69060ee86c69e2db8a91f7de26bf32195b24c9392db066438a166f1a670a",
+    "timm_version": "1.0.22",
+    "cublas_workspace_config": ":4096:8"
+  }
+}

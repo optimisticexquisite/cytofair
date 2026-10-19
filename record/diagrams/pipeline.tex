@@ -1,0 +1,28 @@
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{tikzpicture}[node distance=4mm and 5mm]
+\node[box=26mm] (raw) {Owner downloads\\\footnotesize SIPaKMeD, Cx22, CRIC, Herlev};
+\node[box=26mm, right=of raw] (prov) {Provenance maps\\\footnotesize crop $\to$ parent, 2 branches};
+\node[box=26mm, right=of prov] (splits) {Registered splits\\\footnotesize CSV + SHA-256 manifest};
+\node[box=26mm, right=of splits] (tasks) {Task files\\\footnotesize JSONL, expected fields};
+\node[box=26mm, below=of tasks] (launch) {Launcher\\\footnotesize $\leq$4 GPUs, guards, retries};
+\node[box=26mm, left=of launch] (cache) {Packed caches\\\footnotesize uint8 memmap, hashed};
+\node[box=26mm, left=of cache] (train) {Trainer\\\footnotesize GPU augment, deterministic};
+\node[box=26mm, left=of train] (art) {Artifacts per run\\\footnotesize JSON, logits, weights, features};
+\node[box=26mm, below=of art] (collect) {Collector\\\footnotesize fails closed};
+\node[box=26mm, right=of collect] (stats) {R mixed models\\\footnotesize lme4, lmerTest, Holm};
+\node[box=26mm, right=of stats] (macros) {Numbers + figures\\\footnotesize generated macros};
+\node[box=26mm, right=of macros] (paper) {Manuscript + record\\\footnotesize no typed numbers};
+\draw[flow] (raw) -- (prov); \draw[flow] (prov) -- (splits); \draw[flow] (splits) -- (tasks);
+\draw[flow] (tasks) -- (launch); \draw[flow] (cache) -- (train); \draw[flow] (launch) -- (train);
+\draw[flow] (train) -- (art); \draw[flow] (art) -- (collect); \draw[flow] (collect) -- (stats);
+\draw[flow] (stats) -- (macros); \draw[flow] (macros) -- (paper);
+\draw[flow, dashed] (raw.south) |- ($(cache.north)+(0,3mm)$) -- (cache.north);
+\end{tikzpicture}
+\end{adjustbox}
+\caption{The data-to-manuscript pipeline shared by Study 2 and Amendment 8. Hashes are checked at every arrow
+that crosses a storage boundary: split files against the manifest, caches against their manifests, checkpoints
+against the hash recorded by their training run.}
+\label{r:fig:pipeline}
+\end{figure}

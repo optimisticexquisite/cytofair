@@ -1,0 +1,138 @@
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {1.1}{\ignorespaces Every registered confirmatory test of Study 2 and Amendment 8. H1 is tested alone; H2--H5 and F1--F8 are separate Holm families. Units as in the text (pp; slopes in pp per pp).\relax }}{4}{table.1.1}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Headline conclusions and their correct strength.\relax }}{12}{table.3.1}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Registered amendments and their evidential status.\relax }}{16}{table.5.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces Audited datasets and independent units.\relax }}{17}{table.caption.11}%
+\contentsline {table}{\numberline {6.2}{\ignorespaces Independently reconstructed SIPaKMeD class totals in release order.\relax }}{18}{table.caption.14}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {8.1}{\ignorespaces Provenance gates.\relax }}{25}{table.caption.19}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {9.1}{\ignorespaces Structural leakage. Stochastic values are mean $\pm $ sample SD over five seeds.\relax }}{28}{table.caption.22}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {11.1}{\ignorespaces Parent-identity probe. Mean $\pm $ sample SD over five seeds.\relax }}{35}{table.caption.28}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {12.1}{\ignorespaces SIPaKMeD classifier execution settings.\relax }}{38}{table.caption.31}%
+\contentsline {table}{\numberline {12.2}{\ignorespaces SIPaKMeD test accuracy (\%), mean $\pm $ sample SD over five seeds. \textsf {P1$'$} is numerically identical to \textsf {P1} because the frozen stratified crop split already contained the registered 3,239 training and 810 test observations.\relax }}{38}{table.caption.32}%
+\contentsline {table}{\numberline {12.3}{\ignorespaces Primary SIPaKMeD \textsf {P1}$-$\textsf {P2} contrasts. The six paired $t$-tests form one preregistered BH family. CI is the paired-bootstrap 95\% interval for Cohen's $d_z$, not for the raw percentage-point mean.\relax }}{39}{table.caption.34}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {13.1}{\ignorespaces Cx22 segmentation execution settings.\relax }}{44}{table.caption.39}%
+\contentsline {table}{\numberline {13.2}{\ignorespaces Cx22 semantic macro-Dice (\%), mean $\pm $ sample SD over five seeds. The official column uses a different 400/100 sample and is descriptive, not a paired protocol contrast.\relax }}{45}{table.caption.40}%
+\contentsline {table}{\numberline {13.3}{\ignorespaces Cx22 matched-instance Dice (\%), mean $\pm $ sample SD over five seeds.\relax }}{46}{table.caption.43}%
+\contentsline {table}{\numberline {13.4}{\ignorespaces Primary Cx22 \textsf {P1}$-$\textsf {P2} contrasts. Values are mean $\pm $ SD percentage points; $q$ is within the task-specific preregistered family. Effect is Cohen's $d_z$ except DeepLabV3+, whose non-normal seed differences trigger rank-biserial effect size.\relax }}{47}{table.caption.45}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {15.1}{\ignorespaces Frozen neural-run inventory and summed run time.\relax }}{52}{table.caption.48}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {16.1}{\ignorespaces Acceptance contract with evidence.\relax }}{54}{table.16.1}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {19.1}{\ignorespaces Immediate technical reuse. These rows describe enabled work, not completed future experiments.\relax }}{60}{table.caption.51}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {21.1}{\ignorespaces The scaling roadmap and the response to each item.\relax }}{64}{table.21.1}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {23.1}{\ignorespaces Simulated power (1,000 simulations per cell) of the registered H1 model for a 0.8-pp effect, by variance scale, number of architectures, and number of seeds.\relax }}{70}{table.23.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {24.1}{\ignorespaces The twelve Study 2 backbones: penultimate feature dimension, ImageNet weights, and mean Phase 1 training and total minutes per run.\relax }}{71}{table.24.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {25.1}{\ignorespaces \texttt {cytofair risk-report} closed forms for the four datasets at a 20\% test fraction: crops per parent, expected straddle and sibling rates (percent), siblings per test crop, training-diversity ratio, and class--parent dependence (fraction of class entropy explained by the parent).\relax }}{74}{table.25.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {26.1}{\ignorespaces Host constraints discovered or imposed, and the response to each.\relax }}{76}{table.26.1}%
+\contentsline {table}{\numberline {26.2}{\ignorespaces Caches used by Study 2 and Amendment 8 (hashes in Appendix\nobreakspace {}\ref {r:app:hashes}).\relax }}{77}{table.26.2}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {27.1}{\ignorespaces Compute ledger of every Study 2 and Amendment 8 arm (node1, NVIDIA RTX A6000; times in IST). GPU-hours are summed per-run elapsed time; runs shared four GPUs.\relax }}{81}{table.27.1}%
+\contentsline {table}{\numberline {27.2}{\ignorespaces Software and hardware recorded in every training run.\relax }}{82}{table.27.2}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {28.1}{\ignorespaces Every error and setback of Study 2 and Amendment 8, and its fix.\relax }}{84}{table.28.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {29.1}{\ignorespaces The five registered Study 2 tests (H5 in pp of gap per pp of recoverability).\relax }}{87}{table.29.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {30.1}{\ignorespaces Every protocol model with its registered sensitivity analyses: Satterthwaite and Kenward--Roger degrees of freedom, two-way cluster bootstrap, and seed sign-flip test. The primary source is the bootstrap when the registered residual check fails.\relax }}{89}{table.30.1}%
+\contentsline {table}{\numberline {30.2}{\ignorespaces Phase 1 (SIPaKMeD, 20 seeds per cell): test metrics in percent (mean\,$\pm $\,SD over seeds); NLL in nats.\relax }}{94}{table.30.2}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {31.1}{\ignorespaces CRIC (10 seeds per cell): test metrics in percent (mean\,$\pm $\,SD).\relax }}{98}{table.31.1}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {33.1}{\ignorespaces 2C/2B (10 seeds per cell): accuracy on the common test set and on each background-transplant condition (percent), and the donor-class probability shift (pp).\relax }}{102}{table.33.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {34.1}{\ignorespaces 2A gradient-reversal sweep (10 seeds): accuracy (percent), mean gap (pp), and within-class parent recoverability $R$ of the frozen features (percent; sklearn probe).\relax }}{104}{table.34.1}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {39.1}{\ignorespaces The eight registered follow-up tests (one Holm family). Estimates are oriented so that the predicted direction is positive.\relax }}{112}{table.39.1}%
+\contentsline {table}{\numberline {39.2}{\ignorespaces Amendment 8 carrier factorial (fresh seeds, 10 per cell): accuracy per cell (percent) and the leak effect (pp).\relax }}{113}{table.39.2}%
+\contentsline {table}{\numberline {39.3}{\ignorespaces Amendment 8 test-time carrier ablations on the Study 2 2C models: leak and clean accuracy (percent, 20 runs each) and the leak advantage (pp).\relax }}{114}{table.39.3}%
+\contentsline {table}{\numberline {39.4}{\ignorespaces EXPLORATORY (not registered): leak minus clean accuracy on test crops that do or do not share source pixels with a training sibling (pp; 95\% $t$ interval over architecture--seed--diversity pairs).\relax }}{115}{table.39.4}%
+\contentsline {table}{\numberline {39.5}{\ignorespaces F1 per architecture (secondary): within-cell P1 $-$ P2 context-class probability on discordant cells (pp) with slide-bootstrap intervals.\relax }}{116}{table.39.5}%
+\contentsline {table}{\numberline {39.6}{\ignorespaces Regimes and manipulation checks of every dose-response arm: levels whose mean P2 accuracy stays within 1 pp of baseline, the strongest such level, recoverability at baseline and there (percent), the class-only floor, and the check (at least a quarter of the above-floor $R$ removed).\relax }}{118}{table.39.6}%
+\contentsline {table}{\numberline {39.7}{\ignorespaces Amendment 8 rank-limited LEACE erasure on every Phase 1 model (20 seeds): accuracy with a refitted head (percent), gap (pp), logistic recoverability $R$, and nearest-centroid recoverability (percent).\relax }}{119}{table.39.7}%
+\contentsline {table}{\numberline {39.8}{\ignorespaces Amendment 8 probe-matched linear adversary (10 seeds): accuracy (percent), gap (pp), and recoverability $R$ (percent; device probe). $\lambda $ above the regime collapses P2 accuracy.\relax }}{120}{table.39.8}%
+\contentsline {table}{\numberline {39.9}{\ignorespaces Amendment 8 Reinhard stain normalisation (10 seeds; strength 0 is the matching Phase 1 run): accuracy (percent), gap (pp), and $R$ (percent).\relax }}{120}{table.39.9}%
+\contentsline {table}{\numberline {39.10}{\ignorespaces Grad-CAM (descriptive): share of positive attribution outside the cell mask and background pixel share (percent, 20 runs each), and the median Spearman correlation with a random-head map.\relax }}{121}{table.39.10}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {41.1}{\ignorespaces Every substantive claim of the project and how strongly the evidence supports it.\relax }}{125}{table.41.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {42.1}{\ignorespaces What worked and what did not, by area.\relax }}{127}{table.42.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {43.1}{\ignorespaces Decisions and their reasons.\relax }}{129}{table.43.1}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {A.1}{\ignorespaces Complete SIPaKMeD classification run ledger. All values are final-epoch results.\relax }}{137}{table.A.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {B.1}{\ignorespaces Complete parent-identity probe ledger.\relax }}{142}{table.B.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {C.1}{\ignorespaces Complete Cx22 run ledger. Primary is macro Dice for semantic models and matched-instance Dice for instance models; the ninth column is nucleus Dice or recall at Dice 0.70.\relax }}{144}{table.C.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {D.1}{\ignorespaces Declared owner-source files, exact byte sizes, checksums, and use notes.\relax }}{149}{table.D.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {E.1}{\ignorespaces Released SIPaKMeD split manifests and hashes.\relax }}{150}{table.E.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {F.1}{\ignorespaces Complete repository decision chronology through the frozen result set.\relax }}{151}{table.F.1}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {H.1}{\ignorespaces Principal repository artifacts.\relax }}{155}{table.H.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {I.1}{\ignorespaces Complete structural seed ledger.\relax }}{156}{table.I.1}%
+\contentsline {table}{\numberline {I.2}{\ignorespaces Complete SIPaKMeD literal source-pixel overlap ledger.\relax }}{156}{table.I.2}%
+\contentsline {table}{\numberline {I.3}{\ignorespaces Complete SIPaKMeD classifier contrast ledger. Secondary tests have no confirmatory BH q-value.\relax }}{158}{table.I.3}%
+\contentsline {table}{\numberline {I.4}{\ignorespaces Complete Cx22 contrast ledger. Semantic and instance primary families were corrected separately by task.\relax }}{159}{table.I.4}%
+\contentsline {table}{\numberline {I.5}{\ignorespaces Complete secondary P1-versus-P2 rank-stability ledger.\relax }}{160}{table.I.5}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {J.1}{\ignorespaces Complete excluded-attempt ledger. Metrics are shown only to demonstrate that exclusion was rule-based, not score-based.\relax }}{162}{table.J.1}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {L.1}{\ignorespaces Complete Phase 1 run ledger (720 runs; metrics in percent; minutes of wall time; GPU index).\relax }}{164}{table.L.1}%
+\contentsline {table}{\numberline {L.2}{\ignorespaces Complete CRIC run ledger (180 runs).\relax }}{174}{table.L.2}%
+\contentsline {table}{\numberline {L.3}{\ignorespaces Complete 2C/2B run ledger (160 runs; protocol is the factorial cell).\relax }}{176}{table.L.3}%
+\contentsline {table}{\numberline {L.4}{\ignorespaces Complete 2A gradient-reversal run ledger (280 runs).\relax }}{179}{table.L.4}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {M.1}{\ignorespaces Complete Amendment 8 carrier-factorial run ledger (480 runs).\relax }}{184}{table.M.1}%
+\contentsline {table}{\numberline {M.2}{\ignorespaces Complete Amendment 8 linear-adversary run ledger (300 runs).\relax }}{191}{table.M.2}%
+\contentsline {table}{\numberline {M.3}{\ignorespaces Complete Amendment 8 normalisation run ledger (160 runs).\relax }}{195}{table.M.3}%
+\contentsline {table}{\numberline {M.4}{\ignorespaces Complete LEACE ledger (480 models): refitted-head accuracy and recoverability at rank 0 and rank 256 (percent).\relax }}{197}{table.M.4}%
+\contentsline {table}{\numberline {M.5}{\ignorespaces Complete test-time ablation ledger (160 models; accuracy in percent).\relax }}{204}{table.M.5}%
+\contentsline {table}{\numberline {M.6}{\ignorespaces Every smoke test (Study 2 before registration; Amendment 8 before registration). Only crop-level, leak-cell, or single-protocol runs were smoke-tested, so no registered contrast could be observed.\relax }}{206}{table.M.6}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {N.1}{\ignorespaces Variance components (REML) of every registered mixed model. Correlations of random intercepts and slopes are listed as `corr.'.\relax }}{208}{table.N.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {O.1}{\ignorespaces Complete commit chronology of the project (all branches; IST).\relax }}{210}{table.O.1}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {U.1}{\ignorespaces Key files and directories.\relax }}{228}{table.U.1}%
+\addvspace {10\p@ }
