@@ -1,0 +1,56 @@
+\subsection{Follow-up results}
+\label{sec:followup-results}
+
+\begin{table}[t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Registered follow-up tests (Amendment 8; one Holm family). Every estimate is oriented so
+that the predicted direction is positive: F1 in pp of context-class probability, F2--F6 in pp of
+accuracy or gap, F7--F8 in pp of gap per pp of recoverability.}
+\label{tab:followup}
+\begin{tabular}{llrrrl}
+\toprule
+ & Question & Estimate & 95\% CI & Holm $p$ & Verdict \\
+\midrule
+F1 & CRIC: pull toward the slide's majority class & \FoneEst & \FoneLo\ to \FoneHi & \FonePholm & \FoneSupported \\
+F2 & Stain transfer shrinks the leak effect & \FtwoEst & \FtwoLo\ to \FtwoHi & \FtwoPholm & \FtwoSupported \\
+F3 & Leak effect with backgrounds masked & \FthreeEst & \FthreeLo\ to \FthreeHi & \FthreePholm & \FthreeSupported \\
+F4 & Colour augmentation shrinks the leak effect & \FfourEst & \FfourLo\ to \FfourHi & \FfourPholm & \FfourSupported \\
+F5 & LEACE erasure shrinks the gap & \FfiveEst & \FfiveLo\ to \FfiveHi & \FfivePholm & \FfiveSupported \\
+F6 & Stain normalisation shrinks the gap & \FsixEst & \FsixLo\ to \FsixHi & \FsixPholm & \FsixSupported \\
+F7 & Gap tracks $R$ (linear adversary) & \FsevenEst & \FsevenLo\ to \FsevenHi & \FsevenPholm & \FsevenSupported \\
+F8 & Gap tracks $R$ (pooled) & \FeightEst & \FeightLo\ to \FeightHi & \FeightPholm & \FeightSupported \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{CRIC models do not apply a slide-level label prior (F1).} Over \FoneCells\ discordant
+cells from \FoneSlides\ slides, the probability of the slide's majority class was
+\FoneEst~pp \emph{lower}, not higher, when the cell's slide was in training (\FoneLo\ to
+\FoneHi; F1 \FoneSupported). Crop-level training improved accuracy as much for cells whose class
+disagreed with their slide's majority (\FoneDiscordant~pp) as for cells that agreed
+(\FoneConcordant~pp; contrast \FoneContrast~pp, \FoneContrastLo\ to \FoneContrastHi). Whatever
+the models learn from seen slides helps each cell toward its own class rather than toward the
+slide's typical class.
+
+\paragraph{Carriers at test time (F2).} Stain transfer changed the leak advantage by
+\FtwoEst~pp (\FtwoLo\ to \FtwoHi; F2 \FtwoSupported). The corresponding reductions were
+\AblGreyEst~pp for greyscale (\AblGreyLo\ to \AblGreyHi), \AblLowEst~pp for low-pass filtering
+(\AblLowLo\ to \AblLowHi), \AblFlatEst~pp for illumination flattening (\AblFlatLo\ to
+\AblFlatHi), and \AblBgEst~pp for removing the background (\AblBgLo\ to \AblBgHi).
+Grad-CAM attribution outside the cell mask differed between leak and clean models by
+\CamLeakEst~pp (\CamLeakLo\ to \CamLeakHi; descriptive).
+
+\paragraph{Carriers in training (F3, F4).} On fresh seeds the standard recipe replicated H3
+(\HthreeRepEst~pp, \HthreeRepLo\ to \HthreeRepHi). With every background masked in training
+and testing the leak effect was \FthreeEst~pp (\FthreeLo\ to \FthreeHi; F3 \FthreeSupported);
+masking reduced it by \MaskReductionEst~pp relative to the standard recipe
+(\MaskReductionLo\ to \MaskReductionHi). Colour augmentation reduced it by \FfourEst~pp
+(\FfourLo\ to \FfourHi; F4 \FfourSupported).
+
+\paragraph{Dose-response (F5--F8).} Erasing within-class parent identity reduced the gap by
+\FfiveEst~pp at the strongest in-regime rank (\FfiveLo\ to \FfiveHi; F5 \FfiveSupported). Each
+unit of normalisation strength reduced it by \FsixEst~pp (\FsixLo\ to \FsixHi; F6
+\FsixSupported). Under the probe-matched adversary the slope of gap on recoverability was
+\FsevenEst\ (\FsevenLo\ to \FsevenHi; F7 \FsevenSupported), and pooled over all included
+manipulations \FeightEst\ (\FeightLo\ to \FeightHi; F8 \FeightSupported).

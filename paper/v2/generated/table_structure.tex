@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Structural leakage of a random 80:20 crop split. Straddle and test-crop leakage are percentages (observed: mean\,$\pm$\,SD over five seeds); siblings, diversity ratio, and class--parent dependence are closed-form expectations (\texttt{cytofair risk-report}); literal overlap is the percentage of test observations sharing source pixels with a training observation (same five seeds). P2 and P3 are exactly zero on every column.}
+\label{tab:structure}
+\begin{tabular}{lrrrrrrr}
+\toprule
+Dataset & Analytic & Observed & Test w/ train parent & Siblings & Diversity & Class dep. & Literal \\
+\midrule
+SIPaKMeD & 44.8 & 45.63\,$\pm$\,1.04 & 92.62\,$\pm$\,0.40 & 5.2 & 1.18 & 1.00 & 52.62\,$\pm$\,1.97 \\
+Cx22 & 33.9 & 34.01\,$\pm$\,1.10 & 85.23\,$\pm$\,3.51 & 1.9 & 1.16 & -- & 34.02\,$\pm$\,1.80 \\
+CRIC & 94.9 & 94.35\,$\pm$\,1.10 & 99.97\,$\pm$\,0.08 & 35.6 & 1.25 & 0.68 & 71.54\,$\pm$\,0.90 \\
+Herlev & 0.0 & 0.00\,$\pm$\,0.00 & 0.00\,$\pm$\,0.00 & 0.0 & 1.00 & -- & 0.00 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,142 @@
+{
+  "value": "balanced_accuracy",
+  "left": "P1",
+  "right": "P2",
+  "n_rows": 120,
+  "n_architectures": 6,
+  "n_seeds": 10,
+  "model_messages": {
+    "full": "boundary (singular) fit: see help('isSingular')"
+  },
+  "model_used": "full",
+  "r_version": "R version 4.4.3 (2025-02-28)",
+  "lme4_version": "2.0.6",
+  "lmerTest_version": "3.2.1",
+  "raw_mean_difference": 19.6383295414289,
+  "estimate": 19.6383295414289,
+  "se": 0.708999351844884,
+  "df_satterthwaite": 17.9956970719539,
+  "t": 27.698656550712,
+  "p_satterthwaite": 3.29624352550427e-16,
+  "ci95": [18.1487516464867, 21.1279074363711],
+  "df_kenward_roger": 7.22660955726781,
+  "p_kenward_roger": 1.3300977064177e-08,
+  "singular": true,
+  "variance_components": [
+    {
+      "grp": "split",
+      "var1": "(Intercept)",
+      "vcov": 1.6090088661949,
+      "sdcor": 1.26846713248507
+    },
+    {
+      "grp": "seed",
+      "var1": "(Intercept)",
+      "vcov": 3.43261623004606e-14,
+      "sdcor": 1.85273209883298e-07
+    },
+    {
+      "grp": "architecture",
+      "var1": "(Intercept)",
+      "vcov": 1.62997245305944,
+      "sdcor": 1.27670374522026
+    },
+    {
+      "grp": "architecture",
+      "var1": "x",
+      "vcov": 0.000884160764513503,
+      "sdcor": 0.029734840919593
+    },
+    {
+      "grp": "architecture",
+      "var1": "(Intercept)",
+      "var2": "x",
+      "vcov": 0.0379625827655731,
+      "sdcor": 1
+    },
+    {
+      "grp": "Residual",
+      "vcov": 5.42192842650202,
+      "sdcor": 2.32850347358599
+    }
+  ],
+  "assumptions": {
+    "residual_skewness": -0.44833990056353,
+    "residual_excess_kurtosis": 0.558507936135411,
+    "residual_shapiro_p": 0.16608218454997,
+    "architecture_slope_blups": [0.025153063916608, -0.00631552322136474, 0.0221817817563969, -0.0300901587894923, 0.023351439044673, -0.0342806027067835],
+    "residual_sd_by_protocol": [1.93164050386999, 2.37894991651839]
+  },
+  "assumptions_violated": false,
+  "cluster_bootstrap": {
+    "replicates": 10000,
+    "ci95": [18.004991807292, 21.3376824265736],
+    "p_two_sided": 0
+  },
+  "sign_flip": {
+    "statistic": 19.6383295414289,
+    "permutations": 1024,
+    "p_two_sided": 0.001953125
+  },
+  "primary_source": "lmm",
+  "primary_p": 3.29624352550427e-16,
+  "primary_ci95": [18.1487516464867, 21.1279074363711],
+  "primary_estimate": 19.6383295414289,
+  "supported": true,
+  "per_architecture_descriptive": [
+    {
+      "architecture": "convnext_tiny",
+      "mean_difference": 20.137948846881,
+      "sd_difference": 4.73750634199936,
+      "ci_low": 16.7489409680519,
+      "ci_high": 23.5269567257101,
+      "n": 10,
+      "_row": "convnext_tiny"
+    },
+    {
+      "architecture": "densenet121",
+      "mean_difference": 19.1431642318984,
+      "sd_difference": 3.72995471757,
+      "ci_low": 16.4749153657269,
+      "ci_high": 21.81141309807,
+      "n": 10,
+      "_row": "densenet121"
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "mean_difference": 19.9212684161316,
+      "sd_difference": 2.92268693350778,
+      "ci_low": 17.8305041342566,
+      "ci_high": 22.0120326980066,
+      "n": 10,
+      "_row": "efficientnet_b0"
+    },
+    {
+      "architecture": "resnet18",
+      "mean_difference": 20.8052513799333,
+      "sd_difference": 3.77370658107827,
+      "ci_low": 18.105704316052,
+      "ci_high": 23.5047984438146,
+      "n": 10,
+      "_row": "resnet18"
+    },
+    {
+      "architecture": "resnet50",
+      "mean_difference": 19.0780267771734,
+      "sd_difference": 3.90502570444985,
+      "ci_low": 16.2845396715023,
+      "ci_high": 21.8715138828446,
+      "n": 10,
+      "_row": "resnet50"
+    },
+    {
+      "architecture": "vit_b_16",
+      "mean_difference": 18.7443175965555,
+      "sd_difference": 3.22411553183672,
+      "ci_low": 16.4379242852089,
+      "ci_high": 21.0507109079022,
+      "n": 10,
+      "_row": "vit_b_16"
+    }
+  ]
+}

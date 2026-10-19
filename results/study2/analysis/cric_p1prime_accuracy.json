@@ -1,0 +1,147 @@
+{
+  "value": "accuracy",
+  "left": "P1-prime",
+  "right": "P2",
+  "n_rows": 120,
+  "n_architectures": 6,
+  "n_seeds": 10,
+  "model_messages": {
+    "full": "boundary (singular) fit: see help('isSingular')"
+  },
+  "model_used": "full",
+  "r_version": "R version 4.4.3 (2025-02-28)",
+  "lme4_version": "2.0.6",
+  "lmerTest_version": "3.2.1",
+  "raw_mean_difference": 12.110506627545,
+  "estimate": 12.1105066275449,
+  "se": 0.434971586871317,
+  "df_satterthwaite": 17.4993629470187,
+  "t": 27.8420636958242,
+  "p_satterthwaite": 6.14384051903316e-16,
+  "ci95": [11.1947876386836, 13.0262256164063],
+  "df_kenward_roger": 10.0993274383864,
+  "p_kenward_roger": 6.9798175126928e-11,
+  "singular": true,
+  "variance_components": [
+    {
+      "grp": "split",
+      "var1": "(Intercept)",
+      "vcov": 0.686514743049363,
+      "sdcor": 0.828561852277404
+    },
+    {
+      "grp": "seed",
+      "var1": "(Intercept)",
+      "vcov": 0,
+      "sdcor": 0
+    },
+    {
+      "grp": "architecture",
+      "var1": "(Intercept)",
+      "vcov": 0.28658227422822,
+      "sdcor": 0.535333797016609
+    },
+    {
+      "grp": "architecture",
+      "var1": "x",
+      "vcov": 0.149674039398238,
+      "sdcor": 0.386877292430349
+    },
+    {
+      "grp": "architecture",
+      "var1": "(Intercept)",
+      "var2": "x",
+      "vcov": -0.00848441544258316,
+      "sdcor": -0.0409660436672345
+    },
+    {
+      "grp": "Residual",
+      "vcov": 0.808549786273217,
+      "sdcor": 0.8991939647669
+    }
+  ],
+  "assumptions": {
+    "residual_skewness": -0.0646033045429613,
+    "residual_excess_kurtosis": 1.93606385224327,
+    "residual_shapiro_p": 0.00480822103915877,
+    "architecture_slope_blups": [-0.249367274510127, 0.173230097966961, 0.353425874915884, 0.10061814117499, -0.0137600118183829, -0.364146827729234],
+    "residual_sd_by_protocol": [0.490595517446674, 1.03791135500956]
+  },
+  "assumptions_violated": false,
+  "cluster_bootstrap": {
+    "replicates": 10000,
+    "ci95": [11.2120569198161, 13.0497938870251],
+    "p_two_sided": 0
+  },
+  "sign_flip": {
+    "statistic": 12.110506627545,
+    "permutations": 1024,
+    "p_two_sided": 0.001953125
+  },
+  "primary_source": "lmm",
+  "primary_p": 6.14384051903316e-16,
+  "primary_ci95": [11.1947876386836, 13.0262256164063],
+  "primary_estimate": 12.1105066275449,
+  "supported": true,
+  "binomial_glmm": {
+    "log_odds_ratio": 0.966547046013097,
+    "se": 0.031820442240412,
+    "p_wald": 1.17388710264694e-202
+  },
+  "per_architecture_descriptive": [
+    {
+      "architecture": "convnext_tiny",
+      "mean_difference": 11.6147495682208,
+      "sd_difference": 1.9109650687701,
+      "ci_low": 10.2477275092074,
+      "ci_high": 12.9817716272342,
+      "n": 10,
+      "_row": "convnext_tiny"
+    },
+    {
+      "architecture": "densenet121",
+      "mean_difference": 12.4716203222579,
+      "sd_difference": 1.64976157758645,
+      "ci_low": 11.2914519845263,
+      "ci_high": 13.6517886599894,
+      "n": 10,
+      "_row": "densenet121"
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "mean_difference": 12.8483158750027,
+      "sd_difference": 2.14427393464893,
+      "ci_low": 11.3143947075587,
+      "ci_high": 14.3822370424467,
+      "n": 10,
+      "_row": "efficientnet_b0"
+    },
+    {
+      "architecture": "resnet18",
+      "mean_difference": 12.3006940633024,
+      "sd_difference": 1.69828092376713,
+      "ci_low": 11.0858170762073,
+      "ci_high": 13.5155710503974,
+      "n": 10,
+      "_row": "resnet18"
+    },
+    {
+      "architecture": "resnet50",
+      "mean_difference": 12.0916549439025,
+      "sd_difference": 1.87921052571227,
+      "ci_low": 10.7473487165615,
+      "ci_high": 13.4359611712436,
+      "n": 10,
+      "_row": "resnet50"
+    },
+    {
+      "architecture": "vit_b_16",
+      "mean_difference": 11.3360049925836,
+      "sd_difference": 1.12914259067148,
+      "ci_low": 10.5282650425212,
+      "ci_high": 12.143744942646,
+      "n": 10,
+      "_row": "vit_b_16"
+    }
+  ]
+}

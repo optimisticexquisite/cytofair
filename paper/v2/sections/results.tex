@@ -1,3 +1,146 @@
 \section{Results}
 \label{sec:results}
-[Pending: registered Study 2 results.]
+
+All 1,341 registered runs completed; none failed or diverged, every run was trained from the
+registration commit, and every result matched its registered split hash.
+Table~\ref{tab:verdicts} summarises the five registered tests.
+
+\begin{table}[t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Registered Study 2 tests. Estimates in percentage points (H5: pp of gap per pp of
+recoverability). H1 is tested alone; H2--H5 are one Holm family. H1's primary inference is the
+two-way cluster bootstrap because the registered residual check flagged heavy tails.}
+\label{tab:verdicts}
+\begin{tabular}{llrrrl}
+\toprule
+ & Question & Estimate & 95\% CI & $p$ & Verdict \\
+\midrule
+H1 & SIPaKMeD, P1 $-$ P2 accuracy & \HoneEst & \HoneLo\ to \HoneHi & \HoneP & \HoneSupported \\
+H2 & CRIC, P1 $-$ P2 accuracy & \HtwoEst & \HtwoLo\ to \HtwoHi & \HtwoPholm & \HtwoSupported \\
+H3 & Leakage at matched diversity & \HthreeEst & \HthreeLo\ to \HthreeHi & \HthreePholm & \HthreeSupported \\
+H4 & Own-context route (transplants) & \HfourEst & \HfourLo\ to \HfourHi & \HfourPholm & \HfourSupported \\
+H5 & Gap versus recoverability (GRL) & \HfiveEst & \HfiveLo\ to \HfiveHi & \HfivePholm & \HfiveSupported \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Crop-level splitting inflates SIPaKMeD accuracy (H1)}
+\label{sec:res-h1}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/h1.pdf}
+\caption{Left: P1 $-$ P2 accuracy per architecture (mean and 95\% $t$ interval over 20 seeds)
+and the registered pooled estimate (two-way cluster bootstrap interval). Right: the same for
+P2 $-$ P3, a registered secondary contrast.}
+\label{fig:h1}
+\end{figure}
+
+Mean test accuracy was \SipPOneAcc\% under crop-level splitting (P1) and \SipPTwoAcc\% under
+parent-level splitting (P2). The registered estimate of the difference is \HoneEst~pp (95\%
+cluster-bootstrap interval \HoneBootLo--\HoneBootHi, $p$~\HoneBootP; Figure~\ref{fig:h1}). The
+mixed model gives the same estimate (Satterthwaite $df=\HoneDf$, $p$~\HoneKRp\ with
+Kenward--Roger degrees of freedom), as do the seed-level sign-flip test ($p$~\HoneSignFlipP)
+and the binomial mixed model (log odds ratio \HoneGlmmLogOR, $p$~\HoneGlmmP). All
+\HonePositiveArchs\ architectures scored higher under P1, by \HoneArchMin--\HoneArchMax~pp, and
+\HoneArchCIPositive\ of them individually had intervals excluding zero. Crop-level splitting
+therefore hides about a quarter of the errors: the parent-level error rate is
+\SipErrorRatio\ times the crop-level one. Macro-F1 (\HoneFoneEst~pp) and balanced accuracy
+(\HoneBaccEst~pp) moved by the same amount.
+
+Merging near-duplicate-linked parents on top of parent-level splitting changed nothing (P2
+$-$ P3: \PtwoPthreeEst~pp, \PtwoPthreeLo\ to \PtwoPthreeHi, $p=\PtwoPthreeP$), so the inflation
+comes from shared parents, not from the residual duplicates that cross parent boundaries. The
+architecture ranking was largely preserved (Kendall $\tau=\KendallTau$; \ReorderedPairs\ pairs
+reordered). Within crops tested under both protocols in different seeds (\MoneCrops\ crops),
+accuracy was \MoneEst~pp higher under P1 (\MoneLo--\MoneHi). Within P1, test crops that shared
+source pixels with a training crop were more often correct (log odds \MtwoOverlapLogOdds,
+$p$~\MtwoOverlapP), as were crops with more training siblings (log odds \MtwoSiblingsLogOdds\
+per log sibling, $p=\MtwoSiblingsP$).
+
+\subsection{The CRIC inflation is an order of magnitude larger (H2)}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.72\linewidth]{figures/cric.pdf}
+\caption{CRIC P1 $-$ P2 accuracy per architecture (mean and 95\% $t$ interval over ten seeds),
+the registered CRIC estimate, and the SIPaKMeD estimate for scale.}
+\label{fig:cric}
+\end{figure}
+
+CRIC accuracy fell from \CricPOneAcc\% under crop-level splitting to \CricPTwoAcc\% under
+slide-level splitting: H2 $=\HtwoEst$~pp (\HtwoLo--\HtwoHi; Holm $p$~\HtwoPholm;
+Figure~\ref{fig:cric}). The error rate rose by a factor of \CricErrorRatio. Because the CRIC
+classes are imbalanced, balanced accuracy fell further, from \CricPOneBacc\% to
+\CricPTwoBacc\% (\CricBaccEst~pp), and macro-F1 by \CricFoneEst~pp. The size-matched control
+P1-prime gave the same inflation as P1 (\CricPrimeEst~pp), so the gap is not a training-size
+effect. All six architectures showed gaps of similar size.
+
+\subsection{The inflation is leakage, not training diversity (H3)}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/factorial.pdf}
+\caption{The 2C factorial. Left: leak minus clean accuracy at matched crop and field counts,
+per architecture and diversity level (mean and 95\% $t$ interval over ten seeds), and the
+registered H3 estimate. Right: high minus low diversity within clean cells.}
+\label{fig:factorial}
+\end{figure}
+
+With crop count, field count, and allocation rule held equal, adding the test fields' sibling
+crops to the training set raised accuracy on the common test set by \HthreeEst~pp
+(\HthreeLo--\HthreeHi; Holm $p=\HthreePholm$; Figure~\ref{fig:factorial}). Every architecture
+showed the effect at both diversity levels. Increasing the number of distinct training fields
+by a factor of 1.43 without leakage did nothing (\DivEst~pp, \DivLo\ to \DivHi), and the
+leakage effect did not depend on diversity (interaction \InteractionEst~pp, $p=\InteractionP$).
+The approximate decomposition registered for the natural splits accordingly assigns the
+Phase~1 gap entirely to leakage (diversity component \DecompDiv~pp).
+
+\subsection{Background transplants do not isolate the route (H4)}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/transplant.pdf}
+\caption{Left: accuracy of leak and clean 2C models on composites of their common test set
+(mean and 95\% $t$ interval over 80 runs each). Right: the per-run own-context route,
+sibling minus unseen same-class background, and the registered H4 contrast.}
+\label{fig:transplant}
+\end{figure}
+
+Compositing a cell onto its own inpainted background cost nothing, so seam and inpainting
+artifacts were negligible (Figure~\ref{fig:transplant}). Leak models were \LeakOriginalEst~pp
+more accurate than clean models on unmodified test cells and kept most of that advantage
+when the background was replaced: \TransplantLeakSibling~pp on sibling backgrounds,
+\TransplantLeakUnseen~pp on backgrounds from unseen fields of the same class, and
+\TransplantLeakOther~pp on backgrounds of other classes. The registered own-context route was
+\HfourEst~pp larger in leak models (\HfourLo\ to \HfourHi; Holm $p=\HfourPholm$), not
+supported; its point estimate would assign \RouteShare\% of the inflation to the background.
+Two observations qualify the design. Sibling backgrounds helped even clean models, which had
+never seen those fields, by \TransplantCleanHarmony~pp, presumably because a background from
+the cell's own field matches its stain; this effect is common to both arms and inflates the
+variance of the contrast. And backgrounds do carry class information: an other-class
+background moved \DonorShiftEst~pp of probability toward its class (\DonorShiftLo--\DonorShiftHi,
+secondary).
+
+\subsection{Gradient reversal was evaded (H5)}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/grl.pdf}
+\caption{The gradient-reversal sweep. Left: within-class parent recoverability of the frozen
+features on the probe split. Middle: P1 $-$ P2 accuracy (mean and 95\% $t$ interval over ten
+seeds). Right: per-seed gap against recoverability; hollow grey points are excluded from H5
+(ConvNeXt-T failed the registered manipulation check).}
+\label{fig:grl}
+\end{figure}
+
+For ConvNeXt-T the adversary was evaded: as the reversal strength grew, an independent linear
+probe identified the field \emph{better} (within-class recoverability \GrlConvRzero\% at
+$\lambda=0$, \GrlConvRstar\% at $\lambda=3$), so this architecture failed the registered
+manipulation check and was excluded (Figure~\ref{fig:grl}). For ResNet-50 recoverability fell
+from \GrlResRzero\% to \GrlResRstar\%, passing the check, and the mean gap fell from
+\GrlResGapZero~pp at $\lambda=0$ to between \GrlResGapMin\ and \GrlResGapMax~pp at every
+$\lambda>0$, while P2 accuracy stayed within 1~pp. The registered slope of gap on recoverability
+was positive but not significant (\HfiveEst~pp per pp, \HfiveLo\ to \HfiveHi; Holm
+$p=\HfivePholm$).

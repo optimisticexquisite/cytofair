@@ -1,0 +1,134 @@
+{
+  "context_cells": 11365,
+  "discordant_cells": 2150,
+  "F1": {
+    "estimate": -4.28600200921333,
+    "ci95": [
+      -8.596214254796333,
+      -1.3680558921850465
+    ],
+    "p_two_sided": 0.0002,
+    "cells": 1144,
+    "slides": 230,
+    "replicates": 10000,
+    "quantity": "within-cell P1 - P2 probability of the slide's context class, discordant cells (pp)"
+  },
+  "accuracy_difference_concordant": {
+    "estimate": 10.02059505383693,
+    "ci95": [
+      6.791632341952744,
+      13.623525289769063
+    ],
+    "p_two_sided": 0.0,
+    "cells": 4738,
+    "slides": 250,
+    "replicates": 10000
+  },
+  "accuracy_difference_discordant": {
+    "estimate": 10.545160857660857,
+    "ci95": [
+      6.802231386071784,
+      15.234148053550841
+    ],
+    "p_two_sided": 0.0,
+    "cells": 1144,
+    "slides": 230,
+    "replicates": 10000
+  },
+  "concordance_contrast_secondary": {
+    "estimate": -0.5245658038239274,
+    "ci95": [
+      -5.746099953179862,
+      4.657846959937607
+    ],
+    "p_two_sided": 0.8406,
+    "slides": 283,
+    "replicates": 10000,
+    "quantity": "accuracy difference (P1 - P2) in concordant minus discordant cells (pp)"
+  },
+  "context_prediction_rate_discordant_secondary": {
+    "estimate": -4.4220883283383285,
+    "ci95": [
+      -8.876931768077602,
+      -1.3086421533049029
+    ],
+    "p_two_sided": 0.0008,
+    "cells": 1144,
+    "slides": 230,
+    "replicates": 10000
+  },
+  "per_architecture_secondary": [
+    {
+      "architecture": "convnext_tiny",
+      "estimate": -4.610660476547841,
+      "ci95": [
+        -9.18576385844025,
+        -1.0801252801806676
+      ],
+      "p_two_sided": 0.0032,
+      "cells": 1144,
+      "slides": 230,
+      "replicates": 10000
+    },
+    {
+      "architecture": "densenet121",
+      "estimate": -4.2181792897887425,
+      "ci95": [
+        -8.52068956255421,
+        -1.165203405994552
+      ],
+      "p_two_sided": 0.0026,
+      "cells": 1144,
+      "slides": 230,
+      "replicates": 10000
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "estimate": -3.7810585638363787,
+      "ci95": [
+        -8.220872309028543,
+        -0.599384351787469
+      ],
+      "p_two_sided": 0.0114,
+      "cells": 1144,
+      "slides": 230,
+      "replicates": 10000
+    },
+    {
+      "architecture": "resnet18",
+      "estimate": -4.024566385936334,
+      "ci95": [
+        -8.648899959907942,
+        -0.6102930817688268
+      ],
+      "p_two_sided": 0.0134,
+      "cells": 1144,
+      "slides": 230,
+      "replicates": 10000
+    },
+    {
+      "architecture": "resnet50",
+      "estimate": -4.555486576449938,
+      "ci95": [
+        -9.15362609061194,
+        -1.183826650315723
+      ],
+      "p_two_sided": 0.0034,
+      "cells": 1144,
+      "slides": 230,
+      "replicates": 10000
+    },
+    {
+      "architecture": "vit_b_16",
+      "estimate": -4.5260607627207525,
+      "ci95": [
+        -8.747735159827648,
+        -1.5965254159118303
+      ],
+      "p_two_sided": 0.0,
+      "cells": 1144,
+      "slides": 230,
+      "replicates": 10000
+    }
+  ]
+}

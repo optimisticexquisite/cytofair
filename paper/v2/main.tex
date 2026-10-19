@@ -264,7 +264,7 @@ information from backgrounds at all.
 
 A two-layer parent-identity head is attached to the penultimate features through a
 gradient-reversal layer~\citep{ganin2015backprop,ganin2016dann}, with the DANN ramp
-reaching a maximum coefficient $\lambda\in\{0,0.01,0.03,0.1,0.3,1,3\}$. The head only
+reaching a maximum coefficient $\lambda\in\{0,\allowbreak 0.01,\allowbreak 0.03,\allowbreak 0.1,\allowbreak 0.3,\allowbreak 1,\allowbreak 3\}$. The head only
 discriminates fields \emph{within} the sample's class, so suppressing it never requires
 removing class information. ResNet-50 and ConvNeXt-T are trained on the natural P1 and P2
 splits of ten seeds (280 runs). Fingerprint recoverability $R$ is the within-class
@@ -292,6 +292,9 @@ H1 is the single primary endpoint. H2--H5 form one Holm family~\citep{holm1979}
 has the predicted sign. All other analyses are secondary or exploratory.
 
 \input{sections/results.tex}
+\input{sections/followup_design.tex}
+\input{sections/followup_results.tex}
+\input{sections/discussion.tex}
 
 \bibliographystyle{unsrtnat}
 \bibliography{references}

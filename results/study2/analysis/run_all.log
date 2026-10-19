@@ -1,0 +1,44 @@
+collected 1341/1341 runs; 0 diverged; 0 problems
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+accuracy P1-P2: estimate=0.966 pp, p=0 (cluster_bootstrap), supported=TRUE
+boundary (singular) fit: see help('isSingular')
+accuracy P2-P3: estimate=0.034 pp, p=0.895 (lmm), supported=FALSE
+boundary (singular) fit: see help('isSingular')
+macro_f1 P1-P2: estimate=0.964 pp, p=0 (cluster_bootstrap), supported=TRUE
+boundary (singular) fit: see help('isSingular')
+balanced_accuracy P1-P2: estimate=0.976 pp, p=0 (cluster_bootstrap), supported=TRUE
+accuracy P1-P2: estimate=12.076 pp, p=3.572e-10 (lmm), supported=TRUE
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+accuracy P1-prime-P2: estimate=12.111 pp, p=6.144e-16 (lmm), supported=TRUE
+boundary (singular) fit: see help('isSingular')
+balanced_accuracy P1-P2: estimate=19.638 pp, p=3.296e-16 (lmm), supported=TRUE
+macro_f1 P1-P2: estimate=20.591 pp, p=2.205e-08 (lmm), supported=TRUE
+/tmp/rchethan1_cytofair/analysis_repo/src/cytofair/recoverability.py:67: RuntimeWarning: invalid value encountered in divide
+  normed = values / np.clip(np.linalg.norm(values, axis=1, keepdims=True), 1e-12, None)
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+H2 estimate=12.076 p=3.572e-10 p_holm=1.429e-09 supported=TRUE
+H3 estimate=1.729 p=0.00579 p_holm=0.01737 supported=TRUE
+H4 estimate=0.417 p=0.2273 p_holm=0.2273 supported=FALSE
+H5 estimate=0.059 p=0.07906 p_holm=0.1581 supported=FALSE
+{
+  "M1": {
+    "crops": 3664,
+    "mean_within_crop_difference_pp": 1.2921385502760474,
+    "ci95_pp": [
+      1.0964753648776542,
+      1.4996080357327681
+    ]
+  },
+  "approximate_gap_decomposition": {
+    "phase1_gap_pp": 0.965534979423867,
+    "leakage_part_pp": 1.585709437263992,
+    "diversity_part_pp": -0.001475918525633507,
+    "diversity_log_scale_factor": 0.46975972300288377,
+    "note": "model-based approximation; 2C trains on 1,100 crops versus 3,239 in Phase 1"
+  }
+}

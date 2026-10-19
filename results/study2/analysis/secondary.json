@@ -1,0 +1,310 @@
+{
+  "ranking_P1_vs_P2": [
+    {
+      "dataset": "SIPaKMeD",
+      "left_protocol": "P1",
+      "right_protocol": "P2",
+      "n_architectures": 12,
+      "n_seeds": 20,
+      "test": "kendall_tau_secondary_unadjusted",
+      "p_value": 4.4129288920955584e-05,
+      "effect_name": "kendall_tau",
+      "effect_size": 0.8181818181818181,
+      "effect_ci_low": 0.4242424242424242,
+      "effect_ci_high": 0.8618557850236241,
+      "reordered_pairs": 6,
+      "total_pairs": 66,
+      "tie_changes": 0
+    }
+  ],
+  "ordering_P3_le_P2_le_P1": [
+    {
+      "architecture": "convnext_tiny",
+      "P1": 0.9753086419753088,
+      "P2": 0.9669135802469138,
+      "P3": 0.9672222222222222,
+      "ordering_passed": false
+    },
+    {
+      "architecture": "densenet121",
+      "P1": 0.977037037037037,
+      "P2": 0.970432098765432,
+      "P3": 0.9721604938271605,
+      "ordering_passed": false
+    },
+    {
+      "architecture": "dinov2_vits14",
+      "P1": 0.9374691358024692,
+      "P2": 0.9256172839506173,
+      "P3": 0.9095061728395061,
+      "ordering_passed": true
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "P1": 0.9776543209876543,
+      "P2": 0.9698148148148148,
+      "P3": 0.9685185185185186,
+      "ordering_passed": true
+    },
+    {
+      "architecture": "efficientnet_v2_s",
+      "P1": 0.9735802469135801,
+      "P2": 0.9631481481481481,
+      "P3": 0.9658641975308642,
+      "ordering_passed": false
+    },
+    {
+      "architecture": "maxvit_t",
+      "P1": 0.9716666666666667,
+      "P2": 0.9630246913580247,
+      "P3": 0.9666666666666666,
+      "ordering_passed": false
+    },
+    {
+      "architecture": "mobilenet_v2",
+      "P1": 0.9714197530864197,
+      "P2": 0.9619135802469136,
+      "P3": 0.9628395061728394,
+      "ordering_passed": false
+    },
+    {
+      "architecture": "regnet_y_1_6gf",
+      "P1": 0.9751234567901234,
+      "P2": 0.9655555555555555,
+      "P3": 0.9670987654320987,
+      "ordering_passed": false
+    },
+    {
+      "architecture": "resnet18",
+      "P1": 0.9746913580246913,
+      "P2": 0.9658641975308642,
+      "P3": 0.9677160493827162,
+      "ordering_passed": false
+    },
+    {
+      "architecture": "resnet50",
+      "P1": 0.976358024691358,
+      "P2": 0.9661728395061729,
+      "P3": 0.9650000000000001,
+      "ordering_passed": true
+    },
+    {
+      "architecture": "swin_t",
+      "P1": 0.9749382716049382,
+      "P2": 0.9653703703703703,
+      "P3": 0.9649382716049383,
+      "ordering_passed": true
+    },
+    {
+      "architecture": "vit_b_16",
+      "P1": 0.9717901234567901,
+      "P2": 0.9573456790123457,
+      "P3": 0.9595679012345679,
+      "ordering_passed": false
+    }
+  ],
+  "calibration_by_protocol": {
+    "P1": {
+      "nll": 0.10223842745181169,
+      "ece_15": 0.01780746328793921
+    },
+    "P2": {
+      "nll": 0.1424981433122108,
+      "ece_15": 0.024317187648343157
+    },
+    "P3": {
+      "nll": 0.13629587264731524,
+      "ece_15": 0.02365309834664246
+    }
+  },
+  "pooled_confusion_matrices": {
+    "P1": [
+      [
+        37770,
+        1212,
+        54,
+        29,
+        55
+      ],
+      [
+        831,
+        36918,
+        1368,
+        29,
+        454
+      ],
+      [
+        79,
+        759,
+        37146,
+        38,
+        138
+      ],
+      [
+        71,
+        36,
+        75,
+        37444,
+        54
+      ],
+      [
+        30,
+        100,
+        108,
+        36,
+        39566
+      ]
+    ],
+    "P2": [
+      [
+        37211,
+        1501,
+        90,
+        89,
+        97
+      ],
+      [
+        692,
+        36627,
+        1722,
+        62,
+        497
+      ],
+      [
+        156,
+        1574,
+        36134,
+        68,
+        168
+      ],
+      [
+        93,
+        63,
+        166,
+        37421,
+        57
+      ],
+      [
+        31,
+        129,
+        100,
+        78,
+        39574
+      ]
+    ],
+    "P3": [
+      [
+        37297,
+        1488,
+        84,
+        52,
+        103
+      ],
+      [
+        800,
+        36857,
+        1446,
+        80,
+        417
+      ],
+      [
+        202,
+        1606,
+        35859,
+        107,
+        278
+      ],
+      [
+        42,
+        72,
+        147,
+        37425,
+        90
+      ],
+      [
+        19,
+        194,
+        142,
+        130,
+        39463
+      ]
+    ]
+  },
+  "M1": {
+    "crops": 3664,
+    "mean_within_crop_difference_pp": 1.2921385502760474,
+    "ci95_pp": [
+      1.0964753648776542,
+      1.4996080357327681
+    ]
+  },
+  "M2": {
+    "overlap": {
+      "log_odds": 0.4500088798503883,
+      "se": 0.08988189873722532,
+      "p": 5.538015501633072e-07
+    },
+    "log_siblings": {
+      "log_odds": 0.1499396993929394,
+      "se": 0.059514748080705455,
+      "p": 0.011756488435617237
+    },
+    "difficulty": {
+      "log_odds": 1.0347638438380886,
+      "se": 0.02640650528050365,
+      "p": 0.0
+    },
+    "observations": 177684
+  },
+  "embedding_diversity": {
+    "P1": {
+      "seed": 335.2,
+      "n_crops": 3239.0,
+      "n_parents": 907.8,
+      "mean_pairwise_crop_cosine_distance": 0.535526335093042,
+      "mean_pairwise_parent_centroid_cosine_distance": 0.47152215055131264
+    },
+    "P2": {
+      "seed": 335.2,
+      "n_crops": 3239.0,
+      "n_parents": 772.7,
+      "mean_pairwise_crop_cosine_distance": 0.5354354894068067,
+      "mean_pairwise_parent_centroid_cosine_distance": 0.4660082233776273
+    },
+    "clean_high": {
+      "seed": 335.2,
+      "n_crops": 1100.0,
+      "n_parents": 720.0,
+      "mean_pairwise_crop_cosine_distance": 0.5297552025783127,
+      "mean_pairwise_parent_centroid_cosine_distance": 0.498930858311949
+    },
+    "clean_low": {
+      "seed": 335.2,
+      "n_crops": 1100.0,
+      "n_parents": 504.0,
+      "mean_pairwise_crop_cosine_distance": 0.5310281512304205,
+      "mean_pairwise_parent_centroid_cosine_distance": 0.47918134714121113
+    },
+    "leak_high": {
+      "seed": 335.2,
+      "n_crops": 1100.0,
+      "n_parents": 720.0,
+      "mean_pairwise_crop_cosine_distance": 0.5307457233270667,
+      "mean_pairwise_parent_centroid_cosine_distance": 0.5006749831098233
+    },
+    "leak_low": {
+      "seed": 335.2,
+      "n_crops": 1100.0,
+      "n_parents": 504.0,
+      "mean_pairwise_crop_cosine_distance": 0.5324822746604913,
+      "mean_pairwise_parent_centroid_cosine_distance": 0.48123992041577096
+    }
+  },
+  "approximate_gap_decomposition": {
+    "phase1_gap_pp": 0.965534979423867,
+    "leakage_part_pp": 1.585709437263992,
+    "diversity_part_pp": -0.001475918525633507,
+    "diversity_log_scale_factor": 0.46975972300288377,
+    "note": "model-based approximation; 2C trains on 1,100 crops versus 3,239 in Phase 1"
+  }
+}

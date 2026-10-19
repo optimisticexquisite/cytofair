@@ -1,0 +1,2 @@
+dataset,protocol,architecture,seed,adversary_lambda,accuracy,macro_f1,balanced_accuracy,nll,ece_15,train_crops,test_crops,train_parents,test_parents,test_crops_with_train_parent_fraction,split_file_sha256,split_sha256,git_sha,training_seconds,elapsed_seconds,gpu_visible_devices,task_id,run_json
+,,,17,,,,,,,,,,,,,,a62e8e75b456e01dec89c88a835d1f82ecfb60dd,,13.828644037246704,,fingerprint:resnet18_probe_seed17,/tmp/rchethan1_cytofair/runs/fingerprint/fingerprint_encoder.json

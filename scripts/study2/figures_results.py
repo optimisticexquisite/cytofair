@@ -166,15 +166,15 @@ def figure_transplant(analysis: Path, output: Path) -> None:
         ax.plot([low, high], [y, y], color=style.INK_2, linewidth=1.4, zorder=3)
         style.ring(ax, [mean], [y], color, size=40, zorder=4)
     mechanism = load(analysis / "mechanism.json")
+    title = "Own-context route"
     if mechanism is not None:
         h4 = mechanism["H4"]
-        ax.annotate(f"H4 = {h4['estimate']:.2f} pp\n[{h4['ci95'][0]:.2f}, {h4['ci95'][1]:.2f}]",
-                    (1.0, 0.02), xycoords="axes fraction", ha="right", va="bottom", fontsize=7, color=style.INK)
+        title += f"\nH4 {h4['estimate']:.2f} pp [{h4['ci95'][0]:.2f}, {h4['ci95'][1]:.2f}]".replace("-", "\u2212")
     ax.set_yticks([0, 1], ["clean models", "leak models"])
     style.zero_line(ax)
     ax.grid(axis="y", visible=False)
     ax.set_xlabel("Sibling minus unseen same-class (pp)")
-    ax.set_title("Own-context route", loc="left", color=style.INK)
+    ax.set_title(title, loc="left", color=style.INK)
     figure.tight_layout(w_pad=2.0)
     figure.savefig(output)
     figure.savefig(output.with_suffix(".png"))
@@ -207,7 +207,9 @@ def figure_grl(analysis: Path, output: Path) -> None:
         r_pair = subset.pivot_table(index=["seed", "adversary_lambda"], columns="protocol", values="R").mean(axis=1)
         gap_pairs = (wide.P1 - wide.P2).reindex(r_pair.index)
         regime = set(checks.get(arch, {}).get("non_degenerate_lambdas", lambdas))
-        inside = np.array([value in regime for value in r_pair.index.get_level_values("adversary_lambda")])
+        # Hollow grey: outside the regime, or an architecture that failed the manipulation check.
+        passed = checks.get(arch, {}).get("manipulation_check_passed", True)
+        inside = np.array([passed and value in regime for value in r_pair.index.get_level_values("adversary_lambda")])
         axes[2].scatter(r_pair.values[inside], gap_pairs.values[inside], s=9, color=colors[arch], alpha=0.55,
                         linewidths=0, zorder=2)
         axes[2].scatter(r_pair.values[~inside], gap_pairs.values[~inside], s=9, facecolors="none",
@@ -217,7 +219,7 @@ def figure_grl(analysis: Path, output: Path) -> None:
     axes[0].annotate("class-only floor", (0, floor), xytext=(0, 3), textcoords="offset points", fontsize=7,
                      color=style.INK_2)
     for ax in axes[:2]:
-        ax.set_xticks(range(len(lambdas)), [f"{v:g}" for v in lambdas])
+        ax.set_xticks(range(len(lambdas)), [f"{v:g}".removeprefix("0") if 0 < v < 1 else f"{v:g}" for v in lambdas])
         ax.set_xlabel("Reversal strength $\\lambda$")
         ax.grid(axis="x", visible=False)
     axes[0].set_ylabel("Within-class parent ID (%)")
@@ -229,13 +231,13 @@ def figure_grl(analysis: Path, output: Path) -> None:
     h5 = None if mechanism is None else mechanism.get("H5", {})
     subtitle = ""
     if h5 and h5.get("estimate") is not None:
-        subtitle = f"\nH5 slope {h5['estimate']:.3f} [{h5['ci95'][0]:.3f}, {h5['ci95'][1]:.3f}]"
+        subtitle = f"\nH5 slope {h5['estimate']:.3f} [{h5['ci95'][0]:.3f}, {h5['ci95'][1]:.3f}]".replace("-", "\u2212")
     elif h5 and h5.get("status"):
         subtitle = "\nH5 untestable"
     axes[2].set_xlabel("Recoverability (%)")
     axes[2].set_ylabel("P1 minus P2 (pp)")
     axes[2].set_title("Inflation vs fingerprint" + subtitle, loc="left", color=style.INK)
-    axes[0].legend(loc="upper right", fontsize=7)
+    axes[0].legend(loc="upper left", fontsize=7)
     figure.tight_layout(w_pad=1.6)
     figure.savefig(output)
     figure.savefig(output.with_suffix(".png"))

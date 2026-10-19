@@ -1,0 +1,43 @@
+\section{Follow-up: where does the leaked signal live?}
+\label{sec:followup}
+
+Study~2 established \emph{that} crop-level splitting inflates accuracy and that the inflation is
+leakage, but neither registered mechanism test isolated \emph{how} the models use it: the
+background route was small and uncertain, and the adversary was evaded for one of its two
+architectures. We therefore registered eight further hypotheses (F1--F8) as Amendment~8
+(commit \texttt{\FollowupCommit}, \FollowupTime), after the Study~2 analysis and before any follow-up model was trained or any
+follow-up analysis was run on existing outputs. They form their own Holm family and do not
+alter the Study~2 verdicts. Three arms reuse saved Study~2 artifacts; three train new models
+on seeds no earlier arm used.
+
+\paragraph{Slide context in CRIC (F1).} CRIC slide images contain several classes, so a test
+cell's training siblings can carry a different label. For every cell, the \emph{context class}
+is the majority class of the other cells of its slide. If crop-level models apply a slide-level
+label prior, a \emph{discordant} cell (whose class differs from its context class) should
+receive more probability on the context class when its slide was in training (P1) than when it
+was not (P2). F1 is that within-cell difference, with a cluster bootstrap over slides.
+
+\paragraph{Carrier ablations at test time (F2).} Every 2C model is re-evaluated on its test set
+after one of five interventions that keep cell morphology: greyscale, Reinhard stain transfer
+to an unseen field of the same class, low-pass filtering, illumination flattening, and
+replacement of the background by a constant. F2 asks whether stain transfer shrinks the
+leak-minus-clean advantage. A quantitative Grad-CAM analysis~\citep{selvaraju2017gradcam} of the
+attribution falling outside the cell mask is reported descriptively.
+
+\paragraph{Carrier removal in training (F3, F4).} The 2C factorial is rerun on ten fresh seeds
+under three conditions: the standard recipe, every crop's background masked in training and
+testing, and strong optical-density (HED) colour augmentation~\citep{tellez2019quantifying}
+during training. F3 asks whether leakage survives with no background at all; F4 whether
+colour augmentation shrinks it. The standard condition doubles as an independent replication
+of H3.
+
+\paragraph{Three ways of removing the fingerprint (F5--F8).} Each manipulation lowers the
+within-class parent recoverability $R$ by a different route, and the shortcut account predicts
+that the P1 $-$ P2 gap falls with it. F5 erases, from every saved Phase~1 model, the top-$r$
+directions of within-class parent identity with a rank-limited LEACE projection
+\citep{belrose2023leace} and refits the linear head ($r\in\{0,4,16,64,256\}$). F6 normalises every
+crop's colour statistics toward one reference at increasing strength (Reinhard). F7 repeats the
+adversarial arm with a probe-matched adversary (standardised features, one linear layer,
+periodic re-initialisation) that cannot hide parent identity from a linear probe while leaving it
+readable. F8 pools the dose-response over all three. The H5 regime rule and manipulation check
+apply to F5 and F7 and decide which levels enter F8.

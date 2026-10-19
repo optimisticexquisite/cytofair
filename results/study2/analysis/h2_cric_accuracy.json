@@ -1,0 +1,147 @@
+{
+  "value": "accuracy",
+  "left": "P1",
+  "right": "P2",
+  "n_rows": 120,
+  "n_architectures": 6,
+  "n_seeds": 10,
+  "model_messages": {
+    "full": []
+  },
+  "model_used": "full",
+  "r_version": "R version 4.4.3 (2025-02-28)",
+  "lme4_version": "2.0.6",
+  "lmerTest_version": "3.2.1",
+  "raw_mean_difference": 12.0758295577574,
+  "estimate": 12.0758295577574,
+  "se": 0.404273970604956,
+  "df_satterthwaite": 8.82590308583216,
+  "t": 29.8704107506281,
+  "p_satterthwaite": 3.57202764710044e-10,
+  "ci95": [11.1585410000303, 12.9931181154846],
+  "df_kenward_roger": 8.82590010368753,
+  "p_kenward_roger": 3.57204757514757e-10,
+  "singular": false,
+  "variance_components": [
+    {
+      "grp": "split",
+      "var1": "(Intercept)",
+      "vcov": 0.666188998826975,
+      "sdcor": 0.816204017894408
+    },
+    {
+      "grp": "seed",
+      "var1": "(Intercept)",
+      "vcov": 0.0294886042991168,
+      "sdcor": 0.171722463000962
+    },
+    {
+      "grp": "architecture",
+      "var1": "(Intercept)",
+      "vcov": 0.278259327163539,
+      "sdcor": 0.527502916734627
+    },
+    {
+      "grp": "architecture",
+      "var1": "x",
+      "vcov": 0.0220003476716629,
+      "sdcor": 0.148325141738219
+    },
+    {
+      "grp": "architecture",
+      "var1": "(Intercept)",
+      "var2": "x",
+      "vcov": -0.0499819657640709,
+      "sdcor": -0.638812926149401
+    },
+    {
+      "grp": "Residual",
+      "vcov": 0.795987567940737,
+      "sdcor": 0.892181353728454
+    }
+  ],
+  "assumptions": {
+    "residual_skewness": -0.0516232285996871,
+    "residual_excess_kurtosis": 1.91574055245716,
+    "residual_shapiro_p": 0.00467063609098071,
+    "architecture_slope_blups": [-0.158724243190185, 0.0246293780043443, 0.04968969453417, 0.115028032489702, -0.0545231091103256, 0.0239002472721789],
+    "residual_sd_by_protocol": [0.489363538191637, 1.04137372402488]
+  },
+  "assumptions_violated": false,
+  "cluster_bootstrap": {
+    "replicates": 10000,
+    "ci95": [11.2328380341827, 12.923235444622],
+    "p_two_sided": 0
+  },
+  "sign_flip": {
+    "statistic": 12.0758295577574,
+    "permutations": 1024,
+    "p_two_sided": 0.001953125
+  },
+  "primary_source": "lmm",
+  "primary_p": 3.57202764710044e-10,
+  "primary_ci95": [11.1585410000303, 12.9931181154846],
+  "primary_estimate": 12.0758295577574,
+  "supported": true,
+  "binomial_glmm": {
+    "log_odds_ratio": 0.962170043644926,
+    "se": 0.0276276712956922,
+    "p_wald": 9.72269542626811e-266
+  },
+  "per_architecture_descriptive": [
+    {
+      "architecture": "convnext_tiny",
+      "mean_difference": 11.8098080857761,
+      "sd_difference": 2.10935388176491,
+      "ci_low": 10.3008672193195,
+      "ci_high": 13.3187489522326,
+      "n": 10,
+      "_row": "convnext_tiny"
+    },
+    {
+      "architecture": "densenet121",
+      "mean_difference": 12.1681959616163,
+      "sd_difference": 1.58859770154222,
+      "ci_low": 11.031781625009,
+      "ci_high": 13.3046102982237,
+      "n": 10,
+      "_row": "densenet121"
+    },
+    {
+      "architecture": "efficientnet_b0",
+      "mean_difference": 12.7746271017041,
+      "sd_difference": 2.15100927599515,
+      "ci_low": 11.235887761314,
+      "ci_high": 14.3133664420942,
+      "n": 10,
+      "_row": "efficientnet_b0"
+    },
+    {
+      "architecture": "resnet18",
+      "mean_difference": 12.2963594295789,
+      "sd_difference": 1.23350692777724,
+      "ci_low": 11.4139617302308,
+      "ci_high": 13.178757128927,
+      "n": 10,
+      "_row": "resnet18"
+    },
+    {
+      "architecture": "resnet50",
+      "mean_difference": 11.7795613158141,
+      "sd_difference": 1.81239516730712,
+      "ci_low": 10.4830519165331,
+      "ci_high": 13.0760707150951,
+      "n": 10,
+      "_row": "resnet50"
+    },
+    {
+      "architecture": "vit_b_16",
+      "mean_difference": 11.6264254520548,
+      "sd_difference": 0.997650526543717,
+      "ci_low": 10.9127492581465,
+      "ci_high": 12.3401016459631,
+      "n": 10,
+      "_row": "vit_b_16"
+    }
+  ]
+}

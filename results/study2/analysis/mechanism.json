@@ -1,0 +1,706 @@
+{
+  "r_version": "R version 4.4.3 (2025-02-28)",
+  "H3": {
+    "model_used": "full",
+    "estimate": 1.7292360275507,
+    "se": 0.244176689098861,
+    "df": 3.00000138225023,
+    "p": 0.00579018880515048,
+    "ci95": [0.952157028041884, 2.50631502705951],
+    "singular": true,
+    "variance_components": [
+      {
+        "grp": "training_set",
+        "var1": "(Intercept)",
+        "vcov": 0,
+        "sdcor": 0
+      },
+      {
+        "grp": "seed",
+        "var1": "(Intercept)",
+        "vcov": 0.47776407888283,
+        "sdcor": 0.691204802415919
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "vcov": 0.0775679549219203,
+        "sdcor": 0.27851024204133
+      },
+      {
+        "grp": "architecture",
+        "var1": "leak",
+        "vcov": 0.0962608835255653,
+        "sdcor": 0.310259381043612
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "var2": "leak",
+        "vcov": 9.38597057666346e-05,
+        "sdcor": 0.00108620824734907
+      },
+      {
+        "grp": "Residual",
+        "vcov": 1.42228138471561,
+        "sdcor": 1.19259439237136
+      }
+    ]
+  },
+  "H3_interaction_exploratory": {
+    "model_used": "full",
+    "estimate": -0.196630205729284,
+    "se": 0.377131460463803,
+    "df": 140.999995200389,
+    "p": 0.602917447905449,
+    "ci95": [-0.942193265494463, 0.548932854035896],
+    "singular": true,
+    "variance_components": [
+      {
+        "grp": "training_set",
+        "var1": "(Intercept)",
+        "vcov": 0,
+        "sdcor": 0
+      },
+      {
+        "grp": "seed",
+        "var1": "(Intercept)",
+        "vcov": 0.47776407888283,
+        "sdcor": 0.691204802415919
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "vcov": 0.0775679549219203,
+        "sdcor": 0.27851024204133
+      },
+      {
+        "grp": "architecture",
+        "var1": "leak",
+        "vcov": 0.0962608835255653,
+        "sdcor": 0.310259381043612
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "var2": "leak",
+        "vcov": 9.38597057666346e-05,
+        "sdcor": 0.00108620824734907
+      },
+      {
+        "grp": "Residual",
+        "vcov": 1.42228138471561,
+        "sdcor": 1.19259439237136
+      }
+    ]
+  },
+  "diversity_effect_clean_secondary": {
+    "model_used": "full",
+    "estimate": -0.00314185838708962,
+    "se": 0.320069255341316,
+    "df": 42.4384553318785,
+    "p": 0.992213945707888,
+    "ci95": [-0.64887011566127, 0.64258639888709],
+    "singular": true,
+    "variance_components": [
+      {
+        "grp": "training_set",
+        "var1": "(Intercept)",
+        "vcov": 0,
+        "sdcor": 0
+      },
+      {
+        "grp": "seed",
+        "var1": "(Intercept)",
+        "vcov": 0.588886186968899,
+        "sdcor": 0.767389201754168
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "vcov": 0.0731227066383954,
+        "sdcor": 0.270412105199444
+      },
+      {
+        "grp": "architecture",
+        "var1": "div",
+        "vcov": 0.00531450398148821,
+        "sdcor": 0.0729006445889761
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "var2": "div",
+        "vcov": 0.0197132167737015,
+        "sdcor": 1
+      },
+      {
+        "grp": "Residual",
+        "vcov": 2.02231404438745,
+        "sdcor": 1.42208088531822
+      }
+    ]
+  },
+  "cell_means": [
+    {
+      "cell": "clean_high",
+      "architecture": "convnext_tiny",
+      "value": 95.2072929988334
+    },
+    {
+      "cell": "clean_low",
+      "architecture": "convnext_tiny",
+      "value": 94.9488008626294
+    },
+    {
+      "cell": "leak_high",
+      "architecture": "convnext_tiny",
+      "value": 96.2822267679876
+    },
+    {
+      "cell": "leak_low",
+      "architecture": "convnext_tiny",
+      "value": 95.9952023996575
+    },
+    {
+      "cell": "clean_high",
+      "architecture": "densenet121",
+      "value": 94.7820220708855
+    },
+    {
+      "cell": "clean_low",
+      "architecture": "densenet121",
+      "value": 94.6739561073092
+    },
+    {
+      "cell": "leak_high",
+      "architecture": "densenet121",
+      "value": 96.7605691086575
+    },
+    {
+      "cell": "leak_low",
+      "architecture": "densenet121",
+      "value": 97.1171124635165
+    },
+    {
+      "cell": "clean_high",
+      "architecture": "resnet50",
+      "value": 94.5710499137691
+    },
+    {
+      "cell": "clean_low",
+      "architecture": "resnet50",
+      "value": 94.8874238448401
+    },
+    {
+      "cell": "leak_high",
+      "architecture": "resnet50",
+      "value": 96.1083619977238
+    },
+    {
+      "cell": "leak_low",
+      "architecture": "resnet50",
+      "value": 96.80032116307
+    },
+    {
+      "cell": "clean_high",
+      "architecture": "vit_b_16",
+      "value": 94.0507763717262
+    },
+    {
+      "cell": "clean_low",
+      "architecture": "vit_b_16",
+      "value": 94.1135279739839
+    },
+    {
+      "cell": "leak_high",
+      "architecture": "vit_b_16",
+      "value": 95.9836671795895
+    },
+    {
+      "cell": "leak_low",
+      "architecture": "vit_b_16",
+      "value": 96.02127728418
+    }
+  ],
+  "H4": {
+    "model_used": "full",
+    "estimate": 0.416590777431961,
+    "se": 0.308365233235478,
+    "df": 5.76565684030485,
+    "p": 0.227308392870838,
+    "ci95": [-0.345448523319124, 1.17863007818305],
+    "singular": true,
+    "variance_components": [
+      {
+        "grp": "training_set",
+        "var1": "(Intercept)",
+        "vcov": 0.19320911682695,
+        "sdcor": 0.439555590144125
+      },
+      {
+        "grp": "seed",
+        "var1": "(Intercept)",
+        "vcov": 0.747163997715079,
+        "sdcor": 0.864386486309844
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "vcov": 0.136867689117721,
+        "sdcor": 0.369956334068929
+      },
+      {
+        "grp": "architecture",
+        "var1": "leak",
+        "vcov": 0.141240711129319,
+        "sdcor": 0.375820051526418
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "var2": "leak",
+        "vcov": 0.13903700853231,
+        "sdcor": 1
+      },
+      {
+        "grp": "Residual",
+        "vcov": 1.61832110413384,
+        "sdcor": 1.27213250258526
+      }
+    ]
+  },
+  "H4_leak_effect_on_original_images": {
+    "model_used": "intercepts",
+    "estimate": 1.7292360275507,
+    "se": 0.189410599753348,
+    "df": 144.999999933045,
+    "p": 5.43392809203147e-16,
+    "ci95": [1.3548736364027, 2.10359841869869],
+    "singular": true,
+    "variance_components": [
+      {
+        "grp": "training_set",
+        "var1": "(Intercept)",
+        "vcov": 0,
+        "sdcor": 0
+      },
+      {
+        "grp": "seed",
+        "var1": "(Intercept)",
+        "vcov": 0.476965836458466,
+        "sdcor": 0.690627132726818
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "vcov": 0.0772486893729353,
+        "sdcor": 0.277936484422134
+      },
+      {
+        "grp": "Residual",
+        "vcov": 1.43505501195692,
+        "sdcor": 1.19793781639821
+      }
+    ]
+  },
+  "background_class_information_secondary": {
+    "model_used": "intercepts",
+    "estimate": 3.09308144394906,
+    "se": 0.678715237745396,
+    "df": 3.30213561151287,
+    "p": 0.0160464786088803,
+    "ci95": [1.04071847682413, 5.14544441107399],
+    "singular": false,
+    "variance_components": [
+      {
+        "grp": "seed",
+        "var1": "(Intercept)",
+        "vcov": 0.218728317358646,
+        "sdcor": 0.467683993053692
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "vcov": 1.7316276982138,
+        "sdcor": 1.31591325634093
+      },
+      {
+        "grp": "Residual",
+        "vcov": 0.939938825355468,
+        "sdcor": 0.96950442255591
+      }
+    ]
+  },
+  "H4_background_ge_0.30_secondary": {
+    "model_used": "intercepts",
+    "estimate": 0.633241730488414,
+    "se": 0.341366028058127,
+    "df": 28.00000011023,
+    "p": 0.074150836923597,
+    "ci95": [-0.0660148792281101, 1.33249834020494],
+    "singular": false,
+    "variance_components": [
+      {
+        "grp": "training_set",
+        "var1": "(Intercept)",
+        "vcov": 0.333064403858115,
+        "sdcor": 0.577117322438094
+      },
+      {
+        "grp": "seed",
+        "var1": "(Intercept)",
+        "vcov": 1.12399305553089,
+        "sdcor": 1.06018538734076
+      },
+      {
+        "grp": "architecture",
+        "var1": "(Intercept)",
+        "vcov": 0.137242298213272,
+        "sdcor": 0.37046227637004
+      },
+      {
+        "grp": "Residual",
+        "vcov": 3.32897298905482,
+        "sdcor": 1.82454733812385
+      }
+    ]
+  },
+  "transplant_condition_means": [
+    {
+      "cell": "clean_high",
+      "acc_original": 0.946527853388036,
+      "acc_self": 0.946279185971513,
+      "acc_sibling": 0.934675831692477,
+      "acc_unseen_same_class": 0.913159520631261,
+      "acc_unseen_other_class": 0.859648680347638
+    },
+    {
+      "cell": "clean_low",
+      "acc_original": 0.946559271971907,
+      "acc_self": 0.946382286066012,
+      "acc_sibling": 0.935097815846007,
+      "acc_unseen_same_class": 0.910777356361434,
+      "acc_unseen_other_class": 0.854772887139988
+    },
+    {
+      "cell": "leak_high",
+      "acc_original": 0.962837062634896,
+      "acc_self": 0.96256196809793,
+      "acc_sibling": 0.951312039726444,
+      "acc_unseen_same_class": 0.921352317739623,
+      "acc_unseen_other_class": 0.873832474332851
+    },
+    {
+      "cell": "leak_low",
+      "acc_original": 0.96483478327606,
+      "acc_self": 0.964520181057512,
+      "acc_sibling": 0.952774080033286,
+      "acc_unseen_same_class": 0.928565215925678,
+      "acc_unseen_other_class": 0.874651498824222
+    }
+  ],
+  "grl_sweep_means": [
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P1",
+      "adversary_lambda": 0,
+      "value": 97.8024691358025,
+      "R": 29.7877358490566,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P1",
+      "adversary_lambda": 0,
+      "value": 97.641975308642,
+      "R": 24.4339622641509,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P2",
+      "adversary_lambda": 0,
+      "value": 96.6543209876543,
+      "R": 29.1981132075472,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P2",
+      "adversary_lambda": 0,
+      "value": 96.4691358024691,
+      "R": 24.9646226415094,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P1",
+      "adversary_lambda": 0.01,
+      "value": 97.3086419753086,
+      "R": 25.6721698113208,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P1",
+      "adversary_lambda": 0.01,
+      "value": 97.4197530864198,
+      "R": 22.2995283018868,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P2",
+      "adversary_lambda": 0.01,
+      "value": 96.8148148148148,
+      "R": 24.6933962264151,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P2",
+      "adversary_lambda": 0.01,
+      "value": 96.8641975308642,
+      "R": 22.0283018867925,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P1",
+      "adversary_lambda": 0.03,
+      "value": 96.9753086419753,
+      "R": 23.9622641509434,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P1",
+      "adversary_lambda": 0.03,
+      "value": 96.9135802469136,
+      "R": 18.4905660377358,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P2",
+      "adversary_lambda": 0.03,
+      "value": 96.7777777777778,
+      "R": 23.4787735849057,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P2",
+      "adversary_lambda": 0.03,
+      "value": 96.6296296296296,
+      "R": 18.7146226415094,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P1",
+      "adversary_lambda": 0.1,
+      "value": 97.2345679012346,
+      "R": 23.4198113207547,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P1",
+      "adversary_lambda": 0.1,
+      "value": 96.9753086419753,
+      "R": 16.627358490566,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P2",
+      "adversary_lambda": 0.1,
+      "value": 96.9506172839506,
+      "R": 23.938679245283,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P2",
+      "adversary_lambda": 0.1,
+      "value": 96.4074074074074,
+      "R": 17.0047169811321,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P1",
+      "adversary_lambda": 0.3,
+      "value": 97.3456790123457,
+      "R": 26.7570754716981,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P1",
+      "adversary_lambda": 0.3,
+      "value": 97.0123456790123,
+      "R": 17.1344339622642,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P2",
+      "adversary_lambda": 0.3,
+      "value": 97.283950617284,
+      "R": 27.1698113207547,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P2",
+      "adversary_lambda": 0.3,
+      "value": 96.5432098765432,
+      "R": 16.4622641509434,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P1",
+      "adversary_lambda": 1,
+      "value": 97.9135802469136,
+      "R": 43.4669811320755,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P1",
+      "adversary_lambda": 1,
+      "value": 96.8271604938272,
+      "R": 17.6650943396226,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P2",
+      "adversary_lambda": 1,
+      "value": 97.2469135802469,
+      "R": 46.6155660377358,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P2",
+      "adversary_lambda": 1,
+      "value": 96.5061728395062,
+      "R": 17.7240566037736,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P1",
+      "adversary_lambda": 3,
+      "value": 98.0493827160494,
+      "R": 53.0778301886792,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P1",
+      "adversary_lambda": 3,
+      "value": 96.679012345679,
+      "R": 17.5471698113208,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "convnext_tiny",
+      "protocol": "P2",
+      "adversary_lambda": 3,
+      "value": 97.2469135802469,
+      "R": 57.0400943396226,
+      "floor": 1.17924528301887
+    },
+    {
+      "architecture": "resnet50",
+      "protocol": "P2",
+      "adversary_lambda": 3,
+      "value": 95.9753086419753,
+      "R": 17.6768867924528,
+      "floor": 1.17924528301887
+    }
+  ],
+  "H5_manipulation_checks": {
+    "convnext_tiny": {
+      "non_degenerate_lambdas": [0, 0.01, 0.03, 0.1, 0.3, 1, 3],
+      "lambda_star": 3,
+      "R_baseline": 29.4929245283019,
+      "R_star": 55.0589622641509,
+      "within_class_floor": 1.17924528301887,
+      "manipulation_check_passed": false
+    },
+    "resnet50": {
+      "non_degenerate_lambdas": [0, 0.01, 0.03, 0.1, 0.3, 1, 3],
+      "lambda_star": 3,
+      "R_baseline": 24.6992924528302,
+      "R_star": 17.6120283018868,
+      "within_class_floor": 1.17924528301887,
+      "manipulation_check_passed": true
+    }
+  },
+  "grl_diverged_runs": [],
+  "H5": {
+    "model_used": "fixed_architecture",
+    "estimate": 0.0589681756962709,
+    "se": 0.0330018116588445,
+    "df": 59.5219116126173,
+    "p": 0.0790596159279555,
+    "ci95": [-0.00705618373219102, 0.124992535124733],
+    "singular": false,
+    "variance_components": [
+      {
+        "grp": "seed",
+        "var1": "(Intercept)",
+        "vcov": 1.06193534268914,
+        "sdcor": 1.03050247097673
+      },
+      {
+        "grp": "Residual",
+        "vcov": 0.6736310794384,
+        "sdcor": 0.820750314918246
+      }
+    ],
+    "architectures": "resnet50"
+  },
+  "H2": {
+    "estimate": 12.0758295577574,
+    "p": 3.57202764710044e-10,
+    "source": "lmm"
+  },
+  "holm": [
+    {
+      "hypothesis": "H2",
+      "p": 3.57202764710044e-10,
+      "p_holm": 1.42881105884018e-09,
+      "estimate": 12.0758295577574,
+      "supported": true
+    },
+    {
+      "hypothesis": "H3",
+      "p": 0.00579018880515048,
+      "p_holm": 0.0173705664154515,
+      "estimate": 1.7292360275507,
+      "supported": true
+    },
+    {
+      "hypothesis": "H4",
+      "p": 0.227308392870838,
+      "p_holm": 0.227308392870838,
+      "estimate": 0.416590777431961,
+      "supported": false
+    },
+    {
+      "hypothesis": "H5",
+      "p": 0.0790596159279555,
+      "p_holm": 0.158119231855911,
+      "estimate": 0.0589681756962709,
+      "supported": false
+    }
+  ]
+}
