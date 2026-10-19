@@ -185,6 +185,36 @@ analysis/study2/run_all.sh ROOT PYTHON RSCRIPT     # registered analysis (fails 
 python scripts/study2/paper_numbers.py            # numbers and tables for paper/v2
 ```
 
+### Study 2 results (all registered runs complete)
+
+| Test | Estimate | Verdict |
+|---|---|---|
+| H1 SIPaKMeD P1 - P2 accuracy | +0.97 pp (95% CI 0.59-1.39); all 12 architectures positive | supported |
+| H2 CRIC P1 - P2 accuracy | +12.1 pp (error rate 2.3x at slide level) | supported |
+| H3 leakage at matched diversity | +1.73 pp; diversity alone 0.00 pp | supported |
+| H4 background route | +0.42 pp (-0.35 to 1.18) | not supported |
+| H5 gap vs gradient-reversal recoverability | ConvNeXt-T evaded the adversary; slope n.s. | not supported |
+
+### Follow-up: where the leaked signal lives (Amendment 8)
+
+`PREREGISTRATION_STUDY2_AMENDMENT8.md` registered eight further hypotheses (F1-F8, own Holm
+family) after the Study 2 analysis and before any follow-up run: CRIC slide-context pull,
+test-time carrier ablations and quantitative Grad-CAM on the saved 2C models, carrier removal
+during training on fresh seeds, rank-limited LEACE erasure on the saved Phase 1 models, a
+stain-normalisation dose, and a probe-matched linear adversary (1,580 tasks). Supported: F2
+(test-time stain transfer cuts the leak advantage from 1.72 to 0.46 pp) and F3 (leakage survives
+masking every background, +1.86 pp). Not supported: F1 (no slide-level label prior; reversed),
+F4 (colour augmentation does not prevent leakage), and F5-F8 (cutting linear field
+recoverability by up to 91% leaves the gap unchanged). Grad-CAM maps of leaking and clean models
+do not differ. Amendment 9 records a preparer labelling fix made before any F3/F4 estimate was
+seen. Outputs: `results/study2/analysis`, `results/study2/followup`; manuscript: `paper/v2`.
+
+```bash
+python scripts/study2/build_followup_tasks.py --root ROOT --repository REPO --study2-runs ROOT/runs --python PYTHON
+analysis/study2/followup/run_followup.sh ROOT PYTHON RSCRIPT   # registered follow-up analysis
+python scripts/study2/figures_followup.py                       # follow-up figures for paper/v2
+```
+
 `uv run cytofair risk-report MAP` computes, for any crop-to-parent table, the
 closed-form ingredients of crop-level optimism: expected straddle, test crops with a
 training sibling, siblings per test crop, the training-diversity ratio, and
