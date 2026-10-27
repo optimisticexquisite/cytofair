@@ -1,0 +1,122 @@
+\contentsline {chapter}{Document status and scope}{i}{chapter*.1}%
+\contentsline {chapter}{\numberline {1}Executive overview}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}The entire project in one page}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Headline findings, without spin}{2}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Motivation and problem formulation}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Why cervical cytology makes independence important}{3}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Observation, parent, and evaluation unit}{3}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Three different claims that must not be conflated}{4}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Relationship to leakage and duplicate audits}{4}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Preregistration and analysis governance}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Why the plan was committed first}{5}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Registered endpoints}{5}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Amendments: what changed and why}{5}{section.3.3}%
+\contentsline {chapter}{\numberline {4}Datasets and the hidden hierarchy}{7}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Overview}{7}{section.4.1}%
+\contentsline {section}{\numberline {4.2}SIPaKMeD}{8}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Cx22 and CCEDD}{9}{section.4.3}%
+\contentsline {section}{\numberline {4.4}CRIC}{9}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Herlev as a structural negative control}{9}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Data-use constraints}{9}{section.4.6}%
+\contentsline {chapter}{\numberline {5}System architecture and fail-closed philosophy}{11}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Pipeline}{11}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Core artifact schemas}{12}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Fail-closed algorithm}{12}{section.5.3}%
+\contentsline {chapter}{\numberline {6}Exact provenance recovery}{13}{chapter.6}%
+\contentsline {section}{\numberline {6.1}SIPaKMeD Branch A: filename hierarchy}{13}{section.6.1}%
+\contentsline {section}{\numberline {6.2}SIPaKMeD Branch B: independent content matching}{13}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Why the auxiliary acceptance flag is false for many correct rows}{14}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Cx22, CRIC, and Herlev recovery}{14}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Verification outcome}{15}{section.6.5}%
+\contentsline {chapter}{\numberline {7}Split protocols and structural leakage}{16}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Why four protocols are needed}{16}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Analytic straddle probability}{17}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Structural endpoints}{17}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Interpretation}{18}{section.7.4}%
+\contentsline {chapter}{\numberline {8}Literal overlap and conservative duplicate grouping}{20}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Literal source-pixel overlap}{20}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Perceptual hashes and P3}{21}{section.8.2}%
+\contentsline {chapter}{\numberline {9}The parent-identity mechanism probe}{22}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Motivation}{22}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Balanced task construction}{22}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Image transformations and their motivations}{22}{section.9.3}%
+\contentsline {subsection}{\numberline {9.3.1}RGB}{22}{subsection.9.3.1}%
+\contentsline {subsection}{\numberline {9.3.2}Grayscale}{22}{subsection.9.3.2}%
+\contentsline {subsection}{\numberline {9.3.3}LAB stain normalization}{23}{subsection.9.3.3}%
+\contentsline {subsection}{\numberline {9.3.4}Background-only: Otsu, morphology, and Telea inpainting}{23}{subsection.9.3.4}%
+\contentsline {subsection}{\numberline {9.3.5}High-pass}{23}{subsection.9.3.5}%
+\contentsline {section}{\numberline {9.4}Shuffled-label negative control}{24}{section.9.4}%
+\contentsline {section}{\numberline {9.5}Results}{25}{section.9.5}%
+\contentsline {chapter}{\numberline {10}SIPaKMeD classification rescore}{27}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Why re-run models rather than quote published scores?}{27}{section.10.1}%
+\contentsline {section}{\numberline {10.2}Inputs, augmentation, and optimization}{27}{section.10.2}%
+\contentsline {section}{\numberline {10.3}Metric definitions}{28}{section.10.3}%
+\contentsline {section}{\numberline {10.4}Aggregate scores}{28}{section.10.4}%
+\contentsline {section}{\numberline {10.5}Matched contrasts, uncertainty, and the ordering failure}{29}{section.10.5}%
+\contentsline {section}{\numberline {10.6}What the classification rescore does and does not show}{31}{section.10.6}%
+\contentsline {section}{\numberline {10.7}Training behavior and compute}{32}{section.10.7}%
+\contentsline {chapter}{\numberline {11}Cx22 segmentation rescore}{33}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Why add a second task and dataset?}{33}{section.11.1}%
+\contentsline {section}{\numberline {11.2}Targets and models}{33}{section.11.2}%
+\contentsline {section}{\numberline {11.3}Deterministic input construction}{34}{section.11.3}%
+\contentsline {section}{\numberline {11.4}Semantic metrics}{34}{section.11.4}%
+\contentsline {section}{\numberline {11.5}Instance matching metric}{34}{section.11.5}%
+\contentsline {section}{\numberline {11.6}Semantic results}{35}{section.11.6}%
+\contentsline {section}{\numberline {11.7}Instance results}{36}{section.11.7}%
+\contentsline {section}{\numberline {11.8}Inference and rank stability}{37}{section.11.8}%
+\contentsline {section}{\numberline {11.9}Training failures, recovery, and runtime}{38}{section.11.9}%
+\contentsline {chapter}{\numberline {12}Statistical analysis in full}{40}{chapter.12}%
+\contentsline {section}{\numberline {12.1}The experimental unit is the seed-paired run}{40}{section.12.1}%
+\contentsline {section}{\numberline {12.2}Test-selection rule}{40}{section.12.2}%
+\contentsline {section}{\numberline {12.3}Bootstrap effect intervals}{40}{section.12.3}%
+\contentsline {section}{\numberline {12.4}Multiplicity families}{41}{section.12.4}%
+\contentsline {section}{\numberline {12.5}Structural sampling error}{41}{section.12.5}%
+\contentsline {section}{\numberline {12.6}Why a non-significant result is not ``no effect''}{41}{section.12.6}%
+\contentsline {chapter}{\numberline {13}Execution lifecycle, failures, and demotivations}{42}{chapter.13}%
+\contentsline {section}{\numberline {13.1}Run inventory}{42}{section.13.1}%
+\contentsline {section}{\numberline {13.2}The first classification matrix was invalid}{42}{section.13.2}%
+\contentsline {section}{\numberline {13.3}MAnet numerical failure}{43}{section.13.3}%
+\contentsline {section}{\numberline {13.4}The host bottleneck}{43}{section.13.4}%
+\contentsline {section}{\numberline {13.5}Research stop and evidence freeze}{43}{section.13.5}%
+\contentsline {chapter}{\numberline {14}Verification against the acceptance contract}{44}{chapter.14}%
+\contentsline {section}{\numberline {14.1}Gate-by-gate status}{44}{section.14.1}%
+\contentsline {section}{\numberline {14.2}Why the classification ordering gate fails}{45}{section.14.2}%
+\contentsline {section}{\numberline {14.3}Release-readiness boundary}{45}{section.14.3}%
+\contentsline {chapter}{\numberline {15}Interpretation, limitations, and practical guidance}{46}{chapter.15}%
+\contentsline {section}{\numberline {15.1}What the evidence supports}{46}{section.15.1}%
+\contentsline {section}{\numberline {15.2}Two hard visual structures in Cx22}{46}{section.15.2}%
+\contentsline {section}{\numberline {15.3}Real limitations}{46}{section.15.3}%
+\contentsline {section}{\numberline {15.4}Recommended evaluation rule}{47}{section.15.4}%
+\contentsline {section}{\numberline {15.5}What to say in a paper}{47}{section.15.5}%
+\contentsline {chapter}{\numberline {16}Reproduction and release engineering}{48}{chapter.16}%
+\contentsline {section}{\numberline {16.1}From owner downloads to structural Table 1}{48}{section.16.1}%
+\contentsline {section}{\numberline {16.2}Clean-clone attestation}{49}{section.16.2}%
+\contentsline {section}{\numberline {16.3}Pinned software and result metadata}{49}{section.16.3}%
+\contentsline {section}{\numberline {16.4}Atomicity and resumability}{49}{section.16.4}%
+\contentsline {section}{\numberline {16.5}Human-readable and machine-readable layers}{49}{section.16.5}%
+\contentsline {chapter}{\numberline {17}Reusable outputs and future work}{50}{chapter.17}%
+\contentsline {section}{\numberline {17.1}What exists now}{50}{section.17.1}%
+\contentsline {section}{\numberline {17.2}Two publication units}{50}{section.17.2}%
+\contentsline {section}{\numberline {17.3}Projects unblocked}{50}{section.17.3}%
+\contentsline {section}{\numberline {17.4}Pre-specified V2 in fish imagery}{51}{section.17.4}%
+\contentsline {section}{\numberline {17.5}Adoption goal}{51}{section.17.5}%
+\contentsline {chapter}{\numberline {18}Conclusion}{52}{chapter.18}%
+\contentsline {chapter}{\numberline {A}Complete SIPaKMeD classifier run ledger}{53}{appendix.A}%
+\contentsline {chapter}{\numberline {B}Complete parent-probe run ledger}{58}{appendix.B}%
+\contentsline {chapter}{\numberline {C}Complete Cx22 model run ledger}{60}{appendix.C}%
+\contentsline {chapter}{\numberline {D}Owner data files and integrity hashes}{65}{appendix.D}%
+\contentsline {chapter}{\numberline {E}Released split hashes}{67}{appendix.E}%
+\contentsline {chapter}{\numberline {F}Git decision chronology}{68}{appendix.F}%
+\contentsline {chapter}{\numberline {G}Exact command cookbook}{70}{appendix.G}%
+\contentsline {section}{\numberline {G.1}Local checks}{70}{section.G.1}%
+\contentsline {section}{\numberline {G.2}Recover and verify structural evidence}{70}{section.G.2}%
+\contentsline {section}{\numberline {G.3}Launch the probe and classifier matrices}{70}{section.G.3}%
+\contentsline {section}{\numberline {G.4}Materialize and launch Cx22}{71}{section.G.4}%
+\contentsline {chapter}{\numberline {H}Artifact index and evidence status}{72}{appendix.H}%
+\contentsline {chapter}{\numberline {I}Complete derived-result ledgers}{73}{appendix.I}%
+\contentsline {section}{\numberline {I.1}Structural and literal-overlap seeds}{73}{section.I.1}%
+\contentsline {section}{\numberline {I.2}Classifier contrasts}{74}{section.I.2}%
+\contentsline {section}{\numberline {I.3}Cx22 contrasts}{76}{section.I.3}%
+\contentsline {section}{\numberline {I.4}Rank stability}{78}{section.I.4}%
+\contentsline {chapter}{\numberline {J}Excluded attempt ledger}{79}{appendix.J}%
+\contentsline {chapter}{\numberline {K}Reading guide for future maintainers}{81}{appendix.K}%

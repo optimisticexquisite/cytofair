@@ -1,0 +1,31 @@
+\begin{longtable}{p{1.4cm}p{3.1cm}p{1.0cm}p{1.0cm}rrrp{1.7cm}rrp{2.0cm}rp{2.6cm}r}
+\caption{Complete SIPaKMeD classifier contrast ledger. Secondary tests have no confirmatory BH q-value.}\label{tab:all-class-contrasts}\\
+\toprule
+Family & Architecture & Left & Right & n & Mean diff. (pp) & SD (pp) & Test & p & BH q & Effect & Value & Effect 95 percent CI & Shapiro p \\
+\midrule
+\endfirsthead
+\toprule
+Family & Architecture & Left & Right & n & Mean diff. (pp) & SD (pp) & Test & p & BH q & Effect & Value & Effect 95 percent CI & Shapiro p \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+primary & \path{densenet121} & P1 & P2 & 5 & 1.407 & 0.901 & paired\_t & 0.0251 & 0.1109 & cohens\_dz & 1.561 & [0.985, 4.747] & 0.9922 \\ 
+primary & \path{efficientnet_b0} & P1 & P2 & 5 & 1.086 & 1.849 & paired\_t & 0.2591 & 0.2591 & cohens\_dz & 0.588 & [-0.316, 4.668] & 0.6215 \\ 
+primary & \path{mobilenet_v2} & P1 & P2 & 5 & 2.247 & 1.632 & paired\_t & 0.0370 & 0.1109 & cohens\_dz & 1.377 & [0.809, 6.686] & 0.3183 \\ 
+primary & \path{resnet18} & P1 & P2 & 5 & 1.185 & 1.285 & paired\_t & 0.1081 & 0.1511 & cohens\_dz & 0.922 & [0.442, 2.365] & 0.6256 \\ 
+primary & \path{resnet50} & P1 & P2 & 5 & 0.716 & 0.830 & paired\_t & 0.1260 & 0.1511 & cohens\_dz & 0.863 & [0.085, 4.025] & 0.4504 \\ 
+primary & \path{vit_b_16} & P1 & P2 & 5 & 1.580 & 1.698 & paired\_t & 0.1059 & 0.1511 & cohens\_dz & 0.931 & [0.057, 4.950] & 0.6216 \\ 
+primary & \path{densenet121} & P1-prime & P2 & 5 & 1.407 & 0.901 & paired\_t & 0.0251 & 0.1109 & cohens\_dz & 1.561 & [0.932, 4.747] & 0.9922 \\ 
+primary & \path{efficientnet_b0} & P1-prime & P2 & 5 & 1.086 & 1.849 & paired\_t & 0.2591 & 0.2591 & cohens\_dz & 0.588 & [-0.316, 4.610] & 0.6215 \\ 
+primary & \path{mobilenet_v2} & P1-prime & P2 & 5 & 2.247 & 1.632 & paired\_t & 0.0370 & 0.1109 & cohens\_dz & 1.377 & [0.809, 6.686] & 0.3183 \\ 
+primary & \path{resnet18} & P1-prime & P2 & 5 & 1.185 & 1.285 & paired\_t & 0.1081 & 0.1511 & cohens\_dz & 0.922 & [0.426, 2.442] & 0.6256 \\ 
+primary & \path{resnet50} & P1-prime & P2 & 5 & 0.716 & 0.830 & paired\_t & 0.1260 & 0.1511 & cohens\_dz & 0.863 & [0.085, 4.025] & 0.4504 \\ 
+primary & \path{vit_b_16} & P1-prime & P2 & 5 & 1.580 & 1.698 & paired\_t & 0.1059 & 0.1511 & cohens\_dz & 0.931 & [0.120, 4.950] & 0.6216 \\ 
+secondary & \path{densenet121} & P2 & P3 & 5 & -0.667 & 0.691 & paired\_t & 0.0971 & -- & cohens\_dz & -0.965 & [-3.266, -0.725] & 0.0863 \\ 
+secondary & \path{efficientnet_b0} & P2 & P3 & 5 & -0.716 & 1.943 & paired\_t & 0.4562 & -- & cohens\_dz & -0.369 & [-2.708, 0.467] & 0.6101 \\ 
+secondary & \path{mobilenet_v2} & P2 & P3 & 5 & -1.037 & 1.376 & paired\_t & 0.1673 & -- & cohens\_dz & -0.753 & [-3.329, 0.075] & 0.4329 \\ 
+secondary & \path{resnet18} & P2 & P3 & 5 & -0.346 & 1.189 & paired\_t & 0.5510 & -- & cohens\_dz & -0.291 & [-1.516, 1.255] & 0.7941 \\ 
+secondary & \path{resnet50} & P2 & P3 & 5 & 0.519 & 0.661 & paired\_t & 0.1545 & -- & cohens\_dz & 0.784 & [0.361, 2.534] & 0.2922 \\ 
+secondary & \path{vit_b_16} & P2 & P3 & 5 & 0.025 & 2.345 & paired\_t & 0.9823 & -- & cohens\_dz & 0.011 & [-3.338, 0.817] & 0.2169 \\ 
+\end{longtable}

@@ -1,0 +1,58 @@
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces The project lifecycle. Blue events register decisions, green events record completed evidence, gold events document execution-driven amendments, red records a numerical failure, and purple marks this report.\relax }}{2}{figure.caption.5}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces The hidden hierarchy and the central failure mode. Several file-disjoint crops can share a parent field, source-specific nuisance factors, or literal source pixels.\relax }}{4}{figure.caption.6}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Dataset scale and mean parent multiplicity. The log-scale left panel prevents CRIC's 11,534 observations from visually erasing the smaller datasets.\relax }}{7}{figure.caption.8}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Complete parent-size distributions recovered from the Parquet maps. High multiplicity drives the probability that random crop splitting places a parent in both arms.\relax }}{8}{figure.caption.9}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces One released Cx22 Pair target decoded from the MATLAB-v7.3 structures. Cytoplasm and nucleus unions define two non-exclusive semantic channels; individual cytoplasm masks define the instance task. The CCEDD RGB source is not redistributed in this report.\relax }}{9}{figure.caption.11}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Reproducibility architecture. Deterministic provenance and split artifacts gate the stochastic GPU experiments, and every final result carries the hashes needed to reconnect it to its inputs.\relax }}{11}{figure.caption.12}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Branch-B diagnostics. The minimum winning NCC is 0.999969. The 0.02 runner-up-margin rule is intentionally only a diagnostic: 3,195 crops pass it and 854 do not, yet all rows agree with Branch A and all boxes remain contained.\relax }}{13}{figure.caption.13}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces A real recovered-coordinate example for the parent with the largest crop count. Only rectangle geometry is displayed; source pixels are not redistributed. Overlapping rectangles make literal source-pixel sharing possible.\relax }}{14}{figure.caption.14}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces The four protocols. P1 asks what common crop splitting shares. P1-prime holds its test set but matches the P2 training count. P2 groups exact parents. P3 groups whole near-duplicate-linked parent components.\relax }}{16}{figure.caption.16}%
+\contentsline {figure}{\numberline {7.2}{\ignorespaces The analytic mechanism. A one-crop parent cannot straddle; a high-multiplicity parent almost certainly straddles under independent 80:20 crop allocation.\relax }}{17}{figure.caption.17}%
+\contentsline {figure}{\numberline {7.3}{\ignorespaces Analytic and observed leakage. P2 and P3 are omitted from the bars because both are exactly zero on all four datasets.\relax }}{18}{figure.caption.19}%
+\contentsline {figure}{\numberline {7.4}{\ignorespaces Seed-level structural results. Reporting the spread prevents one convenient split from defining the claim.\relax }}{18}{figure.caption.20}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Literal overlap for every P1 seed. The larger test-crop fraction answers a different question from the pair fraction: whether each test crop has at least one overlapping training sibling.\relax }}{20}{figure.caption.21}%
+\contentsline {figure}{\numberline {8.2}{\ignorespaces Near-duplicate sensitivity audit. The thresholded candidates are used conservatively for grouping; they are not treated as ground-truth duplicate annotations.\relax }}{21}{figure.caption.22}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {9.1}{\ignorespaces Every preprocessing stage shown on an actual local Herlev cell. This is an implementation demonstration, not a probe result image: the reported parent-identification experiment used SIPaKMeD crops. Panels D--G make Otsu thresholding, mask combination, and morphological closing visible before Telea inpainting.\relax }}{24}{figure.caption.23}%
+\contentsline {figure}{\numberline {9.2}{\ignorespaces All prespecified image conditions remain far above chance. Error bars are sample SD across five seeds.\relax }}{25}{figure.caption.25}%
+\contentsline {figure}{\numberline {9.3}{\ignorespaces Probe learning curves reconstructed from every retained epoch history. The RGB signal rises smoothly across seeds; shuffled labels remain near chance.\relax }}{25}{figure.caption.26}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {10.1}{\ignorespaces All frozen SIPaKMeD accuracy observations. Lines connect the same architecture across protocols; points show individual seeds and bars show the mean.\relax }}{29}{figure.caption.29}%
+\contentsline {figure}{\numberline {10.2}{\ignorespaces Paired \textsf {P1}$-$\textsf {P2} effects. Every mean favors the crop-level split, but none survives its preregistered multiplicity correction. The vertical line at zero marks no protocol effect.\relax }}{30}{figure.caption.31}%
+\contentsline {figure}{\numberline {10.3}{\ignorespaces Seed-level paired differences. This figure exposes the small effective sample size and the architecture-specific variability that an aggregate table can hide.\relax }}{30}{figure.caption.32}%
+\contentsline {figure}{\numberline {10.4}{\ignorespaces The registered ordering check. Cell values are the protocol means; the title records the gate outcome. Four of six architectures fail \textsf {P3}$\leq $\textsf {P2}$\leq $\textsf {P1}, so the acceptance contract correctly records one failed gate.\relax }}{31}{figure.caption.33}%
+\contentsline {figure}{\numberline {10.5}{\ignorespaces Classifier wall-clock summaries from the retained run JSON files. These are same-system measurements and should not be compared to timings reported on unrelated hardware.\relax }}{32}{figure.caption.34}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {11.1}{\ignorespaces Cx22 semantic macro-Dice by architecture and protocol. The official arm is visually separated because it is not a same-observation contrast.\relax }}{35}{figure.caption.37}%
+\contentsline {figure}{\numberline {11.2}{\ignorespaces Channel-level Dice makes the central difficulty visible: nuclei are consistently harder than cytoplasm. This is the segmentation analogue of a confusion-matrix diagnostic and uses retained aggregate channel measurements, not invented pixel predictions.\relax }}{36}{figure.caption.38}%
+\contentsline {figure}{\numberline {11.3}{\ignorespaces Cx22 matched-instance Dice. Both Mask R-CNN variants follow the complete registered \textsf {P3}$\leq $\textsf {P2}$\leq $\textsf {P1} ordering.\relax }}{37}{figure.caption.40}%
+\contentsline {figure}{\numberline {11.4}{\ignorespaces Cx22 paired contrast overview. Positive values favor the crop-level protocol. The plot separates point-estimate consistency from multiplicity-adjusted evidence.\relax }}{38}{figure.caption.42}%
+\contentsline {figure}{\numberline {11.5}{\ignorespaces Cx22 run-time distribution. Instance segmentation dominates the computational cost and has a long tail; the plot makes the operational bottleneck explicit.\relax }}{39}{figure.caption.43}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {14.1}{\ignorespaces Machine-readable acceptance status: 13 gates pass, one fails, and three remain pending. A pending release gate is not painted green simply because the numerical experiments are complete.\relax }}{44}{figure.caption.45}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {16.1}{\ignorespaces The intended clean-clone path. Each boundary writes an auditable artifact and performs validation before the next stage begins.\relax }}{48}{figure.caption.46}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

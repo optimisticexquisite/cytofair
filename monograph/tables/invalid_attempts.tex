@@ -1,0 +1,28 @@
+\begin{longtable}{p{3.7cm}p{3.3cm}p{1.5cm}rrrrrp{1.2cm}}
+\caption{Complete excluded-attempt ledger. Metrics are shown only to demonstrate that exclusion was rule-based, not score-based.}\label{tab:invalid-attempts}\\
+\toprule
+Reason & Architecture/mode & Protocol & Seed & Epochs & Train & Test & Recorded metric (percent) & Eligible \\
+\midrule
+\endfirsthead
+\toprule
+Reason & Architecture/mode & Protocol & Seed & Epochs & Train & Test & Recorded metric (percent) & Eligible \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+split-library failure & resnet18 & P1-prime & 101 & 20 & 3223 & 810 & 98.395 & No \\ 
+split-library failure & resnet18 & P1-prime & 17 & 20 & 3214 & 810 & 96.914 & No \\ 
+split-library failure & resnet18 & P1-prime & 29 & 20 & 3237 & 810 & 97.901 & No \\ 
+split-library failure & resnet18 & P1-prime & 43 & 20 & 3215 & 810 & 97.284 & No \\ 
+split-library failure & resnet18 & P1-prime & 71 & 20 & 3236 & 810 & 98.148 & No \\ 
+split-library failure & resnet18 & P1 & 101 & 20 & 3239 & 810 & 97.654 & No \\ 
+split-library failure & resnet18 & P1 & 17 & 20 & 3239 & 810 & 97.901 & No \\ 
+split-library failure & resnet18 & P1 & 29 & 20 & 3239 & 810 & 97.037 & No \\ 
+split-library failure & resnet18 & P1 & 43 & 20 & 3239 & 810 & 96.914 & No \\ 
+split-library failure & resnet18 & P1 & 71 & 20 & 3239 & 810 & 96.420 & No \\ 
+split-library failure & resnet18 & P2 & 17 & 20 & 3214 & 835 & 96.647 & No \\ 
+split-library failure & resnet18 & P2 & 29 & 20 & 3237 & 812 & 95.936 & No \\ 
+smoke test & resnet18/rgb & -- & 17 & 1 & 848 & 848 & 0.590 & No \\ 
+smoke test & resnet18 & P1 & 17 & 1 & 3239 & 810 & 95.556 & No \\ 
+smoke test & vit\_b\_16 & P1 & 17 & 1 & 3239 & 810 & 95.679 & No \\ 
+\end{longtable}

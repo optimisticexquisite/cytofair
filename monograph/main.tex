@@ -1,0 +1,1537 @@
+\documentclass[11pt,oneside]{report}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[a4paper,margin=23mm,headheight=15pt]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{booktabs,longtable,tabularx,array,multirow,makecell}
+\usepackage{float}
+\usepackage{caption,subcaption}
+\usepackage{pdflscape}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,shapes.geometric}
+\usepackage[most]{tcolorbox}
+\usepackage{xurl}
+\usepackage{seqsplit}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\definecolor{CytoBlue}{HTML}{176B87}
+\definecolor{CytoTeal}{HTML}{218C74}
+\definecolor{CytoRed}{HTML}{C4455A}
+\definecolor{CytoGold}{HTML}{D99A2B}
+\definecolor{CytoPurple}{HTML}{735DA5}
+\definecolor{CytoInk}{HTML}{24323D}
+\definecolor{CytoPale}{HTML}{EEF4F7}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=CytoBlue,
+  citecolor=CytoTeal,
+  urlcolor=CytoPurple,
+  pdftitle={CytoFair: Complete Project Record},
+  pdfauthor={Snehasish Ghosh, Soham Mitra, Nibaran Das}
+}
+
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\color{CytoInk}}
+  {\filleft\color{CytoBlue}\fontsize{42}{45}\selectfont\thechapter}
+  {0.3ex}
+  {\titlerule[1.2pt]\vspace{1ex}\filright}
+\titleformat{\section}{\Large\bfseries\color{CytoInk}}{\thesection}{0.65em}{}
+\titleformat{\subsection}{\large\bfseries\color{CytoBlue}}{\thesubsection}{0.65em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{CytoTeal}}{\thesubsubsection}{0.65em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{CytoInk}CytoFair: Complete Project Record}
+\fancyhead[R]{\small\color{CytoBlue}\nouppercase{\leftmark}}
+\fancyfoot[C]{\color{CytoInk}\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+\newtcolorbox{keybox}[1]{
+  enhanced,breakable,colback=CytoPale,colframe=CytoBlue,
+  title={#1},fonttitle=\bfseries,boxrule=0.8pt,arc=1.5mm,
+  left=2mm,right=2mm,top=1.5mm,bottom=1.5mm
+}
+\newtcolorbox{warningbox}[1]{
+  enhanced,breakable,colback=CytoRed!5,colframe=CytoRed,
+  title={#1},fonttitle=\bfseries,boxrule=0.8pt,arc=1.5mm,
+  left=2mm,right=2mm,top=1.5mm,bottom=1.5mm
+}
+\newtcolorbox{decisionbox}[1]{
+  enhanced,breakable,colback=CytoGold!8,colframe=CytoGold!85!black,
+  title={#1},fonttitle=\bfseries,boxrule=0.8pt,arc=1.5mm,
+  left=2mm,right=2mm,top=1.5mm,bottom=1.5mm
+}
+\newcommand{\protocol}[1]{\textsf{#1}}
+\newcommand{\cytofair}{\textsc{CytoFair}}
+\newcommand{\pass}{\textcolor{CytoTeal}{\textbf{PASS}}}
+\newcommand{\fail}{\textcolor{CytoRed}{\textbf{FAIL}}}
+\newcommand{\pending}{\textcolor{CytoGold!80!black}{\textbf{PENDING}}}
+\newcommand{\meanpm}[2]{#1\,$\pm$\,#2}
+\newcommand{\artifact}[1]{\path{#1}}
+\graphicspath{{assets/}}
+
+\lstdefinestyle{cyto}{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{CytoBlue}\bfseries,
+  commentstyle=\color{CytoTeal},
+  stringstyle=\color{CytoPurple},
+  backgroundcolor=\color{CytoPale},
+  frame=single,rulecolor=\color{CytoBlue!45},
+  breaklines=true,showstringspaces=false,
+  numbers=left,numberstyle=\tiny\color{CytoInk!55},
+  xleftmargin=1.7em,framexleftmargin=1.4em
+}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{1.1cm}
+{\color{CytoBlue}\rule{\textwidth}{2.2pt}}\\[1.1cm]
+{\Huge\bfseries\color{CytoInk} Do We Train on Test Cells?\\[0.35cm]}
+{\LARGE\color{CytoBlue} The Complete CytoFair Project Record\\[0.5cm]}
+{\Large Motivation, provenance recovery, leakage measurement, models, statistics,\\
+execution history, failures, verification, and reusable artifacts}\par
+\vspace{1.25cm}
+\includegraphics[width=0.92\textwidth]{hierarchy_and_leakage.png}
+\vfill
+{\Large\bfseries Snehasish Ghosh\textsuperscript{1}, Soham Mitra\textsuperscript{2}, Nibaran Das\textsuperscript{2}}\\[0.35cm]
+{\normalsize
+\textsuperscript{1}Indian Institute of Science, Bengaluru, India\\
+\href{mailto:snehasishg@iisc.ac.in}{snehasishg@iisc.ac.in}\\[0.2cm]
+\textsuperscript{2}Department of Computer Science and Engineering, Jadavpur University, Kolkata, India\\
+Soham Mitra: \textit{[email placeholder]} \quad Nibaran Das: \textit{[email placeholder]}}
+\vfill
+{\large Frozen evidence through 7 September 2026\\
+Comprehensive report compiled 13 September 2026 (Asia/Kolkata)}\\[0.5cm]
+{\color{CytoBlue}\rule{\textwidth}{2.2pt}}
+\end{titlepage}
+
+\pagenumbering{roman}
+\chapter*{Document status and scope}
+\addcontentsline{toc}{chapter}{Document status and scope}
+
+This is the long-form technical record of the \cytofair{} project. It is intentionally broader than the six-page conference paper. It explains why the project was started, how every analysis was designed, how the code represents the data, what was measured, what worked, what failed, what was changed during execution, what remains unverified, and what artifacts can be reused. The report is written from the repository state and frozen result files; it does not add a new experiment.
+
+\begin{keybox}{Evidence boundary}
+The quantitative claims in this document come from committed CSV, JSON, Parquet, source, and report artifacts in the repository. The experiment inventory contains 120 SIPaKMeD classification runs, 30 parent-identity probe runs, and 175 Cx22 segmentation runs: 325 completed neural-network runs in total. Structural analyses are additional deterministic or Monte Carlo computations, not neural runs. No post-hoc classifier confusion matrix or qualitative model prediction is invented, because the frozen classifier JSON files retain aggregate metrics and epoch histories but not per-sample predictions or checkpoints.
+\end{keybox}
+
+\begin{warningbox}{How to interpret ``leakage'' in this report}
+Structural non-independence, literal pixel overlap, and a learnable parent fingerprint are demonstrated. These facts establish that a shortcut is available. They do \emph{not} prove that every cervical-classification model causally uses that shortcut, and the multiplicity-corrected classifier contrasts do not establish a universal accuracy-inflation effect. This distinction is maintained throughout the report.
+\end{warningbox}
+
+\begin{abstract}
+Cervical-cell datasets are frequently released as crops, even when several crops came from one microscopic field or source image. A random crop split can therefore place sibling crops in both training and test sets, making file-level disjointness look like biological or acquisition-level independence. CytoFair recovers the hidden crop-to-parent hierarchy, validates it with fail-closed checks, measures structural and literal overlap, constructs parent- and component-disjoint splits, probes whether source identity remains learnable after transformations, and re-scores classification and segmentation models under matched protocols. The audit recovered all 4,049 SIPaKMeD crops, 1,320 Cx22 regions, 11,534 CRIC cells, and 917 Herlev cells. Under random splitting, 92.62\% of SIPaKMeD test crops, 85.23\% of Cx22 test regions, and 99.97\% of CRIC test cells had a parent in training, whereas Herlev correctly remained at zero. More than half of SIPaKMeD test crops shared literal source pixels with a training crop. A 424-way parent probe reached 25.73\% accuracy against 0.2358\% chance. All six SIPaKMeD classifier P1--P2 point estimates and all seven Cx22 segmentation estimates were positive, but no confirmatory contrast survived its preregistered Benjamini--Hochberg family. The project therefore supports a strong benchmark-construction conclusion---evaluate at the independent parent unit---while retaining a narrower and appropriately uncertain model-performance conclusion.
+\end{abstract}
+
+\tableofcontents
+\listoffigures
+\listoftables
+\clearpage
+\pagenumbering{arabic}
+
+\chapter{Executive overview}
+
+\section{The entire project in one page}
+
+The initial problem was simple to state: \emph{when a benchmark calls every image file an independent example, is that file really the unit that was independently sampled?} In cervical cytology, the answer can be no. One microscope field can emit several cell crops. If those crops are split independently, their source field can appear on both sides of evaluation.
+
+The project followed a staged answer:
+\begin{enumerate}[leftmargin=2em]
+  \item define the independent parent unit for four public datasets;
+  \item recover exact crop-to-parent mappings, using independent recovery branches where the release permits them;
+  \item refuse downstream analysis unless agreement, geometry, counts, and uniqueness pass;
+  \item calculate how often random crop splitting separates siblings;
+  \item detect literal pixel overlap and conservative cross-parent near-duplicate components;
+  \item create four fixed protocols that isolate independence from training-set size;
+  \item ask whether parent identity is visually learnable after removing candidate cues;
+  \item re-run multiple classifier and segmentation families over five fixed seeds;
+  \item use paired inference, effect sizes, bootstrap intervals, and declared BH families;
+  \item preserve failed attempts and execution amendments rather than erasing them.
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{lifecycle_timeline.png}
+\caption{The project lifecycle. Blue events register decisions, green events record completed evidence, gold events document execution-driven amendments, red records a numerical failure, and purple marks this report.}
+\label{fig:lifecycle}
+\end{figure}
+
+\section{Headline findings, without spin}
+
+\begin{longtable}{p{0.22\textwidth}p{0.19\textwidth}p{0.51\textwidth}}
+\caption{Headline conclusions and their correct strength.}\label{tab:headline}\\
+\toprule
+Question & Answer & Evidence and boundary \\
+\midrule
+\endfirsthead
+\toprule
+Question & Answer & Evidence and boundary \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Can provenance be recovered? & Yes & SIPaKMeD branches agree on 4,049/4,049 crops; all boxes are contained; all dataset and class totals match. \\
+Does random crop splitting share parents? & Yes & Mean P1 test-parent overlap is 92.62\% on SIPaKMeD, 85.23\% on Cx22, and 99.97\% on CRIC. \\
+Does the negative control remain negative? & Yes & Herlev has one released cell per parent and returns exactly 0.00\% structural leakage for all seeds. \\
+Are literal pixels shared? & Yes, in SIPaKMeD P1 & 52.62\% of test crops share at least one source pixel with a training crop; P2/P3 return zero. \\
+Is source identity learnable? & Yes & A 424-way ResNet-18 reaches 25.73\% versus 0.2358\% chance; shuffled labels return 0.17\% and cover chance. \\
+Is P1 accuracy universally inflated? & Not established & All six SIPaKMeD and all seven Cx22 P1--P2 means are positive, but no contrast survives BH correction. \\
+Does stronger grouping always lower score? & No & SIPaKMeD's registered P3 $\leq$ P2 $\leq$ P1 model ordering fails for four of six architectures. The failure is retained. \\
+Is Cx22's official split defective? & No such claim & The authors' Multi-Train/Multi-Test parent sets are disjoint. The pooled stress test asks what happens under a different downstream reuse pattern. \\
+Is the release fully ready? & Not yet & The clean-clone/virgin-host evidence, lab-paper crosswalk, and independent Figure-1 reader gate remain pending. \\
+\end{longtable}
+
+\chapter{Motivation and problem formulation}
+
+\section{Why cervical cytology makes independence important}
+
+Cervical cancer caused an estimated 660,000 new cases and 350,000 deaths worldwide in 2022~\cite{who2025hpv}. Cytology screening is a high-volume recognition problem: a small number of clinically important abnormal cells must be found among many plausible normal cells. Automation is attractive because it can help direct expert attention, but only if reported generalization represents genuinely unseen biological or acquisition units.
+
+Modern cervical-cell classifiers report very high crop-level scores. DeepPap reported 98.3\% on Herlev~\cite{zhang2017deeppap}; DeepCervix reported 99.14\% on SIPaKMeD~\cite{rahaman2021deepcervix}; and a knowledge-distillation system reported 98.52\% on SIPaKMeD~\cite{gao2022knowledge}. These achievements motivated a basic audit question that is logically prior to choosing a stronger network: \emph{what population unit does the test set represent?}
+
+\section{Observation, parent, and evaluation unit}
+
+Let $x_i$ be a released image observation and let $g(x_i)=p_j$ map it to the acquisition unit that generated it. In this project:
+\begin{itemize}
+  \item $x_i$ is a SIPaKMeD cell crop and $p_j$ is a cluster field;
+  \item $x_i$ is a Cx22 generated region and $p_j$ is a CCEDD source image;
+  \item $x_i$ is a CRIC annotated cell and $p_j$ is its source smear image;
+  \item $x_i$ is a Herlev single-cell image and is also its own parent.
+\end{itemize}
+
+The crucial idea is that the \emph{model input} and the \emph{independent sampling unit} need not be the same object. A network consumes $x_i$, but the statistical independence boundary may be $p_j$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{hierarchy_and_leakage.png}
+\caption{The hidden hierarchy and the central failure mode. Several file-disjoint crops can share a parent field, source-specific nuisance factors, or literal source pixels.}
+\label{fig:hierarchy}
+\end{figure}
+
+\section{Three different claims that must not be conflated}
+
+\begin{keybox}{Claim 1: structural non-independence}
+Some parents contribute observations to both train and test. This can be established exactly from provenance and split assignments. It requires no model.
+\end{keybox}
+
+\begin{keybox}{Claim 2: shortcut availability}
+A model can identify the source parent from held-out sibling crops at greater-than-chance accuracy. This shows that parent information survives in the released input. It does not yet show that a disease or morphology classifier uses it.
+\end{keybox}
+
+\begin{keybox}{Claim 3: downstream score inflation}
+A crop-level protocol produces a larger score than a parent-disjoint protocol under matched models, seeds, and sample sizes. This is an empirical paired comparison. It needs uncertainty, multiplicity correction, and careful interpretation.
+\end{keybox}
+
+The project obtains strong evidence for Claims 1 and 2. For Claim 3, point estimates are directionally consistent across every tested architecture, but the confirmatory families do not cross the multiplicity-adjusted threshold. The report therefore never upgrades ``available shortcut'' into ``proven universal causal inflation.''
+
+\section{Relationship to leakage and duplicate audits}
+
+Duplicate-aware evaluation has been studied in general vision: ciFAIR removed near-duplicate CIFAR test counterparts~\cite{barz2020cifair}; license-plate work re-evaluated models under duplicate-free splits~\cite{laroca2023lpr}; and medical-image re-identification demonstrated that patient identity can be highly learnable~\cite{packhauser2022reidentification}. Kapoor and Narayanan place these problems in a broader taxonomy of data leakage and reproducibility failures~\cite{kapoor2023leakage}. CytoFair's distinctive concern is an exact cervical-cytology source hierarchy: sibling crops can be non-independent without being duplicate files.
+
+\chapter{Preregistration and analysis governance}
+
+\section{Why the plan was committed first}
+
+The original preregistration was committed at 04:54:10 IST on 22 August 2026 (commit \artifact{67e8ded}). The first result commit was recorded at 13:22:42 IST that day (commit \artifact{1c2da7f}). The plan therefore predates the committed results. This matters because a five-seed matrix contains many possible comparisons; fixing endpoints, seeds, exclusions, and multiplicity families before seeing scores reduces analyst degrees of freedom.
+
+The fixed confirmatory seeds were $17,29,43,71,101$. Five additional robustness seeds were named but were not needed for the reported confirmatory summaries and were not substituted for any unfavorable seed. Every protocol-architecture cell had to contain at least five valid paired runs before inferential output could be emitted.
+
+\section{Registered endpoints}
+
+The structural endpoints were (i) fraction of parents straddling train and test and (ii) fraction of test observations whose parent appears in training. The mechanistic endpoint was 424-way parent-identification accuracy. The SIPaKMeD model endpoint was test accuracy; macro-F1 and balanced accuracy were concordance metrics. For Cx22 semantic segmentation, the primary endpoint was mean per-image cytoplasm/nucleus Dice. For Cx22 instance segmentation, the primary endpoint was per-image mean ground-truth-instance Dice after maximum-weight matching, with unmatched targets assigned zero.
+
+\section{Amendments: what changed and why}
+
+\begin{longtable}{p{0.10\textwidth}p{0.16\textwidth}p{0.26\textwidth}p{0.34\textwidth}}
+\caption{Registered amendments and their evidential status.}\label{tab:amendments}\\
+\toprule
+Date & Amendment & Trigger & Why it did not select a favorable result \\
+\midrule
+\endfirsthead
+\toprule
+Date & Amendment & Trigger & Why it did not select a favorable result \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+22 Aug & SIPaKMeD class order & The integrity gate exposed a transcription swap between Metaplastic and Dyskeratotic. & Corrected before any SIPaKMeD result; numeric target vector 126/108/238/271/223 did not change. \\
+24 Aug & Cx22 segmentation extension & Structural Cx22 results motivated a separately scoped model rescore. & Registered before any Cx22 model was trained; official split retained as descriptive control. \\
+24 Aug & FP16 execution & Full FP32 preflight left three A6000s under-used and made one U-Net epoch exceed 4.5 minutes. & Changed numerical execution before an epoch emitted a result; models, splits, seeds, endpoints, and epoch count stayed fixed. \\
+28 Aug & MAnet in FP32 & The first MAnet P1 seed-17 attempts produced non-finite losses at epochs 23 and 24. & No completed MAnet result existed. All MAnet cells restarted from their fixed seeds rather than selecting a pre-divergence checkpoint. \\
+28 Aug & Deterministic CUDA workspace & Startup warnings showed deterministic matrix multiplication required \artifact{CUBLAS_WORKSPACE_CONFIG=:4096:8}. & Frozen before a corrected MAnet or instance epoch existed; applied to all remaining cells. \\
+6 Sep & Instance runtime correction & Evaluation every epoch, CPU mask matching, and frequent network checkpoint writes caused severe under-utilization. & The registered endpoint was final epoch. Intermediate test inference was removed, exact binary intersections moved to GPU, and recovery checkpoints became five-epoch; final computation stayed identical. \\
+\end{longtable}
+
+\begin{decisionbox}{A useful demotivation}
+The project began with the possibility of a large, architecture-general accuracy correction. The statistics did not support that broad claim. Instead of hiding this, the project narrowed its claim: the benchmark hierarchy is demonstrably non-independent, the source signal is demonstrably learnable, and parent grouping removes the measured sharing. The size of downstream score inflation remains model- and task-dependent.
+\end{decisionbox}
+
+\chapter{Datasets and the hidden hierarchy}
+
+\section{Overview}
+
+\begin{table}[H]
+\centering
+\caption{Audited datasets and independent units.}
+\label{tab:datasets}
+\begin{tabularx}{\textwidth}{lrrrXX}
+\toprule
+Dataset & Observations & Parents & Mean/parent & Released task & Parent definition \\
+\midrule
+SIPaKMeD & 4,049 & 966 & 4.19 & 5-class classification & cluster field \\
+Cx22 & 1,320 & 514 & 2.57 & semantic/instance segmentation & CCEDD source image \\
+CRIC & 11,534 & 400 & 28.84 & cytology classification resource & source smear image \\
+Herlev & 917 & 917 & 1.00 & 7-class single-cell classification & released cell image \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{dataset_scale.png}
+\caption{Dataset scale and mean parent multiplicity. The log-scale left panel prevents CRIC's 11,534 observations from visually erasing the smaller datasets.}
+\label{fig:dataset-scale}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{parent_size_distributions.png}
+\caption{Complete parent-size distributions recovered from the Parquet maps. High multiplicity drives the probability that random crop splitting places a parent in both arms.}
+\label{fig:parent-distributions}
+\end{figure}
+
+\section{SIPaKMeD}
+
+SIPaKMeD contains 4,049 isolated cell images derived from 966 cluster fields~\cite{plissiti2018sipakmed}. The released hierarchy is unusually valuable for an audit: full fields and a \artifact{CROPPED} directory coexist, and crop filenames encode the field identifier. The project uses the cluster field---not the crop file---as the parent.
+
+\begin{table}[H]
+\centering
+\caption{Independently reconstructed SIPaKMeD class totals in release order.}
+\label{tab:sip-classes}
+\begin{tabular}{lrrr}
+\toprule
+Class & Crops & Parents & Crops/parent \\
+\midrule
+Superficial--Intermediate & 831 & 126 & 6.60 \\
+Parabasal & 787 & 108 & 7.29 \\
+Koilocytotic & 825 & 238 & 3.47 \\
+Metaplastic & 793 & 271 & 2.93 \\
+Dyskeratotic & 813 & 223 & 3.65 \\
+\midrule
+Total & 4,049 & 966 & 4.19 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The class order deserves explicit mention because the original planning text swapped the final two names even though its numerical vector was right. The integrity gate exposed that inconsistency, and Amendment 1 corrected it before results existed. This is an example of a check preventing a quiet metadata error.
+
+\section{Cx22 and CCEDD}
+
+Cx22 provides 1,320 generated regions and instance labels, drawing source images from CCEDD~\cite{liu2022cx22}. Three released subsets are involved: Multi-Train, Multi-Test, and Pair. The parent is the named CCEDD source image. Generator metadata provide source name and requested ROI coordinates; the authors' MATLAB generator defines how a source rectangle is clipped, resized, and pasted into a 512-by-512 white canvas.
+
+The official Multi-Train and Multi-Test arms have zero shared parents. Pair is separately released and shares 55 parents with Multi-Test (Jaccard 0.126) and 233 with Multi-Train (Jaccard 0.475). The later model matrix pools all 1,320 observations only as a preregistered stress test of downstream reuse. It is not an accusation that the official authors used a leaking split.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{cx22_label_structure.png}
+\caption{One released Cx22 Pair target decoded from the MATLAB-v7.3 structures. Cytoplasm and nucleus unions define two non-exclusive semantic channels; individual cytoplasm masks define the instance task. The CCEDD RGB source is not redistributed in this report.}
+\label{fig:cx22-labels}
+\end{figure}
+
+\section{CRIC}
+
+CRIC contains 11,534 classified cells associated with 400 source images~\cite{rezende2021cric}. The released classification table supplies source identity and cell coordinates, which makes source-level grouping deterministic. A reliable patient identifier is not present in the released table, so the project does not claim patient-disjoint evaluation. This matters: source-image grouping is stronger than crop grouping but can still be weaker than patient grouping.
+
+\section{Herlev as a structural negative control}
+
+Herlev contains 917 released single-cell images~\cite{jantzen2005pap}. Under the project's declared data unit, each image is one observation and one parent. It therefore has no multi-observation parent structure and must return exactly zero parent straddling. If Herlev showed a nonzero structural effect, the implementation would be wrong. The control passed for all five seeds.
+
+\section{Data-use constraints}
+
+The repository publishes identifiers, coordinates, hashes, split assignments, code, and derived statistics. It does not redistribute raw images. Cx22/CCEDD material is restricted to non-commercial research/education in the declared source manifest, and CCEDD redistribution is prohibited. CRIC and the local Herlev repackaging are declared CC BY 4.0. SIPaKMeD's source notes require citation and experimental use. The complete URL/checksum/terms ledger appears in \cref{tab:data-sources}.
+
+\chapter{System architecture and fail-closed philosophy}
+
+\section{Pipeline}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{reproducibility_pipeline.png}
+\caption{Reproducibility architecture. Deterministic provenance and split artifacts gate the stochastic GPU experiments, and every final result carries the hashes needed to reconnect it to its inputs.}
+\label{fig:repro-pipeline}
+\end{figure}
+
+The system deliberately separates three artifact layers:
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Canonical identity:} exact or released parent IDs used to construct splits.
+  \item \textbf{Independent audit:} image-matched parent IDs, boxes, confidence, runner-up margin, and an auxiliary diagnostic flag.
+  \item \textbf{Sensitivity grouping:} P3 connected-component IDs built from thresholded cross-parent near-duplicate candidates.
+\end{enumerate}
+
+Keeping these layers separate prevents a lower-confidence image match from overwriting an exact filename identity. It also prevents a conservative pHash/dHash candidate from being narrated as a proven duplicate.
+
+\section{Core artifact schemas}
+
+The canonical SIPaKMeD map records \artifact{crop_id}, \artifact{parent_id}, \artifact{class_name}, paths, recovery method, and confidence. Branch B adds $x,y,w,h$, crop and parent dimensions, coarse and refined NCC, second-best confidence, margin, method, and diagnostic \artifact{accepted}. P3 adds \artifact{p3_group_id}. Split CSVs record \artifact{crop_id}, \artifact{parent_id}, \artifact{partition}, \artifact{protocol}, and \artifact{seed}.
+
+Every neural result JSON records task, architecture, protocol/mode, seed, primary and secondary metrics, train/test counts, hyperparameters, exact split/input hashes, Git SHA, timestamps, elapsed time, visible GPU, platform and library versions, and full epoch history. This is more useful than a final number alone: it permits matrix completeness checks, runtime analysis, and learning-curve reconstruction without checkpoints.
+
+\section{Fail-closed algorithm}
+
+\begin{lstlisting}[style=cyto,caption={Conceptual fail-closed workflow.},label={lst:algorithm}]
+for each released dataset:
+    recover exact/released parent identity
+    if an independent recovery branch exists:
+        recover parent and bounding box without consulting branch A
+        require >= 99% A/B agreement
+    require one parent per observation
+    require all boxes contained and all totals exact
+
+construct P1, P1-prime, P2, and P3 for every fixed seed
+measure structural and literal overlap
+run probe/classifier/segmenter matrix with bounded GPUs
+
+before summarizing:
+    require every registered cell and seed exactly once
+    require split hashes, runtime versions, and sample counts
+    pair comparisons by seed
+    attach an effect size and interval to every p-value
+    apply BH over the entire declared family once
+
+if any required evidence is absent:
+    emit FAIL or PENDING; never infer PASS
+\end{lstlisting}
+
+\chapter{Exact provenance recovery}
+
+\section{SIPaKMeD Branch A: filename hierarchy}
+
+Branch A parses the released directory and filename convention. For example, \artifact{im_Dyskeratotic/CROPPED/001_03.bmp} maps to parent \artifact{Dyskeratotic/001}. This route is deterministic, fast, and used for the canonical split map. Its weakness is that a parsing bug could produce internally tidy but wrong identifiers. That is why Branch B was required.
+
+\section{SIPaKMeD Branch B: independent content matching}
+
+For crop $x$ and candidate parent region $r$, normalized cross-correlation is
+\begin{equation}
+\operatorname{NCC}(x,r)=
+\frac{\sum_u(x_u-\bar{x})(r_u-\bar{r})}
+{\sqrt{\sum_u(x_u-\bar{x})^2}\sqrt{\sum_u(r_u-\bar{r})^2}}.
+\end{equation}
+
+Branch B never uses Branch A's parent assignment in the query. It ranks every same-class parent at quarter resolution, refines the five best candidates at full resolution, and records the winning location as a bounding box. A multiscale fallback exists only for unresolved cases. Matching is bounded by class working sets so the complete parent image collection does not have to remain in memory.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{provenance_diagnostics.png}
+\caption{Branch-B diagnostics. The minimum winning NCC is 0.999969. The 0.02 runner-up-margin rule is intentionally only a diagnostic: 3,195 crops pass it and 854 do not, yet all rows agree with Branch A and all boxes remain contained.}
+\label{fig:provenance-diagnostics}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.77\textwidth]{recovered_bbox_example.png}
+\caption{A real recovered-coordinate example for the parent with the largest crop count. Only rectangle geometry is displayed; source pixels are not redistributed. Overlapping rectangles make literal source-pixel sharing possible.}
+\label{fig:bboxes}
+\end{figure}
+
+\section{Why the auxiliary acceptance flag is false for many correct rows}
+
+The \artifact{accepted} field in Branch B encodes a conservative confidence-plus-margin diagnostic. It is not the registered provenance acceptance outcome. Many microscope fields contain visually repetitive background, so a correct near-perfect winner can have another near-perfect candidate. Substituting this diagnostic for the registered 99\% cross-branch agreement rule would discard 854 correctly mapped crops after looking at an arbitrary margin. The project instead retains every row and exposes the ambiguity measure.
+
+\section{Cx22, CRIC, and Herlev recovery}
+
+Cx22 uses source names and ROI coordinates decoded from the authors' three MATLAB generator releases. Every source resolves against the declared 686-image CCEDD set, and rare edge-touching requested boxes are clipped exactly as the generator code specifies. The released Cx22 archives contain generator metadata and masks rather than a second independent RGB crop array, so an A/B image-content branch cannot be constructed from the public package alone. Applicable checks are source existence, exact metadata decoding, generator geometry, bounds, and subset overlap.
+
+CRIC uses the released classifications table: source-image identity and coordinates directly define the map. Herlev assigns each released cell to itself. Neither route pretends to recover unavailable patient identity.
+
+\section{Verification outcome}
+
+\begin{table}[H]
+\centering
+\caption{Provenance gates.}
+\label{tab:provenance-gates}
+\begin{tabularx}{\textwidth}{lrrXl}
+\toprule
+Dataset & Observations & Parents & Applied evidence & Outcome \\
+\midrule
+SIPaKMeD & 4,049 & 966 & 4,049/4,049 A/B agreement; 4,049 contained boxes; exact class totals & \pass \\
+Cx22 & 1,320 & 514 & generator names/ROIs; 686 sources resolve; 1,320 contained clipped boxes & \pass \\
+CRIC & 11,534 & 400 & released source identities and coordinates; no patient-ID claim & \pass \\
+Herlev & 917 & 917 & one released cell per parent & \pass \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+No observation was excluded. The five SIPaKMeD parent counts are exactly 126/108/238/271/223 in corrected release order. All crop counts sum to 4,049.
+
+\chapter{Split protocols and structural leakage}
+
+\section{Why four protocols are needed}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{split_protocols.png}
+\caption{The four protocols. P1 asks what common crop splitting shares. P1-prime holds its test set but matches the P2 training count. P2 groups exact parents. P3 groups whole near-duplicate-linked parent components.}
+\label{fig:protocols}
+\end{figure}
+
+All splits use an 80:20 target and the five fixed seeds. P1 is class-stratified at crop level. P1-prime retains P1's test observations and downsamples only its training observations to exactly the P2 training count, as closely class-balanced as integer counts permit. P2 uses group-aware allocation by exact parent. P3 repeats parent-disjoint allocation after cross-parent candidate links are collapsed into connected components.
+
+On the frozen SIPaKMeD environment, P2 contains 3,239 train and 810 test crops for every seed. P1 already has exactly those counts, so P1-prime is identical to P1. This is not a redundant hidden comparison: it shows that the primary P1--P2 difference cannot be attributed to a larger P1 training set in this implementation.
+
+\section{Analytic straddle probability}
+
+For a parent with $k$ crops independently assigned to training with probability 0.8 and test with probability 0.2, the only non-straddling outcomes are ``all train'' and ``all test.'' Hence
+\begin{align}
+P(\text{no straddle}\mid k) &= 0.8^k+0.2^k,\\
+P(\text{straddle}\mid k) &= 1-0.8^k-0.2^k.
+\end{align}
+For a dataset with parent crop counts $k_1,\dots,k_m$, the analytic expectation is
+\begin{equation}
+\bar{P}_{\text{straddle}}=\frac{1}{m}\sum_{j=1}^{m}\left(1-0.8^{k_j}-0.2^{k_j}\right).
+\end{equation}
+
+The exact class-stratified fixed-size splitter is not perfectly independent Bernoulli assignment. Therefore the analytic quantity is checked against a 10,000-allocation Monte Carlo interval generated with the actual count vector and allocation rule.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.87\textwidth]{straddle_probability.png}
+\caption{The analytic mechanism. A one-crop parent cannot straddle; a high-multiplicity parent almost certainly straddles under independent 80:20 crop allocation.}
+\label{fig:straddle-curve}
+\end{figure}
+
+\section{Structural endpoints}
+
+Let $G_{\mathrm{tr}}$ and $G_{\mathrm{te}}$ be training and test parent sets, and let $T$ be the test observations. The parent-straddle fraction and leaked-test-observation fraction are
+\begin{equation}
+L_p=\frac{|G_{\mathrm{tr}}\cap G_{\mathrm{te}}|}{|G|},\qquad
+L_c=\frac{1}{|T|}\sum_{x\in T}\mathbf{1}\{g(x)\in G_{\mathrm{tr}}\}.
+\end{equation}
+
+\begin{table}[H]
+\centering
+\caption{Structural leakage. Stochastic values are mean $\pm$ sample SD over five seeds.}
+\label{tab:structural}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrr}
+\toprule
+Dataset & Crops & Parents & Analytic P1 straddle & Observed P1 straddle & P1 test with train parent & P2/P3 straddle \\
+\midrule
+SIPaKMeD & 4,049 & 966 & 44.83\% & 45.63$\pm$1.04\% & 92.62$\pm$0.40\% & 0.00$\pm$0.00\% \\
+Cx22 & 1,320 & 514 & 33.93\% & 34.01$\pm$1.10\% & 85.23$\pm$3.51\% & 0.00$\pm$0.00\% \\
+CRIC & 11,534 & 400 & 94.88\% & 94.35$\pm$1.10\% & 99.97$\pm$0.08\% & 0.00$\pm$0.00\% \\
+Herlev & 917 & 917 & 0.00\% & 0.00$\pm$0.00\% & 0.00$\pm$0.00\% & 0.00$\pm$0.00\% \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{structural_results.png}
+\caption{Analytic and observed leakage. P2 and P3 are omitted from the bars because both are exactly zero on all four datasets.}
+\label{fig:structural-results}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{structural_seed_spread.png}
+\caption{Seed-level structural results. Reporting the spread prevents one convenient split from defining the claim.}
+\label{fig:structural-seeds}
+\end{figure}
+
+\section{Interpretation}
+
+CRIC is the most extreme because its parents emit 28.84 crops on average: essentially every random-split test cell has a source image in training. SIPaKMeD and Cx22 have lower parent multiplicity, yet 92.62\% and 85.23\% of their test observations respectively still have a training sibling. Herlev establishes implementation specificity: the same code returns zero when the data genuinely have one observation per parent.
+
+The structural ordering P3 $\leq$ P2 $\leq$ P1 passes for all datasets. This statement concerns shared parents, not model scores. Later, the analogous model-score ordering fails for four of six SIPaKMeD classifiers; the two outcomes are logically compatible.
+
+\chapter{Literal overlap and conservative duplicate grouping}
+
+\section{Literal source-pixel overlap}
+
+SIPaKMeD's recovered boxes permit a stronger question than shared parent identity. Let boxes $B_i$ and $B_j$ come from the same field. Their intersection is non-empty when
+\begin{equation}
+\max(x_i,x_j)<\min(x_i+w_i,x_j+w_j)
+\quad\text{and}\quad
+\max(y_i,y_j)<\min(y_i+h_i,y_j+h_j).
+\end{equation}
+The intersection-over-union is
+\begin{equation}
+\operatorname{IoU}(B_i,B_j)=\frac{|B_i\cap B_j|}{|B_i\cup B_j|}.
+\end{equation}
+
+Across 13,064 within-parent crop pairs, 2,185 share at least one pixel and the maximum IoU is 0.546. Under P1, 16.80$\pm$0.77\% of cross-split sibling pairs overlap and 52.62$\pm$1.97\% of test crops overlap at least one source pixel with a training crop. Both quantities are 0.00$\pm$0.00\% under P2 and P3.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{literal_pixel_overlap.png}
+\caption{Literal overlap for every P1 seed. The larger test-crop fraction answers a different question from the pair fraction: whether each test crop has at least one overlapping training sibling.}
+\label{fig:pixel-overlap}
+\end{figure}
+
+\section{Perceptual hashes and P3}
+
+For each crop the implementation computes a 64-bit perceptual hash from the median-thresholded low-frequency $8\times8$ DCT block and a 64-bit difference hash from adjacent comparisons in an $8\times9$ downsample. Two crops become a candidate pair when they are pixel-exact or when both Hamming distances are at most six. Cross-parent candidate pairs are joined by union-find; each connected component becomes one P3 group.
+
+At the frozen thresholds, the audit found 201 cross-parent candidate pairs. They connect 170 parent IDs into 74 components, the largest containing eight parents, and reduce 966 parents to 870 P3 groups. No pair is pixel-exact. A synthetic calibration detected all three injected transformations and rejected all 100 deterministic unrelated-parent negatives, yielding precision 1.00 and recall 1.00 on that calibration set.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{duplicate_audit.png}
+\caption{Near-duplicate sensitivity audit. The thresholded candidates are used conservatively for grouping; they are not treated as ground-truth duplicate annotations.}
+\label{fig:duplicates}
+\end{figure}
+
+\begin{warningbox}{What the duplicate experiment did not do}
+The broader planning idea mentioned a three-detector majority vote involving learned features. The frozen release implements only the pHash+dHash consensus audit and its synthetic calibration. Therefore the report does not claim a CNN/domain-encoder duplicate ensemble, human-confirmed duplicate truth, or general detector precision outside the calibration set.
+\end{warningbox}
+
+\chapter{The parent-identity mechanism probe}
+
+\section{Motivation}
+
+Structural overlap says that siblings are present. The parent probe asks whether their shared source is visually recoverable after cellular content and color cues are altered. A positive answer makes the shortcut concrete: a learner can recognize the parent field from a different crop. It still does not prove that a morphology classifier uses that signal.
+
+\section{Balanced task construction}
+
+Parents with at least four crops are eligible. The minimum eligible size allows two training and two test crops per parent. To make chance exact, each eligible parent contributes the same number of training and test crops. The final task contains 424 parents, 848 training crops, and 848 test crops, so chance is
+\begin{equation}
+P_{\mathrm{chance}}=\frac{1}{424}=0.00235849=0.235849\%.
+\end{equation}
+
+A ResNet-18~\cite{he2016resnet} initialized from ImageNet replaces its final layer with a 424-way linear classifier. It trains for 15 epochs with AdamW~\cite{loshchilov2019adamw}, learning rate $10^{-4}$, weight decay $10^{-4}$, batch size 64, and fixed seeds. Training augmentation is a random resized crop with scale 0.85--1.0 plus horizontal and vertical flips; testing resizes to $224\times224$. ImageNet normalization follows every image-mode transform.
+
+\section{Image transformations and their motivations}
+
+\subsection{RGB}
+RGB is the maximal-information condition. It permits morphology, stain, illumination, background, focus, acquisition artifacts, and any other visible cue.
+
+\subsection{Grayscale}
+Grayscale removes hue and saturation while retaining luminance, edges, morphology, focus, and texture. Persistence here means identity is not solely a stain-color phenomenon.
+
+\subsection{LAB stain normalization}
+RGB is converted to CIE LAB. For channel vector $z$, source mean $\mu_s$, source standard deviation $\sigma_s$, and fixed target statistics $\mu_t=(190,140,135)$ and $\sigma_t=(35,14,14)$, the implemented transform is
+\begin{equation}
+z'=\operatorname{clip}\left((z-\mu_s)\odot\frac{\sigma_t}{\max(\sigma_s,1)}+\mu_t,0,255\right).
+\end{equation}
+This is a fixed-statistics color-transfer normalization based on the logic of Reinhard et al.~\cite{reinhard2001color}. Persistence means simple first- and second-moment color normalization does not erase the source fingerprint.
+
+\subsection{Background-only: Otsu, morphology, and Telea inpainting}
+
+This condition deliberately removes the likely cell foreground. The implementation converts RGB to HSV and grayscale, then independently obtains Otsu thresholds~\cite{otsu1979threshold} on saturation $S$ and luminance $Y$. The preliminary foreground mask is
+\begin{equation}
+M_0(u)=\mathbf{1}\{S(u)>t_S\;\lor\;Y(u)<t_Y\}.
+\end{equation}
+A $5\times5$ morphological closing fills small holes and connects narrow gaps:
+\begin{equation}
+M=(M_0\oplus K)\ominus K.
+\end{equation}
+Finally, the marked region is filled from its boundary with Telea's fast-marching inpainting method using radius 5~\cite{telea2004inpainting}. The result keeps background statistics while suppressing the cell body and nucleus. A successful classifier in this condition shows that background alone carries considerable parent information.
+
+\subsection{High-pass}
+For Gaussian blur $G_{\sigma=3}*I$, the residual is
+\begin{equation}
+I_{\mathrm{hp}}=\operatorname{clip}\left(I-G_{\sigma=3}*I+128,0,255\right).
+\end{equation}
+This suppresses low-frequency illumination and emphasizes local texture, edges, compression, and focus structure.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{probe_transformations.png}
+\caption{Every preprocessing stage shown on an actual local Herlev cell. This is an implementation demonstration, not a probe result image: the reported parent-identification experiment used SIPaKMeD crops. Panels D--G make Otsu thresholding, mask combination, and morphological closing visible before Telea inpainting.}
+\label{fig:transformations}
+\end{figure}
+
+\section{Shuffled-label negative control}
+
+Only the training labels are permuted, using the same images, optimizer, epochs, seeds, and task size. The five-seed 95\% interval must cover the exact chance baseline. Otherwise the probe would be rejected because a bookkeeping or imbalance artifact could explain apparent identity learning.
+
+\section{Results}
+
+\begin{table}[H]
+\centering
+\caption{Parent-identity probe. Mean $\pm$ sample SD over five seeds.}
+\label{tab:probe}
+\begin{tabular}{lrr}
+\toprule
+Input condition & Accuracy & Multiple of chance \\
+\midrule
+RGB & 25.73$\pm$0.66\% & 109.1$\times$ \\
+Grayscale & 13.80$\pm$1.12\% & 58.5$\times$ \\
+Stain-normalized & 17.31$\pm$0.64\% & 73.4$\times$ \\
+Background-only & 18.68$\pm$1.25\% & 79.2$\times$ \\
+High-pass & 16.27$\pm$0.60\% & 69.0$\times$ \\
+Shuffled RGB labels & 0.17$\pm$0.24\% & 0.7$\times$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{probe_results.png}
+\caption{All prespecified image conditions remain far above chance. Error bars are sample SD across five seeds.}
+\label{fig:probe-results}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{probe_learning_curves.png}
+\caption{Probe learning curves reconstructed from every retained epoch history. The RGB signal rises smoothly across seeds; shuffled labels remain near chance.}
+\label{fig:probe-learning}
+\end{figure}
+
+The shuffled mean is 0.1651\%, SD 0.2445 percentage points, with a five-seed interval from $-0.1385$\% to 0.4687\%; the exact 0.2358\% chance value lies inside. A negative lower confidence limit is an ordinary symmetric small-sample interval artifact and does not imply negative accuracy.
+
+Background-only accuracy is higher than grayscale and stain-normalized accuracy. That does not mean background is the only cue: RGB remains highest, and transformations alter multiple image properties at once. The careful conclusion is that parent information is distributed across color, low- and high-frequency structure, and background.
+
+\chapter{SIPaKMeD classification rescore}
+
+\section{Why re-run models rather than quote published scores?}
+
+Published numbers are entangled with architectures, preprocessing, augmentations, and---most importantly---different splits. Quoting them would not isolate the quantity of interest. The rescore therefore trains six representative image classifiers under the same code path, preprocessing, optimizer family, epoch budget, seeds, and four fixed split protocols. The only intended change across protocols is the independence constraint and, for the explicitly size-matched control, the number of retained training crops.
+
+The six families cover different inductive biases and capacities: ResNet-18 and ResNet-50~\cite{he2016resnet}, DenseNet-121~\cite{huang2017densenet}, MobileNet-V2~\cite{sandler2018mobilenetv2}, EfficientNet-B0~\cite{tan2019efficientnet}, and ViT-B/16~\cite{dosovitskiy2021vit}. Each ImageNet-pretrained head is replaced with a five-way linear classifier. Re-running all six also prevents the conclusion from depending on one especially favorable architecture.
+
+\section{Inputs, augmentation, and optimization}
+
+Every crop is decoded as RGB, converted to a tensor, and normalized by the ImageNet channel statistics. Training augmentation consists of a random resized crop to $224\times224$ with scale in $[0.8,1.0]$, a horizontal flip, and a vertical flip. Test preprocessing is a deterministic resize to $224\times224$. The code records the fully resolved split hash and configuration beside every result.
+
+All classifiers use AdamW~\cite{loshchilov2019adamw}, cross-entropy loss, and a fixed learning rate. The retained endpoint is the final epoch; there is no separate validation split or post-hoc best-epoch selection. A run is valid only when the stored identifiers match its split, the final file is complete, and all reported quantities are finite. Table~\ref{tab:classifier-hparams} gives the execution contract.
+
+\begin{table}[H]
+\centering
+\caption{SIPaKMeD classifier execution settings.}
+\label{tab:classifier-hparams}
+\begin{tabular}{ll}
+\toprule
+Item & Setting \\
+\midrule
+Architectures & ResNet-18/50, DenseNet-121, MobileNet-V2, EfficientNet-B0, ViT-B/16 \\
+Initialization & ImageNet pretrained \\
+Input & RGB, $224\times224$ \\
+Loss & Five-class cross entropy \\
+Optimizer & AdamW \\
+Learning rate & $10^{-4}$, fixed \\
+Weight decay & $10^{-4}$ \\
+Batch size & 64 \\
+Epochs & 20, final-epoch endpoint \\
+Seeds & 17, 29, 43, 71, 101 \\
+Primary metric & Test accuracy \\
+Hardware & NVIDIA RTX A6000; at most three concurrent GPU jobs \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Metric definitions}
+
+For true class $y_i$ and prediction $\hat y_i$, accuracy is
+\begin{equation}
+\operatorname{Acc}=\frac{1}{N}\sum_{i=1}^{N}\mathbf{1}\{\hat y_i=y_i\}.
+\end{equation}
+For class $c$, with precision $P_c$ and recall $R_c$,
+\begin{equation}
+F_{1,c}=\frac{2P_cR_c}{P_c+R_c},\qquad
+F_{1,\mathrm{macro}}=\frac{1}{C}\sum_{c=1}^{C}F_{1,c}.
+\end{equation}
+Balanced accuracy is the unweighted mean class recall,
+\begin{equation}
+\operatorname{BAcc}=\frac{1}{C}\sum_{c=1}^{C}\frac{TP_c}{TP_c+FN_c}.
+\end{equation}
+The preregistered primary endpoint is accuracy. Macro-F1 and balanced accuracy check that the direction is not a class-frequency artifact; they are not used to shop for a smaller $p$-value.
+
+\section{Aggregate scores}
+
+\begin{table}[H]
+\centering
+\caption{SIPaKMeD test accuracy (\%), mean $\pm$ sample SD over five seeds. \protocol{P1$'$} is numerically identical to \protocol{P1} because the frozen stratified crop split already contained the registered 3,239 training and 810 test observations.}
+\label{tab:classification-main}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+Architecture & \protocol{P1} & \protocol{P1$'$} & \protocol{P2} & \protocol{P3} \\
+\midrule
+DenseNet-121 & 98.12$\pm$0.28 & 98.12$\pm$0.28 & 96.72$\pm$0.69 & 97.38$\pm$0.50 \\
+EfficientNet-B0 & 97.78$\pm$0.49 & 97.78$\pm$0.49 & 96.69$\pm$1.49 & 97.41$\pm$0.71 \\
+MobileNet-V2 & 97.41$\pm$0.45 & 97.41$\pm$0.45 & 95.16$\pm$1.50 & 96.20$\pm$0.93 \\
+ResNet-18 & 97.19$\pm$0.59 & 97.19$\pm$0.59 & 96.00$\pm$0.89 & 96.35$\pm$1.28 \\
+ResNet-50 & 97.51$\pm$0.47 & 97.51$\pm$0.47 & 96.79$\pm$0.42 & 96.27$\pm$0.53 \\
+ViT-B/16 & 97.14$\pm$0.95 & 97.14$\pm$0.95 & 95.56$\pm$0.84 & 95.53$\pm$1.68 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{classification_protocol_scores.png}
+\caption{All frozen SIPaKMeD accuracy observations. Lines connect the same architecture across protocols; points show individual seeds and bars show the mean.}
+\label{fig:classification-scores}
+\end{figure}
+
+The top score under \protocol{P1} is DenseNet-121 at 98.12$\pm$0.28\%. Under parent-disjoint \protocol{P2}, DenseNet-121 remains highest at 96.72$\pm$0.69\%, narrowly followed by ResNet-50. The key scientific observation is not which backbone wins; it is that all six paired \protocol{P1}$-$\protocol{P2} mean differences are positive.
+
+\section{Matched contrasts, uncertainty, and the ordering failure}
+
+For architecture $a$ and seed $s$, the primary paired difference is
+\begin{equation}
+d_{a,s}=100\left(\operatorname{Acc}_{a,s,\mathrm{P1}}-
+\operatorname{Acc}_{a,s,\mathrm{P2}}\right)
+\end{equation}
+in percentage points. The paired standardized effect is Cohen's
+\begin{equation}
+d_z=\frac{\bar d}{s_d},
+\end{equation}
+where $s_d$ is the sample SD of the five seed-paired differences. Reported effect-size confidence intervals are seed-paired bootstrap intervals, so a bootstrap resample always keeps the two protocol results from a seed together. The test is a paired $t$-test because every registered five-difference vector passed its Shapiro--Wilk screen; the switch to Wilcoxon was reserved for a failed screen.
+
+\begin{table}[H]
+\centering
+\caption{Primary SIPaKMeD \protocol{P1}$-$\protocol{P2} contrasts. The six paired $t$-tests form one preregistered BH family. CI is the paired-bootstrap 95\% interval for Cohen's $d_z$, not for the raw percentage-point mean.}
+\label{tab:classification-contrasts}
+\small
+\begin{tabular}{lrrrrr}
+\toprule
+Architecture & Mean$\pm$SD (pp) & 95\% CI for $d_z$ & $p$ & BH $q$ & $d_z$ \\
+\midrule
+DenseNet-121 & 1.41$\pm$0.90 & [0.985, 4.747] & 0.0251 & 0.1109 & 1.561 \\
+EfficientNet-B0 & 1.09$\pm$1.85 & [$-$0.316, 4.668] & 0.2591 & 0.2591 & 0.588 \\
+MobileNet-V2 & 2.25$\pm$1.63 & [0.809, 6.686] & 0.0370 & 0.1109 & 1.377 \\
+ResNet-18 & 1.19$\pm$1.28 & [0.442, 2.365] & 0.1081 & 0.1511 & 0.922 \\
+ResNet-50 & 0.72$\pm$0.83 & [0.085, 4.025] & 0.1260 & 0.1511 & 0.863 \\
+ViT-B/16 & 1.58$\pm$1.70 & [0.057, 4.950] & 0.1059 & 0.1511 & 0.931 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{classification_delta_forest.png}
+\caption{Paired \protocol{P1}$-$\protocol{P2} effects. Every mean favors the crop-level split, but none survives its preregistered multiplicity correction. The vertical line at zero marks no protocol effect.}
+\label{fig:classification-forest}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{classification_seed_deltas.png}
+\caption{Seed-level paired differences. This figure exposes the small effective sample size and the architecture-specific variability that an aggregate table can hide.}
+\label{fig:classification-seeds}
+\end{figure}
+
+The registered monotonicity expectation was \protocol{P3}$\leq$\protocol{P2}$\leq$\protocol{P1}. Only ResNet-50 and ViT-B/16 satisfy it. The other four improve from \protocol{P2} to \protocol{P3} by 0.35--1.04 points. Those reversals are not deleted or relabeled: the corresponding \protocol{P2}$-$\protocol{P3} differences are $-0.67$, $-0.72$, $-1.04$, $-0.35$, $+0.52$, and $+0.02$ points in table order, and none has an adjusted confirmatory claim.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{classification_ordering.png}
+\caption{The registered ordering check. Cell values are the protocol means; the title records the gate outcome. Four of six architectures fail \protocol{P3}$\leq$\protocol{P2}$\leq$\protocol{P1}, so the acceptance contract correctly records one failed gate.}
+\label{fig:classification-ordering}
+\end{figure}
+
+Architecture ranks are also unstable across \protocol{P1} and \protocol{P2}: Kendall's $\tau=0.467$ with bootstrap interval [0.071, 0.733] and $p=0.2722$; four of the 15 architecture pairs reverse. This is a descriptive warning that a benchmark split can alter conclusions about model selection even when absolute score differences look modest.
+
+\section{What the classification rescore does and does not show}
+
+The same-sign result across six architectures is scientifically suggestive and consistent with the structural mechanism. The five-seed paired variability is nevertheless too large for any architecture to pass the six-test BH family. The correct report is therefore: \emph{crop-disjoint scores were higher on average for every tested classifier, by 0.72--2.25 percentage points, but the preregistered architecture-wise confirmatory family did not establish individual effects after multiplicity correction.}
+
+No classifier confusion matrix appears because the frozen result schema retains aggregate test metrics and epoch histories, but not per-sample predictions or model checkpoints. Generating such a matrix now would require a new experiment after the declared research stop. Omitting it is more faithful than reconstructing or simulating unobserved cells.
+
+\section{Training behavior and compute}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{classification_training_runtime.png}
+\caption{Classifier wall-clock summaries from the retained run JSON files. These are same-system measurements and should not be compared to timings reported on unrelated hardware.}
+\label{fig:classification-runtime}
+\end{figure}
+
+The 120 retained classification runs consumed 8.48 summed run-hours. Because up to three jobs ran concurrently, this is computational work, not elapsed calendar duration. Shorter wall time does not imply a more accurate or better-calibrated model; it is included so the execution cost is auditable.
+
+\chapter{Cx22 segmentation rescore}
+
+\section{Why add a second task and dataset?}
+
+Classification alone could leave two alternative explanations: perhaps the phenomenon is specific to SIPaKMeD, or perhaps it is specific to assigning a single label to a crop. Cx22 offers a different hierarchy and two pixel-level tasks. It therefore tests whether the split logic transfers to semantic and instance segmentation without pretending that its official split is the same estimand as the pooled stress test.
+
+The pooled analysis treats all 1,320 released generated regions as the observation pool and the 514 CCEDD sources as parents. The protocol{OFFICIAL} arm uses only Cx22-Multi-Train (400 observations) and Cx22-Multi-Test (100 observations). These official train and test source-parent sets are disjoint. Pair is not added to the official test comparison: 55 of its source parents overlap Multi-Test and 233 overlap Multi-Train, with Jaccard similarities 0.126 and 0.475 respectively. Pooling and re-splitting is thus a downstream-reuse stress test, not an accusation that the authors' official Multi split is flawed.
+
+\section{Targets and models}
+
+The semantic target has two independent binary channels: cytoplasm and nucleus. Five encoder--decoder families are re-run: U-Net~\cite{ronneberger2015unet}, U-Net++~\cite{zhou2020unetplusplus}, DeepLabV3+~\cite{chen2018deeplabv3plus}, FPN~\cite{lin2017fpn}, and MAnet~\cite{fan2020manet}. ResNet-34 is the encoder except for DeepLabV3+, which uses ResNet-50. All encoders start from ImageNet weights. The output activation is not embedded in the network; logits are passed through sigmoid in the loss and evaluation code.
+
+For image $i$, channel $c$, prediction probability $p_{icu}$, and binary target $y_{icu}$ at pixel $u$, the training objective is
+\begin{align}
+\mathcal L_{\mathrm{semantic}}
+&=\mathcal L_{\mathrm{BCE}}+\mathcal L_{\mathrm{softDice}},\\
+\mathcal L_{\mathrm{softDice}}
+&=1-\frac{1}{2N}\sum_{i,c}
+\frac{2\sum_u p_{icu}y_{icu}+1}
+{\sum_u p_{icu}+\sum_u y_{icu}+1}.
+\end{align}
+
+The instance task uses Mask R-CNN with a ResNet-50 FPN backbone and its torchvision V2 implementation~\cite{he2017maskrcnn}. The classification and mask heads are replaced for one foreground category plus background. Ground-truth cytoplasm instances are reconstructed from the released MATLAB label structure before resizing. Empty instances after resizing are rejected rather than silently retained.
+
+\section{Deterministic input construction}
+
+All images and masks are resized to $256\times256$; RGB images use antialiased interpolation, while masks use nearest-neighbor interpolation. Training augmentation is determined by a SHA-256 digest of seed, epoch, and crop ID. Digest bits choose horizontal flip, vertical flip, and one of four right-angle rotations. This produces per-epoch augmentation without relying on worker scheduling order. Images are ImageNet-normalized; masks remain binary.
+
+The original JPEGs and generated masks were packed into memory-mappable arrays, each named in a provenance manifest with SHA-256 hashes and a cache version. This was not a scientific transformation. It removed repeated JPEG/MATLAB/NFS decoding from the inner loop while making the exact input bytes auditable.
+
+\begin{table}[H]
+\centering
+\caption{Cx22 segmentation execution settings.}
+\label{tab:cx22-hparams}
+\begin{tabular}{lll}
+\toprule
+Item & Semantic & Instance \\
+\midrule
+Image size & $256\times256$ & $256\times256$ \\
+Epochs & 30 & 30 \\
+Batch size & 16 & 2 (test batch 1) \\
+Optimizer & AdamW & AdamW \\
+Learning rate & $10^{-4}$ fixed & $10^{-4}$ fixed \\
+Weight decay & $10^{-4}$ & $10^{-4}$ \\
+Precision & FP16 except MAnet FP32 & FP16 \\
+Endpoint schedule & every epoch; final retained & final epoch only \\
+Checkpointing & every epoch & every 5 epochs \\
+Seeds & 17, 29, 43, 71, 101 & 17, 29, 43, 71, 101 \\
+Hardware & \multicolumn{2}{l}{NVIDIA RTX A6000; at most three concurrent GPU jobs} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Semantic metrics}
+
+Probabilities are thresholded at 0.5. For predicted set $A$ and target set $B$,
+\begin{equation}
+\operatorname{Dice}(A,B)=\frac{2|A\cap B|}{|A|+|B|},\qquad
+\operatorname{IoU}(A,B)=\frac{|A\cap B|}{|A\cup B|}.
+\end{equation}
+The primary semantic value first averages cytoplasm and nucleus Dice within each image, then averages over test images. This prevents a large cytoplasm region from numerically drowning the smaller nucleus. Channel-specific Dice and IoU are retained as diagnostic endpoints.
+
+\section{Instance matching metric}
+
+Predictions with object score below 0.5 are discarded. Let $D_{jk}$ be Dice between predicted instance $j$ and ground-truth instance $k$. The Hungarian assignment~\cite{kuhn1955hungarian} maximizes
+\begin{equation}
+\max_{\pi}\sum_{(j,k)\in\pi}D_{jk}
+\end{equation}
+subject to one-to-one matching. Every unmatched ground-truth instance receives Dice and IoU zero. The primary image value is the mean over that image's ground-truth instances; images are then averaged. Recall@0.70 is the fraction of ground-truth instances whose matched Dice is at least 0.70. This endpoint penalizes missed cells and does not allow an image with many easy instances to dominate the result.
+
+\begin{lstlisting}[style=cyto,caption={Exact logic of the matched-instance endpoint.},label={lst:instance-metric}]
+keep predictions with confidence >= 0.50
+threshold predicted and target masks at 0.50
+compute all predicted-by-target Dice values on the GPU
+solve maximum-weight one-to-one assignment
+write matched Dice into a zero vector of length n_targets
+average the vector within the image
+average image means over the test set
+\end{lstlisting}
+
+\section{Semantic results}
+
+\begin{table}[H]
+\centering
+\caption{Cx22 semantic macro-Dice (\%), mean $\pm$ sample SD over five seeds. The official column uses a different 400/100 sample and is descriptive, not a paired protocol contrast.}
+\label{tab:cx22-semantic}
+\small
+\begin{tabular}{lrrrrr}
+\toprule
+Model & \protocol{P1} & \protocol{P1$'$} & \protocol{P2} & \protocol{P3} & \protocol{OFFICIAL} \\
+\midrule
+DeepLabV3+ & 88.90$\pm$0.45 & 88.84$\pm$0.45 & 88.64$\pm$0.34 & 88.10$\pm$0.38 & 82.96$\pm$1.54 \\
+FPN & 88.90$\pm$0.43 & 88.97$\pm$0.55 & 88.89$\pm$0.48 & 88.33$\pm$0.30 & 84.43$\pm$0.33 \\
+MAnet & 90.03$\pm$0.60 & 90.07$\pm$0.63 & 89.97$\pm$0.45 & 89.63$\pm$0.21 & 85.50$\pm$1.41 \\
+U-Net & 90.29$\pm$0.48 & 90.32$\pm$0.52 & 89.99$\pm$0.52 & 89.77$\pm$0.16 & 85.64$\pm$0.58 \\
+U-Net++ & 90.56$\pm$0.51 & 90.58$\pm$0.54 & 90.38$\pm$0.35 & 90.05$\pm$0.21 & 87.30$\pm$1.13 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{cx22_semantic_scores.png}
+\caption{Cx22 semantic macro-Dice by architecture and protocol. The official arm is visually separated because it is not a same-observation contrast.}
+\label{fig:cx22-semantic}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{cx22_channel_heatmap.png}
+\caption{Channel-level Dice makes the central difficulty visible: nuclei are consistently harder than cytoplasm. This is the segmentation analogue of a confusion-matrix diagnostic and uses retained aggregate channel measurements, not invented pixel predictions.}
+\label{fig:cx22-channels}
+\end{figure}
+
+U-Net++ is best in every pooled protocol and on the official Multi arm. The channel breakdown explains the lower official macro score: across models, cytoplasm Dice is roughly 94--95\% while nucleus Dice is roughly 72--79\%. Nuclei are smaller, so a fixed boundary displacement consumes a larger fraction of their area; faint staining and overlap also make the boundary less stable. This is a checkable data property visible in the released masks rather than a generic explanation added after the fact.
+
+\section{Instance results}
+
+\begin{table}[H]
+\centering
+\caption{Cx22 matched-instance Dice (\%), mean $\pm$ sample SD over five seeds.}
+\label{tab:cx22-instance}
+\small
+\begin{tabular}{lrrrrr}
+\toprule
+Model & \protocol{P1} & \protocol{P1$'$} & \protocol{P2} & \protocol{P3} & \protocol{OFFICIAL} \\
+\midrule
+Mask R-CNN & 92.10$\pm$0.52 & 92.05$\pm$0.52 & 91.59$\pm$0.42 & 91.11$\pm$1.09 & 92.29$\pm$0.32 \\
+Mask R-CNN V2 & 91.99$\pm$0.57 & 91.95$\pm$0.58 & 91.36$\pm$0.82 & 90.60$\pm$0.52 & 92.18$\pm$0.71 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{cx22_instance_scores.png}
+\caption{Cx22 matched-instance Dice. Both Mask R-CNN variants follow the complete registered \protocol{P3}$\leq$\protocol{P2}$\leq$\protocol{P1} ordering.}
+\label{fig:cx22-instance}
+\end{figure}
+
+Unlike SIPaKMeD classification, all seven Cx22 architecture/task rows satisfy the registered ordering. The differences are still small: \protocol{P1}$-$\protocol{P2} is 0.01--0.30 percentage points for semantic models and 0.51--0.63 points for instance models.
+
+\section{Inference and rank stability}
+
+\begin{table}[H]
+\centering
+\caption{Primary Cx22 \protocol{P1}$-$\protocol{P2} contrasts. Values are mean $\pm$ SD percentage points; $q$ is within the task-specific preregistered family. Effect is Cohen's $d_z$ except DeepLabV3+, whose non-normal seed differences trigger rank-biserial effect size.}
+\label{tab:cx22-primary}
+\small
+\begin{tabular}{llrrrr}
+\toprule
+Task & Model & Mean$\pm$SD & Raw $p$ & BH $q$ & Effect \\
+\midrule
+Semantic & DeepLabV3+ & 0.258$\pm$0.418 & 0.3125 & 0.8458 & 0.600$^{\dagger}$ \\
+Semantic & FPN & 0.010$\pm$0.468 & 0.9625 & 0.9625 & 0.022 \\
+Semantic & MAnet & 0.065$\pm$0.450 & 0.7612 & 0.8458 & 0.146 \\
+Semantic & U-Net & 0.297$\pm$0.767 & 0.4353 & 0.8458 & 0.387 \\
+Semantic & U-Net++ & 0.188$\pm$0.406 & 0.3582 & 0.8458 & 0.464 \\
+Instance & Mask R-CNN & 0.509$\pm$0.581 & 0.1220 & 0.2440 & 0.875 \\
+Instance & Mask R-CNN V2 & 0.630$\pm$1.204 & 0.3068 & 0.3116 & 0.523 \\
+\bottomrule
+\multicolumn{6}{l}{\footnotesize $^{\dagger}$rank-biserial correlation; all other effects are Cohen's $d_z$.}
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{cx22_contrasts.png}
+\caption{Cx22 paired contrast overview. Positive values favor the crop-level protocol. The plot separates point-estimate consistency from multiplicity-adjusted evidence.}
+\label{fig:cx22-contrasts}
+\end{figure}
+
+No primary Cx22 test survives BH correction. The size-matched \protocol{P1$'$}$-$\protocol{P2} Mask R-CNN contrast has raw $p=0.0377$, $d_z=1.368$, and $q=0.1508$; it is not promoted to a significant claim. In the explicitly secondary \protocol{P2}$-$\protocol{P3} family, FPN has raw $p=0.0226$ and $d_z=1.613$; it remains secondary and is not used to rescue the main conclusion.
+
+Semantic model ranking is comparatively stable: Kendall's $\tau=0.8$ with bootstrap interval [0.6, 1.0], $p=0.0833$, and one of ten model pairs reordered. With only two instance models, $\tau=1.0$ but its bootstrap interval spans [$-1$,1], which is appropriately uninformative.
+
+\section{Training failures, recovery, and runtime}
+
+The first MAnet \protocol{P1}, seed-17 attempts produced non-finite losses at epochs 23 and 24 under FP16, despite dynamic loss scaling. Retaining an epoch-22 model or changing only that seed would have biased the matrix. The matrix stopped at 100 of 175 cells, the failure was amended in writing, and every MAnet cell was restarted in FP32 from its fixed seed. The corrected runs also set \artifact{CUBLAS_WORKSPACE_CONFIG=:4096:8} before any corrected MAnet or instance result existed.
+
+Instance segmentation exposed a different failure: not numerical instability, but pipeline starvation. Per-epoch test inference, CPU pairwise mask matching, and network-filesystem checkpoint writes made GPUs wait. The final endpoint was already preregistered, so evaluation was restricted to the final epoch, exact binary intersections moved to the GPU, checkpoints became five-epoch recovery files, and immutable arrays were staged locally. These changes preserved the endpoint and substantially improved utilization; they did not alter splits, seeds, models, thresholds, or the final metric.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{cx22_training_runtime.png}
+\caption{Cx22 run-time distribution. Instance segmentation dominates the computational cost and has a long tail; the plot makes the operational bottleneck explicit.}
+\label{fig:cx22-runtime}
+\end{figure}
+
+The 125 semantic cells consumed 253.33 summed run-hours, with median cell time 2.09 hours. The 50 instance cells consumed 646.76 summed run-hours, with median 2.64 hours and range 0.258--49.79 hours. The complete Cx22 matrix consumed 900.08 summed run-hours. Up to three jobs were concurrent, so the sum is not wall-clock project duration.
+
+As in classification, final model weights and per-pixel predictions were not retained after the completed JSON was written. Figure~\ref{fig:cx22-labels} therefore visualizes real released ground truth, not a simulated qualitative prediction. A post-hoc prediction gallery would require fresh inference and is deliberately outside the frozen record.
+
+\chapter{Statistical analysis in full}
+
+\section{The experimental unit is the seed-paired run}
+
+Every reported neural summary uses the five fixed seeds 17, 29, 43, 71, and 101 and gives the arithmetic mean with sample standard deviation ($n-1$ denominator). The protocol contrast is paired by seed. This pairing removes seed-to-seed variation that affects both arms and prohibits a favorable run in one protocol from being compared with an unrelated run in another.
+
+For values $m_s$ over $S=5$ seeds,
+\begin{equation}
+\bar m=\frac{1}{S}\sum_{s=1}^{S}m_s,\qquad
+s_m=\sqrt{\frac{1}{S-1}\sum_{s=1}^{S}(m_s-\bar m)^2}.
+\end{equation}
+A summary is suppressed if fewer than five seeds are present. This is enforced in code rather than remembered during table writing.
+
+\section{Test-selection rule}
+
+The preregistered rule first applies Shapiro--Wilk~\cite{shapiro1965normality} to the five paired differences. If $p\geq0.05$, a two-sided paired $t$-test is emitted; otherwise a two-sided Wilcoxon signed-rank test~\cite{wilcoxon1945rank} is emitted. The effect is Cohen's $d_z$ for a $t$-test and rank-biserial correlation for Wilcoxon. All-zero differences are descriptive; a constant nonzero difference has an infinite standardized effect by definition and is flagged explicitly.
+
+With only five observations, normality screening has little power and neither test can create information that is not present. The rule is retained because it was specified before results, but conclusions emphasize effect direction, variability, and corrected evidence rather than treating the test label as a guarantee.
+
+\section{Bootstrap effect intervals}
+
+Ten thousand deterministic bootstrap replicates resample the vector of paired differences with replacement. Each replicate recomputes the relevant effect-size estimator. The interval is the 2.5th and 97.5th percentiles of finite estimates. A SHA-256-derived bootstrap seed from the dataset/model/protocol key makes intervals repeatable without coupling them to the training seed.
+
+These are intervals for the standardized effect, not raw mean-score intervals. Because $n=5$, they can be wide or asymmetric and can contain values much larger than the point estimate. That apparent awkwardness is a correct display of limited information.
+
+\section{Multiplicity families}
+
+Benjamini--Hochberg~\cite{benjamini1995fdr} is applied once to the exact supplied family:
+\begin{itemize}
+  \item SIPaKMeD classification: all six \protocol{P1}$-$\protocol{P2} and six \protocol{P1$'$}$-$\protocol{P2} tests in the registered joint family;
+  \item Cx22 semantic: five \protocol{P1}$-$\protocol{P2} and five \protocol{P1$'$}$-$\protocol{P2} tests;
+  \item Cx22 instance: two \protocol{P1}$-$\protocol{P2} and two \protocol{P1$'$}$-$\protocol{P2} tests.
+\end{itemize}
+Secondary \protocol{P2}$-$\protocol{P3} tests and ranking stability are clearly labeled secondary/unadjusted and cannot substitute for a failed primary family. For ordered raw values $p_{(1)}\leq\cdots\leq p_{(M)}$, BH computes monotone adjusted values based on
+\begin{equation}
+q_{(i)}=\min_{j\geq i}\left(1,\frac{M}{j}p_{(j)}\right).
+\end{equation}
+
+\section{Structural sampling error}
+
+The expected parent-straddle probability for a parent of size $k$ and 80/20 crop assignment is exact: $1-0.8^k-0.2^k$. Dataset-level analytic expectations average this quantity over recovered parents. Monte Carlo means and SDs over the same five fixed seeds check the split implementation, while 10,000 additional simulations form the broad analytic envelope recorded in the structural table. Herlev is a stronger software test than a confidence interval: because every parent has $k=1$, both the analytic and observed straddle fractions must be exactly zero.
+
+\section{Why a non-significant result is not ``no effect''}
+
+A BH-adjusted $q>0.05$ says that the current five-seed family does not meet its declared evidential threshold. It does not prove a zero effect. Conversely, six same-sign classifier means do not license six independent significance claims. The report keeps both facts visible: the direction is consistent, and the adjusted confirmatory evidence is insufficient.
+
+\chapter{Execution lifecycle, failures, and demotivations}
+
+\section{Run inventory}
+
+\begin{table}[H]
+\centering
+\caption{Frozen neural-run inventory and summed run time.}
+\label{tab:inventory}
+\begin{tabular}{lrrr}
+\toprule
+Experiment & Cells & Retained complete & Summed hours \\
+\midrule
+SIPaKMeD classification & 120 & 120 & 8.48 \\
+SIPaKMeD parent probe & 30 & 30 & 5.75 \\
+Cx22 semantic segmentation & 125 & 125 & 253.33 \\
+Cx22 instance segmentation & 50 & 50 & 646.76 \\
+\midrule
+Total & 325 & 325 & 914.31 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The total is the sum of recorded per-run elapsed seconds. It is intentionally not converted into ``GPU-days'' without qualification: host I/O stalls and overlapping runs mean elapsed seconds include more than active kernel time, while three concurrent GPUs mean the sum exceeds calendar duration.
+
+\section{The first classification matrix was invalid}
+
+An early classifier attempt used scikit-learn 1.7.2. The resulting \protocol{P2} split counts disagreed across cells, violating the requirement that every architecture see the same seed-specific observations. Twelve JSON files from that attempt were excluded in full. The environment was pinned to scikit-learn 1.9.0, the expected split hashes and counts were made acceptance checks, and the entire 120-cell matrix restarted. Three additional one-epoch files were smoke tests and were never mixed into the result family.
+
+This failure changed the engineering standard: a result is not accepted merely because training finished. Dataset name, architecture, protocol, seed, train/test counts, library versions, provenance hash, split hash, Git SHA, GPU field, metric finiteness, and history length must all match the matrix contract.
+
+\section{MAnet numerical failure}
+
+MAnet attention matrix multiplications overflowed under FP16 late in training. Two attempts failed non-finitely at epochs 23 and 24 for the first MAnet cell. The tempting choices---use the last finite epoch, lower the learning rate only for that cell, or replace seed 17---would each change the estimand after seeing its behavior. The accepted response was broader: freeze an amendment, run every MAnet cell in FP32, restart from the same seeds, and keep the failures in the record.
+
+\section{The host bottleneck}
+
+The remote machine had three available RTX A6000 GPUs but a separate storage/host bottleneck. Heavy concurrent decoding and checkpoint writes could make all GPUs appear slow and could destabilize the SSH session. Launchers therefore queried memory usage and utilization, admitted no more than three idle devices, used atomic result writes, and kept resumable checkpoints. The instance-segmentation redesign reduced expensive network I/O and moved exact matching work to the GPU.
+
+\begin{decisionbox}{What did not work}
+The project did not produce a universal multiplicity-corrected classifier inflation result, did not validate the preregistered classification ordering, did not retain prediction-level classifier outputs for a confusion matrix, and has not yet demonstrated a raw-download-to-Table-1 run on a machine that has never seen the project. Each limitation is part of the result, not a cosmetic omission.
+\end{decisionbox}
+
+\section{Research stop and evidence freeze}
+
+After the publication verdict, exploration stopped. No architecture was added to chase significance; no seed was replaced; no endpoint was changed; no new confusion matrix was generated. The long-form report reconstructs plots only from frozen aggregates and epoch histories. Images used to explain Otsu/Telea and Cx22 label decoding are implementation demonstrations from locally available released data and are labeled as such.
+
+\chapter{Verification against the acceptance contract}
+
+\section{Gate-by-gate status}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{acceptance_dashboard.png}
+\caption{Machine-readable acceptance status: 13 gates pass, one fails, and three remain pending. A pending release gate is not painted green simply because the numerical experiments are complete.}
+\label{fig:acceptance}
+\end{figure}
+
+\begin{longtable}{p{0.29\textwidth}p{0.14\textwidth}p{0.45\textwidth}}
+\caption{Acceptance contract with evidence.}
+\label{tab:acceptance}\\
+\toprule
+Gate & Status & Evidence \\
+\midrule
+\endfirsthead
+\toprule
+Gate & Status & Evidence \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+SIPaKMeD branch agreement $\geq99\%$ & \pass & 4,049/4,049 mappings agree (100\%). \\
+Every bbox lies in parent bounds & \pass & 4,049/4,049 pass geometry checks. \\
+Crop and per-class parent totals match & \pass & 4,049 crops; parent vector 126/108/238/271/223. \\
+Observed straddle matches analytic prediction & \pass & All audited multi-crop datasets fall inside the recorded simulation envelope. \\
+Herlev has no structural effect & \pass & All five seeds return exactly zero in \protocol{P1}; \protocol{P2}/\protocol{P3} also zero. \\
+\protocol{P3}$\leq$\protocol{P2}$\leq$\protocol{P1}, structural & \pass & Grouped protocols eliminate measured parent sharing. \\
+Shuffled probe confirms chance & \pass & 95\% $t$ interval [$-0.1385$, 0.4687]\% contains 0.2358\%. \\
+Every neural summary has $\geq5$ seeds & \pass & 120 classifier, 30 probe, and 175 Cx22 files pass matrix completeness. \\
+Plan predates first result commit & \pass & 22 Aug 2026 04:54:10 IST versus 13:22:42 IST. \\
+BH applied over stated families & \pass & Stored family labels and $q$ values are reproduced from the exact supplied rows. \\
+Effect accompanies every inferential $p$ & \pass & $d_z$, rank-biserial, or Kendall $\tau$ is present. \\
+Classifier \protocol{P3}$\leq$\protocol{P2}$\leq$\protocol{P1} & \fail & Only ResNet-50 and ViT-B/16 pass; four of six fail. \\
+Cx22 model ordering & \pass & All five semantic and two instance rows pass. \\
+Official Cx22 parent disjointness & \pass & Multi-Train and Multi-Test have no shared recovered source parent. \\
+Virgin-host clean-clone reproduction & \pending & Script exists, but execution evidence from a never-used host is absent. \\
+Lab's own affected papers in audit & \pending & No verified crosswalk in the frozen repository. \\
+Figure-1-only independent reader & \pending & No documented colleague response in the frozen repository. \\
+\end{longtable}
+
+\section{Why the classification ordering gate fails}
+
+The structural ordering and model-score ordering are different propositions. \protocol{P3} has stricter grouping than \protocol{P2}, but it also creates a different balanced partition. Removing a small duplicate-connected component can alter class composition, parent difficulty, and which observations land in test. A finite test set can therefore score higher under the stricter split even though it contains less structural sharing. The failure warns against using monotonic score ordering as a definition of correctness; leakage absence should be checked directly from IDs and components.
+
+\section{Release-readiness boundary}
+
+The repository contains a one-script verification path, but the strongest release criterion requires a truly clean machine that has never held the repository or data. Running the script on the development host, even in a new directory, would not fully establish that environmental condition. This report therefore leaves the release gate pending. The same standard applies to the human communication gate and lab-paper crosswalk: absence of evidence is not converted into a pass.
+
+\chapter{Interpretation, limitations, and practical guidance}
+
+\section{What the evidence supports}
+
+The source hierarchy is real and recoverable. Random crop splitting predictably separates siblings. In SIPaKMeD it can also put overlapping source pixels into training and test. Parent identity is learnable even after large parts of the apparent cell signal are removed. Parent- and component-disjoint protocols eliminate the directly measured sharing. These conclusions follow from deterministic identities, geometry, and controls, not from a single favorable neural score.
+
+The downstream effect is subtler. Every tested \protocol{P1}$-$\protocol{P2} mean is positive, including six classifiers and seven segmentation models, but the Cx22 semantic differences are often tiny and none of the task-specific confirmatory families survives BH correction. The evidence supports changing split construction because independence is a design requirement, not because a guaranteed score penalty has been estimated.
+
+\section{Two hard visual structures in Cx22}
+
+The most persistent semantic error source is the nucleus channel. Nuclei occupy fewer pixels, so boundary uncertainty has a larger Dice penalty; pale nuclei and overlaps further reduce contrast. The second hard structure is touching cytoplasm instances. A union mask can remain visually plausible while an instance model merges two touching cells; maximum matching then assigns a good overlap to one target and zero or low overlap to the other. These explanations correspond to the actual label geometry in Figure~\ref{fig:cx22-labels} and the channel results in Figure~\ref{fig:cx22-channels}.
+
+\section{Real limitations}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Dataset hierarchy stops at the released identifier.} SIPaKMeD fields and Cx22/CRIC sources are not guaranteed to be patient IDs. Parent-disjoint is therefore necessary but may not be sufficient for clinical independence.
+  \item \textbf{Five seeds leave broad uncertainty.} The complete matrix is large in GPU hours but small in inferential replication. Shapiro screening and bootstrap effects are fragile at $n=5$.
+  \item \textbf{No clinical validation.} The study audits public research benchmarks; it does not estimate screening sensitivity, specificity, prevalence calibration, reader impact, or deployment safety.
+  \item \textbf{Hardware and host constraint.} Execution occurred on one login node with at most three A6000 GPUs and an unstable I/O bottleneck. Wall times are not portable performance claims.
+  \item \textbf{Probe transformations are not surgical interventions.} Grayscale, normalization, inpainting, and high-pass filtering each alter multiple cues. They localize signal classes but do not identify a unique causal artifact.
+  \item \textbf{Near-duplicate grouping is conservative and calibrated synthetically.} It found no exact cross-parent duplicates and validated candidate detection on 3 positive/100 negative synthetic examples, but it is not a proof that every biological near-duplicate was linked.
+  \item \textbf{Prediction-level artifacts were not retained.} Post-hoc classifier confusion matrices and qualitative prediction panels cannot be reconstructed without new inference.
+  \item \textbf{Reproduction remains pending on a virgin host.} Dependency or URL drift may still be exposed by that final test.
+\end{enumerate}
+
+\section{Recommended evaluation rule}
+
+For any crop-derived cytology dataset, publish at least four fields for every released observation: a stable observation ID, an acquisition/source parent ID, a patient/specimen ID when ethically and legally possible, and a duplicate-component ID if cross-parent duplication was audited. Construct folds at the highest available independent level and publish the exact fold manifest. Report sample counts at both observation and parent levels. Never compare methods under nominally identical dataset names unless the split identifiers also match.
+
+\section{What to say in a paper}
+
+The defensible headline is: ``Random crop-level evaluation in public cervical cytology can place sibling and even pixel-overlapping crops across train and test; source-disjoint manifests remove this non-independence.'' A stronger sentence---``all published scores are inflated''---is not supported. No individual prior paper needs to be named as deficient; the target is a reusable benchmark practice.
+
+\chapter{Reproduction and release engineering}
+
+\section{From owner downloads to structural Table 1}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{reproducibility_pipeline.png}
+\caption{The intended clean-clone path. Each boundary writes an auditable artifact and performs validation before the next stage begins.}
+\label{fig:reproduction}
+\end{figure}
+
+The GPU-free structural result has one public entry point:
+\begin{lstlisting}[style=cyto,language=bash,caption={Raw-download-to-Table-1 entry point.}]
+./scripts/reproduce_table1.sh
+\end{lstlisting}
+The script performs a locked dependency sync; downloads all declared owner files with at most three connections; verifies exact sizes and SHA-256 values; extracts archives; recovers SIPaKMeD, Cx22, CRIC, and Herlev provenance; runs the SIPaKMeD duplicate and pixel-overlap audits; creates fixed splits; and emits the dataset-level and seed-level structural tables.
+
+Raw images are intentionally excluded from version control. The repository distributes URLs, checksums, IDs, coordinates, derived maps, split assignments, and results, subject to each source's terms. In particular, Cx22/CCEDD assets are non-commercial research resources and are not repackaged in this report.
+
+\section{Clean-clone attestation}
+
+The wrapper requires a repository URL and a destination that does not yet exist:
+\begin{lstlisting}[style=cyto,language=bash,caption={Clean-clone verification wrapper.}]
+./scripts/verify_clean_clone.sh \
+  REPOSITORY_URL NEW_DESTINATION [GIT_REF]
+\end{lstlisting}
+It uses \artifact{git clone --no-local}, optionally checks out an exact detached ref, runs the reproduction script, and writes an attestation. A human/operator must set \artifact{CYTOFAIR_VIRGIN_HOST_ATTESTED=YES} only on a host that genuinely has never seen the project. The current repository lacks that final attested evidence, so release remains pending rather than assumed.
+
+\section{Pinned software and result metadata}
+
+The package requires Python 3.11 or newer. The result contract records NumPy 2.5.2, pandas 3.0.5, SciPy 1.18.1, scikit-learn 1.9.0, Pillow 12.3.0, OpenCV 5.0.0, PyTorch 2.9.0+cu128, torchvision 0.24.0+cu128, and CUDA 12.8 for the accepted classifier matrix. The lock file, not these prose values, is the install authority. The explicit versions remain useful diagnostics when a future lock update changes a hash.
+
+\section{Atomicity and resumability}
+
+Long GPU runs write checkpoints locally and copy them to a temporary destination name before atomic rename. A checkpoint is accepted only when its protocol, architecture, seed, and manifest hash match the requested cell. The launcher skips a result only after validating its completed JSON. A second launch can therefore resume interrupted work without accepting a mismatched or half-written file.
+
+\section{Human-readable and machine-readable layers}
+
+The project separates three layers:
+\begin{itemize}
+  \item \textbf{canonical data}: Parquet provenance maps and CSV split assignments;
+  \item \textbf{machine evidence}: JSON run records, CSV summaries, hashes, and acceptance states;
+  \item \textbf{human interpretation}: Markdown reports, figures, the conference paper, and this lifecycle monograph.
+\end{itemize}
+This prevents a narrative edit from changing the measured evidence and makes it possible to regenerate prose tables from structured files.
+
+\chapter{Reusable outputs and future work}
+
+\section{What exists now}
+
+The most durable asset is not a new image collection. It is a stable interface between released observations and independent units: canonical parent maps, duplicate-component identifiers, fixed split CSVs, adjacent hashes, a leak-checking API, a run JSON schema, and paired statistics. A downstream model joins on \artifact{crop_id}; it never infers a split from row order or regenerates folds with a library default.
+
+\section{Two publication units}
+
+The conference unit is the complete provenance/leakage argument, mechanism probe, fixed split release, and matched SIPaKMeD rescore. A journal extension can add a separately preregistered annotation study, expanded cross-dataset validation, a broader detector ensemble, and power-oriented learning curves. These are partitioned future studies, not unreported parts of the present evidence.
+
+\section{Projects unblocked}
+
+\begin{table}[H]
+\centering
+\caption{Immediate technical reuse. These rows describe enabled work, not completed future experiments.}
+\label{tab:reuse}
+\begin{tabularx}{\textwidth}{lXX}
+\toprule
+Project & Reused asset & Work no longer rebuilt \\
+\midrule
+F3: Cx22 seed robustness & Parent map, fixed seeds, run schema, mean/SD and paired inference & Source grouping, seed ledger, rescore scaffold \\
+F8: cross-dataset transfer & Canonical maps, split API, runtime metadata, label-crosswalk slot & Leakage-safe source folds and experiment provenance \\
+F2: foundation encoders & P1/P1$'$/P2/P3 files and architecture-neutral summarizer & Fair split comparison, seed accounting, BH/effect reporting \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Pre-specified V2 in fish imagery}
+
+Fish-Pak contains three views of the same specimen; Croatian Fish contains frames sampled at one frame per second from continuous BRUV/DOV video. The independent units become specimen and video episode. The planned V2 will: recover those units, compute analytic and observed frame straddling, construct specimen/episode-disjoint manifests, run the identity probe, and re-score fixed baselines under \protocol{P1}/\protocol{P1$'$}/\protocol{P2}/\protocol{P3}. No fish-domain result is claimed here.
+
+\section{Adoption goal}
+
+If versioned CytoFair manifests become the default evaluation interface, future papers can cite both the original dataset and the split asset while reporting exactly which parent-disjoint partition they used. This is an intended impact pathway, not a citation prediction or an empirical result.
+
+\chapter{Conclusion}
+
+This project asked whether a file-level train/test boundary corresponds to an independent acquisition boundary in public cervical cytology. It recovered and validated the hidden observation-to-parent hierarchy across four datasets, quantified the analytic and observed structural sharing, demonstrated literal source-pixel sharing in SIPaKMeD, and showed with a shuffled-label-controlled 424-way probe that parent identity remains strongly learnable after multiple cue-removal transformations. It then re-ran six classifiers and seven segmentation models over five fixed seeds and four matched protocols, preserving effect sizes, bootstrap intervals, multiplicity families, failures, and runtime metadata.
+
+The strongest result is methodological: parent-disjoint evaluation is necessary whenever multiple released observations descend from one acquisition unit. The downstream neural results point in a consistent direction but do not justify a universal multiplicity-corrected accuracy-inflation claim. Four of six classifier architectures also violate the preregistered monotonic score ordering, a useful negative result showing that stricter grouping and lower finite-sample score are not synonymous.
+
+CytoFair turns that lesson into reusable artifacts: provenance maps, duplicate components, fixed splits, hashes, fail-closed validators, run ledgers, and a raw-download structural pipeline. The next scientific step is a separately preregistered specimen/episode-disjoint fish-imagery V2; the next release step is a virgin-host clean-clone attestation. Until the latter, the numerical study is complete but the strongest release gate remains honestly pending.
+
+\appendix
+
+\chapter{Complete SIPaKMeD classifier run ledger}
+
+The following 120 rows are the entire accepted classifier matrix. Accuracy, macro-F1, and balanced accuracy are final-epoch test values. This appendix makes every seed visible and prevents mean-only reporting from hiding an outlying run.
+
+\begin{landscape}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\input{tables/classification_runs.tex}
+\end{landscape}
+
+\chapter{Complete parent-probe run ledger}
+
+These 30 rows include five preprocessing arms and the label-shuffled negative control. All use exactly 424 parent classes, 848 training crops, and 848 held-out sibling crops.
+
+\begin{landscape}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\input{tables/probe_runs.tex}
+\end{landscape}
+
+\chapter{Complete Cx22 model run ledger}
+
+The following 175 rows are all accepted Cx22 cells: five semantic architectures and two instance architectures, each under five protocols and five seeds. ``Primary'' is semantic macro-Dice or matched-instance Dice; ``Nuc./R70'' is nucleus Dice for semantic rows and Recall@0.70 for instance rows.
+
+\begin{landscape}
+\scriptsize
+\setlength{\tabcolsep}{2.2pt}
+\input{tables/cx22_runs.tex}
+\end{landscape}
+
+\chapter{Owner data files and integrity hashes}
+
+This table is generated from \artifact{data_sources.json}. A reproduction refuses a file whose byte length or SHA-256 differs, even if its archive name is unchanged.
+
+\begin{landscape}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\input{tables/data_sources.tex}
+\end{landscape}
+
+\chapter{Released split hashes}
+
+Each CSV contains crop ID, parent ID, partition, protocol, and seed. Hashes identify the exact semantic assignment rather than merely naming a random seed.
+
+{\scriptsize
+\setlength{\tabcolsep}{3pt}
+\input{tables/split_hashes.tex}
+}
+
+\chapter{Git decision chronology}
+
+The chronology below is descriptive provenance for major decisions and corrections. The authoritative ordering remains the Git object database. In particular, the first entry is the original preregistration commit.
+
+{\scriptsize
+\setlength{\tabcolsep}{3pt}
+\input{tables/git_timeline.tex}
+}
+
+\chapter{Exact command cookbook}
+
+\section{Local checks}
+
+\begin{lstlisting}[style=cyto,language=bash]
+uv sync --extra dev
+uv run pytest
+uv run ruff check .
+uv run cytofair --help
+\end{lstlisting}
+
+\section{Recover and verify structural evidence}
+
+\begin{lstlisting}[style=cyto,language=bash]
+uv run cytofair recover-sipakmed data/extracted/sipakmed --workers 3
+uv run cytofair recover-cx22 data/extracted/cx22 \
+  --image-root data/extracted/ccedd/png
+uv run cytofair recover-cric data/raw/cric/classifications.csv
+uv run cytofair recover-herlev data/extracted/herlev
+
+uv run cytofair audit-duplicates \
+  provenance/sipakmed_parent_map.parquet \
+  --hashes results/duplicates/sipakmed_hashes.parquet \
+  --pairs results/duplicates/sipakmed_near_duplicate_pairs.csv \
+  --output provenance/sipakmed_parent_map_p3.parquet
+
+uv run cytofair make-splits \
+  provenance/sipakmed_parent_map_p3.parquet \
+  --dataset SIPaKMeD --output splits/generated
+
+uv run cytofair pixel-overlap \
+  provenance/sipakmed_branch_b.parquet --dataset SIPaKMeD
+\end{lstlisting}
+
+\section{Launch the probe and classifier matrices}
+
+\begin{lstlisting}[style=cyto,language=bash]
+python scripts/launch_probe_matrix.py \
+  provenance/sipakmed_parent_map_p3.parquet results/probe \
+  --max-gpus 3 \
+  --modes rgb grayscale stain_normalized background_only highpass
+
+python scripts/launch_classification_matrix.py \
+  --dataset-map SIPaKMeD=provenance/sipakmed_parent_map_p3.parquet \
+  --output results/classification --max-gpus 3 \
+  --architectures resnet18 resnet50 densenet121 \
+    efficientnet_b0 mobilenet_v2 vit_b_16 \
+  --protocols P1 P1-prime P2 P3
+\end{lstlisting}
+
+\section{Materialize and launch Cx22}
+
+\begin{lstlisting}[style=cyto,language=bash]
+cytofair materialize-cx22 provenance/cx22_parent_map.parquet \
+  --labels /path/to/extracted/cx22 \
+  --assets /path/to/cx22_assets \
+  --output provenance/cx22_model_map.parquet
+
+cytofair audit-duplicates provenance/cx22_model_map.parquet \
+  --hashes results/cx22_duplicates/hashes.parquet \
+  --pairs results/cx22_duplicates/pairs.csv \
+  --output provenance/cx22_model_map_p3.parquet
+
+cytofair cache-cx22 provenance/cx22_model_map_p3.parquet \
+  --cache /path/to/cx22_assets/cache256 \
+  --output provenance/cx22_cached_model_map_p3.parquet
+
+nohup python scripts/launch_cx22_segmentation_matrix.py \
+  --map provenance/cx22_cached_model_map_p3.parquet \
+  --output results/cx22_segmentation --max-gpus 3 \
+  > results/cx22_segmentation/controller.log 2>&1 < /dev/null &
+
+python scripts/check_cx22_segmentation.py results/cx22_segmentation
+\end{lstlisting}
+
+\chapter{Artifact index and evidence status}
+
+\begin{longtable}{p{0.29\textwidth}p{0.20\textwidth}p{0.43\textwidth}}
+\caption{Principal repository artifacts.}
+\label{tab:artifacts}\\
+\toprule
+Artifact & Status & Purpose \\
+\midrule
+\endfirsthead
+\toprule
+Artifact & Status & Purpose \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\artifact{PREREGISTRATION.md} & Frozen plan & Endpoints, seeds, protocols, exclusions, corrections, amendments. \\
+\artifact{data_sources.json} & Versioned & Owner URLs, filenames, sizes, hashes, and terms notes. \\
+\artifact{provenance/*.parquet} & Complete derived maps & Observation-to-parent identities, match diagnostics, boxes, hashes, and P3 components. \\
+\artifact{splits/*.csv} & Versioned interface & Exact per-seed assignments joined by crop ID. \\
+\artifact{results/classification/*.json} & 120 accepted & Classifier metrics, environment, split hash, and history. \\
+\artifact{results/probe/*.json} & 30 accepted & Mechanism probe metrics, chance, environment, and history. \\
+\artifact{results/cx22_segmentation/*.json} & 175 accepted & Semantic/instance metrics, manifests, runtime, and history. \\
+\artifact{results/attempts/} & Excluded, retained & Twelve incompatible split-library runs and three smoke tests. \\
+\artifact{reports/generated/acceptance_contract.*} & Current & Machine-readable PASS/FAIL/PENDING gates. \\
+\artifact{scripts/reproduce_table1.sh} & Implemented & GPU-free raw-download-to-structural-table workflow. \\
+\artifact{scripts/verify_clean_clone.sh} & Implemented, unattested & Non-local clone wrapper and optional virgin-host attestation. \\
+\artifact{reports/lab_paper_self_audit.md} & Pending & Nine-record title/protocol crosswalk requiring source-paper checks. \\
+\artifact{reports/figure1_reader_test.md} & Pending & Independent reader protocol and blank response record. \\
+\end{longtable}
+
+\chapter{Complete derived-result ledgers}
+
+These tables expose every structural seed, literal-overlap seed/protocol, registered classifier contrast, registered Cx22 contrast, and rank-stability result. The model run ledgers in Appendices A--C are the underlying run-level evidence; this appendix is the complete derived statistical layer.
+
+\section{Structural and literal-overlap seeds}
+
+{\small
+\setlength{\tabcolsep}{3pt}
+\input{tables/structural_seed_runs.tex}
+\input{tables/pixel_overlap_runs.tex}
+}
+
+\begin{landscape}
+\section{Classifier contrasts}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\input{tables/classification_contrasts.tex}
+\end{landscape}
+
+\begin{landscape}
+\section{Cx22 contrasts}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\input{tables/cx22_contrasts.tex}
+\end{landscape}
+
+\section{Rank stability}
+
+{\scriptsize
+\setlength{\tabcolsep}{3pt}
+\input{tables/ranking_results.tex}
+}
+
+\chapter{Excluded attempt ledger}
+
+No row below was excluded for its score or direction. The twelve twenty-epoch rows belong to the incompatible scikit-learn 1.7.2 split matrix; all were excluded when the entire matrix restarted. The three one-epoch rows are execution smoke tests that were never eligible for confirmatory summaries.
+
+\begin{landscape}
+\small
+\setlength{\tabcolsep}{4pt}
+\input{tables/invalid_attempts.tex}
+\end{landscape}
+
+\chapter{Reading guide for future maintainers}
+
+Start with the acceptance contract, not the paper prose. If a gate fails, follow its evidence path into the structured output. Regenerate a summary rather than editing a number. If a library upgrade changes a split, do not overwrite the published CSV: create a new version and preserve the previous hash. If new data supply patient IDs, introduce a stronger protocol rather than relabeling source-disjoint as patient-disjoint. If a model is rerun, retain its per-sample predictions and checkpoint so confusion matrices and qualitative panels become reproducible first-class artifacts.
+
+The simplest invariant is also the most important: an observation may be the tensor consumed by a network, but it is not automatically the independent unit represented by the test set.
+
+\bibliographystyle{plainnat}
+\bibliography{../paper/references,references}
+
+\end{document}

@@ -1,0 +1,301 @@
+\documentclass[conference]{IEEEtran}
+
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{cite}
+\usepackage{url}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\meanpm}[2]{#1\,$\pm$\,#2}
+\newcommand{\protocol}[1]{\textsf{#1}}
+\newcommand{\cytofair}{\textsc{CytoFair}}
+\newcommand{\placeholder}[1]{\texttt{[#1]}}
+\setlength{\textfloatsep}{5pt plus 1pt minus 2pt}
+\setlength{\dbltextfloatsep}{5pt plus 1pt minus 2pt}
+\setlength{\floatsep}{4pt plus 1pt minus 2pt}
+\setlength{\dblfloatsep}{4pt plus 1pt minus 2pt}
+\setlength{\intextsep}{4pt plus 1pt minus 2pt}
+\setlength{\abovecaptionskip}{2.5pt}
+\setlength{\belowcaptionskip}{0pt}
+\renewcommand{\arraystretch}{0.9}
+
+\title{Do We Train on Test Cells? Provenance Leakage in Public Cervical Cytology Benchmarks}
+
+\author{
+\IEEEauthorblockN{Snehasish Ghosh\IEEEauthorrefmark{1},
+Soham Mitra\IEEEauthorrefmark{2}, and
+Nibaran Das\IEEEauthorrefmark{2}}
+\IEEEauthorblockA{\IEEEauthorrefmark{1}Indian Institute of Science, Bengaluru, India\\
+Email: snehasishg@iisc.ac.in}
+\IEEEauthorblockA{\IEEEauthorrefmark{2}Department of Computer Science and Engineering,
+Jadavpur University, Kolkata, India\\
+Emails: \placeholder{SOHAM EMAIL}, \placeholder{NIBARAN EMAIL}}
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Public cervical cytology benchmarks are built by cropping many cells from far fewer microscopic fields, and the literature splits them at the crop level.
+We recover the concealed hierarchy and measure what that costs.
+Under the standard stratified 80:20 crop split of SIPaKMeD, \meanpm{92.62}{0.40}\% of test crops have a training parent and \meanpm{52.62}{1.97}\% share literal source pixels with a training crop; Cx22 and CRIC show the same pattern, while single-cell Herlev returns exactly \meanpm{0.00}{0.00}\% and so serves as a negative control on the measurement itself.
+The shortcut is learnable: a parent-identity probe reaches \meanpm{25.73}{0.66}\% on a 424-way task against a 0.2358\% chance baseline and a \meanpm{0.17}{0.24}\% label-shuffled comparator, and still reaches \meanpm{18.68}{1.25}\% from inpainted background alone---so the fingerprint is acquisition context, not cell morphology.
+Correcting the evaluation unit lowers accuracy for all six architectures tested (mean 1.37 points), exceeding the 0.62-point spread between the two strongest published five-class results, though our five-seed design is underpowered to certify individual contrasts after correction.
+We release \cytofair: exact provenance maps, fixed parent-disjoint splits, and the audit toolkit, at \placeholder{REPOSITORY URL}.
+\end{abstract}
+
+\begin{IEEEkeywords}
+cervical cytology, data leakage, provenance, grouped splitting, benchmark audit, reproducibility
+\end{IEEEkeywords}
+
+\section{Introduction}
+Cervical cancer caused an estimated 660,000 new cases and 350,000 deaths worldwide in 2022~\cite{who2025hpv}, and computer-assisted cytology screening is attractive as a way to support scarce expert attention.
+That promise rests on an elementary validity condition: the held-out sample should represent genuinely unseen biological or acquisition units.
+The image presented to a network is not always that unit.
+Public cervical benchmarks are overwhelmingly \emph{cropped-from-parent} constructions---many cell images derived from far fewer microscopic fields.
+Sibling crops from one field inherit stain batch, illumination, focus, background texture, preparation artifacts, and sometimes overlapping pixels.
+A crop-level split then places siblings on both sides of evaluation while appearing formally disjoint at the filename level, because parent identifiers are not always carried into the released crop folders.
+
+Whether this matters depends on its scale relative to the differences the field publishes about, and that comparison is unusually stark here.
+DeepPap reported 98.3\% on Herlev~\cite{zhang2017deeppap}; DeepCervix reported 99.14\% five-class accuracy on SIPaKMeD~\cite{rahaman2021deepcervix}; a knowledge-distillation framework reported 98.52\% on the same task~\cite{gao2022knowledge}.
+The two strongest five-class SIPaKMeD results we cite therefore differ by \textbf{0.62 percentage points}.
+Any protocol artifact of comparable magnitude is not a footnote; it is larger than the quantity being contested.
+These methods use standard backbones~\cite{he2016resnet,huang2017densenet,sandler2018mobilenetv2,tan2019efficientnet,dosovitskiy2021vit} on releases that made comparison possible: SIPaKMeD provides 4,049 crops from 966 cluster fields~\cite{plissiti2018sipakmed}, Cx22 provides 1,320 generated regions~\cite{liu2022cx22}, CRIC provides 11,534 cells in 400 images~\cite{rezende2021cric}, and Herlev provides 917 single-cell images~\cite{jantzen2005pap}.
+Performance engineering has advanced faster than auditing of the sampling hierarchy beneath them.
+
+We recover that hierarchy exactly where the release permits, measure what crop splitting shares, test whether the shared signal is learnable, and build partitions that keep a parent wholly in one arm.
+We separate two claims throughout, because only one is established here: recoverable parent information shows a shortcut is \emph{available}, not that every model exploits it.
+Our contributions are fivefold:
+\begin{itemize}\itemsep0pt
+    \item \cytofair, a framework for exact crop-to-parent recovery, fail-closed validation, and provenance-aware split generation;
+    \item the first complete dual-branch provenance map for all 4,049 SIPaKMeD crops---two independent recoveries agreeing on 4,049/4,049---plus source recovery for Cx22 and structural audits of CRIC and Herlev;
+    \item a structural negative control: single-cell Herlev returns exactly zero on every leakage endpoint, validating the instrument and not only the datasets under test;
+    \item measurement of parent straddling, literal cross-split pixel sharing, and a five-seed parent-identity probe with four transformation controls and a shuffled-label comparator, localizing the fingerprint to acquisition context;
+    \item fixed parent-disjoint splits, released, with a deliberately bounded report of accuracy sensitivity on SIPaKMeD---the one dataset given the full six-architecture rescore.
+\end{itemize}
+
+\section{Related Work}
+Our design is assembled from four established lines rather than proposed from scratch.
+Barz and Denzler supply the template: audit a benchmark for train--test near-duplicates, quantify the exposure, and release a corrected evaluation set rather than only a complaint, as they did for CIFAR-10/100 (3.3\% and 10\% of test images) with ciFAIR~\cite{barz2020cifair}; we substitute exactly recovered provenance for image similarity as the grouping criterion, reserving similarity for a labeled sensitivity analysis.
+Laroca \emph{et al.} supply the re-evaluation protocol, re-running six recognition models under duplicate-free license-plate splits~\cite{laroca2023lpr}; our multi-backbone protocol comparison is the same manoeuvre in a medical setting.
+Packh\"auser \emph{et al.} supply the mechanism instrument: their demonstration that chest radiographs support patient re-identification at 95.55\% accuracy~\cite{packhauser2022reidentification} establishes identity probing as evidence that a nuisance signal is present and learnable independent of any downstream task, which Sec.~\ref{sec:probe} adapts from patient to source-field identity and extends with a transformation ablation.
+Kapoor and Narayanan supply the taxonomy situating train--test non-independence within a broader account of leakage in ML-based science~\cite{kapoor2023leakage}.
+Crop-level cervical accuracies are not imported into our comparison, because different splits do not define comparable tests; we use only their \emph{spread}.
+The remaining gap is an exact, validated provenance audit and a corrected public evaluation resource for cervical-cytology crop benchmarks.
+
+\section{Method}
+\cytofair{} treats provenance recovery as a prerequisite, not a post-hoc clustering step: released or exactly reconstructed parent identity defines the independent grouping unit, while image-derived similarity affects only the conservative \protocol{P3} sensitivity split.
+Algorithm~\ref{alg:cytofair} states the full procedure.
+
+\subsection{Exact Provenance Recovery}
+For each released crop $x_i$, let $g(x_i)=p_j$ denote its source parent.
+SIPaKMeD Branch A parses the released filename hierarchy; Branch B ignores that assignment entirely, searches all same-class parent fields, and selects the contained region maximizing normalized cross-correlation.
+Branch B is not a convenience---it is why the map cannot be dismissed as an artifact of filename parsing.
+Recovery is accepted only if the branches agree on at least 99\% of common crops, every bounding box lies inside its parent, every crop has exactly one parent, crop totals equal the release, and reconstructed class-parent counts equal the published vector.
+Cx22 parents and requested regions are decoded from the authors' MATLAB generator metadata and checked against the 686-image CCEDD source release; CRIC parent identities come from its released classifications table; one Herlev crop is one parent.
+
+\subsection{Structural and Literal Sharing}
+For a parent with $k$ crops assigned independently to 80\% training and 20\% test, the probability of straddling both arms is
+\begin{equation}
+P_{\mathrm{straddle}}(k)=1-0.8^k-0.2^k,
+\label{eq:straddle}
+\end{equation}
+and the analytic dataset expectation is its mean over parents---a prediction the measurement must reproduce.
+For an allocation with training-parent set $G_{\mathrm{tr}}$ and test crops $T$,
+\begin{equation}
+L_{p}=\frac{|G_{\mathrm{tr}}\cap G_{\mathrm{te}}|}{|G|},\quad
+L_{c}=\frac{1}{|T|}\sum_{x\in T}\mathbb{1}[g(x)\in G_{\mathrm{tr}}].
+\label{eq:leakage}
+\end{equation}
+For SIPaKMeD the recovered bounding boxes additionally permit literal sharing: $L_{\mathrm{pix}}$ is the fraction of test crops whose parent has at least one training crop with nonempty source-coordinate intersection.
+This endpoint requires no model and admits no interpretive latitude---crops either share pixels or they do not.
+Observed five-seed estimates are checked against an exact 10,000-allocation Monte Carlo interval under the implemented fixed-size, class-stratified rule.
+
+\subsection{Parent-Identity Mechanism Probe}
+\label{sec:probe}
+Parents with at least four crops enter a balanced closed-set task, each contributing equal training and test crops, and a ResNet-18 is trained with cross-entropy over parent labels.
+The question is whether two \emph{different} crops from one field retain a learnable common signature after the cellular content has changed; an affirmative answer establishes availability of a shortcut, not causal use by a class classifier.
+Four prespecified transformations isolate candidate substrates: grayscale removes hue, channel-statistics matching follows Reinhard \emph{et al.}~\cite{reinhard2001color}, background-only masks use Otsu thresholds~\cite{otsu1979threshold} with Telea inpainting~\cite{telea2004inpainting}, and high-pass filtering suppresses low-frequency illumination.
+The background-only condition is decisive: it removes the cell.
+Images, optimizer, epochs, and seeds are retained for a parent-label-shuffled control, whose accuracy must fall to chance if the probe measures what it claims.
+
+\subsection{Matched Protocols and Statistics}
+\protocol{P1} is an 80:20 class-stratified crop split---the protocol the literature uses.
+\protocol{P2} assigns complete recovered parents to one arm.
+\protocol{P3} joins parents connected by cross-parent candidates satisfying both 64-bit pHash and dHash Hamming thresholds of six, then groups the entire connected component; it is a sensitivity analysis, not a claim that every candidate is a proven duplicate.
+\protocol{P1$'$} retains the \protocol{P1} test set and downsamples only its training arm to the exact \protocol{P2} training count, so accuracy change cannot be attributed to training-set size; on SIPaKMeD the counts are already identical, so \protocol{P1$'$}=\protocol{P1} and it is omitted from tables.
+Classifiers are ImageNet-pretrained ResNet-18/50~\cite{he2016resnet}, DenseNet-121~\cite{huang2017densenet}, MobileNet-V2~\cite{sandler2018mobilenetv2}, EfficientNet-B0~\cite{tan2019efficientnet}, and ViT-B/16~\cite{dosovitskiy2021vit}, with only final heads replaced and identical seeds paired across protocols.
+Normal paired differences receive a two-sided paired $t$-test with Cohen's $d_z$; the preregistered fallback is Wilcoxon with rank-biserial correlation.
+All \protocol{P1}$-$\protocol{P2} and \protocol{P1$'$}$-$\protocol{P2} tests form one 12-test Benjamini--Hochberg family~\cite{benjamini1995fdr}, with 10,000 paired bootstrap resamples for effect-size intervals.
+Because \protocol{P1$'$} duplicates \protocol{P1} here, that family contains exact duplicates; duplicating every hypothesis scales both family size and rank proportionally, so adjusted values equal those of the six-test family.
+
+\begin{algorithm}[t]
+\caption{Fail-closed provenance-aware evaluation}
+\label{alg:cytofair}
+\small
+\begin{algorithmic}[1]
+\Require Released observations $X$, source fields $S$, seeds $\mathcal{R}$
+\State Recover $g_A:X\!\to\!S$ from released identifiers
+\State Recover $g_B:X\!\to\!S$ by independent content matching
+\If{agreement, containment, uniqueness, or count gates fail}
+    \State \textbf{stop} and emit an audit ledger
+\EndIf
+\ForAll{$r\in\mathcal{R}$}
+    \State Build \protocol{P1}, \protocol{P1$'$}, \protocol{P2}, \protocol{P3}; measure $L_p$, $L_c$, $L_{\mathrm{pix}}$
+    \State Train the fixed probe and classifier matrix
+\EndFor
+\State Report mean $\pm$ SD, paired effects, adjusted inference
+\State Export provenance, split hashes, and raw runs
+\end{algorithmic}
+\end{algorithm}
+
+\section{Experiments}
+\subsection{Datasets, Integrity, and Setup}
+Branch A and Branch B agree on 4,049/4,049 SIPaKMeD crops, all recovered boxes are contained, and the class-parent vector is 126/108/238/271/223, matching the published release; no observation is excluded.
+The 4,049 crops map to 966 parents, Cx22's 1,320 regions to 514 recovered CCEDD sources, CRIC's 11,534 cells to 400 images, and Herlev contains 917 one-crop parents.
+The crop-to-parent ratio drives everything downstream and is uneven: SIPaKMeD crop counts are nearly balanced across classes (787--831) while parent counts range from 108 Parabasal to 271 Metaplastic fields, on a 3,239/810 train/test allocation.
+All models use AdamW, learning rate and weight decay $10^{-4}$, batch size 64, $224\times224$ RGB inputs, resized-crop and H/V-flip augmentation, and ImageNet initialization; classifiers train 20 epochs and the probe 15.
+Every stochastic cell uses seeds 17, 29, 43, 71, and 101, reported as mean $\pm$ sample SD, on at most three NVIDIA RTX A6000 GPUs (one per run) with PyTorch 2.9.0 and CUDA 12.8.
+Accuracy is the preregistered primary endpoint; macro-F1 and balanced accuracy are retained concordance metrics.
+
+\subsection{Result 1: The Crop Is Not the Independent Unit}
+Table~\ref{tab:structural} is the principal result, and it is close to deterministic.
+Observed straddle means fall inside their exact Monte Carlo intervals for all four datasets and reproduce the analytic prediction of~\eqref{eq:straddle}: SIPaKMeD predicts 44.83\% and measures \meanpm{45.63}{1.04}\%, Cx22 predicts 33.93\% and measures \meanpm{34.01}{1.10}\%, CRIC predicts 94.88\% and measures \meanpm{94.35}{1.10}\%.
+Mechanism and measurement agree to within sampling error on all three.
+
+The crop-level consequences are severe.
+Under \protocol{P1}, \meanpm{92.62}{0.40}\% of SIPaKMeD test crops have a parent in training; Cx22 \meanpm{85.23}{3.51}\%; CRIC \meanpm{99.97}{0.08}\%.
+Among 13,064 within-parent SIPaKMeD crop pairs, 2,185 have intersecting source coordinates, and under \protocol{P1} \meanpm{52.62}{1.97}\% of test crops share literal source pixels with a training crop.
+More than half the nominal test set is, in part, training data.
+
+Herlev anchors the interpretation: the only audited benchmark with one cell per field returns exactly \meanpm{0.00}{0.00}\% on every endpoint.
+The instrument does not manufacture leakage where the construction cannot produce it, the highest-crop-per-field construction (CRIC) produces the highest straddle rate, and dual-branch recovery plus the analytic check are mutually independent safeguards against a split-implementation artifact.
+Both grouped protocols eliminate all measured parent and pixel sharing.
+
+\begin{table*}[t]
+\caption{Structural leakage under crop-level and grouped protocols. Stochastic entries are mean $\pm$ sample SD over five fixed seeds. Herlev is the structural negative control.}
+\label{tab:structural}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{5.2pt}
+\begin{tabular}{lrrrrrrr}
+\toprule
+Dataset & Crops & Parents & Analytic \protocol{P1} straddle & Observed \protocol{P1} straddle & \protocol{P1} test crop w/ train parent & \protocol{P2} straddle & \protocol{P3} straddle \\
+\midrule
+SIPaKMeD & 4,049 & 966 & 44.83\% & \meanpm{45.63}{1.04}\% & \meanpm{92.62}{0.40}\% & \meanpm{0.00}{0.00}\% & \meanpm{0.00}{0.00}\% \\
+Cx22 & 1,320 & 514 & 33.93\% & \meanpm{34.01}{1.10}\% & \meanpm{85.23}{3.51}\% & \meanpm{0.00}{0.00}\% & \meanpm{0.00}{0.00}\% \\
+CRIC & 11,534 & 400 & 94.88\% & \meanpm{94.35}{1.10}\% & \meanpm{99.97}{0.08}\% & \meanpm{0.00}{0.00}\% & \meanpm{0.00}{0.00}\% \\
+Herlev & 917 & 917 & 0.00\% & \meanpm{0.00}{0.00}\% & \meanpm{0.00}{0.00}\% & \meanpm{0.00}{0.00}\% & \meanpm{0.00}{0.00}\% \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{Result 2: The Shortcut Is Learnable, and It Is Not the Cell}
+On the balanced 424-way task (Table~\ref{tab:probe}), parent identity is recovered at \meanpm{25.73}{0.66}\%---109.1$\times$ the 0.2358\% chance baseline.
+The shuffled-label control collapses to \meanpm{0.17}{0.24}\%, with a five-seed 95\% interval of $-0.14$\% to $0.47$\% covering the exact chance value, confirming that the probe measures field identity rather than an artifact of task construction.
+Parent information survives every prespecified transformation, and the decisive condition is background-only at \meanpm{18.68}{1.25}\%---79.2$\times$ chance from an image whose cell has been masked out and inpainted.
+
+The fingerprint is therefore not cellular morphology but \emph{acquisition context}: slide preparation, illumination, focus, and debris field.
+That is the generalizing observation of this paper.
+Because the substrate is context rather than content, the exposure is a property of the \emph{construction}---any crop-level split of any cropped-from-field cytology release carries it, however carefully the class labels were assigned.
+Persistence across all four transformations shows the signal is distributed rather than confined to one channel, and does not identify a single exclusive substrate.
+
+\begin{table}[t]
+\caption{Parent-ID probe ablation, balanced 424-way task. Chance is 0.2358\%.}
+\label{tab:probe}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4.2pt}
+\begin{tabular}{lrr}
+\toprule
+Input condition & Accuracy & Multiple of chance \\
+\midrule
+RGB & \meanpm{25.73}{0.66}\% & 109.1$\times$ \\
+Grayscale & \meanpm{13.80}{1.12}\% & 58.5$\times$ \\
+Stain-normalized & \meanpm{17.31}{0.64}\% & 73.4$\times$ \\
+Background only & \meanpm{18.68}{1.25}\% & 79.2$\times$ \\
+High-pass & \meanpm{16.27}{0.60}\% & 69.0$\times$ \\
+Shuffled labels & \meanpm{0.17}{0.24}\% & 0.7$\times$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Result 3: Bounded Accuracy Sensitivity}
+Table~\ref{tab:joint} rescores six architectures on SIPaKMeD under identical training settings and identical 3,239/810 split sizes.
+Correcting the evaluation unit lowers accuracy for \emph{every} architecture, from \meanpm{0.72}{0.83} points (ResNet-50) to \meanpm{2.25}{1.63} (MobileNet-V2), mean 1.37.
+Because \protocol{P1$'$}=\protocol{P1} here, these differences cannot be attributed to reduced training-set size; train and test counts are held exactly fixed across protocols.
+Effect sizes are moderate to large ($d_z$ 0.588--1.561) and five of six bootstrap intervals for $d_z$ exclude zero, but with five seeds and a declared 12-test family no contrast survives adjustment; the smallest adjusted value is $q=0.1109$.
+The design is therefore \emph{underpowered to certify individual architecture-wise contrasts}---a property of sample size and correction breadth, not evidence of absence.
+We report direction and scale, and do not claim a confirmatory universal inflation effect.
+
+\begin{table*}[t]
+\caption{SIPaKMeD test accuracy and preregistered paired inference. All models were rerun here under identical 3,239/810 counts; mean $\pm$ sample SD over five seeds. $\Delta$ is \protocol{P1}$-$\protocol{P2} in percentage points; $q$ is BH-adjusted over the declared 12-test family.}
+\label{tab:joint}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{5.5pt}
+\begin{tabular}{lrrrrrrr}
+\toprule
+Architecture & \protocol{P1} crop & \textbf{\cytofair{} \protocol{P2}} & \protocol{P3} component & $\Delta$ & Raw $p$ & BH $q$ & $d_z$ \\
+\midrule
+DenseNet-121 & \meanpm{98.12}{0.28}\% & \textbf{\meanpm{96.72}{0.69}\%} & \meanpm{97.38}{0.50}\% & \meanpm{1.41}{0.90} & 0.0251 & 0.1109 & 1.561 \\
+EfficientNet-B0 & \meanpm{97.78}{0.49}\% & \textbf{\meanpm{96.69}{1.49}\%} & \meanpm{97.41}{0.71}\% & \meanpm{1.09}{1.85} & 0.2591 & 0.2591 & 0.588 \\
+MobileNet-V2 & \meanpm{97.41}{0.45}\% & \textbf{\meanpm{95.16}{1.50}\%} & \meanpm{96.20}{0.93}\% & \meanpm{2.25}{1.63} & 0.0370 & 0.1109 & 1.377 \\
+ResNet-18 & \meanpm{97.19}{0.59}\% & \textbf{\meanpm{96.00}{0.89}\%} & \meanpm{96.35}{1.28}\% & \meanpm{1.19}{1.28} & 0.1081 & 0.1511 & 0.922 \\
+ResNet-50 & \meanpm{97.51}{0.47}\% & \textbf{\meanpm{96.79}{0.42}\%} & \meanpm{96.27}{0.53}\% & \meanpm{0.72}{0.83} & 0.1260 & 0.1511 & 0.863 \\
+ViT-B/16 & \meanpm{97.14}{0.95}\% & \textbf{\meanpm{95.56}{0.84}\%} & \meanpm{95.53}{1.68}\% & \meanpm{1.58}{1.70} & 0.1059 & 0.1511 & 0.931 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{Registered Predictions and What They Rule Out}
+Two preregistered predictions were not supported, and both are retained.
+First, the monotonic ordering \protocol{P3}$\leq$\protocol{P2}$\leq$\protocol{P1} fails for four of six architectures.
+On inspection the prediction was mis-specified rather than falsified: \protocol{P3} merges parents into similarity-connected components and therefore changes grouped \emph{test composition}, so it is not nested within \protocol{P2} and no monotone finite-sample ordering should have been expected.
+Read as measurement rather than failed test, it carries usable guidance---similarity purging on top of parent grouping does not further reduce accuracy, indicating the pHash/dHash components largely capture within-parent structure that \protocol{P2} has already absorbed.
+For practitioners building corrected splits, grouping by recovered parent appears sufficient and the more expensive purge is optional.
+Second, ranking stability cannot be resolved at this sample size: Kendall's $\tau$ between \protocol{P1} and \protocol{P2} orderings is 0.467 with 4/15 pairwise reversals, but the seed-bootstrap 95\% CI spans 0.071--0.733 with unadjusted $p=0.2722$, indistinguishable from chance across six architectures, and we draw no conclusion from it.
+Finally, the frozen run schema retained aggregate metrics and epoch histories but not per-sample predictions or checkpoints, so a post-hoc class confusion matrix would require new inference after the declared hard stop; we neither fabricate one nor infer class-pair errors from aggregate metrics.
+
+\section{Discussion}
+The finding is structural rather than architectural.
+For three of four audited benchmarks the released image is not the independent sampling unit, and this is now a recovered, doubly validated fact: two independent recoveries agree on 4,049/4,049 crops, observed straddle rates reproduce an analytic prediction, and a single-cell control returns exactly zero.
+Under the protocol the literature uses, most SIPaKMeD test crops have a training parent and more than half share literal source pixels with one.
+The linking signal is learnable at 109$\times$ chance, and at 79$\times$ chance after the cell itself is removed.
+
+The natural objection is that a 1.37-point mean accuracy change is small.
+It is small absolutely and large relative to what the field is contesting.
+The two strongest published five-class SIPaKMeD results differ by 0.62 points~\cite{rahaman2021deepcervix,gao2022knowledge}; our measured protocol effect exceeds that spread for \emph{every} architecture tested---the smallest, ResNet-50 at \meanpm{0.72}{0.83}, still exceeds it---and reaches 2.25 points, roughly 3.6$\times$ the published spread, for MobileNet-V2.
+This is a comparison of \emph{magnitudes}, not of accuracies: we deliberately do not place our numbers beside published numbers, because different splits do not define comparable tests.
+What is comparable is the sensitivity of a fixed pipeline to split protocol, set against the size of the differences the literature reports.
+On that comparison, protocol choice is of the same order as, or larger than, the methodological progress being claimed.
+
+We show a shortcut is available, not that classifiers use it.
+The probe demonstrates that field identity is recoverable from a crop; it does not demonstrate that a class model routes its prediction through that identity, and our frozen evidence cannot settle it.
+Establishing consequence, as distinct from availability, requires a causal design such as intervention on the fingerprint substrate.
+One design lesson is recorded rather than repaired: the scientific question was singular, but the preregistered analysis tested it six times and then paid a six-way multiplicity penalty for asking once per backbone.
+A pooled omnibus endpoint treating architecture as a nuisance factor would have addressed the same question at materially higher power; we did not preregister one, and do not substitute one after seeing results.
+
+\section{Limitations}
+Only SIPaKMeD received the six-architecture rescore; Cx22, CRIC, and Herlev receive structural audits alone, so magnitude claims are restricted to one benchmark.
+The per-architecture inference is underpowered at five seeds under a 12-test family, and the accuracy arm therefore estimates rather than certifies.
+Interpretation of the weakest cells, MobileNet-V2 under \protocol{P2} and ViT-B/16 under \protocol{P3}, must remain aggregate given the frozen artifacts.
+No prospective clinical validation was performed, and corrected benchmark scores must not be read as estimates of clinical utility.
+
+\section{Conclusion}
+We asked whether public cervical-cytology classifiers are evaluated on genuinely independent cells, and found that released crop filenames conceal a consequential source-field hierarchy.
+\cytofair{} recovers that hierarchy exactly, validates it by two independent routes, and measures what crop-level splitting shares.
+On SIPaKMeD, \meanpm{92.62}{0.40}\% of test crops have a training parent and \meanpm{52.62}{1.97}\% share literal source pixels with a training crop; Cx22 and CRIC show the same construction-linked pattern; single-cell Herlev returns exactly zero and validates the instrument.
+The shared signal is learnable at 109$\times$ chance and at 79$\times$ chance from inpainted background alone, locating it in acquisition context rather than cell morphology---which makes the exposure a property of the cropped-from-field construction itself.
+Correcting the evaluation unit reduces accuracy for all six architectures, by a mean of 1.37 points, exceeding the 0.62-point spread between the two strongest published results, though five seeds cannot certify individual contrasts after correction.
+The contribution is accordingly a benchmark correction and reusable measurement resource---exact provenance maps, fixed parent-disjoint splits, and the audit toolkit---rather than another incremental classifier.
+Two extensions follow directly: a pooled omnibus endpoint with an adequately powered seed budget, replacing the per-architecture family recorded here as mis-specified; and the same grouping apparatus applied to provenance-aware instance segmentation on Cx22 and to two constructions whose grouping units are known but never enforced---specimen-disjoint multi-view Fish-Pak and temporally grouped Croatian Fish video---with deterministic manifests fixed before any model is trained.
+
+\bibliographystyle{IEEEtran}
+{\scriptsize\bibliography{references}}
+
+\end{document}

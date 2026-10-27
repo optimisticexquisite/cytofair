@@ -1,0 +1,59 @@
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {1.1}{\ignorespaces Headline conclusions and their correct strength.\relax }}{2}{table.1.1}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Registered amendments and their evidential status.\relax }}{6}{table.3.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Audited datasets and independent units.\relax }}{7}{table.caption.7}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Independently reconstructed SIPaKMeD class totals in release order.\relax }}{8}{table.caption.10}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces Provenance gates.\relax }}{15}{table.caption.15}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {7.1}{\ignorespaces Structural leakage. Stochastic values are mean $\pm $ sample SD over five seeds.\relax }}{18}{table.caption.18}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {9.1}{\ignorespaces Parent-identity probe. Mean $\pm $ sample SD over five seeds.\relax }}{25}{table.caption.24}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {10.1}{\ignorespaces SIPaKMeD classifier execution settings.\relax }}{28}{table.caption.27}%
+\contentsline {table}{\numberline {10.2}{\ignorespaces SIPaKMeD test accuracy (\%), mean $\pm $ sample SD over five seeds. \textsf {P1$'$} is numerically identical to \textsf {P1} because the frozen stratified crop split already contained the registered 3,239 training and 810 test observations.\relax }}{28}{table.caption.28}%
+\contentsline {table}{\numberline {10.3}{\ignorespaces Primary SIPaKMeD \textsf {P1}$-$\textsf {P2} contrasts. The six paired $t$-tests form one preregistered BH family. CI is the paired-bootstrap 95\% interval for Cohen's $d_z$, not for the raw percentage-point mean.\relax }}{29}{table.caption.30}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {11.1}{\ignorespaces Cx22 segmentation execution settings.\relax }}{34}{table.caption.35}%
+\contentsline {table}{\numberline {11.2}{\ignorespaces Cx22 semantic macro-Dice (\%), mean $\pm $ sample SD over five seeds. The official column uses a different 400/100 sample and is descriptive, not a paired protocol contrast.\relax }}{35}{table.caption.36}%
+\contentsline {table}{\numberline {11.3}{\ignorespaces Cx22 matched-instance Dice (\%), mean $\pm $ sample SD over five seeds.\relax }}{36}{table.caption.39}%
+\contentsline {table}{\numberline {11.4}{\ignorespaces Primary Cx22 \textsf {P1}$-$\textsf {P2} contrasts. Values are mean $\pm $ SD percentage points; $q$ is within the task-specific preregistered family. Effect is Cohen's $d_z$ except DeepLabV3+, whose non-normal seed differences trigger rank-biserial effect size.\relax }}{37}{table.caption.41}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {13.1}{\ignorespaces Frozen neural-run inventory and summed run time.\relax }}{42}{table.caption.44}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {14.1}{\ignorespaces Acceptance contract with evidence.\relax }}{44}{table.14.1}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {17.1}{\ignorespaces Immediate technical reuse. These rows describe enabled work, not completed future experiments.\relax }}{50}{table.caption.47}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {A.1}{\ignorespaces Complete SIPaKMeD classification run ledger. All values are final-epoch results.\relax }}{54}{table.A.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {B.1}{\ignorespaces Complete parent-identity probe ledger.\relax }}{59}{table.B.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {C.1}{\ignorespaces Complete Cx22 run ledger. Primary is macro Dice for semantic models and matched-instance Dice for instance models; the ninth column is nucleus Dice or recall at Dice 0.70.\relax }}{61}{table.C.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {D.1}{\ignorespaces Declared owner-source files, exact byte sizes, checksums, and use notes.\relax }}{66}{table.D.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {E.1}{\ignorespaces Released SIPaKMeD split manifests and hashes.\relax }}{67}{table.E.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {F.1}{\ignorespaces Complete repository decision chronology through the frozen result set.\relax }}{68}{table.F.1}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {H.1}{\ignorespaces Principal repository artifacts.\relax }}{72}{table.H.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {I.1}{\ignorespaces Complete structural seed ledger.\relax }}{73}{table.I.1}%
+\contentsline {table}{\numberline {I.2}{\ignorespaces Complete SIPaKMeD literal source-pixel overlap ledger.\relax }}{73}{table.I.2}%
+\contentsline {table}{\numberline {I.3}{\ignorespaces Complete SIPaKMeD classifier contrast ledger. Secondary tests have no confirmatory BH q-value.\relax }}{75}{table.I.3}%
+\contentsline {table}{\numberline {I.4}{\ignorespaces Complete Cx22 contrast ledger. Semantic and instance primary families were corrected separately by task.\relax }}{77}{table.I.4}%
+\contentsline {table}{\numberline {I.5}{\ignorespaces Complete secondary P1-versus-P2 rank-stability ledger.\relax }}{78}{table.I.5}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {J.1}{\ignorespaces Complete excluded-attempt ledger. Metrics are shown only to demonstrate that exclusion was rule-based, not score-based.\relax }}{80}{table.J.1}%
+\addvspace {10\p@ }
