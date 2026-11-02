@@ -1,0 +1,229 @@
+% ISBI 2027 full paper (4 technical pages + 1 page of references and statements).
+% Compile with XeLaTeX (fontspec; TeX Gyre clones of Times and Helvetica). In the repo: ./build.sh
+\documentclass{article}
+\usepackage{spconf}
+\usepackage{amsmath}
+\usepackage{fontspec}
+\setmainfont{texgyretermes}[Extension=.otf, UprightFont=*-regular, BoldFont=*-bold,
+  ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
+\setsansfont{texgyreheros}[Extension=.otf, UprightFont=*-regular, BoldFont=*-bold,
+  ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
+\usepackage{unicode-math}
+\setmathfont{texgyretermes-math.otf}
+\pdfpagewidth=8.5in \pdfpageheight=11in
+\usepackage{graphicx,booktabs,array,xcolor,cite,pifont}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,shadings}
+\usepackage{enumitem}
+\setlist{nosep, leftmargin=*, labelsep=4pt}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={When Cell Crops Share a Parent: Measuring and Isolating Acquisition Leakage in Cervical Cytology Benchmarks},
+  pdfauthor={Snehasish Ghosh, Soham Mitra, Antareep Majumder, Nibaran Das},
+  pdfkeywords={cervical cytology, data leakage, evaluation protocol, shortcut learning, benchmark validity, preregistration}}
+% References in 9 pt (the template minimum) without extra item spacing.
+\makeatletter
+\def\thebibliography#1{\section{References}\small\list
+ {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+ \advance\leftmargin\labelsep\usecounter{enumi}%
+ \setlength{\itemsep}{0.8pt}\setlength{\parsep}{0pt}\setlength{\topsep}{2pt}}
+ \def\newblock{\hskip .11em plus .33em minus .07em}
+ \sloppy\clubpenalty4000\widowpenalty4000\sfcode`\.=1000\relax}
+\makeatother
+
+% Captions in 9 pt with tight spacing (the template minimum is 9 pt).
+\makeatletter
+\long\def\@makecaption#1#2{\vskip 3pt\small
+  \setbox\@tempboxa\hbox{#1. #2}%
+  \ifdim\wd\@tempboxa>\hsize #1. #2\par\else\hbox to\hsize{\hfil\box\@tempboxa\hfil}\fi\vskip 1pt}
+\makeatother
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\dbltextfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\floatsep}{6pt plus 2pt minus 2pt}
+
+% Palette shared with the matplotlib figures.
+\definecolor{ink}{HTML}{0B0B0B}   \definecolor{ink2}{HTML}{52514E}
+\definecolor{rule}{HTML}{A9A8A2}  \definecolor{other}{HTML}{E4E3DE}
+\definecolor{leak}{HTML}{EB6834}  \definecolor{clean}{HTML}{2A78D6}
+\definecolor{fieldA}{HTML}{EBCFE3} \definecolor{fieldB}{HTML}{CFDDF0}
+\definecolor{fieldC}{HTML}{DDE9C9} \definecolor{fieldD}{HTML}{F3E1C8}
+\definecolor{cyto}{HTML}{FFFFFF}  \definecolor{nuc}{HTML}{5A3F7A}
+\definecolor{featfill}{HTML}{7FA9DE} \definecolor{heat}{HTML}{F2A33A}
+
+\newcommand{\yes}{\textcolor{clean}{\ding{51}}}
+\newcommand{\no}{\textcolor{rule}{\ding{55}}}
+\newcommand{\pp}{\,pp}
+
+% Every number below is generated from the committed results (paper/v2 and record scripts).
+\input{generated/numbers.tex}
+\input{generated/record_numbers.tex}
+\input{generated/derived.tex}
+
+\title{When cell crops share a parent: measuring and isolating acquisition leakage in cervical cytology benchmarks}
+\name{Snehasish Ghosh$^{1}$ \qquad Soham Mitra$^{2}$ \qquad Antareep Majumder$^{3}$ \qquad Nibaran Das$^{2}$}
+\address{\normalsize
+$^{1}$Independent Researcher, formerly affiliated with the Indian Institute of Science, Bengaluru, India\\
+\normalsize $^{2}$Department of Computer Science and Engineering, Jadavpur University, Kolkata, India\\
+\normalsize $^{3}$Independent Researcher}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Public cervical cytology benchmarks release many cell crops cut from far fewer microscope fields or slides and are often split at the crop level, so test cells share acquisition parents with training cells. In a preregistered study, crop-level splitting raised SIPaKMeD accuracy by \HoneEst\ percentage points across twelve architectures and twenty seeds (95\% CI \HoneBootLo--\HoneBootHi), and CRIC accuracy by \HtwoEst\ points (\HtwoLo--\HtwoHi). On SIPaKMeD, a factorial that fixes training crop and parent counts attributes the gain to sibling exposure (\HthreeEst\ points, \HthreeLo--\HthreeHi), not to the extra parent diversity of crop-level splits (\DivEst). Parent identity is decodable at about 100 times chance, yet erasing \LeaceAboveFloorCut\% of its above-floor linear recoverability left the gap unchanged, and Grad-CAM did not distinguish leaking from clean models; matching test cells' colour statistics to an unseen same-class field removed most of the advantage. Decodability and saliency cannot substitute for a parent-disjoint split.
+\end{abstract}
+
+\begin{keywords}
+Cervical cytology, data leakage, evaluation protocol, shortcut learning, benchmark validity, preregistration
+\end{keywords}
+
+\section{Introduction}
+\label{sec:intro}
+
+Public cervical cytology benchmarks are mostly released as cell crops cut from far fewer microscope fields or slide images~\cite{plissiti2018sipakmed,liu2022cx22,rezende2021cric}. Sibling crops share their field's stain, illumination, focus and background, and sometimes pixels. A crop-level split, the default for files that look like independent images, puts siblings on both sides of the split (Fig.~\ref{fig:design}a).
+
+\begin{figure*}[t]
+\centering
+\input{figures/overview.tex}
+\caption{Study design. (a) A crop-level split (P1) places siblings from one acquisition parent in training and test; a parent-disjoint split (P2) does not. (b) Matched-size factorial: one test set per seed; leak and clean training sets have identical crop and field counts and differ only in the test fields' siblings, while diversity varies separately. (c) Diagnostics asking whether decodable parent identity is what the leak uses.}
+\label{fig:design}
+\end{figure*}
+
+That sibling crops inflate scores is expected: placing tiles of one subject in training and validation inflated digital pathology scores by up to 41\%~\cite{bussola2021tiles}, and non-independent splits and shortcut cues mislead medical image evaluation more broadly~\cite{kapoor2023leakage,geirhos2020shortcut,varoquaux2022failures}. Benchmark artifacts have been audited in chest radiographs~\cite{jimenez2023shortcuts}, shortcut mechanisms dissected in segmentation~\cite{lin2024shortcut}, and image-level splitting shown to inflate CT accuracy~\cite{obeten2026kidney}. Contamination does not imply consequence, however: in brain-tumor MRI, removing heavily contaminated test images, without retraining, left balanced accuracy essentially unchanged~\cite{vangala2026scores}. We ask the complementary question of when acquisition siblings do change the score, which requires retraining under each protocol rather than filtering the test set.
+
+Three questions follow. \emph{How much} does crop-level splitting change public cytology benchmarks? \emph{Is the change leakage?} A grouped split removes the test parents' siblings but, at a fixed crop budget, also leaves fewer distinct training parents (crop-level training sets hold 18\% more on SIPaKMeD), so a lower score could reflect lost diversity, a confound that split comparisons leave in place. \emph{Can common diagnostics certify an evaluation?} Decodable source identity is increasingly read as a sign of shortcut use~\cite{germani2026aggregation}, and saliency maps as evidence of where a model looks. A preregistered study and a registered follow-up (2,281 trained models) contribute:
+\begin{itemize}
+\item \textbf{Structure:} closed forms that predict a split's exposure from its crop-to-parent table (Sec.~\ref{sec:data}).
+\item \textbf{Consequence:} one simulation-powered test per benchmark across twelve architectures (Sec.~\ref{sec:res-consequence}).
+\item \textbf{Causal isolation:} a SIPaKMeD factorial that varies sibling exposure at fixed crop and parent counts (Sec.~\ref{sec:res-isolation}).
+\item \textbf{Diagnostic caution:} interventions showing that the linearly decodable parent code and saliency do not track the leak (Sec.~\ref{sec:res-diagnostics}).
+\end{itemize}
+
+\section{Data and acquisition hierarchy}
+\label{sec:data}
+
+\begin{table}[t]
+\caption{Audited datasets. \emph{Sib.}: test crops with a training sibling under a random stratified 80:20 crop split; \emph{Pix.}: test crops sharing source pixels with a training crop (means over five splits). Classifiers were trained only where marked; Cx22 and Herlev received the structural audit only.}
+\label{tab:data}
+\centering\small\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{@{}llrrrrc@{}}
+\toprule
+Dataset & Parent & Crops & Parents & Sib.\,\% & Pix.\,\% & Models \\
+\midrule
+SIPaKMeD~\cite{plissiti2018sipakmed} & field & 4,049 & 966 & 92.6 & \RecOverlapSip & \yes \\
+Cx22~\cite{liu2022cx22} & image & 1,320 & 514 & 85.2 & \RecOverlapCx & -- \\
+CRIC~\cite{rezende2021cric} & slide & 11,534 & 400 & 99.97 & \RecOverlapCric & \yes \\
+Herlev~\cite{jantzen2005pap} & cell & 917 & 917 & 0.0 & 0.0 & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:data} lists four public datasets. SIPaKMeD crops come from cluster fields; filename parsing and template matching independently assign all 4,049 crops to the same field. Cx22 regions come from CCEDD source images, CRIC cells from 400 slide images with nucleus coordinates, and Herlev, with one cell per image, is a negative control. A \emph{parent} is the deepest acquisition unit a release identifies; it is not a patient.
+
+If a parent's $k$ crops are allocated independently to a test fraction $q$, a test crop has a training sibling with probability $1-q^{k-1}$, and at equal size a crop-level training set holds $\sum_j(1-q^{k_j})/\{(1-q)m\}$ times as many distinct parents as a parent-level one over $m$ parents (1.18 for SIPaKMeD, 1.25 for CRIC). These closed forms reproduce Table~\ref{tab:data}. The parent is also learnable: a ResNet-18 trained to identify 424 SIPaKMeD fields recognised held-out siblings at 25.7\% (chance 0.24\%), and at 18.7\% from cell-free backgrounds. Each SIPaKMeD field holds one class; in CRIC, slide identity carries 68\% of the class entropy.
+
+\section{Study design}
+\label{sec:design}
+
+Everything reported comes from the preregistered Study~2 and its registered follow-up; an earlier pilot (Study~1, six architectures, five seeds) served only the power analysis. Each phase was registered before its own runs: Study~2's splits, caches, design tables and analysis scripts were hashed and committed (commit \texttt{\RegistrationCommit}) before its first model was trained, with smoke tests on crop-level splits only, and the follow-up (commit \texttt{\FollowupCommit}) after the Study~2 analysis but before any follow-up model or analysis.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/results.pdf}
+\caption{Consequence and causal isolation. (a,~b) Crop- minus parent-level accuracy per architecture (mean and 95\% $t$ interval over seeds) and the registered pooled estimates (diamonds). (c) The SIPaKMeD factorial: accuracy on the common test set for leak and clean training sets at two diversity levels (bold: mean of four architectures; faint: each architecture), with the registered leakage and diversity estimates.}
+\label{fig:results}
+\end{figure*}
+
+\textbf{Protocols and training.} P1 is a stratified crop-level 80:20 split, P2 a parent-disjoint split of equal test size, and P3 additionally merges parents linked by near-duplicates. Twelve ImageNet-pretrained backbones (ResNet-18/50, DenseNet-121, MobileNet-V2, EfficientNet-B0/V2-S, RegNetY-1.6GF, ConvNeXt-T, Swin-T, MaxViT-T, ViT-B/16, DINOv2 ViT-S/14) are fine-tuned with one deterministic recipe (AdamW, $10^{-4}$, batch 64, 20 epochs, resized-crop and flip augmentation) and scored at the final epoch without model selection; per-crop logits and weights are kept.
+
+\textbf{One test per benchmark (H1, H2).} Instead of one test per architecture, the protocol effect is tested once,
+\begin{equation}
+\mathrm{acc} \sim x + (1+x \mid \mathrm{arch}) + (1 \mid \mathrm{seed}) + (1 \mid \mathrm{split}),
+\label{eq:h1}
+\end{equation}
+where $x=\pm\frac12$ codes P1 vs.\ P2 and \emph{split}, shared by all architectures within a seed, stops twelve evaluations of one test set from counting as twelve~\cite{bates2015lme4,kuznetsova2017lmertest}. A registered residual check selected a two-way cluster bootstrap as the primary inference, with Satterthwaite, Kenward--Roger, binomial-mixed-model and sign-flip tests as sensitivity analyses. Twelve architectures and twenty seeds gave a simulated power of \PowerChosen\ for a 0.8-pp effect on SIPaKMeD; CRIC uses six architectures and ten seeds.
+
+\textbf{Leakage vs.\ diversity (H3).} The factorial (Fig.~\ref{fig:design}b) fixes one test set per seed, half the crops of a random 30\% of multi-crop SIPaKMeD fields (about 527 crops), and varies only the training set, always 220 crops per class. Clean cells draw from other fields; leak cells swap the last fields of the same permutation for the test fields' remaining siblings. Within a diversity level, leak and clean cells thus share crop count, field count and allocation; 720 vs.\ 504 fields gives a 1.43-fold diversity contrast that brackets the natural 1.18. H3 is the leak effect in a mixed model (four architectures, ten seeds, 160 runs); diversity is estimated within clean cells.
+
+\textbf{Diagnostics.} Study~2 registered background transplants (H4) and a gradient-reversal parent adversary (H5)~\cite{ganin2016dann}. The follow-up tests eight hypotheses (F1--F8, \RecFollowTrainRuns\ new models; Fig.~\ref{fig:design}c). The H3 models are re-scored after background removal, illumination flattening, greyscale, low-pass filtering, or Reinhard transfer~\cite{reinhard2001color} of each cell's colour statistics to an unseen field of its own class (F2; the target is chosen by label, so this is a controlled diagnostic); the factorial is retrained with masked backgrounds (F3) or strong HED colour jitter~\cite{tellez2019quantifying} (F4). Parent recoverability $R$, the within-class accuracy of a logistic field probe on frozen features, is lowered by rank-limited LEACE erasure with a refitted head~\cite{belrose2023leace} (F5), stain normalisation (F6) and a probe-matched linear adversary (F7), each required to remove a quarter of the above-floor $R$ while costing at most 1\pp\ of P2 accuracy; F8 pools the dose--response, and F1 tests a slide-level label prior in CRIC. Grad-CAM~\cite{selvaraju2017gradcam} attribution outside the cell mask is compared descriptively, with a randomised-head check~\cite{adebayo2018sanity}. H1 stands alone; H2--H5 and F1--F8 are separate Holm families~\cite{holm1979}.
+
+
+\section{Results}
+\label{sec:results}
+
+All \RecStudyTwoRuns\ study runs and \RecFollowTasks\ follow-up tasks completed, none diverged, and every result matched its registered split hash. Table~\ref{tab:tests} lists all registered tests.
+
+\subsection{Crop-level splitting inflates both benchmarks}
+\label{sec:res-consequence}
+
+On SIPaKMeD, accuracy was \SipPOneAcc\% under P1 and \SipPTwoAcc\% under P2 (H1 $=$ \HoneEst\pp, \HoneBootLo--\HoneBootHi), with all four sensitivity analyses at $p$~\HoneKRp. Every architecture scored higher under P1, by \HoneArchMin--\HoneArchMax\pp\ (Fig.~\ref{fig:results}a): crop-level splitting hides a quarter of the errors. Merging near-duplicate-linked parents changed nothing (P2 $-$ P3: \PtwoPthreeEst\pp, \PtwoPthreeLo\ to \PtwoPthreeHi), so shared parents, not stray duplicates, carry the effect, and the architecture ranking was largely preserved (Kendall $\tau=\KendallTau$). On CRIC, with about 29 mixed-class cells per slide, accuracy fell from \CricPOneAcc\% to \CricPTwoAcc\% (H2 $=$ \HtwoEst\pp; 11.6--12.8\pp\ per architecture; Fig.~\ref{fig:results}b) and balanced accuracy from \CricPOneBacc\% to \CricPTwoBacc\%; a size-matched crop-level control gave the same gap (\CricPrimeEst\pp). That control fixes training size, not slide composition, and the factorial below was run on SIPaKMeD only, so the CRIC gap is consistent with acquisition leakage but not causally decomposed. Our CRIC inputs are $100\times100$ windows around the published nucleus coordinates, so absolute accuracies are not comparable with other CRIC results.
+
+\subsection{On SIPaKMeD, the inflation is leakage, not diversity}
+\label{sec:res-isolation}
+
+At fixed crop count, field count and allocation, adding the test fields' siblings raised accuracy on the common test set by \HthreeEst\pp\ (\HthreeLo--\HthreeHi) in every architecture at both diversity levels, while 43\% more fields without leakage did nothing (\DivEst\pp, \DivLo\ to \DivHi; interaction \InteractionEst\pp, $p=\InteractionP$; Fig.~\ref{fig:results}c). The leak replicated on fresh seeds (\HthreeRepEst\pp) and persisted with every background masked in training and testing (F3: \FthreeEst\pp). In an exploratory split it was as large on test crops sharing no pixel with any training crop (\OverlapNo\pp) as on overlapping ones (\OverlapYes\pp): what helps is a seen field, not memorised pixels.
+
+\begin{table}[t]
+\caption{All registered tests, in pp (H5, F7, F8: pp per pp of $R$; F1: pp of probability; F6: pp per unit strength), signed so that each hypothesis predicts a positive value. $p$: H1 bootstrap, others Holm. $^\dagger$Significant in the opposite direction.}
+\label{tab:tests}
+\centering\small\setlength{\tabcolsep}{2.6pt}
+\begin{tabular}{@{}l@{\hspace{4pt}}lr@{\hspace{5pt}}cr@{\hspace{3pt}}c@{}}
+\toprule
+ & Hypothesis & Est. & 95\% CI & $p$ & \\
+\midrule
+H1 & SIPaKMeD crop vs.\ field & \HoneEst & \HoneBootLo, \HoneBootHi & \HoneBootP & \yes \\
+H2 & CRIC crop vs.\ slide & \HtwoEst & \HtwoLo, \HtwoHi & \HtwoPholm & \yes \\
+H3 & Leakage, matched size & \HthreeEst & \HthreeLo, \HthreeHi & \HthreePholm & \yes \\
+H4 & Own-background route & \HfourEst & \HfourLo, \HfourHi & \HfourPholm & \no \\
+H5 & Gap tracks $R$ (GRL) & \HfiveEst & \HfiveLo, \HfiveHi & \HfivePholm & \no \\
+\midrule
+F1 & CRIC slide-majority pull & \FoneEst & \FoneLo, \FoneHi & \FonePholm & \no$^\dagger$ \\
+F2 & Colour transfer cuts leak & \FtwoEst & \FtwoLo, \FtwoHi & \FtwoPholm & \yes \\
+F3 & Leak, no background & \FthreeEst & \FthreeLo, \FthreeHi & \FthreePholm & \yes \\
+F4 & HED jitter cuts leak & \FfourEst & \FfourLo, \FfourHi & \FfourPholm & \no \\
+F5 & LEACE erasure cuts gap & \FfiveEst & \FfiveLo, \FfiveHi & \FfivePholm & \no \\
+F6 & Normalisation cuts gap & \FsixEst & \FsixLo, \FsixHi & \FsixPholm & \no \\
+F7 & Gap tracks $R$ (linear) & \FsevenEst & \FsevenLo, \FsevenHi & \FsevenPholm & \no \\
+F8 & Gap tracks $R$ (pooled) & \FeightEst & \FeightLo, \FeightHi & \FeightPholm & \no \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/diagnostics.pdf}
+\caption{Diagnostics. (a) Each arrow takes one architecture from no manipulation to the strongest in-regime LEACE erasure or linear adversary: recoverability falls, the gap does not. (b) Leak minus clean accuracy under test-time interventions (colour transfer targets an unseen field of the cell's own class) and training-time colour jitter. (c) Grad-CAM attribution outside the cell mask for leak and clean models of the same seed and diversity level; the diagonal marks equality.}
+\label{fig:diagnostics}
+\end{figure*}
+
+\subsection{Linear decodability and saliency do not track the leak}
+\label{sec:res-diagnostics}
+
+Neither registered Study~2 mechanism test located the leaked signal: background transplants (H4) and gradient reversal (H5), which ConvNeXt-T evaded by making parents \emph{more} decodable ($R$ \GrlConvRzero\% to \GrlConvRstar\%), were not supported. Reducing the linearly decodable parent code did not move the gap either (Fig.~\ref{fig:diagnostics}a). Rank-256 LEACE cut $R$ from \LeaceRzero\% to \LeaceRtop\%, removing \LeaceAboveFloorCut\% of its above-floor value (class-only floor \RFloor\%), in all twelve architectures at a \LeaceAccDrop-pp cost in P2 accuracy, and the gap stayed at \LeaceGapZero--\LeaceGapTop\pp\ (F5); the linear adversary passed its check in all three architectures with no change (F7); pooled over \FeightCells\ cells the slope was \FeightEst\ (\FeightLo\ to \FeightHi; F8), so a 20-pp loss of $R$ moves the gap by at most 0.1\pp. Grad-CAM put \CamBgAttribution\% of attribution outside the cell in leak and clean models alike (difference \CamLeakEst\pp, \CamLeakLo\ to \CamLeakHi; Fig.~\ref{fig:diagnostics}c), although its maps passed the randomised-head check (median Spearman $\rho=\CamSpearman$). On CRIC, seen slides pulled minority-class cells \emph{away} from the slide majority (F1: \FoneEst\pp), which argues against a simple slide-majority prior.
+
+Only colour transfer moved the leak. Matching each test cell's colour statistics to an unseen field of its own class cut the leak from \LeakUnderOriginal\ to \LeakUnderStain\pp\ (F2: \FtwoEst\pp, \FtwoLo--\FtwoHi), whereas flattening illumination (\LeakUnderFlat\pp) or removing the background (\LeakUnderBg\pp), at comparable accuracy cost, did not (Fig.~\ref{fig:diagnostics}b); strong HED jitter in training left it intact (\CarrierColour\ vs.\ \CarrierStandard\pp; F4). Because the transfer is label-conditioned and shifts the test distribution, it implicates field-specific appearance without identifying what the networks learned.
+
+\section{Discussion and conclusion}
+\label{sec:discussion}
+
+Crop-level splitting inflates both public cervical cytology benchmarks we trained on. On SIPaKMeD the inflation is leakage: it appears when a test cell's acquisition siblings are in training, not when training merely gains parent diversity. On CRIC, with 29 mixed-class cells per slide instead of four single-class crops per field, the gap is twelve times larger; without a factorial there, it is consistent with, not attributed to, sibling leakage. A benchmark's exposure can be computed from the closed forms of Sec.~\ref{sec:data} before any model is trained. Rankings largely survived on SIPaKMeD, but accuracies under crop- and parent-level splits are not comparable: on CRIC the protocol gap exceeds the spread between architectures.
+
+The mechanism is narrowed, not identified. The advantage survives background masking, does not depend on shared pixels, does not follow a simple slide-majority prior and is unaffected by reducing the linear parent code, while label-conditioned colour transfer implicates field-specific appearance; nonlinear or spatially encoded parent information may still carry it. The methodological lesson holds regardless: models whose measured parent code was largely erased, and whose saliency matched that of clean models, still benefited from leakage. Probes establish availability, not use~\cite{elazar2021amnesic,ravichander2021probing}, and neither probes, saliency nor augmentation can stand in for a grouped split.
+
+\textbf{Limitations.} Parents are the deepest released units, not patients: parent-disjoint evaluation removes the leakage measured here, but patient-level grouping could reveal further dependence that these experiments cannot bound. The factorial trains on 1,100 crops rather than 3,239, establishing the leak's existence and direction more firmly than an exact decomposition of H1. One training recipe was used, erasure acts on linearly readable pooled features, and the follow-up, registered after the Study~2 results, is confirmatory only for its own questions.
+
+\textbf{Recommendations.} Releases should label every observation with its parent, and its patient where permitted; evaluations should split at the deepest released unit, publish hashed fold manifests and report the fraction of test observations with a training sibling. Code, provenance maps, split manifests, run records and a risk calculator are at \url{https://github.com/optimisticexquisite/cytofair}.
+
+\section{Compliance with ethical standards}
+\label{sec:ethics}
+
+This research study was conducted retrospectively using de-identified human cytology images made available in open access by the creators of SIPaKMeD, Cx22, CRIC and Herlev. No new data were collected, and ethical approval was not required for this secondary analysis of public data.
+
+\section{Acknowledgments}
+\label{sec:acknowledgments}
+
+No funding was received for conducting this study. The authors have no relevant financial or non-financial interests to disclose. Claude (Anthropic), used through Claude Code, assisted in writing and debugging the experiment and analysis code, orchestrating the training runs, producing the figures, and drafting and editing the text of all sections. The authors reviewed all code, results, references and text, and take full responsibility for the content.
+
+\bibliographystyle{IEEEbib}
+\bibliography{refs}
+
+\end{document}

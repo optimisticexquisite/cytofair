@@ -1,0 +1,2 @@
+# Overleaf: compile with XeLaTeX (the paper uses fontspec).
+$pdf_mode = 5;
